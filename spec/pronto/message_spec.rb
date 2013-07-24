@@ -3,7 +3,8 @@ require 'spec_helper'
 module Pronto
   describe Message do
     describe '.new' do
-      subject { Message.new(line, level, msg) }
+      subject { Message.new(path, line, level, msg) }
+      let(:path) { 'README.md' }
       let(:line) { Grit::DiffLine.new }
       let(:msg) { 'message' }
 
