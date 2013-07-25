@@ -7,14 +7,13 @@ Gem::Specification.new do |s|
   s.name        = 'pronto'
   s.version     = Pronto::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Mindaugas Mozūras']
-  s.email       = ['mindaugas.mozuras@gmail.com']
+  s.author      = 'Mindaugas Mozūras'
+  s.email       = 'mindaugas.mozuras@gmail.com'
   s.homepage    = 'http://github.org/mmozuras/pronto'
   s.summary     = 'pronto'
   s.description = 'pronto'
 
   s.required_rubygems_version = '>= 1.3.6'
-  s.rubyforge_project         = 'pronto'
   s.license = 'MIT'
 
   s.files         = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
