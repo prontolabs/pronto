@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'pronto'
+require 'pronto/cli'
+
+Pronto::CLI.start
