@@ -5,6 +5,12 @@ module Pronto
     require 'pronto'
     require 'pronto/version'
 
+    desc 'exec', 'Run Pronto'
+
+    def exec
+      ::Pronto.run
+    end
+
     desc 'list', 'Lists pronto runners that are available to be used'
 
     def list
