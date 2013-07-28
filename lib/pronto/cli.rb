@@ -5,6 +5,12 @@ module Pronto
     require 'pronto'
     require 'pronto/version'
 
+    desc 'list', 'Lists pronto runners that are available to be used'
+
+    def list
+      puts ::Pronto.gem_names
+    end
+
     desc 'version', 'Show the Pronto version'
     map %w(-v --version) => :version
 
