@@ -7,10 +7,11 @@ require 'pronto/runner'
 require 'pronto/formatter/text_formatter'
 
 module Pronto
-  def self.run(start_commit = nil, end_commit = 'master', repo_path = '.')
+  def self.run(commit1 = nil, commit2 = 'master', repo_path = '.')
     repo = Grit::Repo.new(repo_path)
-    start_commit ||= repo.head.commit.id
-    diffs = repo.diff(start_commit, end_commit)
+    commit1 ||= repo.head.commit.id
+    commit2 ||= 'master'
+    diffs = repo.diff(commit1, commit2)
     result = run_all_runners(diffs)
     Formatter::TextFormatter.new.format(result)
   end
