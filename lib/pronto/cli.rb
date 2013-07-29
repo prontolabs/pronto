@@ -19,8 +19,16 @@ module Pronto
                   aliases: '-s',
                   banner: 'Second commit for the diff, defaults to master'
 
+    method_option :runner,
+                  type: :array,
+                  default: [],
+                  aliases: '-r',
+                  banner: 'Run only the passed runners'
+
     def exec
-      ::Pronto.gem_names.each do |gem_name|
+      gem_names = options[:runner].any? ? options[:runner]
+                                        : ::Pronto.gem_names
+      gem_names.each do |gem_name|
         require "pronto/#{gem_name}"
       end
       puts ::Pronto.run(options[:commit1], options[:commit2])

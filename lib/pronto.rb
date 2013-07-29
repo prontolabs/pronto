@@ -8,18 +8,9 @@ require 'pronto/formatter/text_formatter'
 
 module Pronto
   def self.run(commit1 = nil, commit2 = 'master', repo_path = '.')
-    repo = Grit::Repo.new(repo_path)
-    commit1 ||= repo.head.commit.id
-    commit2 ||= 'master'
-    diffs = repo.diff(commit1, commit2)
+    diffs = diff(commit1, commit2, repo_path)
     result = run_all_runners(diffs)
     Formatter::TextFormatter.new.format(result)
-  end
-
-  def self.run_all_runners(diffs)
-    Runner.runners.map do |runner|
-      runner.new.run(diffs)
-    end.flatten.compact
   end
 
   def self.gem_names
@@ -35,5 +26,20 @@ module Pronto
     gems.map { |gem| gem.name.sub(/^pronto-/, '') }
         .uniq
         .sort
+  end
+
+  private
+
+  def self.diff(commit1, commit2, repo_path)
+    repo = Grit::Repo.new(repo_path)
+    commit1 ||= repo.head.commit.id
+    commit2 ||= 'master'
+    repo.diff(commit1, commit2)
+  end
+
+  def self.run_all_runners(diffs)
+    Runner.runners.map do |runner|
+      runner.new.run(diffs)
+    end.flatten.compact
   end
 end
