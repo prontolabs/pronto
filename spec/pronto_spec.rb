@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Pronto do
   describe '.gem_names' do
     subject { Pronto.gem_names }
@@ -9,7 +11,8 @@ describe Pronto do
     end
 
     context 'duplicate names' do
-      let(:gems) { [double(name: 'pronto-rubocop'), double(name: 'pronto-rubocop')] }
+      let(:gems) { [double(name: 'pronto-rubocop'),
+                    double(name: 'pronto-rubocop')] }
       it { should include('rubocop') }
       its(:count) { should == 1 }
     end

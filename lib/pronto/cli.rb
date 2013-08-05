@@ -32,6 +32,10 @@ module Pronto
         require "pronto/#{gem_name}"
       end
       puts ::Pronto.run(options[:commit1], options[:commit2])
+    rescue Grit::InvalidGitRepositoryError
+      puts '"pronto" should be run from a git repository'
+    rescue => e
+      puts e.message
     end
 
     desc 'list', 'Lists pronto runners that are available to be used'
