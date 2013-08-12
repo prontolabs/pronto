@@ -5,7 +5,7 @@ module Pronto
     describe '.new' do
       subject { Message.new(path, line, level, msg) }
       let(:path) { 'README.md' }
-      let(:line) { Grit::DiffLine.new }
+      let(:line) { Rugged::Diff::Line.new }
       let(:msg) { 'message' }
 
       Message::LEVELS.each do |message_level|

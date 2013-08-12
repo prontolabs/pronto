@@ -5,7 +5,7 @@ module Pronto
         messages.map do |message|
           level = message.level[0].upcase
           line = message.line
-          "#{message.path}:#{line.line_number} #{level}: #{message.msg}"
+          "#{message.path}:#{line.new_lineno} #{level}: #{message.msg}"
         end
       end
     end

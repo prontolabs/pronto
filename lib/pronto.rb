@@ -1,4 +1,4 @@
-require 'grit-ext'
+require 'rugged'
 
 require 'pronto/plugin'
 require 'pronto/message'
@@ -8,7 +8,7 @@ require 'pronto/formatter/text_formatter'
 
 module Pronto
   def self.run(commit1 = nil, commit2 = 'master', repo_path = '.')
-    diffs = diff(commit1, commit2, repo_path)
+    diffs = diff(repo_path, commit1, commit2)
     result = run_all_runners(diffs)
     Formatter::TextFormatter.new.format(result)
   end
@@ -30,9 +30,9 @@ module Pronto
 
   private
 
-  def self.diff(commit1, commit2, repo_path)
-    repo = Grit::Repo.new(repo_path)
-    commit1 ||= repo.head.commit.id
+  def self.diff(repo_path, commit1, commit2)
+    repo = Rugged::Repository.new(repo_path)
+    commit1 ||= repo.head.target
     commit2 ||= 'master'
     repo.diff(commit1, commit2)
   end
