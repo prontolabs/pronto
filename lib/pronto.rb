@@ -1,4 +1,7 @@
 require 'rugged'
+require_relative 'rugged/diff'
+require_relative 'rugged/tree'
+require_relative 'rugged/diff/delta'
 
 require 'pronto/plugin'
 require 'pronto/message'

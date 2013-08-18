@@ -1,3 +1,5 @@
+require 'tempfile'
+
 module Pronto
   class Runner
     include Plugin
@@ -7,6 +9,8 @@ module Pronto
     end
 
     def create_tempfile(blob)
+      return if blob.nil?
+
       file = Tempfile.new(blob.oid)
       file.write(blob.text)
       file.close
