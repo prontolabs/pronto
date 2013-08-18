@@ -11,8 +11,8 @@ require 'pronto/formatter/text_formatter'
 
 module Pronto
   def self.run(commit1 = nil, commit2 = 'master', repo_path = '.')
-    diffs = diff(repo_path, commit1, commit2)
-    result = run_all_runners(diffs)
+    patches = diff(repo_path, commit1, commit2)
+    result = run_all_runners(patches)
     Formatter::TextFormatter.new.format(result)
   end
 
@@ -40,9 +40,9 @@ module Pronto
     repo.diff(commit1, commit2)
   end
 
-  def self.run_all_runners(diffs)
+  def self.run_all_runners(patches)
     Runner.runners.map do |runner|
-      runner.new.run(diffs)
+      runner.new.run(patches)
     end.flatten.compact
   end
 end
