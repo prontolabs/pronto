@@ -13,8 +13,17 @@ module Pronto
 
       file = Tempfile.new(blob.oid)
       file.write(blob.text)
-      file.close
-      file
+
+      begin
+        if block_given?
+          file.flush
+          yield(file)
+        else
+          file
+        end
+      ensure
+        file.close unless file.closed?
+      end
     end
   end
 end
