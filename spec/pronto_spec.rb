@@ -1,18 +1,6 @@
 require 'spec_helper'
 
 describe Pronto do
-  describe '.run' do
-    subject { Pronto.run(commit, path_to_repo) }
-
-    let(:commit) { '21cd33a'}
-    let(:path_to_repo) { File.join(File.dirname(__FILE__), '../') }
-
-    context 'no runners available' do
-      before { Pronto::Runner.stub(:runners).and_return([]) }
-      it { should == [] }
-    end
-  end
-
   describe '.gem_names' do
     subject { Pronto.gem_names }
     before { Gem::Specification.should_receive(:find_all) { gems } }
