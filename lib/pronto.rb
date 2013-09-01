@@ -10,8 +10,8 @@ require 'pronto/runner'
 require 'pronto/formatter/text_formatter'
 
 module Pronto
-  def self.run(commit1 = nil, commit2 = 'master', repo_path = '.')
-    patches = diff(repo_path, commit1, commit2)
+  def self.run(commit = 'master', repo_path = '.')
+    patches = diff(repo_path, commit)
     result = run_all_runners(patches)
     Formatter::TextFormatter.new.format(result)
   end
@@ -33,11 +33,10 @@ module Pronto
 
   private
 
-  def self.diff(repo_path, commit1, commit2)
+  def self.diff(repo_path, commit)
     repo = Rugged::Repository.new(repo_path)
-    commit1 ||= repo.head.target
-    commit2 ||= 'master'
-    repo.diff(commit1, commit2)
+    commit ||= 'master'
+    repo.diff(repo.head.target, commit)
   end
 
   def self.run_all_runners(patches)

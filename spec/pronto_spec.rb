@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe Pronto do
   describe '.run' do
-    subject { Pronto.run(commit1, commit2, path_to_repo) }
+    subject { Pronto.run(commit, path_to_repo) }
 
-    let(:commit1) { '2c763a5' }
-    let(:commit2) { '21cd33a'}
+    let(:commit) { '21cd33a'}
     let(:path_to_repo) { File.join(File.dirname(__FILE__), '../') }
 
     context 'no runners available' do
