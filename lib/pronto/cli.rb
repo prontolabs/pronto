@@ -25,11 +25,10 @@ module Pronto
       gem_names.each do |gem_name|
         require "pronto/#{gem_name}"
       end
+
       puts ::Pronto.run(options[:commit])
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
-    rescue => e
-      puts e.message
     end
 
     desc 'list', 'Lists pronto runners that are available to be used'
