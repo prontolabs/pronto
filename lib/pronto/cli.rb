@@ -19,6 +19,12 @@ module Pronto
                   aliases: '-r',
                   banner: 'Run only the passed runners'
 
+    method_option :formatter,
+                  type: :string,
+                  default: nil,
+                  aliases: '-f',
+                  banner: 'Formatter, defaults to text. Available: text, json.'
+
     def exec
       gem_names = options[:runner].any? ? options[:runner]
                                         : ::Pronto.gem_names
@@ -26,7 +32,13 @@ module Pronto
         require "pronto/#{gem_name}"
       end
 
-      puts ::Pronto.run(options[:commit])
+      formatter = if options[:formatter] == 'json'
+                    ::Pronto::Formatter::JsonFormatter.new
+                  else
+                    ::Pronto::Formatter::TextFormatter.new
+                  end
+
+      puts ::Pronto.run(options[:commit], '.', formatter)
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
     end
