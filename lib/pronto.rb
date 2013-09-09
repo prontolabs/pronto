@@ -10,12 +10,15 @@ require 'pronto/message'
 require 'pronto/runner'
 
 require 'pronto/formatter/text_formatter'
+require 'pronto/formatter/json_formatter'
 
 module Pronto
-  def self.run(commit = 'master', repo_path = '.')
+  def self.run(commit = 'master', repo_path = '.', formatter = nil)
     patches = diff(repo_path, commit)
     result = run_all_runners(patches)
-    Formatter::TextFormatter.new.format(result)
+
+    formatter ||= default_formatter
+    formatter.format(result)
   end
 
   def self.gem_names
@@ -45,5 +48,9 @@ module Pronto
     Runner.runners.map do |runner|
       runner.new.run(patches)
     end.flatten.compact
+  end
+
+  def default_formatter
+    Formatter::TextFormatter.new
   end
 end
