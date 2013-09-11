@@ -1,6 +1,7 @@
 require 'rugged'
 require_relative 'rugged/diff'
 require_relative 'rugged/tree'
+require_relative 'rugged/remote'
 require_relative 'rugged/diff/delta'
 require_relative 'rugged/diff/patch'
 require_relative 'rugged/diff/line'
