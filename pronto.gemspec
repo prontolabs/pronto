@@ -24,5 +24,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'rugged', '~> 0.19.0'
   s.add_dependency 'thor', '~> 0.18.0'
   s.add_development_dependency 'rake', '~> 10.1.0'
-  s.add_development_dependency 'rspec', '~> 2.13.0'
+  s.add_development_dependency 'rspec', '~> 2.14.0'
 end
