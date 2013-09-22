@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
 require 'bundler'
+require 'octokit'
 
 Bundler::GemHelper.install_tasks
 
@@ -16,14 +17,24 @@ task :spec do
 end
 
 task :pronto do
-  if ENV['TRAVIS_PULL_REQUEST']
+  if ENV['TRAVIS_PULL_REQUEST'] != 'false'
     puts 'Running pronto on pronto'
 
-    commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
+    puts ENV['TRAVIS_BRANCH']
+    puts ENV['TRAVIS_COMMIT']
+    puts ENV['TRAVIS_COMMIT_RANGE']
+    puts ENV['TRAVIS_PULL_REQUEST']
+    puts ENV['TRAVIS_REPO_SLUG']
+
     access_token =  ENV['GITHUB_ACCESS_TOKEN']
+    repo = ENV['TRAVIS_REPO_SLUG']
+    pull_request_number = ENV['TRAVIS_PULL_REQUEST']
+
+    client = Octokit::Client.new
+    pull_request = client.pull_request(repo, pull_request_number)
 
     system('gem install pronto-rubocop')
-    system("pronto exec -c #{commit} -f github -t #{access_token}")
+    system("pronto exec -c #{pull_request.base.sha} -f github -t #{access_token} -r rubocop")
   end
 end
 
