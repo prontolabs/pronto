@@ -17,8 +17,11 @@ end
 
 task :pronto do
   if ENV['TRAVIS_PULL_REQUEST']
-    sh 'gem install pronto-rubocop'
-    sh "pronto exec -f github -t #{ENV['GITHUB_ACCESS_TOKEN']}"
+    puts 'Running pronto on pronto'
+    `gem install pronto-rubocop`
+    commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').first
+    access_token =  ENV['GITHUB_ACCESS_TOKEN']
+    `pronto exec -c #{commit} -f github -t #{access_token}`
   end
 end
 
