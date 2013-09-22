@@ -19,6 +19,12 @@ task :pronto do
   if ENV['TRAVIS_PULL_REQUEST']
     puts 'Running pronto on pronto'
 
+    puts ENV['TRAVIS_BRANCH']
+    puts ENV['TRAVIS_COMMIT']
+    puts ENV['TRAVIS_COMMIT_RANGE']
+    puts ENV['TRAVIS_PULL_REQUEST']
+    puts ENV['TRAVIS_REPO_SLUG']
+
     commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
     access_token =  ENV['GITHUB_ACCESS_TOKEN']
 
