@@ -23,7 +23,7 @@ module Pronto
                   type: :string,
                   default: nil,
                   aliases: '-f',
-                  banner: 'Formatter, defaults to text. Available: text, json.'
+                  banner: "Formatter, defaults to text. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def exec
       gem_names = options[:runner].any? ? options[:runner]

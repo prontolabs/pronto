@@ -13,6 +13,8 @@ require 'pronto/runner'
 
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
+require 'pronto/formatter/github_formatter'
+require 'pronto/formatter/formatter'
 
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
