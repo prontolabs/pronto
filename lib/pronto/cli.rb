@@ -25,6 +25,12 @@ module Pronto
                   aliases: '-f',
                   banner: "Formatter, defaults to text. Available: #{::Pronto::Formatter.names.join(', ')}"
 
+    method_option :access_token,
+                  type: :string,
+                  default: nil,
+                  aliases: '-t',
+                  banner: 'Github access token, used for github formatter'
+
     def exec
       gem_names = options[:runner].any? ? options[:runner]
                                         : ::Pronto.gem_names
@@ -32,11 +38,11 @@ module Pronto
         require "pronto/#{gem_name}"
       end
 
-      formatter = if options[:formatter] == 'json'
-                    ::Pronto::Formatter::JsonFormatter.new
-                  else
-                    ::Pronto::Formatter::TextFormatter.new
-                  end
+      formatter = ::Pronto::Formatter.get(options[:formatter])
+      if formatter.is_a? ::Pronto::Formatter::GithubFormatter
+        access_token = options[:access_token]
+        formatter.client = Octokit::Client.new(access_token: access_token)
+      end
 
       puts ::Pronto.run(options[:commit], '.', formatter)
     rescue Rugged::RepositoryError
