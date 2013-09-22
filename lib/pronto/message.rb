@@ -11,5 +11,9 @@ module Pronto
 
       @path, @line, @level, @msg = path, line, level, msg
     end
+
+    def repo
+      line.patch.delta.repo
+    end
   end
 end
