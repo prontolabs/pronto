@@ -19,7 +19,7 @@ task :pronto do
   if ENV['TRAVIS_PULL_REQUEST']
     puts 'Running pronto on pronto'
 
-    commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
+    commit = ENV['TRAVIS_BRANCH']
     access_token =  ENV['GITHUB_ACCESS_TOKEN']
 
     system('gem install pronto-rubocop')
