@@ -45,11 +45,14 @@ module Pronto
   def self.diff(repo_path, commit)
     repo = Rugged::Repository.new(repo_path)
     commit ||= 'master'
+    puts "Running diff from #{commit} to #{repo.head.target}"
     repo.diff(commit, repo.head.target)
   end
 
   def self.run_all_runners(patches)
-    Runner.runners.map do |runner|
+    runners = Runner.runners
+    puts "Running #{runners.count} runners"
+    runners.map do |runner|
       runner.new.run(patches)
     end.flatten.compact
   end
