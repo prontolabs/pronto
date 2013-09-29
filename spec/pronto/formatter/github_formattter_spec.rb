@@ -16,8 +16,14 @@ module Pronto
         before { message.stub(:repo).and_return(repository) }
         specify do
           Octokit::Client.any_instance
+                         .should_receive(:commit_comments)
+                         .twice
+                         .and_return([])
+
+          Octokit::Client.any_instance
                          .should_receive(:create_commit_comment)
                          .twice
+
           subject
         end
       end
