@@ -41,3 +41,11 @@ Then navigate to repository you want run Pronto on, and:
 
 Run `pronto` in your terminal without any arguments to see what more Pronto is
 capable off.
+
+## Runners
+
+Pronto can run various tools and libraries, as long as there's a runner for it.
+Currently available runners:
+
+* [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
+* [pronto-flay](https://github.com/mmozuras/pronto-flay)
