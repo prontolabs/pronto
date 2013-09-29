@@ -13,6 +13,8 @@ module Pronto
 
           create_commit_comment(repo, sha, position, path, body)
         end
+
+        "THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!!"
       end
 
       private
@@ -46,8 +48,7 @@ module Pronto
         blamelines = blame(message).lines
         lineno = message.line.new_lineno
 
-        blameline = blamelines.find { |line| line.lineno == lineno }
-
+        blameline = blamelines.detect { |line| line.lineno == lineno }
         blameline.commit.id if blameline
       end
 
