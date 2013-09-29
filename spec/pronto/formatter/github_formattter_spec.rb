@@ -11,7 +11,7 @@ module Pronto
         subject { github_formatter.format(messages) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-        let(:line) { OpenStruct.new({new_lineno: 1}) }
+        let(:line) { OpenStruct.new({ new_lineno: 1 }) }
 
         before { message.stub(:repo).and_return(repository) }
         specify do

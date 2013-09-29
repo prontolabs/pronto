@@ -11,8 +11,8 @@ describe Pronto do
     end
 
     context 'duplicate names' do
-      let(:gems) { [double(name: 'pronto-rubocop'),
-                    double(name: 'pronto-rubocop')] }
+      let(:gem) { double(name: 'pronto-rubocop') }
+      let(:gems) { [gem, gem] }
       it { should include('rubocop') }
       its(:count) { should == 1 }
     end
@@ -20,13 +20,17 @@ describe Pronto do
     context 'inproperly named gem' do
       context 'with good path' do
         let(:gems) { [double(name: 'good', full_gem_path: '/good')] }
-        before { File.stub(:exists?).with('/good/lib/pronto/good.rb') { true } }
+        before do
+          File.stub(:exists?).with('/good/lib/pronto/good.rb').and_return(true)
+        end
         it { should include('good') }
       end
 
       context 'with bad path' do
         let(:gems) { [double(name: 'bad', full_gem_path: '/bad')] }
-        before { File.stub(:exists?).with('/bad/lib/pronto/bad.rb') { false } }
+        before do
+          File.stub(:exists?).with('/bad/lib/pronto/bad.rb').and_return(false)
+        end
         it { should_not include('bad') }
       end
     end

@@ -28,7 +28,7 @@ module Pronto
         blamelines = blame(message).lines
         lineno = message.line.new_lineno
 
-        blameline = blamelines.detect { |line| line.lineno == lineno }
+        blameline = blamelines.find { |line| line.lineno == lineno }
 
         blameline.commit.id if blameline
       end

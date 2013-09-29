@@ -34,7 +34,7 @@ module Pronto
 
     describe '.names' do
       subject { Formatter.names }
-      it { should =~ ['github', 'json', 'text'] }
+      it { should =~ %w(github json text) }
     end
   end
 end

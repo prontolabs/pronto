@@ -19,7 +19,7 @@ module Pronto
 
       context 'executable' do
         let(:path) { 'test' }
-        before { File.stub(:open).with(path).and_return{shebang} }
+        before { File.stub(:open).with(path).and_return(shebang) }
 
         context 'ruby' do
           let(:shebang) { '#!ruby' }
