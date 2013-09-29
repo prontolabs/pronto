@@ -31,19 +31,19 @@ module Pronto
       end
 
       def run_task(verbose)
-        return if pull_request == 'false'
+        return if pull_request_number == 'false'
 
         client = Octokit::Client.new
 
-        pull_request = client.pull_request(repo_slug, pull_request)
-        formatter = GithubFormatter.new
+        pull_request = client.pull_request(repo_slug, pull_request_number)
+        formatter = ::Pronto::Formatter::GithubFormatter.new
 
         ::Pronto.run(pull_request.base.sha, '.', formatter)
       end
 
       private
 
-      def pull_request
+      def pull_request_number
         ENV['TRAVIS_PULL_REQUEST']
       end
 
