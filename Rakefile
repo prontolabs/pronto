@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
 require 'bundler'
+require 'pronto/rake/travis_pull_request'
 
 Bundler::GemHelper.install_tasks
 
@@ -15,17 +16,7 @@ task :spec do
   sh 'bundle exec rspec'
 end
 
-task :pronto do
-  if ENV['TRAVIS_PULL_REQUEST'] != 'false'
-    puts 'Running pronto on pronto'
-
-    commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
-    access_token = ENV['GITHUB_ACCESS_TOKEN']
-
-    system('gem install pronto-rubocop')
-    system("pronto exec -c #{commit} -f github -t #{access_token}")
-  end
-end
+travis_pull_request = Pronto::Rake::TravisPullRequest.new
 
 task(:default).clear
-task default: [:bundle, :spec, :pronto]
+task default: [:bundle, :spec, travis_pull_request]
