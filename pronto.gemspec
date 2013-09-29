@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.author      = 'Mindaugas Mozūras'
   s.email       = 'mindaugas.mozuras@gmail.com'
   s.homepage    = 'http://github.org/mmozuras/pronto'
-  s.summary     = 'pronto runs analysis quickly by checking only the introduced changes'
+  s.summary     = 'Pronto runs analysis quickly by checking only the introduced changes'
 
   s.required_rubygems_version = '>= 1.3.6'
   s.license = 'MIT'
