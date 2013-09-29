@@ -6,12 +6,14 @@ module Rugged
       end
 
       def position
-        hunk.lines.find_index do |line|
-          content == line.content &&
-            line_origin == line.line_origin &&
-            old_lineno == line.old_lineno &&
-            new_lineno == line.new_lineno
-        end
+        patch.lines.find_index(self)
+      end
+
+      def ==(other)
+        content == other.content &&
+          line_origin == other.line_origin &&
+          old_lineno == other.old_lineno &&
+          new_lineno == other.new_lineno
       end
     end
   end
