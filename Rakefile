@@ -16,7 +16,7 @@ task :spec do
   sh 'bundle exec rspec'
 end
 
-travis_pull_request = Pronto::RakeTask::TravisPullRequest.new
+Pronto::RakeTask::TravisPullRequest.new
 
 task(:default).clear
-task default: [:bundle, :spec, travis_pull_request]
+task default: [:bundle, :spec, :pronto_travis_pull_request]

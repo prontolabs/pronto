@@ -10,7 +10,11 @@ module Pronto
     # require 'rubocop/rake/travis_pull_request'
     # Pronto::Rake::TravisPullRequest.new
     class TravisPullRequest < Rake::TaskLib
+      attr_accessor :name
+
       def initialize(*args, &task_block)
+        setup_ivars(args)
+
         unless ::Rake.application.last_comment
           desc 'Run Pronto on Travis Pull Request'
         end
@@ -44,6 +48,10 @@ module Pronto
 
       def repo_slug
         ENV['TRAVIS_REPO_SLUG']
+      end
+
+      def setup_ivars(args)
+        @name = args.shift || :pronto_travis_pull_request
       end
     end
   end
