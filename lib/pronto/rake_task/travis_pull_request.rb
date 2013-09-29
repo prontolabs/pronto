@@ -31,7 +31,7 @@ module Pronto
       end
 
       def run_task(verbose)
-        return if pull_request_number == 'false'
+        return if pull_request_number.nil? || pull_request_number == 'false'
 
         client = Octokit::Client.new
 
