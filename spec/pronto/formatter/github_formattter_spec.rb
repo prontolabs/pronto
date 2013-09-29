@@ -13,11 +13,11 @@ module Pronto
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { OpenStruct.new({new_lineno: 1}) }
 
-        let(:client) { double(:client) }
         before { message.stub(:repo).and_return(repository) }
-        before { github_formatter.client = client }
         specify do
-          client.should_receive(:create_commit_comment).twice
+          Octokit::Client.any_instance
+                         .should_receive(:create_commit_comment)
+                         .twice
           subject
         end
       end

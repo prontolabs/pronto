@@ -3,7 +3,10 @@ require 'octokit'
 module Pronto
   module Formatter
     class GithubFormatter
-      attr_writer :client
+      def initialize
+        access_token = ENV['GITHUB_ACCESS_TOKEN']
+        @client = Octokit::Client.new(access_token: access_token)
+      end
 
       def format(messages)
         messages.each do |message|

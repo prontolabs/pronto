@@ -20,7 +20,7 @@ task :pronto do
     puts 'Running pronto on pronto'
 
     commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
-    access_token =  ENV['GITHUB_ACCESS_TOKEN']
+    access_token = ENV['GITHUB_ACCESS_TOKEN']
 
     system('gem install pronto-rubocop')
     system("pronto exec -c #{commit} -f github -t #{access_token}")
