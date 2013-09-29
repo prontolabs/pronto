@@ -33,7 +33,7 @@ module Pronto
       end
 
       formatter = ::Pronto::Formatter.get(options[:formatter])
-      puts ::Pronto.run(options[:commit], '.', formatter)
+      ::Pronto.run(options[:commit], '.', formatter)
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
     end
