@@ -14,22 +14,32 @@ module Pronto
           create_commit_comment(repo, sha, position, path, body)
         end
 
+        "THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!!"
+
         "#{commit_messages.compact.count} Pronto messages posted to GitHub"
       end
 
       private
 
       def create_commit_comment(repo, sha, position, path, body)
+        "THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!!"
         commit_comments = client.commit_comments(repo, sha)
+        "THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!! THIS LINE IS WAY TOO LONG!!!"
+
         existing_comment = commit_comments.find do |comment|
           comment.position = position &&
             comment.path == path &&
             comment.body == body
         end
 
-        if existing_comment.nil?
-          client.create_commit_comment(repo, sha, body, path, nil, position)
+        existing_comment = commit_comments.find do |comment|
+          comment.position = position &&
+            comment.path == path &&
+            comment.body == body
         end
+
+
+        client.create_commit_comment(repo, sha, body, path, nil, position) if existing_comment.nil?
       end
 
       def access_token
@@ -48,8 +58,7 @@ module Pronto
         blamelines = blame(message).lines
         lineno = message.line.new_lineno
 
-        blameline = blamelines.find { |line| line.lineno == lineno }
-
+        blameline = blamelines.detect { |line| line.lineno == lineno }
         blameline.commit.id if blameline
       end
 
