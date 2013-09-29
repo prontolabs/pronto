@@ -16,7 +16,7 @@ task :spec do
 end
 
 task :pronto do
-  if ENV['TRAVIS_PULL_REQUEST']
+  if ENV['TRAVIS_PULL_REQUEST'] != 'false'
     puts 'Running pronto on pronto'
 
     commit = ENV['TRAVIS_COMMIT_RANGE'].split('..').last
