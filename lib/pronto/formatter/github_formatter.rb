@@ -14,7 +14,7 @@ module Pronto
                                         sha(message),
                                         message.msg,
                                         message.path,
-                                        message.line.new_lineno,
+                                        nil,
                                         message.line.position)
         end
       end
