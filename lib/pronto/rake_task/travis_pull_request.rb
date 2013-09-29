@@ -11,6 +11,7 @@ module Pronto
     # Pronto::Rake::TravisPullRequest.new
     class TravisPullRequest < Rake::TaskLib
       attr_accessor :name
+      attr_accessor :verbose
 
       def initialize(*args, &task_block)
         setup_ivars(args)
@@ -52,6 +53,7 @@ module Pronto
 
       def setup_ivars(args)
         @name = args.shift || :pronto_travis_pull_request
+        @verbose = true
       end
     end
   end
