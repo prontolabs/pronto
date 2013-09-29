@@ -13,8 +13,6 @@ module Rugged
         delta.new_file_full_path
       end
 
-      private
-
       def lines
         map(&:lines).flatten.compact
       end
