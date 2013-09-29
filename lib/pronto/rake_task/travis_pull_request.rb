@@ -4,7 +4,7 @@ require 'rake'
 require 'rake/tasklib'
 
 module Pronto
-  module Rake
+  module RakeTask
     # Provides a custom rake task to use with Travis.
     #
     # require 'rubocop/rake/travis_pull_request'
