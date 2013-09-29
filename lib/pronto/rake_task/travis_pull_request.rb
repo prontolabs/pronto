@@ -38,6 +38,7 @@ module Pronto
         pull_request = client.pull_request(repo_slug, pull_request_number)
         formatter = ::Pronto::Formatter::GithubFormatter.new
 
+        ::Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
         ::Pronto.run(pull_request.base.sha, '.', formatter)
       end
 

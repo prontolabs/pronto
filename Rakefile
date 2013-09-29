@@ -1,6 +1,6 @@
 #!/usr/bin/env rake
 require 'bundler'
-require 'pronto/rake_task/travis_pull_request'
+require_relative 'lib/pronto/rake_task/travis_pull_request'
 
 Bundler::GemHelper.install_tasks
 
