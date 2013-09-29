@@ -13,8 +13,6 @@ module Pronto
                                         message.path,
                                         message.line.new_lineno)
         end
-
-        "#{messages.count} pronto messages posted to GitHub"
       end
 
       private
