@@ -28,7 +28,7 @@ Then run it using the included rake task or manually.
 
 ### Local Changes
 
-You can run Pronto locally. First, install Pronto andrunners you want to use:
+You can run Pronto locally. First, install Pronto and runners you want to use:
 ```bash
   gem install pronto
   gem install pronto-rubocop
