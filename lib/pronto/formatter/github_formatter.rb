@@ -4,7 +4,7 @@ module Pronto
   module Formatter
     class GithubFormatter
       def format(messages)
-        messages.each do |message|
+        commit_messages = messages.map do |message|
           repo = github_slug(message)
           sha = commit_sha(message)
           position = message.line.position
@@ -13,6 +13,8 @@ module Pronto
 
           create_commit_comment(repo, sha, position, path, body)
         end
+
+        "#{commit_messages.compact.count} Pronto messages posted to GitHub"
       end
 
       private
