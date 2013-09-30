@@ -8,6 +8,8 @@
 
 Pronto runs analysis quickly by checking only the introduced changes.
 
+![Pronto demo](pronto.gif "")
+
 ### Pull Requests
 
 You can run Pronto as part of your builds and then get results as commit
