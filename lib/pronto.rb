@@ -5,6 +5,7 @@ require_relative 'pronto/rugged/diff/patch'
 require_relative 'pronto/rugged/diff/line'
 require_relative 'pronto/rugged/tree'
 require_relative 'pronto/rugged/remote'
+require_relative 'pronto/rugged/repository'
 
 require 'pronto/plugin'
 require 'pronto/message'

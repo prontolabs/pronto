@@ -1,5 +1,4 @@
 require 'octokit'
-require 'grit'
 
 module Pronto
   module Formatter
@@ -56,10 +55,7 @@ module Pronto
 
       def blame(message)
         @blames ||= {}
-        # TODO: Using grit blame implementation for now.
-        # Replace it with rugged implementation when it's available.
-        grit_repo = Grit::Repo.new(message.repo.path)
-        @blames[message.path] ||= grit_repo.blame(message.path)
+        @blames[message.path] ||= message.repo.blame(message.path)
         @blames[message.path]
       end
     end
