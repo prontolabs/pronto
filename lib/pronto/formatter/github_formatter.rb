@@ -20,6 +20,8 @@ module Pronto
       private
 
       def create_comment(repo, sha, position, path, body)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+
         comments = client.commit_comments(repo, sha)
 
         existing_comment = comments.find do |comment|
