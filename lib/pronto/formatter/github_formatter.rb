@@ -19,6 +19,7 @@ module Pronto
       private
 
       def create_comment(repo, sha, comment)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
         comments = client.commit_comments(repo, sha)
         existing = comments.any? { |c| comment == c }
         client.create_commit_comment(repo, sha, comment) unless existing
