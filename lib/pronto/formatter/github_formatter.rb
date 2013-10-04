@@ -35,6 +35,28 @@ module Pronto
         end
       end
 
+      def create_comment(repo, sha, position, path, body)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+
+        comments = @pull_id ? client.pull_comments(repo, @pull_id)
+                            : client.commit_comments(repo, sha)
+
+        existing_comment = comments.find do |comment|
+          comment.position = position &&
+            comment.commid_id == sha &&
+            comment.path == path &&
+            comment.body == body
+        end
+
+        return if existing_comment
+
+        if @pull_id
+          client.create_pull_comment(repo, @pull_id, body, sha, path, position)
+        else
+          client.create_commit_comment(repo, sha, body, path, nil, position)
+        end
+      end
+
       def access_token
         ENV['GITHUB_ACCESS_TOKEN']
       end
