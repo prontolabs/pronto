@@ -31,12 +31,12 @@ module Pronto
       end
 
       def run_task(verbose)
-        return if pull_request_number.nil? || pull_request_number == 'false'
+        return if pull_id.nil? || pull_id == 'false'
 
         client = Octokit::Client.new
 
-        pull_request = client.pull_request(repo_slug, pull_request_number)
-        formatter = ::Pronto::Formatter::GithubFormatter.new
+        pull_request = client.pull_request(repo_slug, pull_id)
+        formatter = ::Pronto::Formatter::GithubFormatter.new(pull_id)
 
         ::Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
         ::Pronto.run(pull_request.base.sha, '.', formatter)
@@ -44,7 +44,7 @@ module Pronto
 
       private
 
-      def pull_request_number
+      def pull_id
         ENV['TRAVIS_PULL_REQUEST']
       end
 
