@@ -29,7 +29,6 @@ module Pronto
 
         existing_comment = comments.find do |comment|
           comment.position = position &&
-            comment.commid_id == sha &&
             comment.path == path &&
             comment.body == body
         end
