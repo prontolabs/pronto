@@ -6,14 +6,15 @@
 
 ## Usage
 
-Pronto runs analysis quickly by checking only the introduced changes.
+Pronto runs analysis quickly by checking only the introduced changes. Created
+to be used on pull requets, but suited for other scenarios as well.
 
 ![Pronto demo](pronto.gif "")
 
 ### Pull Requests
 
-You can run Pronto as part of your builds and then get results as commit
-comments using `GithubFormatter`.
+You can run Pronto as part of your builds and then get results as comments
+using `GithubFormatter`.
 
 Actually, Pronto runs Pronto whenever you make a pull request on Pronto. It
 uses Travis CI and the included `TravisPullRequest` rake task for that.
