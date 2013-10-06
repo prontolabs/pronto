@@ -2,7 +2,6 @@ require 'spec_helper'
 
 module Rugged
   describe Remote do
-    let(:repository) { Repository.init_at('.') }
     let(:remote) { Remote.new(repository, url) }
 
     describe '#github_slug' do

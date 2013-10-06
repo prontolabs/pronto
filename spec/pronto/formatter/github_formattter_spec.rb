@@ -5,7 +5,6 @@ module Pronto
   module Formatter
     describe GithubFormatter do
       let(:github_formatter) { GithubFormatter.new }
-      let(:repository) { Rugged::Repository.init_at('.') }
 
       describe '#format' do
         subject { github_formatter.format(messages) }
