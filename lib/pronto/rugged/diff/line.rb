@@ -20,8 +20,6 @@ module Rugged
 
       def commit_sha
         @commit_sha ||= begin
-          blamelines = repo.blame(patch.new_file_full_path).lines
-          blameline = blamelines.find { |line| line.lineno == new_lineno }
           blameline.commit.id if blameline
         end
       end
@@ -37,6 +35,13 @@ module Rugged
 
       def repo
         patch.diff.tree.repo
+      end
+
+      def blameline
+        @blameline ||= begin
+          blamelines = repo.blame(patch.new_file_full_path).lines
+          blamelines.find { |line| line.lineno == new_lineno }
+        end
       end
     end
   end
