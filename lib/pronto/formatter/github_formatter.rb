@@ -4,6 +4,8 @@ module Pronto
   module Formatter
     class GithubFormatter
       def format(messages)
+        puts "#{messages.count} messages discovered by Pronto"
+
         commit_messages = messages.map do |message|
           repo = github_slug(message)
           sha = message.line.commit_sha
@@ -19,7 +21,13 @@ module Pronto
 
       private
 
+      def renaem_create_comment(repo, sha, position, path, body)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+      end
+
       def create_comment(repo, sha, position, path, body)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
+
         comments = client.commit_comments(repo, sha)
 
         existing_comment = comments.find do |comment|
@@ -29,8 +37,13 @@ module Pronto
         end
 
         unless existing_comment
+          puts "commit: #{sha}, #{body}, #{sha}, #{path}, #{position}"
           client.create_commit_comment(repo, sha, body, path, nil, position)
         end
+      end
+
+      def teterenaem_create_comment(repo, sha, position, path, body)
+        "TESTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
       end
 
       def access_token

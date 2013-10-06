@@ -31,7 +31,7 @@ module Rugged
           end
 
           commit_patch.lines.find do |l|
-            blameline.lineno == l.new_lineno
+            blameline.oldlineno == l.old_lineno
           end
         end
       end
