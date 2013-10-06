@@ -12,6 +12,12 @@ module Rugged
         line_index + hunk_index + 1
       end
 
+      def commit
+        @commit ||= begin
+          repo.lookup(commit_sha) if commit_sha
+        end
+      end
+
       def commit_sha
         @commit_sha ||= begin
           blamelines = repo.blame(patch.new_file_full_path).lines
