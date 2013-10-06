@@ -28,7 +28,7 @@ module Pronto
                             : client.commit_comments(repo, sha)
 
         existing_comment = comments.find do |comment|
-          comment.position = position &&
+          comment.position == position &&
             comment.path == path &&
             comment.body == body
         end
