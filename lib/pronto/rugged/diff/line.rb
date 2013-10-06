@@ -24,6 +24,16 @@ module Rugged
         end
       end
 
+      def commit_line
+        commit_patch = commit.patches.find do |p|
+          patch.new_file_full_path == p.new_file_full_path
+        end
+
+        commit_patch.lines.find do |l|
+          blameline.lineno == l.new_lineno
+        end
+      end
+
       def ==(other)
         content == other.content &&
           line_origin == other.line_origin &&

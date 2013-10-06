@@ -11,7 +11,7 @@ module Pronto
         commit_messages = messages.map do |message|
           repo = github_slug(message)
           sha = message.line.commit_sha
-          position = message.line.position
+          position = message.line.commit_line.position
           path = message.path
           body = message.msg
 

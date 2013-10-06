@@ -12,6 +12,7 @@ module Pronto
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { OpenStruct.new({ new_lineno: 1 }) }
+        before { line.stub(:commit_line).and_return(line) }
         before { message.stub(:repo).and_return(repository) }
 
         context 'with pull request id' do
