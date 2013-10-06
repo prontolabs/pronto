@@ -4,7 +4,7 @@ require 'ostruct'
 module Pronto
   module Formatter
     describe GithubFormatter do
-      let(:github_formatter) { GithubFormatter.new(pull_id) }
+      let(:github_formatter) { GithubFormatter.new }
       let(:repository) { Rugged::Repository.init_at('.') }
 
       describe '#format' do
@@ -15,36 +15,17 @@ module Pronto
         before { line.stub(:commit_line).and_return(line) }
         before { message.stub(:repo).and_return(repository) }
 
-        context 'with pull request id' do
-          let(:pull_id) { 1 }
-          specify do
-            Octokit::Client.any_instance
-                           .should_receive(:pull_comments)
-                           .twice
-                           .and_return([])
+        specify do
+          Octokit::Client.any_instance
+                         .should_receive(:commit_comments)
+                         .twice
+                         .and_return([])
 
-            Octokit::Client.any_instance
-                           .should_receive(:create_pull_comment)
-                           .twice
+          Octokit::Client.any_instance
+                         .should_receive(:create_commit_comment)
+                         .twice
 
-            subject
-          end
-        end
-
-        context 'without pull request id' do
-          let(:pull_id) { nil }
-          specify do
-            Octokit::Client.any_instance
-                           .should_receive(:commit_comments)
-                           .twice
-                           .and_return([])
-
-            Octokit::Client.any_instance
-                           .should_receive(:create_commit_comment)
-                           .twice
-
-            subject
-          end
+          subject
         end
       end
     end

@@ -3,10 +3,6 @@ require 'octokit'
 module Pronto
   module Formatter
     class GithubFormatter
-      def initialize(pull_id = nil)
-        @pull_id = pull_id || ENV['PULL_REQUEST_ID']
-      end
-
       def format(messages)
         commit_messages = messages.map do |message|
           repo = github_slug(message)
@@ -24,8 +20,7 @@ module Pronto
       private
 
       def create_comment(repo, sha, position, path, body)
-        comments = @pull_id ? client.pull_comments(repo, @pull_id)
-                            : client.commit_comments(repo, sha)
+        comments = client.commit_comments(repo, sha)
 
         existing_comment = comments.find do |comment|
           comment.position == position &&
@@ -33,11 +28,7 @@ module Pronto
             comment.body == body
         end
 
-        return if existing_comment
-
-        if @pull_id
-          client.create_pull_comment(repo, @pull_id, body, sha, path, position)
-        else
+        unless existing_comment
           client.create_commit_comment(repo, sha, body, path, nil, position)
         end
       end
