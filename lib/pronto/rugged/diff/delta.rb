@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Rugged
   class Diff
     class Delta
