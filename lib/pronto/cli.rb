@@ -9,9 +9,9 @@ module Pronto
 
     method_option :commit,
                   type: :string,
-                  default: nil,
+                  default: 'master',
                   aliases: '-c',
-                  banner: 'Commit for the diff, defaults to master'
+                  banner: 'Commit for the diff'
 
     method_option :runner,
                   type: :array,
@@ -21,10 +21,9 @@ module Pronto
 
     method_option :formatter,
                   type: :string,
-                  default: nil,
+                  default: 'text',
                   aliases: '-f',
-                  banner: "Formatter, defaults to text.
-                           Available: #{::Pronto::Formatter.names.join(', ')}"
+                  banner: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def exec
       gem_names = options[:runner].any? ? options[:runner] : ::Pronto.gem_names
