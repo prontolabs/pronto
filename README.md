@@ -52,3 +52,4 @@ Currently available runners:
 
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-flay](https://github.com/mmozuras/pronto-flay)
+* [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
