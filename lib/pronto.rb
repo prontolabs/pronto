@@ -46,7 +46,8 @@ module Pronto
   def self.diff(repo_path, commit)
     repo = Rugged::Repository.new(repo_path)
     commit ||= 'master'
-    repo.diff(commit, repo.head.target)
+    merge_base = repo.merge_base(commit, repo.head.target)
+    repo.diff(merge_base, repo.head.target)
   end
 
   def self.run_all_runners(patches)
