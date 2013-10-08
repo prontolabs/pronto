@@ -30,9 +30,11 @@ module Rugged
             patch.new_file_full_path == p.new_file_full_path
           end
 
-          commit_patch.lines.find do |l|
-            blameline.oldlineno == l.old_lineno
+          result = commit_patch.lines.find do |l|
+            blameline.lineno == l.new_lineno
           end
+
+          result || self # no commit_line means that it was just added
         end
       end
 
