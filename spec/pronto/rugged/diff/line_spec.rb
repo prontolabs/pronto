@@ -3,13 +3,13 @@ require 'spec_helper'
 module Rugged
   class Diff
     describe Line do
-      let(:diff) { repository.diff('26c74f4', 'c0e8106') }
+      let(:diff) { repository.diff('52637a1', '52637a1~5') }
       let(:patch) { diff.patches.last }
-      let(:line) { patch.lines[20] }
+      let(:line) { patch.lines[2] }
 
       describe '#position' do
         subject { line.position }
-        it { should == 22 }
+        it { should == 3 }
       end
     end
   end

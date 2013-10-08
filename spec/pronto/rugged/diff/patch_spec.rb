@@ -3,7 +3,7 @@ require 'spec_helper'
 module Rugged
   class Diff
     describe Patch do
-      let(:diff) { repository.diff('26c74f4', 'c0e8106') }
+      let(:diff) { repository.diff('52637a1', '52637a1~5') }
       let(:patch) { diff.patches.last }
 
       describe '#new_file_full_path' do
@@ -13,17 +13,17 @@ module Rugged
 
       describe '#lines' do
         subject { patch.lines }
-        its(:count) { should == 56 }
+        its(:count) { should == 7 }
       end
 
       describe '#added_lines' do
         subject { patch.added_lines }
-        its(:count) { should == 30 }
+        its(:count) { should == 0 }
       end
 
       describe '#deleted_lines' do
         subject { patch.deleted_lines }
-        its(:count) { should == 11 }
+        its(:count) { should == 1 }
       end
     end
   end
