@@ -14,6 +14,20 @@ module Pronto
 
         its(:count) { should == 2 }
         its(:first) { should == 'path/to:1 W: crucial' }
+
+        context 'message without path' do
+          let(:message) { Message.new(nil, line, :warning, 'careful') }
+
+          its(:count) { should == 2 }
+          its(:first) { should == ':1 W: careful' }
+        end
+
+        context 'message without line' do
+          let(:message) { Message.new('path/to', nil, :warning, 'careful') }
+
+          its(:count) { should == 2 }
+          its(:first) { should == 'path/to: W: careful' }
+        end
       end
     end
   end
