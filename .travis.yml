@@ -2,6 +2,7 @@ language: ruby
 rvm:
 - 1.9.3
 - 2.0.0
+- rbx-19mode
 env:
   global:
     secure: LW/HXahV3KYeaFjHXboWs37GHOeABPHkjOFgZN79vSz2ClJSckMAAU/sbQw6HWtIzIHlRawX4sDTd0KIXEpFH6hwWevwXMgLpNzRh2utdPwWuN96+/KrwPI/vnYjtFqpxouQqWEma5SlN1HGxrs5qCKmIBNplQGbpDVxiSfyWEo=
