@@ -5,7 +5,14 @@ module Pronto
     require 'pronto'
     require 'pronto/version'
 
-    desc 'exec', 'Run Pronto'
+    class << self
+      def is_thor_reserved_word?(word, type)
+        return false if word == 'run'
+        super
+      end
+    end
+
+    desc 'run', 'Run Pronto'
 
     method_option :commit,
                   type: :string,
@@ -25,7 +32,7 @@ module Pronto
                   aliases: '-f',
                   banner: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
 
-    def exec
+    def run
       gem_names = options[:runner].any? ? options[:runner] : ::Pronto.gem_names
       gem_names.each do |gem_name|
         require "pronto/#{gem_name}"
