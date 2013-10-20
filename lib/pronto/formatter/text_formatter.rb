@@ -1,7 +1,7 @@
 module Pronto
   module Formatter
     class TextFormatter
-      def format(messages)
+      def format(messages, _)
         messages.map do |message|
           level = message.level[0].upcase
           line = message.line

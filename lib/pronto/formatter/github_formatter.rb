@@ -3,15 +3,15 @@ require 'octokit'
 module Pronto
   module Formatter
     class GithubFormatter
-      def format(messages)
+      def format(messages, repo)
         commit_messages = messages.map do |message|
-          repo = github_slug(message)
+          github_slug = repo.remotes.map(&:github_slug).compact.first
           sha = message.commit_sha
           position = message.line.commit_line.position if message.line
           path = message.path
           body = message.msg
 
-          create_comment(repo, sha, position, path, body)
+          create_comment(github_slug, sha, position, path, body)
         end
 
         "#{commit_messages.compact.count} Pronto messages posted to GitHub"
@@ -39,10 +39,6 @@ module Pronto
 
       def client
         @client ||= Octokit::Client.new(access_token: access_token)
-      end
-
-      def github_slug(message)
-        message.repo.remotes.map(&:github_slug).compact.first
       end
     end
   end

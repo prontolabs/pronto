@@ -7,7 +7,7 @@ module Pronto
       let(:text_formatter) { TextFormatter.new }
 
       describe '#format' do
-        subject { text_formatter.format(messages) }
+        subject { text_formatter.format(messages, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { OpenStruct.new({ new_lineno: 1 }) }

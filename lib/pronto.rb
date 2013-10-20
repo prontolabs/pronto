@@ -27,7 +27,7 @@ module Pronto
     result = run_all_runners(patches, merge_base)
 
     formatter ||= default_formatter
-    formatter.format(result)
+    formatter.format(result, repo)
   end
 
   def self.gem_names

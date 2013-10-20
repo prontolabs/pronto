@@ -18,7 +18,7 @@ module Pronto
     end
 
     def repo
-      line.patch.delta.repo
+      line.patch.delta.repo if line
     end
   end
 end

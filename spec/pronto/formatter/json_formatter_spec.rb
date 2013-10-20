@@ -7,7 +7,7 @@ module Pronto
       let(:json_formatter) { JsonFormatter.new }
 
       describe '#format' do
-        subject { json_formatter.format(messages) }
+        subject { json_formatter.format(messages, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { OpenStruct.new({ new_lineno: 1 }) }
