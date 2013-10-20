@@ -19,8 +19,12 @@ require 'pronto/formatter/formatter'
 
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
-    patches = diff(repo_path, commit)
-    result = run_all_runners(patches, commit)
+    repo = Rugged::Repository.new(repo_path)
+    commit ||= 'master'
+    merge_base = repo.merge_base(commit, repo.head.target)
+    patches = repo.diff(merge_base, repo.head.target)
+
+    result = run_all_runners(patches, merge_base)
 
     formatter ||= default_formatter
     formatter.format(result)
@@ -42,13 +46,6 @@ module Pronto
   end
 
   private
-
-  def self.diff(repo_path, commit)
-    repo = Rugged::Repository.new(repo_path)
-    commit ||= 'master'
-    merge_base = repo.merge_base(commit, repo.head.target)
-    repo.diff(merge_base, repo.head.target)
-  end
 
   def self.run_all_runners(patches, commit)
     Runner.runners.map do |runner|
