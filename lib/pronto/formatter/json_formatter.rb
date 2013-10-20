@@ -10,6 +10,7 @@ module Pronto
           result = { level: message.level[0].upcase, message: message.msg }
           result[:path] = message.path if message.path
           result[:line] = lineno if lineno
+          result[:commit_sha] = message.commit_sha if message.commit_sha
           result
         end.to_json
       end

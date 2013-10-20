@@ -6,7 +6,11 @@ module Pronto
           level = message.level[0].upcase
           line = message.line
           lineno = line.new_lineno if line
-          "#{message.path}:#{lineno} #{level}: #{message.msg}"
+          path = message.path
+          commit_sha = message.commit_sha
+
+          location = (path.nil? && lineno.nil?) ? commit_sha : "#{path}:#{lineno}"
+          "#{location} #{level}: #{message.msg}"
         end
       end
     end

@@ -6,7 +6,7 @@ module Pronto
       def format(messages)
         commit_messages = messages.map do |message|
           repo = github_slug(message)
-          sha = message.line.commit_sha
+          sha = message.commit_sha
           position = message.line.commit_line.position
           path = message.path
           body = message.msg

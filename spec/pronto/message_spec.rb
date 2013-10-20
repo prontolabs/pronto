@@ -3,7 +3,7 @@ require 'spec_helper'
 module Pronto
   describe Message do
     describe '.new' do
-      subject { Message.new(path, line, level, msg) }
+      subject { Message.new(path, line, level, msg, '8cda581') }
       let(:path) { 'README.md' }
       let(:line) { Rugged::Diff::Line.new }
       let(:msg) { 'message' }
