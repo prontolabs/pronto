@@ -26,13 +26,14 @@ module Rugged
 
       def commit_line
         @commit_line ||= begin
-          commit_patch = commit.show.patches.find do |p|
+          diff = commit.show
+          patches = diff ? diff.patches : []
+          commit_patch = patches.find do |p|
             patch.new_file_full_path == p.new_file_full_path
           end
 
-          result = commit_patch.lines.find do |l|
-            blameline.lineno == l.new_lineno
-          end
+          lines = commit_patch ? commit_patch.lines : []
+          result = lines.find { |l| blameline.lineno == l.new_lineno }
 
           result || self # no commit_line means that it was just added
         end
