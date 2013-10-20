@@ -20,7 +20,7 @@ require 'pronto/formatter/formatter'
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
     patches = diff(repo_path, commit)
-    result = run_all_runners(patches)
+    result = run_all_runners(patches, commit)
 
     formatter ||= default_formatter
     formatter.format(result)
@@ -50,9 +50,9 @@ module Pronto
     repo.diff(merge_base, repo.head.target)
   end
 
-  def self.run_all_runners(patches)
+  def self.run_all_runners(patches, commit)
     Runner.runners.map do |runner|
-      runner.new.run(patches)
+      runner.new.run(patches, commit)
     end.flatten.compact
   end
 
