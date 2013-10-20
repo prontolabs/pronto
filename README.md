@@ -55,3 +55,4 @@ Currently available runners:
 * [pronto-flay](https://github.com/mmozuras/pronto-flay)
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
+* [pronto-poper](https://github.com/mmozuras/pronto-poper)
