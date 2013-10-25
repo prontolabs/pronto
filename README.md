@@ -6,7 +6,7 @@
 [![Dependency Status](https://gemnasium.com/mmozuras/pronto.png)](https://gemnasium.com/mmozuras/pronto)
 
 Pronto runs analysis quickly by checking only the relevant changes. Created to
-be used on pull requets, but suited for other scenarios as well. Perfect if you
+be used on pull requests, but suited for other scenarios as well. Perfect if you
 want to find out quickly if branch introduces changes that conform to your
 [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](https://github.com/mmozuras/pronto-flay), [don't introduce security holes](https://github.com/mmozuras/pronto-brakeman) and [more](#runners).
 
