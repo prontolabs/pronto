@@ -62,3 +62,4 @@ Currently available runners:
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
+* [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
