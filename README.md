@@ -63,3 +63,4 @@ Currently available runners:
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
+* [pronto-spell](https://github.com/mmozuras/pronto-spell)
