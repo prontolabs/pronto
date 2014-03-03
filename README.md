@@ -4,6 +4,7 @@
 [![Build Status](https://secure.travis-ci.org/mmozuras/pronto.png)](http://travis-ci.org/mmozuras/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.png)](http://badge.fury.io/rb/pronto)
 [![Dependency Status](https://gemnasium.com/mmozuras/pronto.png)](https://gemnasium.com/mmozuras/pronto)
+[![Inline docs](http://inch-pages.github.io/github/mmozuras/pronto.png)](http://inch-pages.github.io/github/mmozuras/pronto)
 
 Pronto runs analysis quickly by checking only the relevant changes. Created to
 be used on pull requests, but suited for other scenarios as well. Perfect if you
