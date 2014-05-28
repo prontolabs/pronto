@@ -21,6 +21,11 @@ module Pronto
         it { should be_an_instance_of TextFormatter }
       end
 
+      context 'checkstyle' do
+        let(:name) { 'checkstyle' }
+        it { should be_an_instance_of CheckstyleFormatter }
+      end
+
       context 'empty' do
         let(:name) { '' }
         it { should be_an_instance_of TextFormatter }
@@ -34,7 +39,7 @@ module Pronto
 
     describe '.names' do
       subject { Formatter.names }
-      it { should =~ %w(github json text) }
+      it { should =~ %w(github json checkstyle text) }
     end
   end
 end

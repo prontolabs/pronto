@@ -15,6 +15,7 @@ require 'pronto/runner'
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
 require 'pronto/formatter/github_formatter'
+require 'pronto/formatter/checkstyle_formatter'
 require 'pronto/formatter/formatter'
 
 module Pronto

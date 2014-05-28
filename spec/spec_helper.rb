@@ -9,3 +9,8 @@ end
 def repository
   Rugged::Repository.init_at('.')
 end
+
+def load_fixture(fixture_name)
+  path = File.join(%w(spec support files), fixture_name)
+  File.read(path).strip
+end

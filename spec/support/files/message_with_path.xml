@@ -1,0 +1,7 @@
+<?xml version='1.0'?>
+<checkstyle>
+  <file name='path/to'>
+    <error line='1' severity='error' message='Line Error' source='com.puppycrawl.tools.checkstyle.pronto'/>
+    <error line='1' severity='warning' message='Line Warning' source='com.puppycrawl.tools.checkstyle.pronto'/>
+  </file>
+</checkstyle>
