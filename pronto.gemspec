@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.executables << 'pronto'
 
   s.add_dependency 'rugged', '~> 0.19.0'
-  s.add_dependency 'thor', '~> 0.18.0'
+  s.add_dependency 'thor', '~> 0.19.1'
   s.add_dependency 'octokit', '~> 2.7.1'
   s.add_dependency 'grit', '~> 2.5.0'
   s.add_development_dependency 'rake', '~> 10.1.0'
