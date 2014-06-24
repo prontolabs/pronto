@@ -1,22 +1,9 @@
 #!/usr/bin/env rake
 require 'bundler'
-require_relative 'lib/pronto/rake_task/travis_pull_request'
+require 'rspec/core/rake_task'
 
 Bundler::GemHelper.install_tasks
-
-desc 'Bundle the gem'
-task :bundle do
-  sh 'bundle check || bundle install'
-  sh 'gem build *.gemspec'
-  sh 'gem install *.gem'
-  sh 'rm *.gem'
-end
-
-task :spec do
-  sh 'bundle exec rspec'
-end
-
-Pronto::RakeTask::TravisPullRequest.new
+RSpec::Core::RakeTask.new(:spec)
 
 task(:default).clear
-task default: [:bundle, :spec, :pronto_travis_pull_request]
+task default: [:spec]
