@@ -7,21 +7,21 @@ module Pronto
 
       describe '#format' do
         subject { checkstyle_formatter.format(messages, nil) }
-        let(:line) { OpenStruct.new({ new_lineno: 1 }) }
-        let(:error_message) { Message.new('path/to', line, :error, 'Line Error') }
-        let(:warning_message) { Message.new('path/to', line, :warning, 'Line Warning') }
-        let(:messages) { [error_message, warning_message] }
+        let(:line) { OpenStruct.new(new_lineno: 1) }
+        let(:error) { Message.new('path/to', line, :error, 'Line Error') }
+        let(:warning) { Message.new('path/to', line, :warning, 'Line Warning') }
+        let(:messages) { [error, warning] }
 
         it { should eq load_fixture('message_with_path.xml') }
 
         context 'message without path' do
-          let(:error_message) { Message.new(nil, line, :error, 'Line Error') }
+          let(:error) { Message.new(nil, line, :error, 'Line Error') }
 
           it { should eq load_fixture('message_without_path.xml') }
         end
 
         context 'message without line' do
-          let(:error_message) { Message.new('path/to', nil, :error, 'Line Error') }
+          let(:error) { Message.new('path/to', nil, :error, 'Line Error') }
 
           it { should eq load_fixture('message_without_line.xml') }
         end

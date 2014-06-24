@@ -10,7 +10,7 @@ module Pronto
         subject { text_formatter.format(messages, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-        let(:line) { OpenStruct.new({ new_lineno: 1 }) }
+        let(:line) { OpenStruct.new(new_lineno: 1) }
 
         its(:count) { should == 2 }
         its(:first) { should == 'path/to:1 W: crucial' }
