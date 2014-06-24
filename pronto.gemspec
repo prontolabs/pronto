@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
 require 'pronto/version'
 
@@ -10,12 +10,18 @@ Gem::Specification.new do |s|
   s.author      = 'Mindaugas Mozūras'
   s.email       = 'mindaugas.mozuras@gmail.com'
   s.homepage    = 'http://github.org/mmozuras/pronto'
-  s.summary     = 'Pronto runs analysis quickly by checking only the introduced changes'
+  s.summary     = 'Pronto runs analysis by checking only the introduced changes'
+  s.description = <<-EOF
+    Pronto runs analysis quickly by checking only the relevant changes. Created
+    to be used on pull requests, but suited for other scenarios as well. Perfect
+    if you want to find out quickly if branch introduces changes that conform to
+    your styleguide, are DRY, don't introduce security holes and more.
+  EOF
 
   s.required_rubygems_version = '>= 1.3.6'
   s.license = 'MIT'
 
-  s.files         = Dir.glob('{lib}/**/*') + %w[LICENSE README.md]
+  s.files         = Dir.glob('{lib}/**/*') + %w(LICENSE README.md)
   s.test_files    = `git ls-files -- {spec}/*`.split("\n")
   s.require_paths = ['lib']
   s.executables << 'pronto'
