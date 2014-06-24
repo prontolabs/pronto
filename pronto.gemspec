@@ -20,10 +20,10 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables << 'pronto'
 
-  s.add_dependency 'rugged', '~> 0.19.0'
-  s.add_dependency 'thor', '~> 0.19.1'
-  s.add_dependency 'octokit', '~> 2.7.1'
-  s.add_dependency 'grit', '~> 2.5.0'
-  s.add_development_dependency 'rake', '~> 10.1.0'
-  s.add_development_dependency 'rspec', '~> 2.14.0'
+  s.add_runtime_dependency 'rugged', '~> 0.19', '>= 0.19.0'
+  s.add_runtime_dependency 'thor', '~> 0.19', '>= 0.19.1'
+  s.add_runtime_dependency 'octokit', '~> 2.7', '>= 2.7.1'
+  s.add_runtime_dependency 'grit', '~> 2.5', '>= 2.5.0'
+  s.add_development_dependency 'rake', '~> 10.1', '>= 10.1.0'
+  s.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.0'
 end
