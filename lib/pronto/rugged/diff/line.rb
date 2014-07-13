@@ -2,7 +2,7 @@ module Rugged
   class Diff
     class Line
       def patch
-        hunk.owner
+        hunk.delta
       end
 
       def position
@@ -19,9 +19,7 @@ module Rugged
       end
 
       def commit_sha
-        @commit_sha ||= begin
-          blameline.commit.id if blameline
-        end
+        blame[:final_commit_id] if blame
       end
 
       def commit_line
@@ -33,7 +31,7 @@ module Rugged
           end
 
           lines = commit_patch ? commit_patch.lines : []
-          result = lines.find { |l| blameline.lineno == l.new_lineno }
+          result = lines.find { |l| blame[:final_start_line_number] == l.new_lineno }
 
           result || self # no commit_line means that it was just added
         end
@@ -52,11 +50,9 @@ module Rugged
         patch.diff.tree.repo
       end
 
-      def blameline
-        @blameline ||= begin
-          blamelines = repo.blame(patch.new_file_full_path).lines
-          blamelines.find { |line| line.lineno == new_lineno }
-        end
+      def blame
+        @blame ||= Blame.new(repo, patch.delta.new_file[:path],
+                             min_line: new_lineno, max_line: new_lineno)[0]
       end
     end
   end

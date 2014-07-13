@@ -21,7 +21,13 @@ module Rugged
     end
 
     def lines
-      map(&:lines).flatten.compact
+      map do |hunk|
+        hunk.lines.map do |line|
+          # TODO: Remove this hack when regression is fixed
+          line.define_singleton_method(:hunk) { hunk }
+          line
+        end
+      end.flatten.compact
     end
   end
 end

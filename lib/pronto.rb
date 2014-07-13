@@ -18,6 +18,8 @@ require 'pronto/formatter/formatter'
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
     repo = Rugged::Repository.new(repo_path)
+    # TODO: Remove this hack when regression is fixed
+    Rugged::Tree.define_singleton_method(:repo) { repo }
     commit ||= 'master'
     merge_base = repo.merge_base(commit, repo.head.target)
     patches = repo.diff(merge_base, repo.head.target)
