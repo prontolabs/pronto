@@ -1,11 +1,8 @@
 require 'rugged'
-require 'pronto/rugged/diff'
+require 'pronto/rugged/patch'
 require 'pronto/rugged/diff/delta'
-require 'pronto/rugged/diff/patch'
 require 'pronto/rugged/diff/line'
-require 'pronto/rugged/tree'
 require 'pronto/rugged/remote'
-require 'pronto/rugged/repository'
 require 'pronto/rugged/commit'
 
 require 'pronto/plugin'
