@@ -66,3 +66,4 @@ Currently available runners:
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
+* [pronto-haml](https://github.com/mmozuras/pronto-haml)
