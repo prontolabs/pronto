@@ -1,9 +1,12 @@
 require 'rspec'
+require 'rspec/its'
+require 'pry'
+
 require 'pronto'
 
 RSpec.configure do |config|
-  config.color_enabled = true
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.expect_with(:rspec) { |c| c.syntax = :should }
+  config.mock_with(:rspec) { |c| c.syntax = :should }
 end
 
 def repository

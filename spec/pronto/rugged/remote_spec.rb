@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Rugged
   describe Remote do
-    let(:remote) { Remote.new(repository, url) }
+    let(:remote) { repository.remotes.create_anonymous(url) }
 
     describe '#github_slug' do
       subject { remote.github_slug }
