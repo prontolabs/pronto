@@ -52,7 +52,9 @@ module Rugged
 
       def blame
         @blame ||= Blame.new(repo, patch.delta.new_file[:path],
-                             min_line: new_lineno, max_line: new_lineno)[0]
+                             min_line: new_lineno, max_line: new_lineno,
+                             track_copies_same_file: true,
+                             track_copies_any_commit_copies: true)[0]
       end
     end
   end
