@@ -31,7 +31,7 @@ module Rugged
           end
 
           lines = commit_patch ? commit_patch.lines : []
-          result = lines.find { |l| blame[:final_start_line_number] == l.new_lineno }
+          result = lines.find { |l| blame[:orig_start_line_number] == l.new_lineno }
 
           result || self # no commit_line means that it was just added
         end
