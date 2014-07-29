@@ -1,9 +1,7 @@
 require 'rugged'
-require 'pronto/rugged/patch'
-require 'pronto/rugged/diff/delta'
-require 'pronto/rugged/diff/line'
+require 'pronto/git/patch'
+require 'pronto/git/line'
 require 'pronto/rugged/remote'
-require 'pronto/rugged/commit'
 
 require 'pronto/plugin'
 require 'pronto/message'
@@ -18,11 +16,10 @@ require 'pronto/formatter/formatter'
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
     repo = Rugged::Repository.new(repo_path)
-    # TODO: Remove this hack when regression is fixed
-    Rugged::Tree.define_singleton_method(:repo) { repo }
     commit ||= 'master'
     merge_base = repo.merge_base(commit, repo.head.target)
-    patches = repo.diff(merge_base, repo.head.target)
+    # TODO This could be cleaner
+    patches = repo.diff(merge_base, repo.head.target).map { |patch| Git::Patch.new(patch, repo) }
 
     result = run_all_runners(patches, merge_base)
 
