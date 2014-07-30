@@ -8,6 +8,7 @@ module Pronto
       describe '#format' do
         subject { github_formatter.format(messages, repository) }
         let(:messages) { [message, message] }
+        let(:repository) { Pronto::Git::Repository.new('.') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { OpenStruct.new(new_lineno: 1) }
         before { line.stub(:commit_line).and_return(line) }

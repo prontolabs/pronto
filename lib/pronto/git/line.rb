@@ -38,7 +38,7 @@ module Pronto
 
       def commit_line
         @commit_line ||= begin
-          patches = repo.show_commit(commit_sha)
+          patches = patch.repo.show_commit(commit_sha)
 
           commit_patch = patches.find do |p|
             patch.new_file_full_path == p.new_file_full_path
@@ -60,15 +60,8 @@ module Pronto
 
       private
 
-      def repo
-        patch.repo
-      end
-
       def blame
-        @blame ||= Rugged::Blame.new(repo.rugged, patch.delta.new_file[:path],
-                                     min_line: new_lineno, max_line: new_lineno,
-                                     track_copies_same_file: true,
-                                     track_copies_any_commit_copies: true)[0]
+        @blame ||= patch.blame(new_lineno)
       end
     end
   end

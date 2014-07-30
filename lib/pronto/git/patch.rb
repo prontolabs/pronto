@@ -19,6 +19,10 @@ module Pronto
         patch.stat[1]
       end
 
+      def blame(lineno)
+        repo.blame(self, lineno)
+      end
+
       def lines
         @lines ||= begin
           patch.map do |hunk|

@@ -32,8 +32,11 @@ module Pronto
         @repo.path
       end
 
-      def rugged
-        @repo
+      def blame(patch, lineno)
+        Rugged::Blame.new(@repo, patch.delta.new_file[:path],
+                          min_line: lineno, max_line: lineno,
+                          track_copies_same_file: true,
+                          track_copies_any_commit_copies: true)[0]
       end
 
       private
