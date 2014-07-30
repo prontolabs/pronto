@@ -1,7 +1,10 @@
 require 'rugged'
+
+require 'pronto/git/repository'
+require 'pronto/git/patches'
 require 'pronto/git/patch'
 require 'pronto/git/line'
-require 'pronto/rugged/remote'
+require 'pronto/git/remote'
 
 require 'pronto/plugin'
 require 'pronto/message'
@@ -15,13 +18,12 @@ require 'pronto/formatter/formatter'
 
 module Pronto
   def self.run(commit = 'master', repo_path = '.', formatter = nil)
-    repo = Rugged::Repository.new(repo_path)
     commit ||= 'master'
-    merge_base = repo.merge_base(commit, repo.head.target)
-    # TODO This could be cleaner
-    patches = repo.diff(merge_base, repo.head.target).map { |patch| Git::Patch.new(patch, repo) }
 
-    result = run_all_runners(patches, merge_base)
+    repo = Git::Repository.new(repo_path)
+    patches = repo.diff(commit)
+
+    result = run_all_runners(patches)
 
     formatter ||= default_formatter
     formatter.format(result, repo)
@@ -33,7 +35,7 @@ module Pronto
         true
       elsif gem.name != 'pronto'
         runner_path = File.join(gem.full_gem_path, "lib/pronto/#{gem.name}.rb")
-        File.exists?(runner_path)
+        File.exist?(runner_path)
       end
     end
 
@@ -44,9 +46,9 @@ module Pronto
 
   private
 
-  def self.run_all_runners(patches, commit)
+  def self.run_all_runners(patches)
     Runner.runners.map do |runner|
-      runner.new.run(patches, commit)
+      runner.new.run(patches, patches.commit)
     end.flatten.compact
   end
 

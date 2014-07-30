@@ -1,6 +1,7 @@
 require 'rspec'
 require 'rspec/its'
 require 'pry'
+require 'ostruct'
 
 require 'pronto'
 
@@ -10,7 +11,7 @@ RSpec.configure do |config|
 end
 
 def repository
-  Rugged::Repository.init_at('.')
+  Pronto::Git::Repository.new('.')
 end
 
 def load_fixture(fixture_name)
