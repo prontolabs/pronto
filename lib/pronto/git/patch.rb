@@ -21,9 +21,9 @@ module Pronto
 
       def lines
         @lines ||= begin
-          hunks.map do |hunk|
+          hunks.flat_map do |hunk|
             hunk.lines.map { |line| Line.new(line, self, hunk) }
-          end.flatten.compact
+          end
         end
       end
 
