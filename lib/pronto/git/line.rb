@@ -1,29 +1,12 @@
+require 'forwardable'
+
 module Pronto
   module Git
     class Line < Struct.new(:line, :patch, :hunk)
-      def addition?
-        line.addition?
-      end
+      extend Forwardable
 
-      def deletion?
-        line.deletion?
-      end
-
-      def content
-        line.content
-      end
-
-      def new_lineno
-        line.new_lineno
-      end
-
-      def old_lineno
-        line.old_lineno
-      end
-
-      def line_origin
-        line.line_origin
-      end
+      def_delegators :line, :addition?, :deletion?, :content, :new_lineno,
+                     :old_lineno, :line_origin
 
       def position
         hunk_index = patch.hunks.find_index { |h| h.header == hunk.header }
@@ -52,7 +35,7 @@ module Pronto
       end
 
       def ==(other)
-        line.content == other.content &&
+        content == other.content &&
           line_origin == other.line_origin &&
           old_lineno == other.old_lineno &&
           new_lineno == other.new_lineno
