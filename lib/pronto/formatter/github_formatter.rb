@@ -1,5 +1,3 @@
-require 'octokit'
-
 module Pronto
   module Formatter
     class GithubFormatter
@@ -33,12 +31,8 @@ module Pronto
         end
       end
 
-      def access_token
-        ENV['GITHUB_ACCESS_TOKEN']
-      end
-
       def client
-        @client ||= Octokit::Client.new(access_token: access_token)
+        @client ||= Github.new
       end
     end
   end
