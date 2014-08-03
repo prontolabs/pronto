@@ -3,20 +3,16 @@ require 'pathname'
 module Pronto
   module Git
     class Patch < Struct.new(:patch, :repo)
-      def delta
-        patch.delta
-      end
+      extend Forwardable
 
-      def hunks
-        patch.hunks
-      end
+      def_delegators :patch, :delta, :hunks, :stat
 
       def additions
-        patch.stat[0]
+        stat[0]
       end
 
       def deletions
-        patch.stat[1]
+        stat[1]
       end
 
       def blame(lineno)
@@ -25,7 +21,7 @@ module Pronto
 
       def lines
         @lines ||= begin
-          patch.map do |hunk|
+          hunks.map do |hunk|
             hunk.lines.map { |line| Line.new(line, self, hunk) }
           end.flatten.compact
         end
@@ -41,7 +37,7 @@ module Pronto
 
       def new_file_full_path
         repo_path = Pathname.new(repo.path).parent
-        repo_path.join(patch.delta.new_file[:path])
+        repo_path.join(delta.new_file[:path])
       end
     end
   end

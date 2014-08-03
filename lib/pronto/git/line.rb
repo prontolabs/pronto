@@ -1,5 +1,3 @@
-require 'forwardable'
-
 module Pronto
   module Git
     class Line < Struct.new(:line, :patch, :hunk)

@@ -1,4 +1,5 @@
 require 'rugged'
+require 'forwardable'
 
 require 'pronto/git/repository'
 require 'pronto/git/patches'
