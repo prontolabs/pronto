@@ -1,7 +1,5 @@
 require 'rspec'
 require 'rspec/its'
-require 'pry'
-
 require 'pronto'
 
 RSpec.configure do |config|
