@@ -10,7 +10,7 @@ module Pronto
         let(:messages) { [message, message] }
         let(:repository) { Pronto::Git::Repository.new('.') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-        let(:line) { OpenStruct.new(new_lineno: 1) }
+        let(:line) { double(new_lineno: 1, commit_sha: '123', position: nil) }
         before { line.stub(:commit_line).and_return(line) }
 
         specify do

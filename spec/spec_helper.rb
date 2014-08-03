@@ -1,7 +1,6 @@
 require 'rspec'
 require 'rspec/its'
 require 'pry'
-require 'ostruct'
 
 require 'pronto'
 

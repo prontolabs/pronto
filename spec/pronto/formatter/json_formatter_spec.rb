@@ -9,7 +9,7 @@ module Pronto
         subject { json_formatter.format(messages, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-        let(:line) { OpenStruct.new(new_lineno: 1) }
+        let(:line) { double(new_lineno: 1, commit_sha: nil) }
 
         it { should == '[{"level":"W","message":"crucial","path":"path/to","line":1},{"level":"W","message":"crucial","path":"path/to","line":1}]' }
 

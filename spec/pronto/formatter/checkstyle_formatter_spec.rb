@@ -7,7 +7,7 @@ module Pronto
 
       describe '#format' do
         subject { checkstyle_formatter.format(messages, nil) }
-        let(:line) { OpenStruct.new(new_lineno: 1) }
+        let(:line) { double(new_lineno: 1, commit_sha: '123') }
         let(:error) { Message.new('path/to', line, :error, 'Line Error') }
         let(:warning) { Message.new('path/to', line, :warning, 'Line Warning') }
         let(:messages) { [error, warning] }
