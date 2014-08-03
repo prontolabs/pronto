@@ -5,8 +5,8 @@ module Pronto
         @repo = Rugged::Repository.new(path)
       end
 
-      def remotes
-        @repo.remotes.map { |remote| Remote.new(remote) }
+      def github_slug
+        remotes.map(&:github_slug).compact.first
       end
 
       def diff(commit)
@@ -47,6 +47,10 @@ module Pronto
 
       def head
         @repo.head.target
+      end
+
+      def remotes
+        @remotes ||= @repo.remotes.map { |remote| Remote.new(remote) }
       end
     end
   end

@@ -3,13 +3,14 @@ module Pronto
     class GithubFormatter
       def format(messages, repo)
         commit_messages = messages.map do |message|
-          github_slug = repo.remotes.map(&:github_slug).compact.first
+          github_slug = repo.github_slug
           sha = message.commit_sha
           position = message.line.commit_line.position if message.line
-          path = message.path
           body = message.msg
+          path = message.path
 
-          create_comment(github_slug, sha, position, path, body)
+          comment = Github::Comment.new(github_slug, sha, body, path, position)
+          create_comment(github_slug, sha, comment)
         end
 
         "#{commit_messages.compact.count} Pronto messages posted to GitHub"
@@ -17,18 +18,10 @@ module Pronto
 
       private
 
-      def create_comment(repo, sha, position, path, body)
+      def create_comment(repo, sha, comment)
         comments = client.commit_comments(repo, sha)
-
-        existing_comment = comments.find do |comment|
-          comment.position == position &&
-            comment.path == path &&
-            comment.body == body
-        end
-
-        unless existing_comment
-          client.create_commit_comment(repo, sha, body, path, nil, position)
-        end
+        existing = comments.any? { |c| comment == c }
+        client.create_commit_comment(repo, sha, comment) unless existing
       end
 
       def client
