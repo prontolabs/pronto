@@ -4,10 +4,12 @@
 
 ### New features
 
+* [#27](https://github.com/mmozuras/pronto/issues/27): '--exit-code' option for 'pronto run'. Pronto exits with non-zero code if there were any warnings/errors.
+
 ### Changes
 
 * [#29](https://github.com/mmozuras/pronto/issues/29): Be compatible and depend on rugged '0.21.0'.
-* Performance improvement - use Rugged::Blame instead of one provided by Grit.
-* Performance improvement - cache comments retrieved from GitHub.
+* Performance improvement: use Rugged::Blame instead of one provided by Grit.
+* Performance improvement: cache comments retrieved from GitHub.
 
 ### Bugs fixed

@@ -14,6 +14,10 @@ module Pronto
 
     desc 'run', 'Run Pronto'
 
+    method_option :'exit-code',
+                  type: :boolean,
+                  banner: 'Exits with non-zero code if there were any warnings/errors.'
+
     method_option :commit,
                   type: :string,
                   default: 'master',
@@ -39,7 +43,8 @@ module Pronto
       end
 
       formatter = ::Pronto::Formatter.get(options[:formatter])
-      puts ::Pronto.run(options[:commit], '.', formatter)
+      messages = ::Pronto.run(options[:commit], '.', formatter)
+      exit(messages.count) if options[:'exit-code']
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
     end
