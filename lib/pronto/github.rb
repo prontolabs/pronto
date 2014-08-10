@@ -1,8 +1,14 @@
 module Pronto
   class Github
+    def initialize
+      @comment_cache = {}
+    end
+
     def commit_comments(repo, sha)
-      client.commit_comments(repo, sha).map do |comment|
-        Comment.new(repo, sha, comment.body, comment.path, comment.body)
+      @comment_cache["#{repo}/#{sha}"] ||= begin
+        client.commit_comments(repo, sha).map do |comment|
+          Comment.new(repo, sha, comment.body, comment.path, comment.body)
+        end
       end
     end
 

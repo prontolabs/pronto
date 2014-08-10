@@ -16,7 +16,7 @@ module Pronto
         specify do
           Octokit::Client.any_instance
                          .should_receive(:commit_comments)
-                         .twice
+                         .once
                          .and_return([])
 
           Octokit::Client.any_instance
