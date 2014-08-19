@@ -1,5 +1,3 @@
-require 'pathname'
-
 module Pronto
   module Git
     class Patch < Struct.new(:patch, :repo)
@@ -36,8 +34,7 @@ module Pronto
       end
 
       def new_file_full_path
-        repo_path = Pathname.new(repo.path).parent
-        repo_path.join(delta.new_file[:path])
+        repo.path.join(delta.new_file[:path])
       end
     end
   end

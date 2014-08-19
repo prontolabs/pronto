@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Pronto
   module Git
     class Repository
@@ -29,7 +31,7 @@ module Pronto
       end
 
       def path
-        @repo.path
+        Pathname.new(@repo.path).parent
       end
 
       def blame(patch, lineno)
