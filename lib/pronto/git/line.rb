@@ -21,13 +21,8 @@ module Pronto
         @commit_line ||= begin
           patches = patch.repo.show_commit(commit_sha)
 
-          commit_patch = patches.find do |p|
-            patch.new_file_full_path == p.new_file_full_path
-          end
-
-          lines = commit_patch ? commit_patch.lines : []
-          result = lines.find { |l| blame[:orig_start_line_number] == l.new_lineno }
-
+          result = patches.find_line(patch.new_file_full_path,
+                                     blame[:orig_start_line_number])
           result || self # no commit_line means that it was just added
         end
       end
