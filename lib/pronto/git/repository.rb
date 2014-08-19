@@ -30,6 +30,15 @@ module Pronto
         Patches.new(self, sha, diff.patches)
       end
 
+      def commits_until(sha)
+        result = []
+        @repo.walk('HEAD', Rugged::SORT_TOPO).take_while do |commit|
+          result << commit.oid
+          !commit.oid.start_with?(sha)
+        end
+        result
+      end
+
       def path
         Pathname.new(@repo.path).parent
       end

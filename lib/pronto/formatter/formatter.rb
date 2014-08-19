@@ -11,6 +11,7 @@ module Pronto
 
     FORMATTERS = {
       'github' => GithubFormatter,
+      'github_pr' => GithubPullRequestFormatter,
       'json' => JsonFormatter,
       'checkstyle' => CheckstyleFormatter,
       'text' => TextFormatter
