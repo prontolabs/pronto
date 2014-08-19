@@ -7,7 +7,7 @@ module Pronto
     def pull_comments(repo, sha)
       @comment_cache["#{repo}/#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(repo, pull_id).map do |comment|
-          Comment.new(repo, sha, comment.body, comment.path, comment.body)
+          Comment.new(repo, sha, comment.body, comment.path, comment.position)
         end
       end
     end
@@ -15,7 +15,7 @@ module Pronto
     def commit_comments(repo, sha)
       @comment_cache["#{repo}/#{sha}"] ||= begin
         client.commit_comments(repo, sha).map do |comment|
-          Comment.new(repo, sha, comment.body, comment.path, comment.body)
+          Comment.new(repo, sha, comment.body, comment.path, comment.position)
         end
       end
     end
