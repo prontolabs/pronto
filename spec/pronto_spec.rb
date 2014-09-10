@@ -21,7 +21,7 @@ describe Pronto do
       context 'with good path' do
         let(:gems) { [double(name: 'good', full_gem_path: '/good')] }
         before do
-          File.stub(:exists?).with('/good/lib/pronto/good.rb').and_return(true)
+          File.stub(:exist?).with('/good/lib/pronto/good.rb').and_return(true)
         end
         it { should include('good') }
       end
@@ -29,7 +29,7 @@ describe Pronto do
       context 'with bad path' do
         let(:gems) { [double(name: 'bad', full_gem_path: '/bad')] }
         before do
-          File.stub(:exists?).with('/bad/lib/pronto/bad.rb').and_return(false)
+          File.stub(:exist?).with('/bad/lib/pronto/bad.rb').and_return(false)
         end
         it { should_not include('bad') }
       end

@@ -1,13 +1,22 @@
 module Pronto
   module Formatter
-    class GithubFormatter
+    class GithubPullRequestFormatter
       def format(messages, repo)
         commit_messages = messages.map do |message|
           github_slug = repo.github_slug
-          sha = message.commit_sha
           body = message.msg
           path = message.path
-          position = message.line.commit_line.position if message.line
+
+          commits = repo.commits_until(message.commit_sha)
+
+          line = nil
+          sha = commits.find do |commit|
+            patches = repo.show_commit(commit)
+            line = patches.find_line(message.full_path, message.line.new_lineno)
+            line
+          end
+
+          position = line.position - 1
 
           comment = Github::Comment.new(github_slug, sha, body, path, position)
           create_comment(github_slug, sha, comment)
@@ -19,9 +28,9 @@ module Pronto
       private
 
       def create_comment(repo, sha, comment)
-        comments = client.commit_comments(repo, sha)
+        comments = client.pull_comments(repo, sha)
         existing = comments.any? { |c| comment == c }
-        client.create_commit_comment(repo, sha, comment) unless existing
+        client.create_pull_comment(repo, sha, comment) unless existing
       end
 
       def client

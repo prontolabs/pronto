@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'ostruct'
 
 module Pronto
   module Formatter
@@ -9,14 +8,15 @@ module Pronto
       describe '#format' do
         subject { github_formatter.format(messages, repository) }
         let(:messages) { [message, message] }
+        let(:repository) { Git::Repository.new('.') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-        let(:line) { OpenStruct.new(new_lineno: 1) }
+        let(:line) { double(new_lineno: 1, commit_sha: '123', position: nil) }
         before { line.stub(:commit_line).and_return(line) }
 
         specify do
           Octokit::Client.any_instance
                          .should_receive(:commit_comments)
-                         .twice
+                         .once
                          .and_return([])
 
           Octokit::Client.any_instance

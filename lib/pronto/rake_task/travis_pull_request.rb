@@ -1,5 +1,4 @@
 require 'pronto'
-require 'octokit'
 require 'rake'
 require 'rake/tasklib'
 

@@ -17,8 +17,12 @@ module Pronto
       @commit_sha ||= line.commit_sha if line
     end
 
+    def full_path
+      repo.path.join(path) if repo
+    end
+
     def repo
-      line.patch.delta.repo if line
+      line.patch.repo if line
     end
   end
 end
