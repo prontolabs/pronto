@@ -6,6 +6,7 @@ module Pronto
       attr_reader :commit, :repo
 
       def initialize(repo, commit, patches)
+        @repo = repo
         @commit = commit
         @patches = patches.map { |patch| Git::Patch.new(patch, repo) }
       end

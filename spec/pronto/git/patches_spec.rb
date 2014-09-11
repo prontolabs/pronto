@@ -3,19 +3,26 @@ require 'spec_helper'
 module Pronto
   module Git
     describe Patches do
-      describe '#find_line' do
-        subject { Patches.new(repo, commit, patches).find_line(path, line) }
+      let(:patches) { Patches.new(repo, commit, []) }
+      let(:repo) { nil }
+      let(:commit) { nil }
 
-        let(:repo) { nil }
-        let(:commit) { nil }
+      describe '#repo' do
+        subject { patches.repo }
+
+        context 'non-nil repo' do
+          let(:repo) { double }
+          it { should_not be_nil }
+        end
+      end
+
+      describe '#find_line' do
+        subject { patches.find_line(path, line) }
 
         let(:path) { '/test.rb' }
         let(:line) { 1 }
 
-        context 'no patches' do
-          let(:patches) { [] }
-          it { should be_nil }
-        end
+        it { should be_nil }
       end
     end
   end
