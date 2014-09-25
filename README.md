@@ -15,10 +15,12 @@ want to find out quickly if branch introduces changes that conform to your
 
 ## Usage
 
-### Pull Requests
+Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 
-You can run Pronto as part of your builds and then get results as comments
-using `GithubFormatter`.
+### GitHub Integration
+
+You can run Pronto as a step of your CI builds and get the results as comments
+on GitHub commits using `GithubFormatter`.
 
 Add Pronto runners you want to use to your Gemfile:
 ```ruby
@@ -28,23 +30,27 @@ or gemspec file:
 ```ruby
   s.add_development_dependency 'pronto-rubocop'
 ```
-Set environment variable GITHUB_ACCESS_TOKEN to OAuth token that has access to
-repository. Then set it up to run using the included rake task or manually:
+Set the GITHUB_ACCESS_TOKEN environment variable to [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) 
+that has access to the repository. Then set up a rake task:
 ```ruby
   Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 
   formatter = Pronto::Formatter::GithubFormatter.new
   Pronto.run('origin/master', '.', formatter)
 ```
+or run it via command line:
+```
+ GITHUB_ACCESS_TOKEN=<token> bundle exec pronto run -f github -c origin/master
+```
 
 ### Local Changes
 
-You can run Pronto locally. First, install Pronto and runners you want to use:
+You can run Pronto locally. First, install Pronto and the runners you want to use:
 ```bash
   gem install pronto
   gem install pronto-rubocop
 ```
-Then navigate to repository you want run Pronto on, and:
+Then navigate to the repository you want to run Pronto on, and:
 ```bash
   git checkout feature/branch
   pronto run # Pronto runs against master by default
