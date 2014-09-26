@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+### Bugs fixed
+
+* GithubPullRequestFormatter had an off-by-one positioning error.
+
 ## 0.3.1
 
 ### Bugs fixed
