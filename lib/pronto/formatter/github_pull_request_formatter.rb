@@ -16,9 +16,7 @@ module Pronto
             line
           end
 
-          position = line.position - 1
-
-          comment = Github::Comment.new(github_slug, sha, body, path, position)
+          comment = Github::Comment.new(github_slug, sha, body, path, line.position)
           create_comment(github_slug, sha, comment)
         end
 
