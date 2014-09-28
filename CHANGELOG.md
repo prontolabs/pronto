@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3
+
+### Bugs fixed
+
+* GithubPullRequestFormatter was working incorrectly with merge commits.
+
 ## 0.3.2
 
 ### Bugs fixed
