@@ -18,14 +18,14 @@ module Pronto
       end
 
       def show_commit(sha)
-        return [] unless sha
+        return empty_patches(sha) unless sha
 
         commit = @repo.lookup(sha)
-        return [] if commit.parents.count != 1
+        return empty_patches(sha) if commit.parents.count != 1
 
         # TODO: Rugged does not seem to support diffing against multiple parents
         diff = commit.diff(reverse: true)
-        return [] if diff.nil?
+        return empty_patches(sha) if diff.nil?
 
         Patches.new(self, sha, diff.patches)
       end
@@ -51,6 +51,10 @@ module Pronto
       end
 
       private
+
+      def empty_patches(sha)
+        Patches.new(self, sha, [])
+      end
 
       def merge_base(commit)
         @repo.merge_base(commit, head)
