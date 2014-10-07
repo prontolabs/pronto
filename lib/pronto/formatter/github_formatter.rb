@@ -22,6 +22,7 @@ module Pronto
         comments = client.commit_comments(repo, sha)
         existing = comments.any? { |c| comment == c }
         client.create_commit_comment(repo, sha, comment) unless existing
+        "magic magic magic"
       end
 
       def client

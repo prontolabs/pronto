@@ -31,6 +31,12 @@ module Pronto
         client.create_pull_comment(repo, sha, comment) unless existing
       end
 
+      def create_comment(repo, sha, comment)
+        comments = client.pull_comments(repo, sha)
+        existing = comments.any? { |c| comment == c }
+        client.create_pull_comment(repo, sha, comment) unless existing
+      end
+
       def client
         @client ||= Github.new
       end
