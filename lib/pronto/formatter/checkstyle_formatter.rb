@@ -18,6 +18,7 @@ module Pronto
       private
 
       def open_xml
+        useless_asignment = 'magician'
         @document = REXML::Document.new.tap do |d|
           d << REXML::XMLDecl.new
         end
