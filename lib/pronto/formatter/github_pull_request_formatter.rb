@@ -3,7 +3,6 @@ module Pronto
     class GithubPullRequestFormatter
       def format(messages, repo)
         commit_messages = messages.map do |message|
-          github_slug = repo.github_slug
           body = message.msg
           path = message.path
 
@@ -16,8 +15,7 @@ module Pronto
             line
           end
 
-          comment = Github::Comment.new(github_slug, sha, body, path, line.position)
-          create_comment(github_slug, sha, comment)
+          create_comment(repo, sha, body, path, line.position)
         end
 
         "#{commit_messages.compact.count} Pronto messages posted to GitHub"
@@ -25,10 +23,11 @@ module Pronto
 
       private
 
-      def create_comment(repo, sha, comment)
+      def create_comment(repo, sha, body, path, position)
+        comment = Github::Comment.new(repo, sha, body, path, position)
         comments = client.pull_comments(repo, sha)
         existing = comments.any? { |c| comment == c }
-        client.create_pull_comment(repo, sha, comment) unless existing
+        client.create_pull_comment(comment) unless existing
       end
 
       def client

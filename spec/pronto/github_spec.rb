@@ -8,7 +8,7 @@ module Pronto
       subject { github.commit_comments(repo, sha) }
 
       context 'three requests for same comments' do
-        let(:repo) { 'mmozuras/pronto' }
+        let(:repo) { double(github_slug: 'mmozuras/pronto') }
         let(:sha) { '61e4bef' }
 
         specify do
