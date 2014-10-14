@@ -25,16 +25,12 @@ module Pronto
       end
 
       def process_messages(messages)
-        group_messages(messages).map do |path, path_messages|
+        messages.group_by(&:path).map do |path, path_messages|
           REXML::Element.new('file', @checkstyle).tap do |file|
             file.attributes['name'] = path
             add_file_messages(path_messages, file)
           end
         end
-      end
-
-      def group_messages(messages)
-        messages.group_by { |message| message.path }
       end
 
       def add_file_messages(path_messages, file)
