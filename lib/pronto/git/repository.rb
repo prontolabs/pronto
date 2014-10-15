@@ -7,10 +7,6 @@ module Pronto
         @repo = Rugged::Repository.new(path)
       end
 
-      def github_slug
-        remotes.map(&:github_slug).compact.first
-      end
-
       def diff(commit)
         if commit == :index
           patches = @repo.index.diff
@@ -59,6 +55,10 @@ module Pronto
         @repo.head.name.sub('refs/heads/', '') if @repo.head.branch?
       end
 
+      def remote_urls
+        @repo.remotes.map(&:url)
+      end
+
       private
 
       def empty_patches(sha)
@@ -71,10 +71,6 @@ module Pronto
 
       def head
         @repo.head.target
-      end
-
-      def remotes
-        @remotes ||= @repo.remotes.map { |remote| Remote.new(remote) }
       end
     end
   end

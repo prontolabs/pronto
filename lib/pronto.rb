@@ -6,7 +6,6 @@ require 'pronto/git/repository'
 require 'pronto/git/patches'
 require 'pronto/git/patch'
 require 'pronto/git/line'
-require 'pronto/git/remote'
 
 require 'pronto/plugin'
 require 'pronto/message'
