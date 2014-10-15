@@ -50,6 +50,10 @@ module Pronto
                           track_copies_any_commit_copies: true)[0]
       end
 
+      def branch
+        @repo.head.name.sub('refs/heads/', '') if @repo.head.branch?
+      end
+
       private
 
       def empty_patches(sha)
