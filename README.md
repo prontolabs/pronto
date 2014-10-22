@@ -80,3 +80,4 @@ Currently available:
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-haml](https://github.com/mmozuras/pronto-haml)
+* [pronto-scss](https://github.com/mmozuras/pronto-scss)
