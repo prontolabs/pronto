@@ -12,9 +12,14 @@ module Pronto
       end
 
       def diff(commit)
-        merge_base = merge_base(commit)
-        patches = @repo.diff(merge_base, head)
-        Patches.new(self, merge_base, patches)
+        if commit == :index
+          patches = @repo.index.diff
+          Patches.new(self, head, patches)
+        else
+          merge_base = merge_base(commit)
+          patches = @repo.diff(merge_base, head)
+          Patches.new(self, merge_base, patches)
+        end
       end
 
       def show_commit(sha)
