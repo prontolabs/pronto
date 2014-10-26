@@ -81,3 +81,4 @@ Currently available:
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-haml](https://github.com/mmozuras/pronto-haml)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
+* [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
