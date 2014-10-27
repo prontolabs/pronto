@@ -5,6 +5,7 @@
 ### New features
 
 * Try to detect pull request id automatically, if `PULL_REQUEST_ID` is not specified. Inspired by @willnet/prid.
+* [#40](https://github.com/mmozuras/pronto/issues/40): Add '--index' option for 'pronto run'. Pronto analyzes changes before committing.
 
 ## 0.3.3
 

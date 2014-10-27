@@ -24,6 +24,11 @@ module Pronto
                   aliases: '-c',
                   banner: 'Commit for the diff'
 
+    method_option :index,
+                  type: :boolean,
+                  aliases: '-i',
+                  banner: 'Analyze changes in git index (staging area)'
+
     method_option :runner,
                   type: :array,
                   default: [],
@@ -43,7 +48,8 @@ module Pronto
       end
 
       formatter = ::Pronto::Formatter.get(options[:formatter])
-      messages = ::Pronto.run(options[:commit], '.', formatter)
+      commit = options[:index] ? :index : options[:commit]
+      messages = ::Pronto.run(commit, '.', formatter)
       exit(messages.count) if options[:'exit-code']
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
