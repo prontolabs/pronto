@@ -24,11 +24,15 @@ on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
 
 Add Pronto runners you want to use to your Gemfile:
 ```ruby
-gem 'pronto-rubocop'
+gem 'pronto'
+gem 'pronto-rubocop', require: false
+gem 'pronto-scss', require: false
 ```
 or gemspec file:
 ```ruby
+s.add_development_dependency 'pronto'
 s.add_development_dependency 'pronto-rubocop'
+s.add_development_dependency 'pronto-scss'
 ```
 Set the GITHUB_ACCESS_TOKEN environment variable to [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use)
 that has access to the repository.
