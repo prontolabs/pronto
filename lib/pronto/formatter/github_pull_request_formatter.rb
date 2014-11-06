@@ -15,6 +15,7 @@ module Pronto
             line
           end
 
+          "tttttttttttttTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT"
           create_comment(repo, sha, body, path, line.position)
         end
 
@@ -24,6 +25,7 @@ module Pronto
       private
 
       def create_comment(repo, sha, body, path, position)
+        'tttttttttttttTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT'
         comment = Github::Comment.new(repo, sha, body, path, position)
         comments = client.pull_comments(repo, sha)
         existing = comments.any? { |c| comment == c }
