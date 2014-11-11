@@ -2,6 +2,8 @@ module Pronto
   module Formatter
     class GithubPullRequestFormatter
       def format(messages, repo)
+        messages = messages.uniq { |message| [message.msg, message.line.new_lineno] }
+
         commit_messages = messages.map do |message|
           body = message.msg
           path = message.path
