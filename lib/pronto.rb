@@ -23,15 +23,16 @@ require 'pronto/formatter/checkstyle_formatter'
 require 'pronto/formatter/formatter'
 
 module Pronto
-  def self.run(commit = 'master', repo_path = '.', formatter = nil)
+  def self.run(commit = 'master', repo_path = '.',
+               formatter = Formatter::TextFormatter.new, file = nil)
     commit ||= 'master'
 
     repo = Git::Repository.new(repo_path)
-    patches = repo.diff(commit)
+    options = { paths: [file] } if file
+    patches = repo.diff(commit, options)
 
     result = run_all_runners(patches)
 
-    formatter ||= default_formatter
     puts formatter.format(result, repo)
 
     result
@@ -58,9 +59,5 @@ module Pronto
     Runner.runners.map do |runner|
       runner.new.run(patches, patches.commit)
     end.flatten.compact
-  end
-
-  def default_formatter
-    Formatter::TextFormatter.new
   end
 end

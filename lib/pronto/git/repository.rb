@@ -7,13 +7,13 @@ module Pronto
         @repo = Rugged::Repository.new(path)
       end
 
-      def diff(commit)
+      def diff(commit, options = nil)
         if commit == :index
-          patches = @repo.index.diff
+          patches = @repo.index.diff(options)
           Patches.new(self, head, patches)
         else
           merge_base = merge_base(commit)
-          patches = @repo.diff(merge_base, head)
+          patches = @repo.diff(merge_base, head, options)
           Patches.new(self, merge_base, patches)
         end
       end
