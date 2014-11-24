@@ -1,5 +1,6 @@
 require 'rugged'
 require 'octokit'
+require 'gitlab'
 require 'forwardable'
 
 require 'pronto/git/repository'
@@ -11,11 +12,13 @@ require 'pronto/plugin'
 require 'pronto/message'
 require 'pronto/runner'
 require 'pronto/github'
+require 'pronto/gitlab'
 
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
 require 'pronto/formatter/github_formatter'
 require 'pronto/formatter/github_pull_request_formatter'
+require 'pronto/formatter/gitlab_formatter'
 require 'pronto/formatter/checkstyle_formatter'
 require 'pronto/formatter/formatter'
 
