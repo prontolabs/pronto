@@ -54,6 +54,44 @@ formatter = Pronto::Formatter::GithubFormatter.new # or GithubPullRequestFormatt
 Pronto.run('origin/master', '.', formatter)
 ```
 
+### GitLab Integration
+
+You can run Pronto as a step of your CI builds and get the results as comments
+on GitLab commits using `GitlabFormatter`.
+
+**note: this requires at least GitLab v7.5.0**
+
+Add Pronto runners you want to use to your Gemfile:
+```ruby
+gem 'pronto'
+gem 'pronto-rubocop', require: false
+gem 'pronto-scss', require: false
+```
+or gemspec file:
+```ruby
+s.add_development_dependency 'pronto'
+s.add_development_dependency 'pronto-rubocop'
+s.add_development_dependency 'pronto-scss'
+```
+
+Set the `GITLAB_API_ENDPOINT` environment variable to your API endpoint URL.
+If you are using Gitlab.com's hosted service your endpoint will be `https://gitlab.com/api/v3`.
+Set the `GITLAB_API_PRIVATE_TOKEN` environment variable to your Gitlab private token
+which you can find in your account settings.
+
+Then just run it:
+```bash
+GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+```
+
+As an alternative, you can also set up a rake task:
+```ruby
+Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
+
+formatter = Pronto::Formatter::GitlabFormatter.new
+Pronto.run('origin/master', '.', formatter)
+```
+
 ### Local Changes
 
 You can run Pronto locally. First, install Pronto and the runners you want to use:
