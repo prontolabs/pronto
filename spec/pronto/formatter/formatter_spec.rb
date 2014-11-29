@@ -43,7 +43,7 @@ module Pronto
 
     describe '.names' do
       subject { Formatter.names }
-      it { should =~ %w(github github_pr json checkstyle text) }
+      it { should =~ %w(github github_pr gitlab json checkstyle text) }
     end
   end
 end
