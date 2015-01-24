@@ -17,11 +17,6 @@ want to find out quickly if branch introduces changes that conform to your
 
 Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 
-### GitHub Integration
-
-You can run Pronto as a step of your CI builds and get the results as comments
-on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
-
 Add Pronto runners you want to use to your Gemfile:
 ```ruby
 gem 'pronto'
@@ -34,6 +29,12 @@ s.add_development_dependency 'pronto'
 s.add_development_dependency 'pronto-rubocop'
 s.add_development_dependency 'pronto-scss'
 ```
+
+### GitHub Integration
+
+You can run Pronto as a step of your CI builds and get the results as comments
+on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
+
 Set the GITHUB_ACCESS_TOKEN environment variable to [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use)
 that has access to the repository.
 
@@ -51,6 +52,27 @@ As an alternative, you can also set up a rake task:
 Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 
 formatter = Pronto::Formatter::GithubFormatter.new # or GithubPullRequestFormatter
+Pronto.run('origin/master', '.', formatter)
+```
+
+### GitLab Integration
+
+You can also run Pronto to get the results as comments on GitLab commits using `GitlabFormatter`.
+
+Set the GITLAB_API_PRIVATE_TOKEN environment variable to [GitLab Private Token](http://doc.gitlab.com/ce/api/session.html) that has access to the repository. You can also find it under your GitLab profile account section.
+
+Set the GITLAB_API_ENDPOINT environment variable to your GitLab URL, e.g. `http://mygitlab.com/api/v3`.
+
+Then just run it:
+```bash
+GITLAB_API_ENDPOINT=url GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+```
+
+As an alternative, you can also set up a rake task:
+```ruby
+Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
+
+formatter = Pronto::Formatter::GitlabFormatter.new
 Pronto.run('origin/master', '.', formatter)
 ```
 
