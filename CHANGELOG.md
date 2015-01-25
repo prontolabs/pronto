@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+
+## 0.4.0
+
 ### New features
 
 * Try to detect pull request id automatically, if `PULL_REQUEST_ID` is not specified. Inspired by @willnet/prid.
