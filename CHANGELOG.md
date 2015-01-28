@@ -9,11 +9,12 @@
 
 * Try to detect pull request id automatically, if `PULL_REQUEST_ID` is not specified. Inspired by @willnet/prid.
 * [#40](https://github.com/mmozuras/pronto/issues/40): Add '--index' option for 'pronto run'. Pronto analyzes changes before committing.
-* [#50](https://github.com/mmozuras/pronto/pull/50): Adds GitLab formatter
+* [#50](https://github.com/mmozuras/pronto/pull/50): Add GitLab formatter
 * [#52](https://github.com/mmozuras/pronto/pull/52): Allow specifying a path for 'pronto run'.
 
 ### Changes
-* Github and Github pull request formatters now filter out duplicate offenses on the same line to avoid spamming with redundant comments.
+
+* GitHub and GitHub pull request formatters now filter out duplicate offenses on the same line to avoid spamming with redundant comments.
 
 ## 0.3.3
 
