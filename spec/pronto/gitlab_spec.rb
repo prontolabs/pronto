@@ -17,7 +17,7 @@ module Pronto
 
           ::Gitlab::Client.any_instance
                           .should_receive(:commit_comments)
-                          .with('mmozuras%2Fpronto', sha)
+                          .with('mmozuras%2Fpronto', sha, per_page: 500)
                           .once
                           .and_return([])
 
