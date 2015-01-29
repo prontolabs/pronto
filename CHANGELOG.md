@@ -2,9 +2,12 @@
 
 ## Unreleased
 
-### Changes
 
-* [#58](https://github.com/mmozuras/pronto/pull/58): GitlabFormatter uses a high +per_page+ value to avoid pagination (and thus duplicate comments)
+## 0.4.1
+
+### Bugs fixed
+
+* [#58](https://github.com/mmozuras/pronto/pull/58): GitlabFormatter uses a high +per_page+ value to avoid pagination (and thus duplicate comments).
 
 ## 0.4.0
 
