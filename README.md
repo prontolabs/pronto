@@ -112,15 +112,15 @@ Just run `pronto` without any arguments to see what Pronto is capable off.
 Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
-* [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
-* [pronto-flay](https://github.com/mmozuras/pronto-flay)
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
+* [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-flay](https://github.com/mmozuras/pronto-flay)
 * [pronto-foodcritic](https://github.com/mmozuras/pronto-foodcritic)
+* [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
+* [pronto-haml](https://github.com/mmozuras/pronto-haml)
+* [pronto-poper](https://github.com/mmozuras/pronto-poper)
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
 * [pronto-reek](https://github.com/mmozuras/pronto-reek)
-* [pronto-poper](https://github.com/mmozuras/pronto-poper)
-* [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
-* [pronto-spell](https://github.com/mmozuras/pronto-spell)
-* [pronto-haml](https://github.com/mmozuras/pronto-haml)
+* [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
-* [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-spell](https://github.com/mmozuras/pronto-spell)
