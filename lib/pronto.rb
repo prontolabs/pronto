@@ -35,7 +35,12 @@ module Pronto
 
     puts formatter.format(result, repo)
 
-    result
+    if result.empty?
+      then
+      Kernel.exit 0
+    else
+      Kernel.exit 1
+    end
   end
 
   def self.gem_names
@@ -54,7 +59,7 @@ module Pronto
   end
 
   private
-
+ 
   def self.run_all_runners(patches)
     Runner.runners.map do |runner|
       runner.new.run(patches, patches.commit)
