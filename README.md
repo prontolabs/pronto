@@ -105,7 +105,7 @@ git checkout feature/branch
 pronto run # Pronto runs against master by default
 ```
 
-Just run `pronto` without any arguments to see what Pronto is capable off.
+Just run `pronto` without any arguments to see what Pronto is capable of.
 
 ## Runners
 
