@@ -17,6 +17,21 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
 
 Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 
+### Local Changes
+
+You can run Pronto locally. First, install Pronto and the runners you want to use:
+```bash
+gem install pronto
+gem install pronto-rubocop
+```
+Then navigate to the repository you want to run Pronto on, and:
+```bash
+git checkout feature/branch
+pronto run # Pronto runs against master by default
+```
+
+Just run `pronto` without any arguments to see what Pronto is capable of.
+
 ### GitHub Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
@@ -91,21 +106,6 @@ Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 formatter = Pronto::Formatter::GitlabFormatter.new
 Pronto.run('origin/master', '.', formatter)
 ```
-
-### Local Changes
-
-You can run Pronto locally. First, install Pronto and the runners you want to use:
-```bash
-gem install pronto
-gem install pronto-rubocop
-```
-Then navigate to the repository you want to run Pronto on, and:
-```bash
-git checkout feature/branch
-pronto run # Pronto runs against master by default
-```
-
-Just run `pronto` without any arguments to see what Pronto is capable of.
 
 ## Runners
 
