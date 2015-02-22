@@ -8,6 +8,6 @@ RSpec.configure do |config|
 end
 
 def load_fixture(fixture_name)
-  path = File.join(%w(spec support files), fixture_name)
+  path = File.join(%w(spec fixtures), fixture_name)
   File.read(path).strip
 end
