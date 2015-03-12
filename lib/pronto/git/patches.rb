@@ -15,10 +15,22 @@ module Pronto
         @patches.each(&block)
       end
 
-      def find_line(path, line)
-        patch = find { |p| p.new_file_full_path == path }
+      def find_line(path, line_number)
+        patch = find_patch_by_path(path)
+        lines = patch ? patch.lines : []
+        lines.find { |l| l.new_lineno == line_number }
+      end
+
+      def find_added_line_with_content(path, content)
+        patch = find_patch_by_path(path)
         lines = patch ? patch.added_lines : []
-        lines.find { |l| l.new_lineno == line }
+        lines.find { |l| l.content == content }
+      end
+
+      private
+
+      def find_patch_by_path(path)
+        find { |p| p.new_file_full_path == path }
       end
     end
   end
