@@ -12,4 +12,9 @@ describe Pronto do
     subject { repo.branch }
     it { should == 'master' }
   end
+
+  describe '#remote_urls' do
+    subject { repo.remote_urls }
+    it { should be_empty }
+  end
 end
