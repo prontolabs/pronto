@@ -7,4 +7,9 @@ describe Pronto do
     subject { repo.path }
     its(:to_s) { should end_with 'pronto/spec/fixtures' }
   end
+
+  describe '#branch' do
+    subject { repo.branch }
+    it { should == 'master' }
+  end
 end
