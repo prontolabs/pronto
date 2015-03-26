@@ -39,4 +39,18 @@ describe Pronto do
       it { should contain_exactly('64dadfdb7c7437476782e8eb024085862e6287d6') }
     end
   end
+
+  describe '#show_commit' do
+    subject { repo.show_commit(sha) }
+
+    context 'initial' do
+      let(:sha) { '3e0e3ab' }
+      it { should be_none }
+    end
+
+    context 'last' do
+      let(:sha) { '64dadfd' }
+      it { should be_one }
+    end
+  end
 end
