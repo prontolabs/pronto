@@ -53,4 +53,18 @@ describe Pronto do
       it { should be_one }
     end
   end
+
+  describe '#diff' do
+    subject { repo.diff(sha) }
+
+    context 'initial' do
+      let(:sha) { '3e0e3ab' }
+      it { should be_one }
+    end
+
+    context 'last' do
+      let(:sha) { '64dadfd' }
+      it { should be_none }
+    end
+  end
 end
