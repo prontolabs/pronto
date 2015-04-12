@@ -27,7 +27,15 @@ gem install pronto-rubocop
 Then navigate to the repository you want to run Pronto on, and:
 ```bash
 git checkout feature/branch
-pronto run # Pronto runs against master by default
+
+# Analyze diff of committed changes on current branch and master:
+pronto run
+
+# Analyze diff of uncommitted changes and master:
+pronto run --index
+
+# Analyze *all* changes since the *initial* commit (may take some time):
+pronto run --commit=$(git log --pretty=format:%H | tail -1)
 ```
 
 Just run `pronto` without any arguments to see what Pronto is capable of.
