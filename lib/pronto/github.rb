@@ -37,14 +37,16 @@ module Pronto
     def slug
       @slug ||= begin
         @repo.remote_urls.map do |url|
-          match = /.*github.com(:|\/)(?<slug>.*).git/.match(url)
+          match = /#{Regexp.escape(github_hostname)}(:|\/)(?<slug>.*).git/.match(url)
           match[:slug] if match
         end.compact.first
       end
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token)
+      @client ||= Octokit::Client.new(api_endpoint: github_api_endpoint,
+                                      web_endpoint: github_web_endpoint,
+                                      access_token: access_token)
     end
 
     def pull_requests
@@ -65,6 +67,18 @@ module Pronto
 
     def access_token
       ENV['GITHUB_ACCESS_TOKEN']
+    end
+
+    def github_web_endpoint
+      ENV['GITHUB_WEB_ENDPOINT'] || 'https://github.com/'
+    end
+
+    def github_api_endpoint
+      ENV['GITHUB_API_ENDPOINT'] || 'https://api.github.com/'
+    end
+
+    def github_hostname
+      URI.parse(github_web_endpoint).host
     end
 
     class Comment < Struct.new(:sha, :body, :path, :position)
