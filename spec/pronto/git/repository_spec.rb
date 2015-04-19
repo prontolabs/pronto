@@ -72,4 +72,15 @@ describe Pronto do
       it { should be_one }
     end
   end
+
+  describe '#blame' do
+    subject { repo.blame('hamlet.txt', 1) }
+
+    it do
+      should match a_hash_including(orig_start_line_number: 1,
+        orig_commit_id: 'ac86326d7231ad77dab94e2c4f6f61245a2d9bec',
+        final_start_line_number: 1,
+        final_commit_id: 'ac86326d7231ad77dab94e2c4f6f61245a2d9bec')
+    end
+  end
 end

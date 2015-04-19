@@ -14,7 +14,7 @@ module Pronto
       end
 
       def blame(lineno)
-        repo.blame(self, lineno)
+        repo.blame(new_file_path, lineno)
       end
 
       def lines
@@ -34,7 +34,13 @@ module Pronto
       end
 
       def new_file_full_path
-        repo.path.join(delta.new_file[:path])
+        repo.path.join(new_file_path)
+      end
+
+      private
+
+      def new_file_path
+        delta.new_file[:path]
       end
     end
   end
