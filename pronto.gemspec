@@ -28,10 +28,10 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'rugged', '~> 0.21.0'
   s.add_runtime_dependency 'thor', '~> 0.19.0'
-  s.add_runtime_dependency 'octokit', '~> 3.2'
-  s.add_runtime_dependency 'gitlab', '~> 3.3'
-  s.add_development_dependency 'rake', '~> 10.3'
-  s.add_development_dependency 'rspec', '~> 3.0'
-  s.add_development_dependency 'rspec-its', '~> 1.0'
-  s.add_development_dependency 'rspec-expectations', '~> 3.0'
+  s.add_runtime_dependency 'octokit', '~> 3.8.0'
+  s.add_runtime_dependency 'gitlab', '~> 3.3.0'
+  s.add_development_dependency 'rake', '~> 10.4.0'
+  s.add_development_dependency 'rspec', '~> 3.2.0'
+  s.add_development_dependency 'rspec-its', '~> 1.2.0'
+  s.add_development_dependency 'rspec-expectations', '~> 3.2.0'
 end
