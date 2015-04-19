@@ -66,5 +66,10 @@ describe Pronto do
       let(:sha) { '64dadfd' }
       it { should be_none }
     end
+
+    context 'index' do
+      let(:sha) { :index }
+      it { should be_one }
+    end
   end
 end
