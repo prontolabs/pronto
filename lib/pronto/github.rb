@@ -70,8 +70,8 @@ module Pronto
     class Comment < Struct.new(:sha, :body, :path, :position)
       def ==(other)
         position == other.position &&
-          path == other.path &&
-          body == other.body
+        path == other.path &&
+        body == other.body
       end
     end
   end

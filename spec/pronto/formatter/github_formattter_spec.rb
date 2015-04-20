@@ -15,13 +15,13 @@ module Pronto
 
         specify do
           Octokit::Client.any_instance
-                         .should_receive(:commit_comments)
-                         .once
-                         .and_return([])
+            .should_receive(:commit_comments)
+            .once
+            .and_return([])
 
           Octokit::Client.any_instance
-                         .should_receive(:create_commit_comment)
-                         .once
+            .should_receive(:create_commit_comment)
+            .once
 
           subject
         end
@@ -42,13 +42,13 @@ module Pronto
 
         specify do
           Octokit::Client.any_instance
-                         .should_receive(:commit_comments)
-                         .once
-                         .and_return([])
+            .should_receive(:commit_comments)
+            .once
+            .and_return([])
 
           Octokit::Client.any_instance
-                         .should_receive(:create_commit_comment)
-                         .twice
+            .should_receive(:create_commit_comment)
+            .twice
 
           subject
         end

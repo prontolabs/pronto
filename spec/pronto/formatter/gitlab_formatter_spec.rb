@@ -18,13 +18,13 @@ module Pronto
 
         specify do
           ::Gitlab::Client.any_instance
-                          .should_receive(:commit_comments)
-                          .once
-                          .and_return([])
+            .should_receive(:commit_comments)
+            .once
+            .and_return([])
 
           ::Gitlab::Client.any_instance
-                          .should_receive(:create_commit_comment)
-                          .once
+            .should_receive(:create_commit_comment)
+            .once
 
           subject
         end
@@ -45,13 +45,13 @@ module Pronto
 
         specify do
           ::Gitlab::Client.any_instance
-                          .should_receive(:commit_comments)
-                          .once
-                          .and_return([])
+            .should_receive(:commit_comments)
+            .once
+            .and_return([])
 
           ::Gitlab::Client.any_instance
-                          .should_receive(:create_commit_comment)
-                          .twice
+            .should_receive(:create_commit_comment)
+            .twice
 
           subject
         end

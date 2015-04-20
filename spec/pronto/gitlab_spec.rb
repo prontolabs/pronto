@@ -8,7 +8,9 @@ module Pronto
       subject { gitlab.commit_comments(sha) }
 
       context 'three requests for same comments' do
-        let(:repo) { double(remote_urls: ['git@gitlab.example.com:mmozuras/pronto.git']) }
+        let(:repo) do
+          double(remote_urls: ['git@gitlab.example.com:mmozuras/pronto.git'])
+        end
         let(:sha) { 'foobar' }
         let(:comment) { double(note: 'note', path: 'path', line: 1) }
 

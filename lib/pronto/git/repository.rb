@@ -46,8 +46,8 @@ module Pronto
 
       def blame(path, lineno)
         Rugged::Blame.new(@repo, path, min_line: lineno, max_line: lineno,
-                          track_copies_same_file: true,
-                          track_copies_any_commit_copies: true)[0]
+                                       track_copies_same_file: true,
+                                       track_copies_any_commit_copies: true)[0]
       end
 
       def branch

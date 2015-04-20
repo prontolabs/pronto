@@ -47,8 +47,8 @@ module Pronto
     class Comment < Struct.new(:sha, :note, :path, :line)
       def ==(other)
         line == other.line &&
-          path == other.path &&
-          note == other.note
+        path == other.path &&
+        note == other.note
       end
     end
   end

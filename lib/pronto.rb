@@ -49,8 +49,8 @@ module Pronto
     end
 
     gems.map { |gem| gem.name.sub(/^pronto-/, '') }
-        .uniq
-        .sort
+      .uniq
+      .sort
   end
 
   private
