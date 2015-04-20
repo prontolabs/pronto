@@ -67,7 +67,7 @@ module Pronto
       ENV['GITHUB_ACCESS_TOKEN']
     end
 
-    class Comment < Struct.new(:sha, :body, :path, :position)
+    Comment = Struct.new(:sha, :body, :path, :position) do
       def ==(other)
         position == other.position &&
         path == other.path &&

@@ -44,7 +44,7 @@ module Pronto
       ENV['GITLAB_API_ENDPOINT']
     end
 
-    class Comment < Struct.new(:sha, :note, :path, :line)
+    Comment = Struct.new(:sha, :note, :path, :line) do
       def ==(other)
         line == other.line &&
         path == other.path &&

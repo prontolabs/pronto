@@ -1,6 +1,6 @@
 module Pronto
   module Git
-    class Patch < Struct.new(:patch, :repo)
+    Patch = Struct.new(:patch, :repo) do
       extend Forwardable
 
       def_delegators :patch, :delta, :hunks, :stat

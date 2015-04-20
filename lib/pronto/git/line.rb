@@ -1,6 +1,6 @@
 module Pronto
   module Git
-    class Line < Struct.new(:line, :patch, :hunk)
+    Line = Struct.new(:line, :patch, :hunk) do
       extend Forwardable
 
       def_delegators :line, :addition?, :deletion?, :content, :new_lineno,
