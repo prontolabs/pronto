@@ -29,9 +29,9 @@ module Pronto
 
       def ==(other)
         content == other.content &&
-        line_origin == other.line_origin &&
-        old_lineno == other.old_lineno &&
-        new_lineno == other.new_lineno
+          line_origin == other.line_origin &&
+          old_lineno == other.old_lineno &&
+          new_lineno == other.new_lineno
       end
 
       private

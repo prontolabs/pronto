@@ -6,3 +6,6 @@ SignalException:
 
 TrailingComma:
   Enabled: false
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
