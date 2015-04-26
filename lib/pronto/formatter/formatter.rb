@@ -15,7 +15,8 @@ module Pronto
       'gitlab' => GitlabFormatter,
       'json' => JsonFormatter,
       'checkstyle' => CheckstyleFormatter,
-      'text' => TextFormatter
+      'text' => TextFormatter,
+      'null' => NullFormatter
     }
   end
 end

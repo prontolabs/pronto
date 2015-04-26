@@ -20,6 +20,7 @@ require 'pronto/formatter/github_formatter'
 require 'pronto/formatter/github_pull_request_formatter'
 require 'pronto/formatter/gitlab_formatter'
 require 'pronto/formatter/checkstyle_formatter'
+require 'pronto/formatter/null_formatter'
 require 'pronto/formatter/formatter'
 
 module Pronto
@@ -33,7 +34,8 @@ module Pronto
 
     result = run_all_runners(patches)
 
-    puts formatter.format(result, repo)
+    formatted = formatter.format(result, repo)
+    puts formatted if formatted
 
     result
   end

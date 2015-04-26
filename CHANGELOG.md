@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### New features
+
+* New formatter: NullFormatter. Discards data without writing it anywhere.
 
 ## 0.4.1
 
