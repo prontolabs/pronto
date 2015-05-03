@@ -37,12 +37,12 @@ module Pronto
         before { Runner.runners << Shakespeare if Runner.runners.empty? }
 
         context 'all files' do
-          its(:count ){ should == 1 }
+          its(:count) { should == 1 }
         end
 
         context 'specific file' do
           let(:file) { 'hamlet.txt' }
-          its(:count ){ should == 1 }
+          its(:count) { should == 1 }
         end
 
         context 'non-existant file' do

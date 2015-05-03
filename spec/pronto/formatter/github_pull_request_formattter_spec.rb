@@ -5,7 +5,7 @@ module Pronto
     describe GithubPullRequestFormatter do
       let(:formatter) { described_class.new }
 
-      let(:repo) { Pronto::Git::Repository.new('spec/fixtures/test.git') }
+      let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
 
       describe '#format' do
         subject { formatter.format(messages, repo) }
