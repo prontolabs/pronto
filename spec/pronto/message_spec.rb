@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Pronto
   describe Message do
-    let(:message) { Message.new(path, line, level, msg, '8cda581') }
+    let(:message) { described_class.new(path, line, level, msg, '8cda581') }
 
     let(:path) { 'README.md' }
     let(:line) { Git::Line.new }

@@ -3,7 +3,7 @@ require 'spec_helper'
 module Pronto
   module Git
     describe Patch do
-      let(:patch) { Patch.new(rugged_patch, repo) }
+      let(:patch) { described_class.new(rugged_patch, repo) }
 
       let(:repo) { nil }
 

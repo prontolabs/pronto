@@ -3,10 +3,10 @@ require 'spec_helper'
 module Pronto
   module Formatter
     describe TextFormatter do
-      let(:text_formatter) { TextFormatter.new }
+      let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { text_formatter.format(messages, nil) }
+        subject { formatter.format(messages, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { double(new_lineno: 1, commit_sha: '123') }

@@ -3,10 +3,10 @@ require 'spec_helper'
 module Pronto
   module Formatter
     describe CheckstyleFormatter do
-      let(:checkstyle_formatter) { CheckstyleFormatter.new }
+      let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { checkstyle_formatter.format(messages, nil) }
+        subject { formatter.format(messages, nil) }
         let(:line) { double(new_lineno: 1, commit_sha: '123') }
         let(:error) { Message.new('path/to', line, :error, 'Line Error') }
         let(:warning) { Message.new('path/to', line, :warning, 'Line Warning') }

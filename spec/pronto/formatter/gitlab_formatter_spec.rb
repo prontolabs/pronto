@@ -6,10 +6,10 @@ module Pronto
       ENV['GITLAB_API_ENDPOINT'] = 'http://example.com/api/v3'
       ENV['GITLAB_API_PRIVATE_TOKEN'] = 'token'
 
-      let(:gitlab_formatter) { GitlabFormatter.new }
+      let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { gitlab_formatter.format(messages, repository) }
+        subject { formatter.format(messages, repository) }
         let(:messages) { [message, message] }
         let(:repository) { Git::Repository.new('.') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
@@ -31,7 +31,7 @@ module Pronto
       end
 
       describe '#format without duplicates' do
-        subject { gitlab_formatter.format(messages, repository) }
+        subject { formatter.format(messages, repository) }
         let(:messages) { [message1, message2] }
         let(:repository) { Git::Repository.new('.') }
         let(:message1) { Message.new('path/to1', line1, :warning, 'crucial') }

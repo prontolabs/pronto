@@ -3,7 +3,7 @@ require 'spec_helper'
 module Pronto
   module Git
     describe Line do
-      let(:line) { Line.new(rugged_line, patch, hunk) }
+      let(:line) { described_class.new(rugged_line, patch, hunk) }
 
       let(:patch) { nil }
       let(:hunk) { nil }

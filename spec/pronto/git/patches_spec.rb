@@ -3,7 +3,7 @@ require 'spec_helper'
 module Pronto
   module Git
     describe Patches do
-      let(:patches) { Patches.new(repo, commit, []) }
+      let(:patches) { described_class.new(repo, commit, []) }
       let(:repo) { nil }
       let(:commit) { nil }
 

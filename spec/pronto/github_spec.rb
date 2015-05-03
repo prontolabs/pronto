@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Pronto
   describe Github do
-    let(:github) { Github.new(repo) }
+    let(:github) { described_class.new(repo) }
 
     let(:repo) { double(remote_urls: ['git@github.com:mmozuras/pronto.git']) }
     let(:sha) { '61e4bef' }

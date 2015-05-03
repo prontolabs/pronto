@@ -3,10 +3,10 @@ require 'spec_helper'
 module Pronto
   module Formatter
     describe GithubFormatter do
-      let(:github_formatter) { GithubFormatter.new }
+      let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { github_formatter.format(messages, repository) }
+        subject { formatter.format(messages, repository) }
         let(:messages) { [message, message] }
         let(:repository) { Git::Repository.new('.') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
@@ -28,7 +28,7 @@ module Pronto
       end
 
       describe '#format without duplicates' do
-        subject { github_formatter.format(messages, repository) }
+        subject { formatter.format(messages, repository) }
         let(:messages) { [message1, message2] }
         let(:repository) { Git::Repository.new('.') }
         let(:message1) { Message.new('path/to1', line1, :warning, 'crucial') }

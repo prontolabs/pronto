@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Pronto
   describe Gitlab do
-    let(:gitlab) { Gitlab.new(repo) }
+    let(:gitlab) { described_class.new(repo) }
 
     describe '#commit_comments' do
       subject { gitlab.commit_comments(sha) }
