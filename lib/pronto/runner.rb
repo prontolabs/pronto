@@ -7,10 +7,18 @@ module Pronto
     end
 
     def ruby_file?(path)
-      File.extname(path) == '.rb' || ruby_executable?(path)
+      rb_file?(path) || rake_file?(path) || ruby_executable?(path)
     end
 
     private
+
+    def rb_file?(path)
+      File.extname(path) == '.rb'
+    end
+
+    def rake_file?(path)
+      File.extname(path) == '.rake'
+    end
 
     def ruby_executable?(path)
       line = File.open(path) { |file| file.readline }
