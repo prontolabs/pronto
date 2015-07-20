@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables << 'pronto'
 
-  s.add_runtime_dependency 'rugged', '~> 0.22.0'
+  s.add_runtime_dependency 'rugged', '~> 0.23.0'
   s.add_runtime_dependency 'thor', '~> 0.19.0'
   s.add_runtime_dependency 'octokit', '~> 3.8.0'
   s.add_runtime_dependency 'gitlab', '~> 3.4.0'
