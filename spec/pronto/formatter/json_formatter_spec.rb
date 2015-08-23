@@ -6,7 +6,7 @@ module Pronto
       let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { formatter.format(messages, nil) }
+        subject { formatter.format(messages, nil, nil) }
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { double(new_lineno: 1, commit_sha: nil) }
