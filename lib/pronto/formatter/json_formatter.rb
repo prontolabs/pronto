@@ -3,7 +3,7 @@ require 'json'
 module Pronto
   module Formatter
     class JsonFormatter
-      def format(messages, _)
+      def format(messages, _, _)
         messages.map do |message|
           lineno = message.line.new_lineno if message.line
 

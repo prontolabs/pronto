@@ -8,11 +8,12 @@ module Pronto
       let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
 
       describe '#format' do
-        subject { formatter.format(messages, repo) }
+        subject { formatter.format(messages, repo, patches) }
         let(:messages) { [message, message] }
         let(:message) { Message.new(patch.new_file_full_path, line, :warning, 'crucial') }
         let(:patch) { repo.show_commit('64dadfd').first }
         let(:line) { patch.added_lines.first }
+        let(:patches) { repo.diff('64dadfd^') }
 
         specify do
           ENV['PULL_REQUEST_ID'] = '10'
