@@ -35,7 +35,7 @@ module Pronto
     private
 
     def slug
-      @slug ||= begin
+      @slug = ENV['GITHUB_SLUG'] || begin
         @repo.remote_urls.map do |url|
           match = /.*github.com(:|\/)(?<slug>.*).git/.match(url)
           match[:slug] if match
