@@ -22,7 +22,7 @@ module Pronto
       context 'bad level' do
         let(:level) { :random }
         specify do
-          -> { subject }.should raise_error
+          -> { subject }.should raise_error(::ArgumentError)
         end
       end
     end
