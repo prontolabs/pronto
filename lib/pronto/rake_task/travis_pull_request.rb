@@ -24,12 +24,12 @@ module Pronto
             if task_block
               task_block.call(*[self, task_args].slice(0, task_block.arity))
             end
-            run_task(verbose)
+            run_task
           end
         end
       end
 
-      def run_task(verbose)
+      def run_task
         return if pull_id.nil? || pull_id == 'false'
 
         client = Octokit::Client.new

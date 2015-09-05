@@ -13,7 +13,7 @@ module Pronto
     private
 
     def ruby_executable?(path)
-      line = File.open(path) { |file| file.readline }
+      line = File.open(path, &:readline)
       line =~ /#!.*ruby/
     rescue ArgumentError, EOFError
       false
