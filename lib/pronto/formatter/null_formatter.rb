@@ -1,7 +1,7 @@
 module Pronto
   module Formatter
     class NullFormatter
-      def format(_, _)
+      def format(_, _, _)
       end
     end
   end

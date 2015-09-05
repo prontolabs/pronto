@@ -9,7 +9,7 @@ module Pronto
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.body, comment.path, comment.position)
+          Comment.new(sha, comment.body, comment.path, comment.position || comment.original_position)
         end
       end
     end
@@ -44,7 +44,7 @@ module Pronto
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token)
+      @client ||= Octokit::Client.new(access_token: access_token, auto_paginate: true)
     end
 
     def pull_requests
