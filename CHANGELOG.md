@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.4.3
+
+* Depend on `rugged ~> 0.23.0` and `octokit ~> 4.1.0`
+
 ## 0.4.2
 
 ### New features
