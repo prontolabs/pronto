@@ -2,9 +2,19 @@
 
 ## Unreleased
 
+### New features
+### Changes
+
+### Bugs fixed
+
+* [#93](https://github.com/mmozuras/pronto/pull/93): comments didn't have position when outdated.
+* [#94](https://github.com/mmozuras/pronto/pull/94): duplicate comment detection was failing for large GitHub pull requests.
+
 ## 0.4.3
 
-* Depend on `rugged ~> 0.23.0` and `octokit ~> 4.1.0`
+### Changes
+
+* Depend on `rugged ~> 0.23.0` and `octokit ~> 4.1.0`.
 
 ## 0.4.2
 
