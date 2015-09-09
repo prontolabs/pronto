@@ -14,7 +14,7 @@ module Pronto
           line = nil
           sha = commits.find do |commit|
             patches = repo.show_commit(commit)
-            line = patches.find_line(message.full_path, message.line.new_lineno)
+            line = patches.find_added_line_with_content(message.full_path, message.line.content)
             line
           end
 
