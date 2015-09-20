@@ -5,8 +5,11 @@
 ### New features
 ### Changes
 
+* [#82](https://github.com/mmozuras/pronto/pull/82): treat Rake files as Ruby files.
+
 ### Bugs fixed
 
+* [#91](https://github.com/mmozuras/pronto/pull/91): find position in full diff and fix how commit id is used in GithubPullRequestFormatter.
 * [#93](https://github.com/mmozuras/pronto/pull/93): comments didn't have position when outdated.
 * [#94](https://github.com/mmozuras/pronto/pull/94): duplicate comment detection was failing for large GitHub pull requests.
 
