@@ -9,6 +9,7 @@
 
 ### Bugs fixed
 
+* [#87](https://github.com/mmozuras/pronto/pull/87): handle github remote urls without .git suffix.
 * [#91](https://github.com/mmozuras/pronto/pull/91): find position in full diff and fix how commit id is used in GithubPullRequestFormatter.
 * [#92](https://github.com/mmozuras/pronto/pull/92): ignore failed pull request comments.
 * [#93](https://github.com/mmozuras/pronto/pull/93): comments didn't have position when outdated.
@@ -37,9 +38,9 @@
 ### New features
 
 * Try to detect pull request id automatically, if `PULL_REQUEST_ID` is not specified. Inspired by @willnet/prid.
-* [#40](https://github.com/mmozuras/pronto/issues/40): Add '--index' option for 'pronto run'. Pronto analyzes changes before committing.
-* [#50](https://github.com/mmozuras/pronto/pull/50): Add GitLab formatter
-* [#52](https://github.com/mmozuras/pronto/pull/52): Allow specifying a path for 'pronto run'.
+* [#40](https://github.com/mmozuras/pronto/issues/40): add '--index' option for 'pronto run'. Pronto analyzes changes before committing.
+* [#50](https://github.com/mmozuras/pronto/pull/50): add GitLab formatter
+* [#52](https://github.com/mmozuras/pronto/pull/52): allow specifying a path for 'pronto run'.
 
 ### Changes
 
@@ -68,10 +69,10 @@
 ### New features
 
 * [#27](https://github.com/mmozuras/pronto/issues/27): '--exit-code' option for 'pronto run'. Pronto exits with non-zero code if there were any warnings/errors.
-* [#16](https://github.com/mmozuras/pronto/issues/16): New formatter: GithubPullRequestFormatter. Writes review comments on GitHub pull requests.
+* [#16](https://github.com/mmozuras/pronto/issues/16): new formatter: GithubPullRequestFormatter. Writes review comments on GitHub pull requests.
 
 ### Changes
 
-* [#29](https://github.com/mmozuras/pronto/issues/29): Be compatible and depend on rugged '0.21.0'.
+* [#29](https://github.com/mmozuras/pronto/issues/29): be compatible and depend on rugged '0.21.0'.
 * Performance improvement: use Rugged::Blame instead of one provided by Grit.
 * Performance improvement: cache comments retrieved from GitHub.
