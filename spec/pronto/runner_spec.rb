@@ -17,6 +17,11 @@ module Pronto
         it { should be_truthy }
       end
 
+      context 'ending with .rake' do
+        let(:path) { 'test.rake' }
+        it { should be_truthy }
+      end
+
       context 'executable' do
         let(:path) { 'test' }
         before { File.stub(:open).with(path).and_return(shebang) }
