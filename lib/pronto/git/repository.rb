@@ -58,6 +58,10 @@ module Pronto
         @repo.remotes.map(&:url)
       end
 
+      def head_commit_sha
+        head.oid
+      end
+
       private
 
       def empty_patches(sha)

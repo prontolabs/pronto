@@ -6,7 +6,7 @@ module Pronto
       let(:formatter) { described_class.new }
 
       describe '#format' do
-        subject { formatter.format(messages, repo) }
+        subject { formatter.format(messages, repo, nil) }
         let(:messages) { [message, message] }
         let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
@@ -28,7 +28,7 @@ module Pronto
       end
 
       describe '#format without duplicates' do
-        subject { formatter.format(messages, repo) }
+        subject { formatter.format(messages, repo, nil) }
         let(:messages) { [message1, message2] }
         let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
         let(:message1) { Message.new('path/to1', line1, :warning, 'crucial') }

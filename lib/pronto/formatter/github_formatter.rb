@@ -1,7 +1,7 @@
 module Pronto
   module Formatter
     class GithubFormatter
-      def format(messages, repo)
+      def format(messages, repo, _)
         messages = messages.uniq { |message| [message.msg, message.line.new_lineno] }
         client = Github.new(repo)
 

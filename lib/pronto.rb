@@ -34,7 +34,7 @@ module Pronto
 
     result = run_all_runners(patches)
 
-    formatted = formatter.format(result, repo)
+    formatted = formatter.format(result, repo, patches)
     puts formatted if formatted
 
     result
