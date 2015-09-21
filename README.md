@@ -122,6 +122,7 @@ Currently available:
 
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-fasterer](https://github.com/mmozuras/pronto-fasterer)
 * [pronto-flay](https://github.com/mmozuras/pronto-flay)
 * [pronto-foodcritic](https://github.com/mmozuras/pronto-foodcritic)
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
