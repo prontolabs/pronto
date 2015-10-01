@@ -129,6 +129,7 @@ Currently available:
 * [pronto-haml](https://github.com/mmozuras/pronto-haml)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
+* [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
 * [pronto-reek](https://github.com/mmozuras/pronto-reek)
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
