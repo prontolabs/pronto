@@ -2,10 +2,9 @@ module Pronto
   module Formatter
     class GithubFormatter
       def format(messages, repo, _)
-        messages = messages.uniq { |message| [message.msg, message.line.new_lineno] }
         client = Github.new(repo)
 
-        commit_messages = messages.map do |message|
+        commit_messages = messages.uniq.map do |message|
           sha = message.commit_sha
           body = message.msg
           path = message.path

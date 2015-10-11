@@ -44,5 +44,25 @@ module Pronto
         it { should be_nil }
       end
     end
+
+    describe '#==' do
+      subject { message == other }
+
+      context 'path, msg and line match' do
+        let(:other) { described_class.new(path, line, level, msg, '1111') }
+        it { should be_truthy }
+      end
+
+      context 'without lines, path, msg and sha match' do
+        let(:line) { nil }
+        let(:other) { described_class.new(path, nil, level, msg, '8cda581') }
+        it { should be_truthy }
+      end
+
+      context 'only path and msg match' do
+        let(:other) { described_class.new(path, nil, level, msg, '1111') }
+        it { should be_falsy }
+      end
+    end
   end
 end

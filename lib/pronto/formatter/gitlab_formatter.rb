@@ -2,10 +2,9 @@ module Pronto
   module Formatter
     class GitlabFormatter
       def format(messages, repo, _)
-        messages = messages.uniq { |message| [message.msg, message.line.new_lineno] }
         client = Gitlab.new repo
 
-        commit_messages = messages.map do |message|
+        commit_messages = messages.uniq.map do |message|
           create_comment(client,
                          message.commit_sha,
                          message.msg,

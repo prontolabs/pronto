@@ -24,5 +24,25 @@ module Pronto
     def repo
       line.patch.repo if line
     end
+
+    def ==(other)
+      comparison_attributes.all? do |attribute|
+        send(attribute) == other.send(attribute)
+      end
+    end
+
+    alias :eql? :==
+
+    def hash
+      comparison_attributes.reduce(0) do |hash, attribute|
+        hash ^ send(attribute).hash
+      end
+    end
+
+    private
+
+    def comparison_attributes
+      line ? [:path, :msg, :level, :line] : [:path, :msg, :level, :commit_sha]
+    end
   end
 end

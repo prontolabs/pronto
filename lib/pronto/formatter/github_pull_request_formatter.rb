@@ -2,11 +2,10 @@ module Pronto
   module Formatter
     class GithubPullRequestFormatter
       def format(messages, repo, patches)
-        messages = messages.uniq { |message| [message.msg, message.line.new_lineno] }
         client = Github.new(repo)
         head = repo.head_commit_sha
 
-        commit_messages = messages.map do |message|
+        commit_messages = messages.uniq.map do |message|
           body = message.msg
           path = message.path
           line = patches.find_line(message.full_path, message.line.new_lineno)

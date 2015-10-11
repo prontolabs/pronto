@@ -28,6 +28,9 @@ module Pronto
       end
 
       def ==(other)
+        return false if other.nil?
+        return true if line.nil? && other.line.nil?
+
         content == other.content &&
           line_origin == other.line_origin &&
           old_lineno == other.old_lineno &&
