@@ -40,6 +40,16 @@ pronto run --commit=$(git log --pretty=format:%H | tail -1)
 
 Just run `pronto` without any arguments to see what Pronto is capable of.
 
+Available Options
+
+Command flag     | Description
+-----------------|------------------------------------------------------------
+`--exit-code`    | Exits with non-zero code if there were any warnings/errors.
+`-c/--commit`    | Commit for the diff.
+`-i/--index`     | Analyze changes in git index (staging area).
+`-r/--runner`    | Run only the passed runners.
+`-f/--formatter` | Pick output formatter.
+
 ### GitHub Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
