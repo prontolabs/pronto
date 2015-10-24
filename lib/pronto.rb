@@ -3,6 +3,9 @@ require 'octokit'
 require 'gitlab'
 require 'forwardable'
 
+require 'pronto/config_file'
+require 'pronto/config'
+
 require 'pronto/git/repository'
 require 'pronto/git/patches'
 require 'pronto/git/patch'
