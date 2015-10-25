@@ -16,6 +16,22 @@ module Pronto
       ENV['GITHUB_SLUG'] || @config_hash['github']['slug']
     end
 
+    def github_web_endpoint
+      ENV['GITHUB_WEB_ENDPOINT'] ||
+        @config_hash['github']['web_endpoint'] ||
+        'https://github.com/'
+    end
+
+    def github_api_endpoint
+      ENV['GITHUB_API_ENDPOINT'] ||
+        @config_hash['github']['api_endpoint'] ||
+        'https://api.github.com/'
+    end
+
+    def github_hostname
+      URI.parse(github_web_endpoint).host
+    end
+
     def gitlab_private_token
       ENV['GITLAB_API_PRIVATE_TOKEN'] || @config_hash['gitlab']['private_token']
     end
