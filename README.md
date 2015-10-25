@@ -13,6 +13,13 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
 
 ![Pronto demo](pronto.gif "")
 
+* [Usage](#usage)
+    * [Local Changes](#local-changes)
+    * [GitHub Integration](#github-integration)
+    * [GitLab Integration](#gitlab-integration)
+* [Configuration](#configuration)
+* [Runners](#runners)
+
 ## Usage
 
 Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
@@ -67,8 +74,8 @@ s.add_development_dependency 'pronto'
 s.add_development_dependency 'pronto-rubocop'
 s.add_development_dependency 'pronto-scss'
 ```
-Set the GITHUB_ACCESS_TOKEN environment variable to [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use)
-that has access to the repository.
+Set the GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
+[OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that has access to the repository.
 
 Then just run it:
 ```bash
@@ -107,10 +114,11 @@ s.add_development_dependency 'pronto-rubocop'
 s.add_development_dependency 'pronto-scss'
 ```
 
-Set the `GITLAB_API_ENDPOINT` environment variable to your API endpoint URL.
-If you are using Gitlab.com's hosted service your endpoint will be `https://gitlab.com/api/v3`.
-Set the `GITLAB_API_PRIVATE_TOKEN` environment variable to your Gitlab private token
-which you can find in your account settings.
+Set the `GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
+your API endpoint URL. If you are using Gitlab.com's hosted service your
+endpoint will be `https://gitlab.com/api/v3`.
+Set the `GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
+to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
 ```bash
@@ -124,6 +132,30 @@ Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 formatter = Pronto::Formatter::GitlabFormatter.new
 Pronto.run('origin/master', '.', formatter)
 ```
+
+## Configuration
+
+The behavior of Pronto can be controlled via the `.pronto.yml` configuration
+file. It must be placed in your project directory.
+
+The file has the following format:
+
+```yaml
+github:
+  slug: mmozuras/pronto
+  access_token: B26354
+  api_endpoint: https://api.github.com/
+  web_endpoint: https://github.com/
+gitlab:
+  slug: mmozuras/pronto,
+  api_private_token: 46751,
+  api_endpoint: https://api.vinted.com/gitlab
+```
+
+All properties that can be specified via `.pronto.yml`, can also be specified
+via environment variables. Their names will be the upcased path to the property.
+For example: `GITHUB_SLUG` or `GITLAB_API_PRIVATE_TOKEN`. Environment variables
+will always take precedence over values in configuration file.
 
 ## Runners
 
