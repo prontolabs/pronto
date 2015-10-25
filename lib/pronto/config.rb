@@ -8,6 +8,10 @@ module Pronto
       @excluded_files ||= exclude.flat_map { |path| Dir[path] }
     end
 
+    def github_access_token
+      ENV['GITHUB_ACCESS_TOKEN'] || @config_file['github']['access_token']
+    end
+
     def github_slug
       @config_file['github']['slug']
     end

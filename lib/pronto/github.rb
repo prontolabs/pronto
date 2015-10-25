@@ -2,6 +2,7 @@ module Pronto
   class Github
     def initialize(repo)
       @repo = repo
+      @config = Config.new
       @comment_cache = {}
       @pull_id_cache = {}
     end
@@ -45,7 +46,7 @@ module Pronto
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token,
+      @client ||= Octokit::Client.new(access_token: @config.github_access_token,
                                       auto_paginate: true)
     end
 
@@ -63,10 +64,6 @@ module Pronto
           pull[:number].to_i if pull
         end
       end
-    end
-
-    def access_token
-      ENV['GITHUB_ACCESS_TOKEN']
     end
 
     Comment = Struct.new(:sha, :body, :path, :position) do
