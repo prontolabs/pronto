@@ -23,6 +23,7 @@ module Pronto
     private
 
     def slug
+      return @config.gitlab_slug if @config.gitlab_slug
       @slug ||= begin
         host = URI.split(@config.gitlab_endpoint)[2, 2].compact.join(':')
         slug = @repo.remote_urls.map do |url|

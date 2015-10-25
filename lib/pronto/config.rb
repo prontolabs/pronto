@@ -13,7 +13,7 @@ module Pronto
     end
 
     def github_slug
-      @config_hash['github']['slug']
+      ENV['GITHUB_SLUG'] || @config_hash['github']['slug']
     end
 
     def gitlab_private_token
@@ -22,6 +22,10 @@ module Pronto
 
     def gitlab_endpoint
       ENV['GITLAB_API_ENDPOINT'] || @config_hash['gitlab']['endpoint']
+    end
+
+    def gitlab_slug
+      ENV['GITLAB_SLUG'] || @config_hash['gitlab']['slug']
     end
 
     private
