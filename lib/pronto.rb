@@ -50,9 +50,7 @@ module Pronto
       end
     end
 
-    gems.map { |gem| gem.name.sub(/^pronto-/, '') }
-      .uniq
-      .sort
+    gems.map { |gem| gem.name.sub(/^pronto-/, '') }.uniq.sort
   end
 
   private

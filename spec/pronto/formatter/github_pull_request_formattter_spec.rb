@@ -10,7 +10,7 @@ module Pronto
       describe '#format' do
         subject { formatter.format(messages, repo, patches) }
         let(:messages) { [message, message] }
-        let(:message) { Message.new(patch.new_file_full_path, line, :warning, 'crucial') }
+        let(:message) { Message.new(patch.new_file_full_path, line, :info, '') }
         let(:patch) { repo.show_commit('64dadfd').first }
         let(:line) { patch.added_lines.first }
         let(:patches) { repo.diff('64dadfd^') }
