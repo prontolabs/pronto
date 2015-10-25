@@ -3,6 +3,9 @@
 ## Unreleased
 
 ### New features
+
+* [#104](https://github.com/mmozuras/pronto/pull/82): configure via .pronto.yml file.
+
 ### Changes
 
 * [#82](https://github.com/mmozuras/pronto/pull/82): treat Rake files as Ruby files.

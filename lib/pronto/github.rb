@@ -2,6 +2,7 @@ module Pronto
   class Github
     def initialize(repo)
       @repo = repo
+      @config = Config.new
       @comment_cache = {}
       @pull_id_cache = {}
     end
@@ -36,16 +37,20 @@ module Pronto
     private
 
     def slug
+      return @config.github_slug if @config.github_slug
       @slug ||= begin
         @repo.remote_urls.map do |url|
-          match = /.*github.com(:|\/)(?<slug>.*?)(?:\.git)?\z/.match(url)
+          hostname = Regexp.escape(@config.github_hostname)
+          match = /.*#{hostname}(:|\/)(?<slug>.*?)(?:\.git)?\z/.match(url)
           match[:slug] if match
         end.compact.first
       end
     end
 
     def client
-      @client ||= Octokit::Client.new(access_token: access_token,
+      @client ||= Octokit::Client.new(api_endpoint: @config.github_api_endpoint,
+                                      web_endpoint: @config.github_web_endpoint,
+                                      access_token: @config.github_access_token,
                                       auto_paginate: true)
     end
 
@@ -63,10 +68,6 @@ module Pronto
           pull[:number].to_i if pull
         end
       end
-    end
-
-    def access_token
-      ENV['GITHUB_ACCESS_TOKEN']
     end
 
     Comment = Struct.new(:sha, :body, :path, :position) do
