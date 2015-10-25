@@ -12,6 +12,14 @@ module Pronto
       @config_file['github']['slug']
     end
 
+    def gitlab_private_token
+      ENV['GITLAB_API_PRIVATE_TOKEN'] || @config_file['gitlab']['private_token']
+    end
+
+    def gitlab_endpoint
+      ENV['GITLAB_API_ENDPOINT'] || @config_file['gitlab']['endpoint']
+    end
+
     private
 
     def exclude

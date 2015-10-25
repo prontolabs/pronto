@@ -2,6 +2,7 @@ module Pronto
   class Gitlab
     def initialize(repo)
       @repo = repo
+      @config = Config.new
       @comment_cache = {}
     end
 
@@ -23,7 +24,7 @@ module Pronto
 
     def slug
       @slug ||= begin
-        host = URI.split(endpoint)[2, 2].compact.join(':')
+        host = URI.split(@config.gitlab_endpoint)[2, 2].compact.join(':')
         slug = @repo.remote_urls.map do |url|
           match = /.*#{host}(:|\/)(?<slug>.*).git/.match(url)
           match[:slug] if match
@@ -33,15 +34,8 @@ module Pronto
     end
 
     def client
-      @client ||= ::Gitlab.client(endpoint: endpoint, private_token: private_token)
-    end
-
-    def private_token
-      ENV['GITLAB_API_PRIVATE_TOKEN']
-    end
-
-    def endpoint
-      ENV['GITLAB_API_ENDPOINT']
+      @client ||= ::Gitlab.client(endpoint: @config.gitlab_endpoint,
+                                  private_token: @config.gitlab_private_token)
     end
 
     Comment = Struct.new(:sha, :note, :path, :line) do
