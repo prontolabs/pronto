@@ -1,5 +1,25 @@
 module Pronto
   class ConfigFile
+    EMPTY = {
+      'all' => {
+        'exclude' => [],
+        'include' => []
+      },
+      'github' => {
+        'slug' => nil,
+        'access_token' => nil,
+        'api_endpoint' => 'https://api.github.com/',
+        'web_endpoint' => 'https://github.com/'
+      },
+      'gitlab' => {
+        'slug' => nil,
+        'api_private_token' => nil,
+        'api_endpoint' => nil
+      },
+      'runners' => [],
+      'formatters' => []
+    }
+
     def initialize(path = '.pronto.yml')
       @path = path
     end
@@ -20,26 +40,7 @@ module Pronto
         end
       end
 
-      hash.merge(empty_config, &merger)
-    end
-
-    def empty_config
-      {
-        'all' => { 'exclude' => [], 'include' => [] },
-        'github' => {
-          'slug' => nil,
-          'access_token' => nil,
-          'api_endpoint' => nil,
-          'web_endpoint' => nil
-        },
-        'gitlab' => {
-          'slug' => nil,
-          'private_token' => nil,
-          'endpoint' => nil
-        },
-        'runners' => [],
-        'formatters' => []
-      }
+      hash.merge(EMPTY, &merger)
     end
   end
 end

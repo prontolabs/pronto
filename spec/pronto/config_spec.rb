@@ -33,14 +33,14 @@ module Pronto
       end
 
       context 'default' do
-        let(:config_hash) { { 'github' => { 'web_endpoint' => nil } } }
+        let(:config_hash) { ConfigFile::EMPTY }
         it { should == 'https://github.com/' }
       end
     end
 
     describe '#github_hostname' do
       subject { config.github_hostname }
-      let(:config_hash) { { 'github' => { 'web_endpoint' => nil } } }
+      let(:config_hash) { ConfigFile::EMPTY }
       it { should == 'github.com' }
     end
 

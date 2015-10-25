@@ -14,16 +14,16 @@ module Pronto
             'github' => {
               'slug' => nil,
               'access_token' => nil,
-              'api_endpoint' => nil,
-              'web_endpoint' => nil
+              'api_endpoint' => 'https://api.github.com/',
+              'web_endpoint' => 'https://github.com/'
             })
         end
         it do
           should include(
             'gitlab' => {
               'slug' => nil,
-              'private_token' => nil,
-              'endpoint' => nil
+              'api_private_token' => nil,
+              'api_endpoint' => nil
             })
         end
         it { should include('runners' => []) }
