@@ -22,7 +22,7 @@ module Pronto
     private
 
     def slug
-      @slug ||= begin
+      @slug = ENV['GITLAB_SLUG'] || begin
         host = URI.split(endpoint)[2, 2].compact.join(':')
         slug = @repo.remote_urls.map do |url|
           match = /.*#{host}(:|\/)(?<slug>.*).git/.match(url)
