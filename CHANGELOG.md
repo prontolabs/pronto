@@ -20,6 +20,7 @@
 * [#93](https://github.com/mmozuras/pronto/pull/93): comments didn't have position when outdated.
 * [#94](https://github.com/mmozuras/pronto/pull/94): duplicate comment detection was failing for large GitHub pull requests.
 * [poper#4](https://github.com/mmozuras/pronto-poper/issues/4): handle message uniqueness when they're without line numbers.
+* [#101](https://github.com/mmozuras/pronto/pull/101): make GitLab work with ssh port urls.
 
 ## 0.4.3
 
