@@ -16,30 +16,30 @@ module Pronto
 
     method_option :'exit-code',
                   type: :boolean,
-                  banner: 'Exits with non-zero code if there were any warnings/errors.'
+                  desc: 'Exits with non-zero code if there were any warnings/errors.'
 
     method_option :commit,
                   type: :string,
                   default: 'master',
                   aliases: '-c',
-                  banner: 'Commit for the diff'
+                  desc: 'Commit for the diff'
 
     method_option :index,
                   type: :boolean,
                   aliases: '-i',
-                  banner: 'Analyze changes in git index (staging area)'
+                  desc: 'Analyze changes in git index (staging area)'
 
     method_option :runner,
                   type: :array,
                   default: [],
                   aliases: '-r',
-                  banner: 'Run only the passed runners'
+                  desc: 'Run only the passed runners'
 
     method_option :formatter,
                   type: :string,
                   default: 'text',
                   aliases: '-f',
-                  banner: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
+                  desc: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def run(path = nil)
       gem_names = options[:runner].any? ? options[:runner] : ::Pronto.gem_names
