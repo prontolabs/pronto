@@ -1,8 +1,9 @@
 module Pronto
   describe Runners do
     describe '#run' do
-      subject { described_class.new(runners).run(patches) }
-      let(:patches) { double(commit: nil) }
+      subject { described_class.new(runners, config).run(patches) }
+      let(:patches) { double(commit: nil, any?: true) }
+      let(:config) { Config.new }
 
       context 'no runners' do
         let(:runners) { [] }
@@ -18,6 +19,12 @@ module Pronto
 
         let(:runners) { [FakeRunner] }
         it { should == [1, 3] }
+
+        context 'rejects excluded files' do
+          let(:config) { double(excluded_files: ['1']) }
+          let(:patches) { [double(new_file_full_path: 1)] }
+          it { should be_empty }
+        end
       end
     end
   end
