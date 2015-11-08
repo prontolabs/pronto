@@ -14,6 +14,7 @@ require 'pronto/git/line'
 require 'pronto/plugin'
 require 'pronto/message'
 require 'pronto/runner'
+require 'pronto/runners'
 require 'pronto/github'
 require 'pronto/gitlab'
 
@@ -35,7 +36,7 @@ module Pronto
     options = { paths: [file] } if file
     patches = repo.diff(commit, options)
 
-    result = run_all_runners(patches)
+    result = Runners.new.run(patches)
 
     formatted = formatter.format(result, repo, patches)
     puts formatted if formatted
@@ -54,13 +55,5 @@ module Pronto
     end
 
     gems.map { |gem| gem.name.sub(/^pronto-/, '') }.uniq.sort
-  end
-
-  private
-
-  def self.run_all_runners(patches)
-    Runner.runners.map do |runner|
-      runner.new.run(patches, patches.commit)
-    end.flatten.compact
   end
 end
