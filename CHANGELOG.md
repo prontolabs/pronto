@@ -7,12 +7,12 @@
 * [#104](https://github.com/mmozuras/pronto/pull/104): configure via .pronto.yml file.
 * [#86](https://github.com/mmozuras/pronto/pull/86): ability to specify GitHub slug via configuration or environment variable.
 * [#77](https://github.com/mmozuras/pronto/pull/77): ability to specify GitHub endpoints via configuration or environment variable.
+* [#108](https://github.com/mmozuras/pronto/pull/108): ability to specify excluded files via configuration.
 
 ### Changes
 
 * [#82](https://github.com/mmozuras/pronto/pull/82): treat Rake files as Ruby files.
 * [#107](https://github.com/mmozuras/pronto/pull/107): use desc: instead of banner: for CLI options descriptions.
-
 
 ### Bugs fixed
 
