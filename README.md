@@ -141,6 +141,8 @@ file. It must be placed in your project directory.
 The file has the following format:
 
 ```yaml
+all:
+  exclude: rspec/*
 github:
   slug: mmozuras/pronto
   access_token: B26354

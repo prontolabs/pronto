@@ -14,6 +14,11 @@ module Pronto
         end
       end
 
+      describe '#reject!' do
+        subject { patches.reject! { |_| true } }
+        its(:to_a) { should be_empty }
+      end
+
       describe '#find_line' do
         subject { patches.find_line(path, line) }
 

@@ -12,7 +12,9 @@ module Pronto
     end
 
     def excluded_files
-      @excluded_files ||= exclude.flat_map { |path| Dir[path] }
+      @excluded_files ||= Array(exclude)
+        .flat_map { |path| Dir[path.to_s] }
+        .map { |path| File.expand_path(path) }
     end
 
     def github_hostname

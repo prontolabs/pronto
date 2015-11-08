@@ -15,6 +15,10 @@ module Pronto
         @patches.each(&block)
       end
 
+      def reject!(&block)
+        @patches.reject!(&block)
+      end
+
       def find_line(path, line)
         patch = find { |p| p.new_file_full_path == path }
         lines = patch ? patch.lines : []
