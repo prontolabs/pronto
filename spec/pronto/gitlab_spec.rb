@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe Gitlab do
     let(:gitlab) { described_class.new(repo) }

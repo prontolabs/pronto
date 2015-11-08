@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   module Git
     describe Line do

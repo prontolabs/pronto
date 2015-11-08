@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe Runner do
     let(:runner) { described_class.new }

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe ConfigFile do
     let(:config_file) { described_class.new }

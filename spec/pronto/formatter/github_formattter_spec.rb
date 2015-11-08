@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   module Formatter
     describe GithubFormatter do

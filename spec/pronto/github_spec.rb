@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe Github do
     let(:github) { described_class.new(repo) }

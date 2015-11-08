@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe Message do
     let(:message) { described_class.new(path, line, level, msg, '8cda581') }

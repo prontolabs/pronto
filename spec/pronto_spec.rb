@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Pronto
   describe Pronto do
     describe '.run' do
