@@ -11,6 +11,8 @@
 ### Changes
 
 * [#82](https://github.com/mmozuras/pronto/pull/82): treat Rake files as Ruby files.
+* [#107](https://github.com/mmozuras/pronto/pull/107): use desc: instead of banner: for CLI options descriptions.
+
 
 ### Bugs fixed
 
