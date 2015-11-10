@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'pronto/version'
+require 'English'
 
 Gem::Specification.new do |s|
   s.name = 'pronto'
@@ -21,10 +22,21 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = '>= 1.3.6'
   s.license = 'MIT'
 
-  s.files = Dir.glob('{lib}/**/*') + %w(LICENSE README.md)
-  s.test_files = `git ls-files -- {spec}/*`.split("\n")
+  s.files = `git ls-files`.split($RS).reject do |file|
+    file =~ %r{^(?:
+    spec/.*
+    |Gemfile
+    |Rakefile
+    |\.rspec
+    |\.gitignore
+    |\.rubocop.yml
+    |\.travis.yml
+    )$}x
+  end
+  s.test_files = []
+  s.extra_rdoc_files = ['LICENSE', 'README.md']
   s.require_paths = ['lib']
-  s.executables << 'pronto'
+  s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
   s.add_runtime_dependency('rugged', '~> 0.23.0')
   s.add_runtime_dependency('thor', '~> 0.19.0')
