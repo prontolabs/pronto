@@ -19,8 +19,9 @@ Gem::Specification.new do |s|
     your styleguide, are DRY, don't introduce security holes and more.
   EOF
 
-  s.required_rubygems_version = '>= 1.3.6'
-  s.license = 'MIT'
+  s.licenses = ['MIT']
+  s.required_ruby_version = '>= 1.9.3'
+  s.rubygems_version = '1.8.23'
 
   s.files = `git ls-files`.split($RS).reject do |file|
     file =~ %r{^(?:
