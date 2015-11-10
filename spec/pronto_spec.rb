@@ -7,6 +7,7 @@ module Pronto
       let(:file) { nil }
 
       context 'no runners' do
+        before { Runner.runners.clear }
         it { should be_empty }
       end
 
