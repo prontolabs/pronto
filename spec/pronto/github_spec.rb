@@ -49,6 +49,11 @@ module Pronto
       context 'three requests for same comments' do
         specify do
           Octokit::Client.any_instance
+            .should_receive(:pull_requests)
+            .once
+            .and_return([])
+
+          Octokit::Client.any_instance
             .should_receive(:pull_comments)
             .with('mmozuras/pronto', 10)
             .once
