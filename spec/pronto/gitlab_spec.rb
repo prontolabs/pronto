@@ -10,7 +10,10 @@ module Pronto
       end
 
       context 'ssh with port remote url' do
-        let(:repo) { double(remote_urls: ['ssh://git@gitlab.example.com:111/mmozuras/pronto.git']) }
+        let(:repo) do
+          remote_url = 'ssh://git@gitlab.example.com:111/mmozuras/pronto.git'
+          double(remote_urls: [remote_url])
+        end
 
         it 'returns correct slug' do
           subject.should eql('mmozuras%2Fpronto')
@@ -26,7 +29,6 @@ module Pronto
           subject.should eql('mmozuras%2Fpronto')
         end
       end
-
     end
 
     describe '#commit_comments' do

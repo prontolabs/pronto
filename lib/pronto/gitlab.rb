@@ -25,23 +25,33 @@ module Pronto
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
       @slug ||= begin
-        host = URI.split(@config.gitlab_api_endpoint)[2, 2].compact.join(':')
         slug = @repo.remote_urls.map do |url|
-          match =
-            if url.match(/^ssh:\/\//)
-              /.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git/.match(url)
-            else
-              /.*#{host}(:|\/)(?<slug>.*).git/.match(url)
-            end
+          match = if url.match(/^ssh:\/\//)
+                    /.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git/.match(url)
+                  else
+                    /.*#{host}(:|\/)(?<slug>.*).git/.match(url)
+                  end
           match[:slug] if match
         end.compact.first
         URI.escape(slug, '/') if slug
       end
     end
 
+    def host
+      @host ||= URI.split(gitlab_api_endpoint)[2, 2].compact.join(':')
+    end
+
     def client
-      @client ||= ::Gitlab.client(endpoint: @config.gitlab_api_endpoint,
-                                  private_token: @config.gitlab_api_private_token)
+      @client ||= ::Gitlab.client(endpoint: gitlab_api_endpoint,
+                                  private_token: gitlab_api_private_token)
+    end
+
+    def gitlab_api_private_token
+      @config.gitlab_api_private_token
+    end
+
+    def gitlab_api_endpoint
+      @config.gitlab_api_endpoint
     end
 
     Comment = Struct.new(:sha, :note, :path, :line) do

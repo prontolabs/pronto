@@ -36,7 +36,9 @@ module Pronto
 
         context 'last' do
           let(:sha) { '64dadfd' }
-          it { should contain_exactly('64dadfdb7c7437476782e8eb024085862e6287d6') }
+          it do
+            should contain_exactly('64dadfdb7c7437476782e8eb024085862e6287d6')
+          end
         end
       end
 
