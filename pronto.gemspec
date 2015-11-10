@@ -26,12 +26,14 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables << 'pronto'
 
-  s.add_runtime_dependency 'rugged', '~> 0.23.0'
-  s.add_runtime_dependency 'thor', '~> 0.19.0'
-  s.add_runtime_dependency 'octokit', '~> 4.1.0'
-  s.add_runtime_dependency 'gitlab', '~> 3.4.0'
-  s.add_development_dependency 'rake', '~> 10.4.0'
-  s.add_development_dependency 'rspec', '~> 3.3.0'
-  s.add_development_dependency 'rspec-its', '~> 1.2.0'
-  s.add_development_dependency 'rspec-expectations', '~> 3.3.0'
+  s.add_runtime_dependency('rugged', '~> 0.23.0')
+  s.add_runtime_dependency('thor', '~> 0.19.0')
+  s.add_runtime_dependency('octokit', '~> 4.1.0')
+  s.add_runtime_dependency('gitlab', '~> 3.4.0')
+  s.add_development_dependency('rake', '~> 10.4.0')
+  s.add_development_dependency('rspec', '~> 3.3.0')
+  s.add_development_dependency('rspec-its', '~> 1.2.0')
+  s.add_development_dependency('rspec-expectations', '~> 3.3.0')
+  s.add_development_dependency('bundler', '~> 1.3')
+  s.add_development_dependency('simplecov', '~> 0.10')
 end

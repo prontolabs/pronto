@@ -1,3 +1,5 @@
+require 'support/coverage'
+
 require 'rspec'
 require 'rspec/its'
 
