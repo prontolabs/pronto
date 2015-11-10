@@ -31,7 +31,8 @@ module Pronto
 
     def create_pull_comment(comment)
       client.create_pull_comment(slug, pull_id, comment.body,
-                                 comment.sha, comment.path, comment.position)
+                                 pull_sha || comment.sha,
+                                 comment.path, comment.position)
     end
 
     private
@@ -54,20 +55,29 @@ module Pronto
                                       auto_paginate: true)
     end
 
-    def pull_requests
-      @pull_requests ||= client.pull_requests(slug)
+    def pull_id
+      pull ? pull[:number].to_i : env_pull_id.to_i
     end
 
-    def pull_id
-      @pull_id ||= begin
-        pull_id = ENV['PULL_REQUEST_ID']
-        if pull_id
-          pull_id.to_i
-        elsif @repo.branch
-          pull = pull_requests.find { |pr| pr[:head][:ref] == @repo.branch }
-          pull[:number].to_i if pull
-        end
-      end
+    def env_pull_id
+      ENV['PULL_REQUEST_ID']
+    end
+
+    def pull_sha
+      pull[:head][:sha] if pull
+    end
+
+    def pull
+      return unless @repo.branch
+      @pull ||= if env_pull_id
+                  pull_requests.find { |pr| pr[:number].to_i == env_pull_id.to_i }
+                else
+                  pull_requests.find { |pr| pr[:head][:ref] == @repo.branch }
+                end
+    end
+
+    def pull_requests
+      @pull_requests ||= client.pull_requests(slug)
     end
 
     Comment = Struct.new(:sha, :body, :path, :position) do

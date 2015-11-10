@@ -17,6 +17,11 @@ module Pronto
           ENV['PULL_REQUEST_ID'] = '10'
 
           Octokit::Client.any_instance
+            .should_receive(:pull_requests)
+            .once
+            .and_return([])
+
+          Octokit::Client.any_instance
             .should_receive(:pull_comments)
             .once
             .and_return([])

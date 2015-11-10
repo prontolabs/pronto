@@ -2,7 +2,9 @@ module Pronto
   describe Github do
     let(:github) { described_class.new(repo) }
 
-    let(:repo) { double(remote_urls: ['git@github.com:mmozuras/pronto.git']) }
+    let(:repo) do
+      double(remote_urls: ['git@github.com:mmozuras/pronto.git'], branch: nil)
+    end
     let(:sha) { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
 
