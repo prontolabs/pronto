@@ -3,6 +3,12 @@
 ## Unreleased
 
 ### New features
+### Changes
+### Bugs fixed
+
+## 0.5.0
+
+### New features
 
 * [#104](https://github.com/mmozuras/pronto/pull/104): configure via .pronto.yml file.
 * [#86](https://github.com/mmozuras/pronto/pull/86): ability to specify GitHub slug via configuration or environment variable.
