@@ -6,6 +6,12 @@
 ### Changes
 ### Bugs fixed
 
+## 0.5.1
+
+### Changes
+
+* Try to retrieve commit sha for GitHub PR via GitHub API instead of trusting local sha.
+
 ## 0.5.0
 
 ### New features
