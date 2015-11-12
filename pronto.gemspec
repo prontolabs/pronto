@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     spec/.*
     |Gemfile
     |Rakefile
+    |pronto.gif
     |\.rspec
     |\.gitignore
     |\.rubocop.yml
