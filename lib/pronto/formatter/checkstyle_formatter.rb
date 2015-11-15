@@ -21,7 +21,7 @@ module Pronto
         @document = REXML::Document.new.tap do |d|
           d << REXML::XMLDecl.new
         end
-        @checkstyle = REXML::Element.new('checkstyle', @document)
+        @checkstyle = REXML::Element.new("checkstyle", @document)
       end
 
       def process_messages(messages)
