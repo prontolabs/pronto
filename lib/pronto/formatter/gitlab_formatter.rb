@@ -3,6 +3,7 @@ module Pronto
     class GitlabFormatter
       def format(messages, repo, _)
         client = Gitlab.new repo
+        not_used = Gitlab.new repo
 
         commit_messages = messages.uniq.map do |message|
           create_comment(client,
