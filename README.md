@@ -36,10 +36,11 @@ $ gem install pronto-rubocop
 $ gem install pronto-flay
 ```
 
-If you'd rather install Pronto using `bundler`, you don't need to require it:
+If you'd rather install Pronto using `bundler`, you don't need to require it,
+unless you're gonna run it from Ruby (via Rake task, for example):
 
 ```ruby
-gem 'pronto', require: false
+gem 'pronto'
 gem 'pronto-rubocop', require: false
 gem 'pronto-flay', require: false
 ```
@@ -51,6 +52,7 @@ Pronto runs the checks on a diff between the current HEAD and the provided commi
 ### Local Changes
 
 Navigate to the repository you want to run Pronto on, and:
+
 ```sh
 git checkout feature/branch
 
@@ -82,30 +84,24 @@ You can run Pronto as a step of your CI builds and get the results as comments
 on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
 
 Add Pronto runners you want to use to your Gemfile:
-```ruby
-gem 'pronto'
-gem 'pronto-rubocop', require: false
-gem 'pronto-scss', require: false
-```
-or gemspec file:
-```ruby
-s.add_development_dependency 'pronto'
-s.add_development_dependency 'pronto-rubocop'
-s.add_development_dependency 'pronto-scss'
-```
+
 Set the GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
 [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that has access to the repository.
 
 Then just run it:
+
 ```sh
 $ GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
 ```
+
 or, if you want comments to appear on pull request diff, instead of commit:
+
 ```sh
 $ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
+
 ```ruby
 Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 
@@ -120,19 +116,6 @@ on GitLab commits using `GitlabFormatter`.
 
 **note: this requires at least GitLab v7.5.0**
 
-Add Pronto runners you want to use to your Gemfile:
-```ruby
-gem 'pronto'
-gem 'pronto-rubocop', require: false
-gem 'pronto-scss', require: false
-```
-or gemspec file:
-```ruby
-s.add_development_dependency 'pronto'
-s.add_development_dependency 'pronto-rubocop'
-s.add_development_dependency 'pronto-scss'
-```
-
 Set the `GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
 your API endpoint URL. If you are using Gitlab.com's hosted service your
 endpoint will be `https://gitlab.com/api/v3`.
@@ -140,11 +123,13 @@ Set the `GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
 to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
+
 ```sh
 $ GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
+
 ```ruby
 Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
 
