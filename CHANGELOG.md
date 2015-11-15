@@ -6,11 +6,17 @@
 ### Changes
 ### Bugs fixed
 
+## 0.5.3
+
+### Bugs fixed
+
+* Remove pronto.gif from gem, accidently included since `0.5.0`.
+
 ## 0.5.2
 
 ### Bugs fixed
 
-* GithubPullRequestFormatter was working incorrectly when `PULL_REQUEST_ID` is not specified. Introduced in `0.5.1`
+* GithubPullRequestFormatter was working incorrectly when `PULL_REQUEST_ID` is not specified. Introduced in `0.5.1`.
 
 ## 0.5.1
 
