@@ -6,13 +6,14 @@
 [![Dependency Status](https://gemnasium.com/mmozuras/pronto.png)](https://gemnasium.com/mmozuras/pronto)
 [![Inline docs](http://inch-ci.org/github/mmozuras/pronto.png)](http://inch-ci.org/github/mmozuras/pronto)
 
-Pronto runs analysis quickly by checking only the relevant changes. Created to
+**Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration).
 Perfect if want to find out quickly if branch introduces changes that conform
 to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](https://github.com/mmozuras/pronto-flay), [don't introduce security holes](https://github.com/mmozuras/pronto-brakeman) and [more](#runners).
 
 ![Pronto demo](pronto.gif "")
 
+* [Installation](#installation)
 * [Usage](#usage)
     * [Local Changes](#local-changes)
     * [GitHub Integration](#github-integration)
@@ -20,18 +21,36 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
 * [Configuration](#configuration)
 * [Runners](#runners)
 
+## Installation
+
+**Pronto**'s installation is standard for a Ruby gem:
+
+```bash
+$ gem install pronto
+```
+
+You'll also want to install some [runners](#runners) to go along with the main gem:
+
+```bash
+$ gem install pronto-rubocop
+$ gem install pronto-flay
+```
+
+If you'd rather install Pronto using `bundler`, you don't need to require it:
+
+```ruby
+gem 'pronto', require: false
+gem 'pronto-rubocop', require: false
+gem 'pronto-flay', require: false
+```
+
 ## Usage
 
 Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 
 ### Local Changes
 
-You can run Pronto locally. First, install Pronto and the runners you want to use:
-```bash
-gem install pronto
-gem install pronto-rubocop
-```
-Then navigate to the repository you want to run Pronto on, and:
+Navigate to the repository you want to run Pronto on, and:
 ```bash
 git checkout feature/branch
 
