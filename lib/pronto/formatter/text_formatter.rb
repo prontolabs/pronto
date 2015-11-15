@@ -4,7 +4,7 @@ module Pronto
       def format(messages, _, _)
         messages.map do |message|
           level = message.level[0].upcase
-          "#{location(message)} #{level}: #{message.msg}"
+          "#{location(message)} #{level}:\n #{message.msg}\n\n"
         end
       end
 
