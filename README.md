@@ -20,6 +20,8 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
     * [GitLab Integration](#gitlab-integration)
 * [Configuration](#configuration)
 * [Runners](#runners)
+* [Changelog](#changelog)
+* [Copyright](#copyright)
 
 ## Installation
 
@@ -182,3 +184,11 @@ Currently available:
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
+
+## Changelog
+
+**Pronto**'s changelog is available [here](CHANGELOG.md).
+
+## Copyright
+
+Copyright (c) 2013-2015 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
