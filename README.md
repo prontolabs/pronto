@@ -25,13 +25,13 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
 
 **Pronto**'s installation is standard for a Ruby gem:
 
-```bash
+```sh
 $ gem install pronto
 ```
 
 You'll also want to install some [runners](#runners) to go along with the main gem:
 
-```bash
+```sh
 $ gem install pronto-rubocop
 $ gem install pronto-flay
 ```
@@ -51,7 +51,7 @@ Pronto runs the checks on a diff between the current HEAD and the provided commi
 ### Local Changes
 
 Navigate to the repository you want to run Pronto on, and:
-```bash
+```sh
 git checkout feature/branch
 
 # Analyze diff of committed changes on current branch and master:
@@ -97,12 +97,12 @@ Set the GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
 [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that has access to the repository.
 
 Then just run it:
-```bash
-GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
+```sh
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
 ```
 or, if you want comments to appear on pull request diff, instead of commit:
-```bash
-GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin/master
+```sh
+$ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
@@ -140,8 +140,8 @@ Set the `GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
 to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
-```bash
-GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+```sh
+$ GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
