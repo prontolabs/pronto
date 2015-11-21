@@ -185,6 +185,13 @@ Currently available:
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 
+## Tutorials
+
+Some tutorials and usecases which can help you to get started faster:
+
+* [Setup automatic Github pull requests review with CircleCI and Pronto gem](https://medium.com/@MaximAbramchuk/circleci-github-pr-commenting-ruby-scss-coffeescript-javascript-git-and-etc-fbcbe2a378a5#.gk5f14p3j)
+
+
 ## Changelog
 
 **Pronto**'s changelog is available [here](CHANGELOG.md).
