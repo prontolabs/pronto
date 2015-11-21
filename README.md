@@ -20,6 +20,7 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
     * [GitLab Integration](#gitlab-integration)
 * [Configuration](#configuration)
 * [Runners](#runners)
+* [Articles](#articles)
 * [Changelog](#changelog)
 * [Copyright](#copyright)
 
@@ -185,12 +186,15 @@ Currently available:
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 
-## Tutorials
+## Articles
 
-Some tutorials and usecases which can help you to get started faster:
+Articles to help you to get started:
 
-* [Setup automatic Github pull requests review with CircleCI and Pronto gem](https://medium.com/@MaximAbramchuk/circleci-github-pr-commenting-ruby-scss-coffeescript-javascript-git-and-etc-fbcbe2a378a5#.gk5f14p3j)
+* [Automating code review with Pronto (and friends)](http://everydayrails.com/2015/02/17/pronto-ruby-code-review.html)
+* [Setup Pronto with CircleCI](https://medium.com/@MaximAbramchuk/circleci-github-pr-commenting-ruby-scss-coffeescript-javascript-git-and-etc-fbcbe2a378a5#.gk5f14p3j)
+* [Continuous Static Analysis using Pronto](http://codingfearlessly.com/2014/11/06/continuous-static-analysis/)
 
+Make a Pull Request to add something you wrote or found useful.
 
 ## Changelog
 
