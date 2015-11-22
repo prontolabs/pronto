@@ -3,8 +3,15 @@
 ## Unreleased
 
 ### New features
+
+* Added `-V/--verbose-version` option that displays Ruby version.
+
 ### Changes
+
+* `--version` only displays the version itself without any additional text.
+
 ### Bugs fixed
+
 
 ## 0.5.3
 

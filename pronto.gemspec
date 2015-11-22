@@ -6,7 +6,7 @@ require 'English'
 
 Gem::Specification.new do |s|
   s.name = 'pronto'
-  s.version = Pronto::VERSION
+  s.version = Pronto::Version::STRING
   s.platform = Gem::Platform::RUBY
   s.author = 'Mindaugas Mozūras'
   s.email = 'mindaugas.mozuras@gmail.com'

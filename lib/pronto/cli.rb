@@ -61,11 +61,18 @@ module Pronto
       puts ::Pronto.gem_names
     end
 
-    desc 'version', 'Show the Pronto version'
+    desc 'version', 'Display version'
     map %w(-v --version) => :version
 
     def version
-      puts "Pronto version #{::Pronto::VERSION}"
+      puts Version::STRING
+    end
+
+    desc 'verbose-version', 'Display verbose version'
+    map %w(-V --verbose-version) => :verbose_version
+
+    def verbose_version
+      puts Version.verbose
     end
   end
 end
