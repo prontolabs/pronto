@@ -42,7 +42,7 @@ module Pronto
                   desc: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def run(path = nil)
-      gem_names = options[:runner].any? ? options[:runner] : ::Pronto.gem_names
+      gem_names = options[:runner].any? ? options[:runner] : ::Pronto::GemNames.new.to_a
       gem_names.each do |gem_name|
         require "pronto/#{gem_name}"
       end
@@ -58,7 +58,7 @@ module Pronto
     desc 'list', 'Lists pronto runners that are available to be used'
 
     def list
-      puts ::Pronto.gem_names
+      puts ::Pronto::GemNames.new.to_a
     end
 
     desc 'version', 'Display version'

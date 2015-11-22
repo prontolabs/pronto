@@ -106,7 +106,7 @@ $ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin
 As an alternative, you can also set up a rake task:
 
 ```ruby
-Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
+Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
 
 formatter = Pronto::Formatter::GithubFormatter.new # or GithubPullRequestFormatter
 Pronto.run('origin/master', '.', formatter)
@@ -134,7 +134,7 @@ $ GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token
 As an alternative, you can also set up a rake task:
 
 ```ruby
-Pronto.gem_names.each { |gem_name| require "pronto/#{gem_name}" }
+Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
 
 formatter = Pronto::Formatter::GitlabFormatter.new
 Pronto.run('origin/master', '.', formatter)

@@ -9,6 +9,7 @@
 ### Changes
 
 * `--version` only displays the version itself without any additional text.
+* Replaced `Pronto.gem_names` with `Pronto::GemNames.new.to_a`.
 
 ### Bugs fixed
 
