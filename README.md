@@ -176,6 +176,7 @@ Currently available:
 * [pronto-fasterer](https://github.com/mmozuras/pronto-fasterer)
 * [pronto-flay](https://github.com/mmozuras/pronto-flay)
 * [pronto-foodcritic](https://github.com/mmozuras/pronto-foodcritic)
+* [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
 * [pronto-haml](https://github.com/mmozuras/pronto-haml)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
