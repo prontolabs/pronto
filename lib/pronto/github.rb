@@ -85,6 +85,10 @@ module Pronto
           path == other.path &&
           body == other.body
       end
+
+      def to_s
+        "[#{sha}] #{path}:#{position} - #{body}"
+      end
     end
   end
 end

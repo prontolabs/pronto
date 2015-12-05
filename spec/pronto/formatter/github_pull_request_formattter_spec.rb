@@ -13,9 +13,8 @@ module Pronto
         let(:line) { patch.added_lines.first }
         let(:patches) { repo.diff('64dadfd^') }
 
-        specify do
+        before do
           ENV['PULL_REQUEST_ID'] = '10'
-
           Octokit::Client.any_instance
             .should_receive(:pull_requests)
             .once
@@ -25,12 +24,49 @@ module Pronto
             .should_receive(:pull_comments)
             .once
             .and_return([])
+        end
 
+        specify do
           Octokit::Client.any_instance
             .should_receive(:create_pull_comment)
             .once
 
           subject
+        end
+
+        context 'error handling' do
+
+          let(:error_response) do
+            {
+              status: 422,
+              body: {
+                message: 'Validation Failed',
+                errors: [
+                  resource: 'Issue',
+                  field: 'title',
+                  code: 'missing_field'
+                ]
+              }.to_json,
+              response_headers: {
+                content_type: 'json'
+              }
+            }
+          end
+
+          it 'handles and prints details' do
+            Octokit::Client.any_instance
+              .should_receive(:create_pull_comment)
+              .and_raise(Octokit::UnprocessableEntity.from_response(
+                error_response))
+
+            STDERR.should_receive(:puts) do |line|
+              line.should =~ /Failed to post/
+              line.should =~ /Validation Failed/
+              line.should =~ /missing_field/
+              line.should =~ /Issue/
+            end
+            subject
+          end
         end
       end
     end
