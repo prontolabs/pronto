@@ -35,7 +35,6 @@ module Pronto
         end
 
         context 'error handling' do
-
           let(:error_response) do
             {
               status: 422,
@@ -57,7 +56,7 @@ module Pronto
             Octokit::Client.any_instance
               .should_receive(:create_pull_comment)
               .and_raise(Octokit::UnprocessableEntity.from_response(
-                error_response))
+                           error_response))
 
             STDERR.should_receive(:puts) do |line|
               line.should =~ /Failed to post/

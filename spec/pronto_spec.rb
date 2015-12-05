@@ -50,6 +50,5 @@ module Pronto
         end
       end
     end
-
   end
 end
