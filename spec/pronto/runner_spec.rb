@@ -34,6 +34,12 @@ module Pronto
           it { should be_falsy }
         end
       end
+
+      context 'directory' do
+        let(:path) { 'directory' }
+        before { File.stub(:directory?).with(path).and_return(true) }
+        it { should be_falsy }
+      end
     end
   end
 end
