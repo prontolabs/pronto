@@ -14,6 +14,7 @@
 
 ### Bugs fixed
 
+* [#122](https://github.com/mmozuras/pronto/pull/122): ignore symlink directories.
 
 ## 0.5.3
 
