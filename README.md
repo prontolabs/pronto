@@ -186,6 +186,7 @@ Currently available:
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
+* [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
 
 ## Articles
