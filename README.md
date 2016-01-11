@@ -149,7 +149,8 @@ The file has the following format:
 
 ```yaml
 all:
-  exclude: rspec/*
+  exclude: 
+    - 'spec/**/*'
 github:
   slug: mmozuras/pronto
   access_token: B26354
