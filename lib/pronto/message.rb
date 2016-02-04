@@ -1,10 +1,10 @@
 module Pronto
   class Message
-    attr_reader :path, :line, :level, :msg, :commit_sha
+    attr_reader :path, :line, :level, :msg, :commit_sha, :runner
 
     LEVELS = [:info, :warning, :error, :fatal]
 
-    def initialize(path, line, level, msg, commit_sha = nil)
+    def initialize(path, line, level, msg, commit_sha = nil, runner = nil)
       unless LEVELS.include?(level)
         raise ::ArgumentError, "level should be set to one of #{LEVELS}"
       end
@@ -13,6 +13,7 @@ module Pronto
       @line = line
       @level = level
       @msg = msg
+      @runner = runner
       @commit_sha = commit_sha
       @commit_sha ||= line.commit_sha if line
     end
