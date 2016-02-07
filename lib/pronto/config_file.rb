@@ -17,7 +17,8 @@ module Pronto
         'api_endpoint' => nil
       },
       'runners' => [],
-      'formatters' => []
+      'formatters' => [],
+      'max_warnings' => nil
     }
 
     def initialize(path = '.pronto.yml')

@@ -21,6 +21,10 @@ module Pronto
       URI.parse(github_web_endpoint).host
     end
 
+    def max_warnings
+      @config_hash['max_warnings']
+    end
+
     private
 
     def exclude

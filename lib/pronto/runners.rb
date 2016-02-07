@@ -9,8 +9,13 @@ module Pronto
       patches = reject_excluded(patches)
       return [] unless patches.any?
 
-      @runners.map { |runner| runner.new.run(patches, patches.commit) }
-        .flatten.compact
+      result = []
+      @runners.each do |runner|
+        next if @config.max_warnings && result.count >= @config.max_warnings
+        result += runner.new.run(patches, patches.commit).flatten.compact
+      end
+      result = result.take(@config.max_warnings) if @config.max_warnings
+      result
     end
 
     private

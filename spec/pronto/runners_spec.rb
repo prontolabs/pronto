@@ -25,6 +25,11 @@ module Pronto
           let(:patches) { [double(new_file_full_path: 1)] }
           it { should be_empty }
         end
+
+        context 'max warnings' do
+          let(:config) { double(max_warnings: 1, excluded_files: []) }
+          it { should == [1] }
+        end
       end
     end
   end

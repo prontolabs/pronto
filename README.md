@@ -160,6 +160,7 @@ gitlab:
   slug: mmozuras/pronto,
   api_private_token: 46751,
   api_endpoint: https://api.vinted.com/gitlab
+max_warnings: 150
 ```
 
 All properties that can be specified via `.pronto.yml`, can also be specified
