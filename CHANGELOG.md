@@ -12,6 +12,7 @@
 * `--version` only displays the version itself without any additional text.
 * Replaced `Pronto.gem_names` with `Pronto::GemNames.new.to_a`.
 * [#116](https://github.com/mmozuras/pronto/pull/116): improved GitHub formatter error output.
+* [#123](https://github.com/mmozuras/pronto/pull/126): added runner attribute to message initialization.
 
 ### Bugs fixed
 
