@@ -17,7 +17,7 @@ module Pronto
     end
 
     def commit_comments(sha)
-      @comment_cache["#{sha}"] ||= begin
+      @comment_cache[sha.to_s] ||= begin
         client.commit_comments(slug, sha).map do |comment|
           Comment.new(sha, comment.body, comment.path, comment.position)
         end

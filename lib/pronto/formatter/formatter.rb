@@ -17,6 +17,6 @@ module Pronto
       'checkstyle' => CheckstyleFormatter,
       'text' => TextFormatter,
       'null' => NullFormatter
-    }
+    }.freeze
   end
 end

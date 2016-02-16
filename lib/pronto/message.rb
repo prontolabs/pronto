@@ -2,7 +2,7 @@ module Pronto
   class Message
     attr_reader :path, :line, :level, :msg, :commit_sha, :runner
 
-    LEVELS = [:info, :warning, :error, :fatal]
+    LEVELS = [:info, :warning, :error, :fatal].freeze
 
     def initialize(path, line, level, msg, commit_sha = nil, runner = nil)
       unless LEVELS.include?(level)
