@@ -149,7 +149,7 @@ The file has the following format:
 
 ```yaml
 all:
-  exclude: 
+  exclude:
     - 'spec/**/*'
 github:
   slug: mmozuras/pronto
@@ -199,6 +199,7 @@ Articles to help you to get started:
 * [Setup Pronto with CircleCI](https://medium.com/@MaximAbramchuk/circleci-github-pr-commenting-ruby-scss-coffeescript-javascript-git-and-etc-fbcbe2a378a5#.gk5f14p3j)
 * [Continuous Static Analysis using Pronto](http://codingfearlessly.com/2014/11/06/continuous-static-analysis/)
 * [Pronto and git hooks](http://elliotthilaire.net/gem-pronto-and-git-hooks/)
+* [How to end fruitless dev discussions about your project’s code style?](https://medium.com/appaloosa-store-engineering/how-to-end-fruitless-dev-discussions-about-your-project-s-code-style-245070bff6d4)
 
 Make a Pull Request to add something you wrote or found useful.
 
