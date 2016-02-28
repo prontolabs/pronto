@@ -210,4 +210,4 @@ Make a Pull Request to add something you wrote or found useful.
 
 ## Copyright
 
-Copyright (c) 2013-2015 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
+Copyright (c) 2013-2016 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
