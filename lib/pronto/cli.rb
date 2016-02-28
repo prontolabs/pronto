@@ -35,11 +35,11 @@ module Pronto
                   aliases: '-r',
                   desc: 'Run only the passed runners'
 
-    method_option :formatter,
-                  type: :string,
+    method_option :formatters,
+                  type: :array,
                   default: 'text',
-                  aliases: '-f',
-                  desc: "Pick output formatter. Available: #{::Pronto::Formatter.names.join(', ')}"
+                  aliases: ['formatter', '-f'],
+                  desc: "Pick output formatters. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def run(path = nil)
       gem_names = options[:runner].any? ? options[:runner] : ::Pronto::GemNames.new.to_a
@@ -47,9 +47,9 @@ module Pronto
         require "pronto/#{gem_name}"
       end
 
-      formatter = ::Pronto::Formatter.get(options[:formatter])
+      formatters = ::Pronto::Formatter.get(options[:formatters])
       commit = options[:index] ? :index : options[:commit]
-      messages = ::Pronto.run(commit, '.', formatter, path)
+      messages = ::Pronto.run(commit, '.', formatters, path)
       exit(messages.count) if options[:'exit-code']
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'

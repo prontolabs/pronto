@@ -1,8 +1,9 @@
 module Pronto
   module Formatter
-    def self.get(name)
-      formatter = FORMATTERS[name.to_s] || TextFormatter
-      formatter.new
+    def self.get(names)
+      names ||= 'text'
+      Array(names).map { |name| FORMATTERS[name.to_s] || TextFormatter }
+        .uniq.map(&:new)
     end
 
     def self.names

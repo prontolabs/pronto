@@ -32,7 +32,7 @@ require 'pronto/formatter/formatter'
 
 module Pronto
   def self.run(commit = 'master', repo_path = '.',
-               formatter = Formatter::TextFormatter.new, file = nil)
+               formatters = [Formatter::TextFormatter.new], file = nil)
     commit ||= 'master'
 
     repo = Git::Repository.new(repo_path)
@@ -41,8 +41,10 @@ module Pronto
 
     result = Runners.new.run(patches)
 
-    formatted = formatter.format(result, repo, patches)
-    puts formatted if formatted
+    Array(formatters).each do |formatter|
+      formatted = formatter.format(result, repo, patches)
+      puts formatted if formatted
+    end
 
     result
   end

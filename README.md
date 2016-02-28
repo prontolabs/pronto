@@ -79,7 +79,7 @@ Command flag     | Description
 `-c/--commit`    | Commit for the diff.
 `-i/--index`     | Analyze changes in git index (staging area).
 `-r/--runner`    | Run only the passed runners.
-`-f/--formatter` | Pick output formatter.
+`-f/--formatters`| Pick output formatters.
 
 ### GitHub Integration
 
