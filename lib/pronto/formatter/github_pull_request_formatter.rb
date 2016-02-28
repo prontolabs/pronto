@@ -29,7 +29,7 @@ module Pronto
         # tends to recognize these better, leading to messages we can't post
         # because their diff position is non-existent on Github.
         # Ignore such occasions and continue posting other messages.
-        STDERR.puts "Failed to post: #{comment} with #{e.message}"
+        $stderr.puts "Failed to post: #{comment} with #{e.message}"
       end
     end
   end

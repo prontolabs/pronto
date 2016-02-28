@@ -58,7 +58,7 @@ module Pronto
               .and_raise(Octokit::UnprocessableEntity.from_response(
                            error_response))
 
-            STDERR.should_receive(:puts) do |line|
+            $stderr.should_receive(:puts) do |line|
               line.should =~ /Failed to post/
               line.should =~ /Validation Failed/
               line.should =~ /missing_field/
