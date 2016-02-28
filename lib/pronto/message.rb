@@ -32,7 +32,7 @@ module Pronto
       end
     end
 
-    alias_method :eql?, :==
+    alias eql? ==
 
     def hash
       comparison_attributes.reduce(0) do |hash, attribute|

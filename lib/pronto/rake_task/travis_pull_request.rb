@@ -21,9 +21,7 @@ module Pronto
 
         task(name, *args) do |_, task_args|
           RakeFileUtils.send(:verbose, verbose) do
-            if task_block
-              task_block.call(*[self, task_args].slice(0, task_block.arity))
-            end
+            yield(*[self, task_args].slice(0, task_block.arity)) if task_block
             run_task
           end
         end
@@ -32,16 +30,19 @@ module Pronto
       def run_task
         return if pull_id.nil? || pull_id == 'false'
 
-        client = Octokit::Client.new
-
         pull_request = client.pull_request(repo_slug, pull_id)
         formatter = ::Pronto::Formatter::GithubFormatter.new
 
-        ::Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
+        gem_names = ::Pronto::GemNames.new.to_a
+        gem_names.each { |gem_name| require "pronto/#{gem_name}" }
         ::Pronto.run(pull_request.base.sha, '.', formatter)
       end
 
       private
+
+      def client
+        Octokit::Client.new
+      end
 
       def pull_id
         ENV['TRAVIS_PULL_REQUEST']
