@@ -25,6 +25,12 @@ module Pronto
       @config_hash['max_warnings']
     end
 
+    def logger
+      @logger ||= begin
+        @config_hash['verbose'] ? Logger.new($stdout) : Logger.silent
+      end
+    end
+
     private
 
     def exclude

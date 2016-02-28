@@ -5,6 +5,7 @@ require 'forwardable'
 
 require 'pronto/gem_names'
 
+require 'pronto/logger'
 require 'pronto/config_file'
 require 'pronto/config'
 

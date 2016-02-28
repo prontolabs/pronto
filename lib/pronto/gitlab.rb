@@ -15,6 +15,7 @@ module Pronto
     end
 
     def create_commit_comment(comment)
+      @config.logger.log("Creating commit comment on #{comment.sha}")
       client.create_commit_comment(slug, comment.sha, comment.note,
                                    path: comment.path, line: comment.line,
                                    line_type: 'new')

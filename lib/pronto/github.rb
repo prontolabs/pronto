@@ -25,11 +25,13 @@ module Pronto
     end
 
     def create_commit_comment(comment)
+      @config.logger.log("Creating commit comment on #{comment.sha}")
       client.create_commit_comment(slug, comment.sha, comment.body,
                                    comment.path, nil, comment.position)
     end
 
     def create_pull_comment(comment)
+      @config.logger.log("Creating pull request comment on #{pull_id}")
       client.create_pull_comment(slug, pull_id, comment.body,
                                  pull_sha || comment.sha,
                                  comment.path, comment.position)

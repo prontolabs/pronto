@@ -21,13 +21,14 @@ module Pronto
         it { should == [1, 3] }
 
         context 'rejects excluded files' do
-          let(:config) { double(excluded_files: ['1']) }
+          before { config.stub(:excluded_files) { ['1'] } }
           let(:patches) { [double(new_file_full_path: 1)] }
           it { should be_empty }
         end
 
         context 'max warnings' do
-          let(:config) { double(max_warnings: 1, excluded_files: []) }
+          before { config.stub(:excluded_files) { [] } }
+          before { config.stub(:max_warnings) { 1 } }
           it { should == [1] }
         end
       end

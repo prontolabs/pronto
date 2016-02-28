@@ -18,7 +18,8 @@ module Pronto
       },
       'runners' => [],
       'formatters' => [],
-      'max_warnings' => nil
+      'max_warnings' => nil,
+      'verbose' => false
     }.freeze
 
     def initialize(path = '.pronto.yml')

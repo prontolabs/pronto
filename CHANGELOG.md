@@ -6,6 +6,7 @@
 
 * Added `-V/--verbose-version` option that displays Ruby version.
 * [#127](https://github.com/mmozuras/pronto/pull/127): ability to specify `max_warnings` via configuration or environment variable.
+* [#18](https://github.com/mmozuras/pronto/issues/18): ability to specify `verbose` via configuration, which can provide more output for debugging purposes.
 
 ### Changes
 
