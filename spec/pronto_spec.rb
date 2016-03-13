@@ -18,8 +18,12 @@ module Pronto
 
       context 'a single runner' do
         class Shakespeare
-          def run(patches, _)
-            patches.flat_map(&:added_lines).flat_map do |line|
+          def initialize(patches, _)
+            @patches = patches
+          end
+
+          def run
+            @patches.flat_map(&:added_lines).flat_map do |line|
               [new_message(line)] if no_more?(line)
             end
           end

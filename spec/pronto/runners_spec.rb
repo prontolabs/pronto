@@ -12,7 +12,10 @@ module Pronto
 
       context 'fake runner' do
         class FakeRunner
-          def run(_, _)
+          def initialize(_, _)
+          end
+
+          def run
             [1, nil, [3]]
           end
         end

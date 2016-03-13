@@ -13,7 +13,7 @@ module Pronto
       @runners.each do |runner|
         next if exceeds_max?(result)
         @config.logger.log("Running #{runner}")
-        result += runner.new.run(patches, patches.commit).flatten.compact
+        result += runner.new(patches, patches.commit).run.flatten.compact
       end
       result = result.take(@config.max_warnings) if @config.max_warnings
       result

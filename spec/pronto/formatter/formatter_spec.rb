@@ -49,7 +49,7 @@ module Pronto
         subject { Formatter.get(names) }
 
         context 'github and text' do
-          let(:names) { ['github', 'text'] }
+          let(:names) { %w(github text) }
 
           its(:count) { should == 2 }
           its(:first) { should be_an_instance_of GithubFormatter }
