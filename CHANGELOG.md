@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.0
+
 ### New features
 
 * Added `-V/--verbose-version` option that displays Ruby version.
