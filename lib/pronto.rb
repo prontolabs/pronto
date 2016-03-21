@@ -3,6 +3,7 @@ require 'octokit'
 require 'gitlab'
 require 'forwardable'
 require 'httparty'
+require 'rainbow'
 
 require 'pronto/gem_names'
 
@@ -25,6 +26,7 @@ require 'pronto/github'
 require 'pronto/gitlab'
 require 'pronto/bitbucket'
 
+require 'pronto/formatter/colorizable'
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
 require 'pronto/formatter/github_formatter'
