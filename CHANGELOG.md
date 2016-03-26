@@ -2,11 +2,16 @@
 
 ## Unreleased
 
+### New features
+
+* [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket formatter.
+* [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket pull request formatter.
+
 ## 0.6.0
 
 ### New features
 
-* Added `-V/--verbose-version` option that displays Ruby version.
+* Add `-V/--verbose-version` option that displays Ruby version.
 * [#127](https://github.com/mmozuras/pronto/pull/127): ability to specify `max_warnings` via configuration or environment variable.
 * [#18](https://github.com/mmozuras/pronto/issues/18): ability to specify `verbose` via configuration, which can provide more output for debugging purposes.
 * [#83](https://github.com/mmozuras/pronto/issues/83): support multiple formatters as an option to `pronto run`.
@@ -14,9 +19,9 @@
 ### Changes
 
 * `--version` only displays the version itself without any additional text.
-* Replaced `Pronto.gem_names` with `Pronto::GemNames.new.to_a`.
-* [#116](https://github.com/mmozuras/pronto/pull/116): improved GitHub formatter error output.
-* [#123](https://github.com/mmozuras/pronto/pull/126): added runner attribute to message initialization.
+* Replace `Pronto.gem_names` with `Pronto::GemNames.new.to_a`.
+* [#116](https://github.com/mmozuras/pronto/pull/116): improve GitHub formatter error output.
+* [#123](https://github.com/mmozuras/pronto/pull/126): add runner attribute to message initialization.
 * Runner expects to receive patches/commit via `initialize(patches, commit)`, instead of `run(patches, commit)`.
 
 ### Bugs fixed
