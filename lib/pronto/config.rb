@@ -4,7 +4,7 @@ module Pronto
       @config_hash = config_hash
     end
 
-    %w(github gitlab).each do |service|
+    %w(github gitlab bitbucket).each do |service|
       ConfigFile::EMPTY[service].each do |key, _|
         name = "#{service}_#{key}"
         define_method(name) { ENV[name.upcase] || @config_hash[service][key] }
@@ -19,6 +19,10 @@ module Pronto
 
     def github_hostname
       URI.parse(github_web_endpoint).host
+    end
+
+    def bitbucket_hostname
+      URI.parse(bitbucket_web_endpoint).host
     end
 
     def max_warnings

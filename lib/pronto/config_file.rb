@@ -16,6 +16,12 @@ module Pronto
         'api_private_token' => nil,
         'api_endpoint' => nil
       },
+      'bitbucket' => {
+        'slug' => nil,
+        'username' => nil,
+        'password' => nil,
+        'web_endpoint' => 'https://bitbucket.org/'
+      },
       'runners' => [],
       'formatters' => [],
       'max_warnings' => nil,
