@@ -182,6 +182,7 @@ Currently available:
 * [pronto-foodcritic](https://github.com/mmozuras/pronto-foodcritic)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
+* [pronto-json](https://github.com/deees/pronto-json)
 * [pronto-haml](https://github.com/mmozuras/pronto-haml)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
 * [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
