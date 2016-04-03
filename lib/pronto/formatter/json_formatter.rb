@@ -11,6 +11,7 @@ module Pronto
           result[:path] = message.path if message.path
           result[:line] = lineno if lineno
           result[:commit_sha] = message.commit_sha if message.commit_sha
+          result[:runner] = message.runner if message.runner
           result
         end.to_json
       end
