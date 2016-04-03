@@ -8,6 +8,7 @@ module Pronto
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { double(new_lineno: 1, commit_sha: nil) }
+        let(:runner) { Class }
 
         it do
           should ==
@@ -30,6 +31,15 @@ module Pronto
           it do
             should == '[{"level":"W","message":"careful","path":"path/to"},'\
               '{"level":"W","message":"careful","path":"path/to"}]'
+          end
+        end
+
+        context 'message with a runner' do
+          let(:message) { Message.new(nil, line, :warning, 'careful', nil, runner) }
+
+          it do
+            should == '[{"level":"W","message":"careful","line":1,"runner":"Class"},'\
+              '{"level":"W","message":"careful","line":1,"runner":"Class"}]'
           end
         end
       end
