@@ -203,6 +203,7 @@ Articles to help you to get started:
 * [Continuous Static Analysis using Pronto](http://codingfearlessly.com/2014/11/06/continuous-static-analysis/)
 * [Pronto and git hooks](http://elliotthilaire.net/gem-pronto-and-git-hooks/)
 * [How to end fruitless dev discussions about your project’s code style?](https://medium.com/appaloosa-store-engineering/how-to-end-fruitless-dev-discussions-about-your-project-s-code-style-245070bff6d4)
+* [Free automated code reviews using Pronto](https://hovancik.net/blog/2016/04/11/free-automated-code-reviews-using-pronto.html)
 
 Make a Pull Request to add something you wrote or found useful.
 
