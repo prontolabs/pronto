@@ -37,6 +37,14 @@ module Pronto
                                  comment.path, comment.position)
     end
 
+    def create_commit_status(status)
+      sha = pull_sha || status.sha
+      @config.logger.log("Creating comment status on #{sha}")
+      client.create_status(slug,
+                           sha,
+                           status.state, context: status.context, description: status.description)
+    end
+
     private
 
     def slug
@@ -79,6 +87,19 @@ module Pronto
 
     def pull_requests
       @pull_requests ||= client.pull_requests(slug)
+    end
+
+    Status = Struct.new(:sha, :state, :context, :description) do
+      def ==(other)
+        sha == other.sha &&
+          state == other.state &&
+          context == other.context &&
+          description == other.description
+      end
+
+      def to_s
+        "[#{sha}] #{context} #{state} - #{description}"
+      end
     end
 
     Comment = Struct.new(:sha, :body, :path, :position) do
