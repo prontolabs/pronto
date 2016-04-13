@@ -193,6 +193,7 @@ Currently available:
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
+* [pronto-credo](https://github.com/carakan/pronto-credo)
 
 ## Articles
 
