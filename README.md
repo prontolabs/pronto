@@ -176,6 +176,7 @@ Currently available:
 
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-credo](https://github.com/carakan/pronto-credo)
 * [pronto-eslint](https://github.com/mmozuras/pronto-eslint)
 * [pronto-fasterer](https://github.com/mmozuras/pronto-fasterer)
 * [pronto-flay](https://github.com/mmozuras/pronto-flay)
@@ -193,7 +194,6 @@ Currently available:
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
-* [pronto-credo](https://github.com/carakan/pronto-credo)
 
 ## Articles
 
