@@ -3,10 +3,6 @@ require_relative 'github_status_formatter/status_builder'
 module Pronto
   module Formatter
     class GithubStatusFormatter
-      def initialize(opts = {})
-        @level_mapping ||= opts.fetch(:level_mapping, {})
-      end
-
       def format(messages, repo, _)
         client = Github.new(repo)
         head = repo.head_commit_sha
@@ -21,7 +17,7 @@ module Pronto
       private
 
       def create_status(client, sha, runner, messages)
-        builder = StatusBuilder.new(messages, @level_mapping.fetch(runner, {}))
+        builder = StatusBuilder.new(messages)
         status = Github::Status.new(sha, builder.state, runner.name, builder.description)
 
         client.create_commit_status(status)
