@@ -21,7 +21,7 @@ module Pronto
       private
 
       def create_status(client, sha, runner, messages)
-        builder = StatusBuilder.new(messages, @level_mapping)
+        builder = StatusBuilder.new(messages, @level_mapping.fetch(runner, {}))
         status = Github::Status.new(sha, builder.state, runner.name, builder.description)
 
         client.create_commit_status(status)

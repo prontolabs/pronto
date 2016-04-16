@@ -4,10 +4,9 @@ module Pronto
   module Formatter
     class GithubStatusFormatter
       class StatusBuilder
-        def initialize(messages, level_mapping)
+        def initialize(messages, runner_level_mapping)
           @messages = messages
-          @level_mapping = level_mapping
-          @cached_lm = {}
+          @level_mapping = DEFAULT_LEVEL_TO_STATE_MAPPING.merge(runner_level_mapping)
         end
 
         def description
@@ -30,11 +29,7 @@ module Pronto
         end
 
         def message_state(message)
-          level_mapping(message.runner)[message.level]
-        end
-
-        def level_mapping(runner)
-          @cached_lm[runner] ||= DEFAULT_LEVEL_TO_STATE_MAPPING.merge(@level_mapping[runner] || {})
+          @level_mapping[message.level]
         end
 
         def map_description
