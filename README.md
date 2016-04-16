@@ -103,13 +103,21 @@ or, if you want comments to appear on pull request diff, instead of commit:
 $ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin/master
 ```
 
+Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
+
+```sh
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
+```
+
 As an alternative, you can also set up a rake task:
 
 ```ruby
 Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
 
 formatter = Pronto::Formatter::GithubFormatter.new # or GithubPullRequestFormatter
-Pronto.run('origin/master', '.', formatter)
+status_formatter = Pronto::Formatter::GithubStatusFormatter.new
+formatters = [formatter, status_formatter]
+Pronto.run('origin/master', '.', formatters)
 ```
 
 ### GitLab Integration

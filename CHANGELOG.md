@@ -7,6 +7,7 @@
 * [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket formatter.
 * [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket pull request formatter.
 * [#134](https://github.com/mmozuras/pronto/pull/134): colorize text formatter.
+* [#144](https://github.com/mmozuras/pronto/pull/144): add GitHub status formatter.
 
 ## 0.6.0
 
