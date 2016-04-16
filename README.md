@@ -7,7 +7,7 @@
 [![Inline docs](http://inch-ci.org/github/mmozuras/pronto.png)](http://inch-ci.org/github/mmozuras/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
-be used on [pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration).
+be used on [pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
 Perfect if want to find out quickly if branch introduces changes that conform
 to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](https://github.com/mmozuras/pronto-flay), [don't introduce security holes](https://github.com/mmozuras/pronto-brakeman) and [more](#runners).
 
@@ -18,6 +18,7 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
     * [Local Changes](#local-changes)
     * [GitHub Integration](#github-integration)
     * [GitLab Integration](#gitlab-integration)
+    * [Bitbucket Integration](#bitbucket-integration)
 * [Configuration](#configuration)
 * [Runners](#runners)
 * [Articles](#articles)
@@ -100,7 +101,7 @@ $ GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
 or, if you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_pr -c origin/master
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
@@ -131,13 +132,26 @@ Then just run it:
 $ GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
-As an alternative, you can also set up a rake task:
+### Bitbucket Integration
 
-```ruby
-Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
+You can run Pronto as a step of your CI builds and get the results as comments
+on Bitbucket commits using `BitbucketFormatter` or `BitbucketPullRequestFormatter`.
 
-formatter = Pronto::Formatter::GitlabFormatter.new
-Pronto.run('origin/master', '.', formatter)
+Add Pronto runners you want to use to your Gemfile:
+
+Set the BITBUCKET_USERNAME and BITBUCKET_PASSWORD environment variables or values in `.pronto.yml`.
+.
+
+Then just run it:
+
+```sh
+$ BITBUCKET_USERNAME=user BITBUCKET_PASSWORD=pass pronto run -f bitbucket -c origin/master
+```
+
+or, if you want comments to appear on pull request diff, instead of commit:
+
+```sh
+$ BITBUCKET_USERNAME=user BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
 ```
 
 ## Configuration
@@ -160,6 +174,11 @@ gitlab:
   slug: mmozuras/42
   api_private_token: 46751
   api_endpoint: https://api.vinted.com/gitlab
+bitbucket:
+  slug: mmozuras/pronto
+  username: user
+  password: pass
+  web_endpoint: https://bitbucket.org/
 max_warnings: 150
 verbose: false
 ```
