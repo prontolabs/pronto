@@ -157,8 +157,8 @@ github:
   api_endpoint: https://api.github.com/
   web_endpoint: https://github.com/
 gitlab:
-  slug: mmozuras/pronto,
-  api_private_token: 46751,
+  slug: mmozuras/42
+  api_private_token: 46751
   api_endpoint: https://api.vinted.com/gitlab
 max_warnings: 150
 verbose: false
