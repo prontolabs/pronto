@@ -44,7 +44,7 @@ module Pronto
 
       def status_description(messages)
         desc = map_description(messages)
-        desc.empty? ? 'Coast is clear!' : "Found #{desc}."
+        desc.empty? ? NO_ISSUES_DESCRIPTION : "Found #{desc}."
       end
 
       def map_description(messages)
@@ -79,7 +79,9 @@ module Pronto
         fatal: :failure
       }.freeze
 
-      private_constant :DEFAULT_LEVEL_TO_STATE_MAPPING
+      NO_ISSUES_DESCRIPTION = 'Coast is clear!'.freeze
+
+      private_constant :DEFAULT_LEVEL_TO_STATE_MAPPING, :NO_ISSUES_DESCRIPTION
     end
   end
 end
