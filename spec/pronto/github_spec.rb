@@ -67,5 +67,54 @@ module Pronto
         end
       end
     end
+
+    describe '#create_commit_status' do
+      subject { github.create_commit_status(status) }
+
+      let(:octokit_client) { double(Octokit::Client) }
+      let(:status) { Pronto::Github::Status.new(sha, state, context, description) }
+      let(:state) { :success }
+      let(:context) { :pronto }
+      let(:description) { 'No issues found!' }
+
+      before do
+        github.instance_variable_set(:@client, octokit_client)
+
+        octokit_client
+          .should_receive(:create_status)
+          .with('mmozuras/pronto', expected_sha, state, context: context, description: description)
+          .once
+      end
+      after { ENV.delete('PULL_REQUEST_ID') }
+
+      context 'uses PULL_REQUEST_ID to create commit status' do
+        let(:pull_request_sha) { '123456' }
+        let(:expected_sha) { pull_request_sha }
+
+        before { ENV['PULL_REQUEST_ID'] = '10' }
+
+        specify do
+          octokit_client
+            .should_receive(:pull_requests)
+            .once
+            .and_return([{ number: 10, head: { sha: pull_request_sha } }])
+
+          subject
+        end
+      end
+
+      context 'adds status to commit with sha' do
+        let(:expected_sha) { sha }
+
+        before { ENV.delete('PULL_REQUEST_ID') }
+
+        specify do
+          octokit_client
+            .should_not_receive(:pull_requests)
+
+          subject
+        end
+      end
+    end
   end
 end
