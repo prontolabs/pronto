@@ -1,10 +1,12 @@
 require_relative 'sentence'
+require_relative 'inflector'
 
 module Pronto
   module Formatter
     class GithubStatusFormatter
       class StatusBuilder
-        def initialize(messages)
+        def initialize(runner, messages)
+          @runner = runner
           @messages = messages
         end
 
@@ -15,6 +17,10 @@ module Pronto
 
         def state
           failure? ? :failure : :success
+        end
+
+        def context
+          Inflector.underscore(@runner.name)
         end
 
         private

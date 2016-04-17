@@ -10,13 +10,14 @@ module Pronto
         let(:runner_class) do
           Class.new do
             def self.name
-              'FakeRunner'
+              'Pronto::FakeRunner'
             end
           end
         end
         let(:message) { Pronto::Message.new('app/path', nil, level, '', sha, runner_class) }
         let(:sha) { '64dadfdb7c7437476782e8eb024085862e6287d6' }
-        let(:expected_status) { Github::Status.new(sha, expected_state, runner_class.name, expected_description) }
+        let(:expected_status) { Github::Status.new(sha, expected_state, expected_context, expected_description) }
+        let(:expected_context) { 'pronto/fake_runner' }
 
         let(:messages) { [message, message] }
 
