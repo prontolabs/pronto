@@ -109,6 +109,13 @@ Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/12
 $ GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
 ```
 
+It's possible to combine multiple formatters.
+To get both pull request comments and commit status summary use:
+
+```sh
+$ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
+```
+
 As an alternative, you can also set up a rake task:
 
 ```ruby
