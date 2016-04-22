@@ -10,6 +10,7 @@ module Pronto
         let(:messages) { [message, message] }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { double(new_lineno: 1, commit_sha: '123') }
+        let(:runner) { double(to_s: 'Pronto::RunnerName') }
 
         its(:count) { should == 2 }
         its(:first) { should == 'path/to:1 W: crucial' }
@@ -42,6 +43,11 @@ module Pronto
           its(:first) { should == 'W: careful' }
         end
 
+        context 'message with runner' do
+          let(:message) { Message.new(nil, nil, :warning, 'careful', nil, runner) }
+          its(:first) { should == 'RunnerName/W: careful' }
+        end
+
         context 'in TTY' do
           before { $stdout.stub(:tty?) { true } }
 
@@ -68,6 +74,11 @@ module Pronto
 
             its(:count) { should == 2 }
             its(:first) { should == "\e[35mW\e[0m: careful" }
+          end
+
+          context 'message with runner' do
+            let(:message) { Message.new(nil, nil, :warning, 'careful', nil, runner) }
+            its(:first) { should == "RunnerName/\e[35mW\e[0m: careful" }
           end
 
           context 'info message' do
