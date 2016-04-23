@@ -10,6 +10,7 @@ rvm:
 
 after_success:
 - >
-  [ "${TRAVIS_PULL_REQUEST}" = "false" ] || [ "${TRAVIS_RUBY_VERSION}" = "1.9.3" ] &&
+  [ "${TRAVIS_PULL_REQUEST}" != "false" ] &&
+  [ "${TRAVIS_RUBY_VERSION}" = "1.9.3" ] &&
     PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
       bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
