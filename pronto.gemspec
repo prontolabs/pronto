@@ -52,4 +52,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec-expectations', '~> 3.4')
   s.add_development_dependency('bundler', '~> 1.3')
   s.add_development_dependency('simplecov', '~> 0.11')
+  s.add_development_dependency('rubocop', '~> 0.39.0')
+  s.add_development_dependency('pronto-rubocop', '~> 0.6.2')
 end
