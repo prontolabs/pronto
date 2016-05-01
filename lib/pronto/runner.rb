@@ -23,7 +23,7 @@ module Pronto
     end
 
     def repo_path
-      ruby_patches.first.repo.path
+      @patches.first.repo.path
     end
 
     private
