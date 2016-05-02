@@ -9,6 +9,10 @@
 * [#134](https://github.com/mmozuras/pronto/pull/134): colorize text formatter.
 * [#144](https://github.com/mmozuras/pronto/pull/144): add GitHub status formatter.
 
+### Bugs fixed
+
+* [#153](https://github.com/mmozuras/pronto/pull/153): correctly get repo_path.
+
 ## 0.6.0
 
 ### New features
