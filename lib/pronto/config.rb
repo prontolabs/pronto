@@ -11,6 +11,10 @@ module Pronto
       end
     end
 
+    def consolidate_comments?
+      !@config_hash['consolidate_comments'].nil?
+    end
+
     def excluded_files
       @excluded_files ||= Array(exclude)
         .flat_map { |path| Dir[path.to_s] }
