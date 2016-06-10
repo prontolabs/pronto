@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 module Pronto
   module Formatter
     class GithubFormatter
