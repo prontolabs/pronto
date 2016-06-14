@@ -8,6 +8,7 @@
 * [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket pull request formatter.
 * [#134](https://github.com/mmozuras/pronto/pull/134): colorize text formatter.
 * [#144](https://github.com/mmozuras/pronto/pull/144): add GitHub status formatter.
+* [#157](https://github.com/mmozuras/pronto/pull/157): ability to run pronto CLI from within subdirectories of a git repository.
 
 ### Bugs fixed
 
