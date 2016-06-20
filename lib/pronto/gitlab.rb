@@ -27,10 +27,10 @@ module Pronto
       return @config.gitlab_slug if @config.gitlab_slug
       @slug ||= begin
         slug = @repo.remote_urls.map do |url|
-          match = if url =~ /^ssh:\/\//
-                    /.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git/.match(url)
+          match = if url =~ %r{^ssh:\/\/}
+                    %r{.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git}.match(url)
                   else
-                    /.*#{host}(:|\/)(?<slug>.*).git/.match(url)
+                    %r{.*#{host}(:|\/)(?<slug>.*).git}.match(url)
                   end
           match[:slug] if match
         end.compact.first

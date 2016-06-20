@@ -1,19 +1,19 @@
 class BitbucketClient
   include HTTParty
-  base_uri "https://api.bitbucket.org/1.0"
+  base_uri 'https://api.bitbucket.org/1.0'
 
   def initialize(username, password)
     @credentials = { username: username, password: password }
     @headers = { basic_auth: @credentials }
   end
 
-  def commit_comments(slug, sha, options={})
+  def commit_comments(slug, sha, options = {})
     options.merge!(@headers)
     response = self.class.get("/repositories/#{slug}/changesets/#{sha}/comments", options)
     openstruct(response.parsed_response)
   end
 
-  def create_commit_comment(slug, sha, body, path, position, runner = nil, commit_sha = nil, options={})
+  def create_commit_comment(slug, sha, body, path, position, runner = nil, commit_sha = nil, options = {})
     options.merge!(@headers)
     options[:body] = {
       content: body,
@@ -23,13 +23,13 @@ class BitbucketClient
     self.class.post("/repositories/#{slug}/changesets/#{sha}/comments", options)
   end
 
-  def pull_comments(slug, pr_id, options={})
+  def pull_comments(slug, pr_id, options = {})
     options.merge!(@headers)
     response = self.class.get("/repositories/#{slug}/pullrequests/#{pr_id}/comments", options)
     openstruct(response.parsed_response)
   end
 
-  def pull_requests(slug, options={})
+  def pull_requests(slug, options = {})
     options.merge!(@headers)
     response = self.class.get("https://api.bitbucket.org/2.0/repositories/#{slug}/pullrequests?state=OPEN", options)
     openstruct(response.parsed_response['values'])
