@@ -53,7 +53,7 @@ module Pronto
       messages = Dir.chdir(repo_workdir) do
         ::Pronto.run(commit, '.', formatters, path)
       end
-      exit(messages.count) if options[:'exit-code']
+      exit(1) if options[:'exit-code'] && messages.any? { |m| m.level != :info }
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
     end
