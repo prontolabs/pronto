@@ -10,6 +10,10 @@
 * [#144](https://github.com/mmozuras/pronto/pull/144): add GitHub status formatter.
 * [#157](https://github.com/mmozuras/pronto/pull/157): ability to run pronto CLI from within subdirectories of a git repository.
 
+### Changes
+
+* [#162](https://github.com/mmozuras/pronto/pull/162): don't count info messages for error exit code.
+
 ### Bugs fixed
 
 * [#153](https://github.com/mmozuras/pronto/pull/153): correctly get repo_path.
