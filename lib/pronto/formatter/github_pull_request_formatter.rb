@@ -1,12 +1,16 @@
+require 'pronto/formatter/github_formatter/comment_builder'
+
 module Pronto
   module Formatter
     class GithubPullRequestFormatter
+      include Pronto::Formatter::GithubFormatter::CommentBuilder
+
       def format(messages, repo, patches)
         client = Github.new(repo)
         head = repo.head_commit_sha
 
         commit_messages = messages.uniq.map do |message|
-          body = message.msg
+          body = comment_from_message(message)
           path = message.path
           line = patches.find_line(message.full_path, message.line.new_lineno)
 
