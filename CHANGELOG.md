@@ -9,6 +9,7 @@
 * [#134](https://github.com/mmozuras/pronto/pull/134): colorize text formatter.
 * [#144](https://github.com/mmozuras/pronto/pull/144): add GitHub status formatter.
 * [#157](https://github.com/mmozuras/pronto/pull/157): ability to run pronto CLI from within subdirectories of a git repository.
+* [#154](https://github.com/mmozuras/pronto/pull/154): add an option to consolidate pull request comments.
 
 ### Changes
 
