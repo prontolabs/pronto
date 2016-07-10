@@ -10,8 +10,7 @@ module Pronto
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.body, comment.path,
-                      comment.position || comment.original_position)
+          Comment.new(sha, comment.body, comment.path, comment.position)
         end
       end
     end
