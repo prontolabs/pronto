@@ -3,10 +3,13 @@ module Pronto
     let(:bitbucket) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@bitbucket.org:mmozuras/pronto.git'], branch: nil)
+      double(remote_urls: ['git@bitbucket.org:mmozuras/pronto.git'],
+             branch: nil)
     end
     let(:sha) { '61e4bef' }
-    let(:comment) { double(content: 'note', filename: 'path', line_to: 1, position: 1) }
+    let(:comment) do
+      double(content: 'note', filename: 'path', line_to: 1, position: 1)
+    end
 
     describe '#slug' do
       let(:repo) { double(remote_urls: ['git@bitbucket.org:mmozuras/pronto']) }
