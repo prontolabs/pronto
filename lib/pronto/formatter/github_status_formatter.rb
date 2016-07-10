@@ -18,7 +18,7 @@ module Pronto
 
       def create_status(client, sha, runner, messages)
         builder = StatusBuilder.new(runner, messages)
-        status = Github::Status.new(sha, builder.state, builder.context, builder.description)
+        status = Status.new(sha, builder.state, builder.context, builder.description)
 
         client.create_commit_status(status)
       end

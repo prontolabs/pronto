@@ -72,17 +72,18 @@ module Pronto
       subject { github.create_commit_status(status) }
 
       let(:octokit_client) { double(Octokit::Client) }
-      let(:status) { Pronto::Github::Status.new(sha, state, context, description) }
+      let(:status) { Status.new(sha, state, context, desc) }
       let(:state) { :success }
       let(:context) { :pronto }
-      let(:description) { 'No issues found!' }
+      let(:desc) { 'No issues found!' }
 
       before do
         github.instance_variable_set(:@client, octokit_client)
 
         octokit_client
           .should_receive(:create_status)
-          .with('mmozuras/pronto', expected_sha, state, context: context, description: description)
+          .with('mmozuras/pronto', expected_sha, state,
+                context: context, description: desc)
           .once
       end
       after { ENV.delete('PULL_REQUEST_ID') }
