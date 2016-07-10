@@ -39,7 +39,7 @@ module Pronto
           double(remote_urls: ['git@gitlab.example.com:mmozuras/pronto.git'])
         end
         let(:sha) { 'foobar' }
-        let(:comment) { double(body: 'body', path: 'path', position: 1) }
+        let(:comment) { double(note: 'body', path: 'path', line: 1) }
 
         specify do
           ENV['GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v3'

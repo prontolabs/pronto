@@ -20,6 +20,7 @@ require 'pronto/git/line'
 
 require 'pronto/plugin'
 require 'pronto/message'
+require 'pronto/comment'
 require 'pronto/runner'
 require 'pronto/runners'
 require 'pronto/github'

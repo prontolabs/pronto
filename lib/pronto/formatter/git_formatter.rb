@@ -45,15 +45,13 @@ module Pronto
       end
 
       def consolidate_comments(comments)
-        result = comments.first
+        comment = comments.first
         if comments.length > 1
           joined_body = join_comments(comments)
-          result = client_module::Comment.new(result.sha,
-                                              joined_body,
-                                              result.path,
-                                              result.position)
+          Comment.new(comment.sha, joined_body, comment.path, comment.position)
+        else
+          comment
         end
-        result
       end
 
       def dedupe_comments(existing, comments)
@@ -70,7 +68,7 @@ module Pronto
         path = message.path
         lineno = line_number(message)
 
-        client_module::Comment.new(sha, body, path, lineno)
+        Comment.new(sha, body, path, lineno)
       end
 
       def new_comments(messages, patches, sha)
