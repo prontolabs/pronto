@@ -43,7 +43,7 @@ module Pronto
       @slug ||= begin
         @repo.remote_urls.map do |url|
           hostname = Regexp.escape(@config.bitbucket_hostname)
-          match = /.*#{hostname}(:|\/)(?<slug>.*?)(?:\.git)?\z/.match(url)
+          match = %r{.*#{hostname}(:|\/)(?<slug>.*?)(?:\.git)?\z}.match(url)
           match[:slug] if match
         end.compact.first
       end
