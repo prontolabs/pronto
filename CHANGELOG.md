@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changes
+
+* Remove support for Ruby 1.9.3.
+
 
 ## 0.7.0
 
