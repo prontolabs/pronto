@@ -35,10 +35,13 @@ module Pronto
         end
 
         context 'message with a runner' do
-          let(:message) { Message.new(nil, line, :warning, 'careful', nil, runner) }
+          let(:message) do
+            Message.new(nil, line, :warning, 'careful', nil, runner)
+          end
 
           it do
-            should == '[{"level":"W","message":"careful","line":1,"runner":"Class"},'\
+            should ==
+              '[{"level":"W","message":"careful","line":1,"runner":"Class"},'\
               '{"level":"W","message":"careful","line":1,"runner":"Class"}]'
           end
         end

@@ -14,7 +14,9 @@ module Pronto
             end
           end
         end
-        let(:message) { Pronto::Message.new('app/path', nil, level, '', sha, runner_class) }
+        let(:message) do
+          Pronto::Message.new('app/path', nil, level, '', sha, runner_class)
+        end
         let(:sha) { '64dadfdb7c7437476782e8eb024085862e6287d6' }
         let(:status) { Status.new(sha, state, context, description) }
         let(:context) { 'pronto/fake_runner' }
@@ -73,7 +75,9 @@ module Pronto
         context 'when has multiple messages' do
           let(:level) { :warning }
           let(:level2) { :error }
-          let(:message2) { Pronto::Message.new('app/path', nil, level2, '', sha, runner_class) }
+          let(:message2) do
+            Pronto::Message.new('app/path', nil, level2, '', sha, runner_class)
+          end
 
           let(:state) { :failure }
           let(:description) { 'Found 1 warning and 1 error.' }

@@ -14,7 +14,8 @@ module Pronto
               'access_token' => nil,
               'api_endpoint' => 'https://api.github.com/',
               'web_endpoint' => 'https://github.com/'
-            })
+            }
+          )
         end
         it do
           should include(
@@ -22,7 +23,8 @@ module Pronto
               'slug' => nil,
               'api_private_token' => nil,
               'api_endpoint' => nil
-            })
+            }
+          )
         end
         it { should include('runners' => []) }
         it { should include('formatters' => []) }

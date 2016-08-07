@@ -32,7 +32,6 @@ module Pronto
     def create_pull_comment(comment)
       @config.logger.log("Creating pull request comment on #{pull_id}")
       client.create_pull_comment(slug, pull_id, comment.body,
-                                 pull_sha || comment.sha,
                                  comment.path, comment.position)
     end
 
@@ -60,10 +59,6 @@ module Pronto
 
     def env_pull_id
       ENV['PULL_REQUEST_ID']
-    end
-
-    def pull_sha
-      pull.source['commit']['hash'] if pull
     end
 
     def pull
