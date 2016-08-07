@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+
+## 0.7.0
+
 ### New features
 
 * [#135](https://github.com/mmozuras/pronto/pull/135): add Bitbucket formatter.
