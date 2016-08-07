@@ -226,6 +226,7 @@ Currently available:
 * [pronto-reek](https://github.com/mmozuras/pronto-reek)
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
+* [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
