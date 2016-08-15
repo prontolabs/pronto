@@ -40,7 +40,7 @@ module Pronto
       return false if File.directory?(path)
       line = File.open(path, &:readline)
       line =~ /#!.*ruby/
-    rescue ArgumentError, EOFError
+    rescue ArgumentError, EOFError, Errno::ENOENT
       false
     end
   end
