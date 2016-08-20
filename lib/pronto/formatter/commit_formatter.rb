@@ -6,7 +6,7 @@ module Pronto
         grouped_comments(comments)
       end
 
-      def line_number(message)
+      def line_number(message, _)
         message.line.new_lineno
       end
 

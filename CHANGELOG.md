@@ -6,6 +6,10 @@
 
 * Remove support for Ruby 1.9.3.
 
+## Bugs fixed
+
+* [#149](https://github.com/mmozuras/pronto/issues/149): Use patches to correctly find line position for GitHub pull request formatter.
+
 
 ## 0.7.0
 

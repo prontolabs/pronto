@@ -9,7 +9,7 @@ module Pronto
         'GitLab'
       end
 
-      def line_number(message)
+      def line_number(message, _)
         message.line.commit_line.new_lineno
       end
     end

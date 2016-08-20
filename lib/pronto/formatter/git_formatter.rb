@@ -63,10 +63,10 @@ module Pronto
         comments.map { |comment| "- #{comment.body}" }.join("\n")
       end
 
-      def new_comment(message, _patches, sha)
+      def new_comment(message, patches, sha)
         body = message.msg
         path = message.path
-        lineno = line_number(message)
+        lineno = line_number(message, patches)
 
         Comment.new(sha, body, path, lineno)
       end

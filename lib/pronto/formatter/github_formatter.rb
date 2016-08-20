@@ -9,8 +9,8 @@ module Pronto
         'GitHub'
       end
 
-      def line_number(message)
-        message.line.commit_line.position
+      def line_number(message, _)
+        message.line.commit_line.position if message.line
       end
     end
   end
