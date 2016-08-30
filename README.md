@@ -242,6 +242,7 @@ Articles to help you to get started:
 * [Pronto and git hooks](http://elliotthilaire.net/gem-pronto-and-git-hooks/)
 * [How to end fruitless dev discussions about your project’s code style?](https://medium.com/appaloosa-store-engineering/how-to-end-fruitless-dev-discussions-about-your-project-s-code-style-245070bff6d4)
 * [Free automated code reviews using Pronto](https://hovancik.net/blog/2016/04/11/free-automated-code-reviews-using-pronto.html)
+* [Automated Elixir code review with Github, Credo and Travis CI](https://medium.com/fazibear/automated-elixir-code-review-with-github-credo-and-travis-ci-986cd56b8f02)
 
 Make a Pull Request to add something you wrote or found useful.
 
