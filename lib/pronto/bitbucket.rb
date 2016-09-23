@@ -65,7 +65,9 @@ module Pronto
       @pull ||= if env_pull_id
                   pull_requests.find { |pr| pr.id.to_i == env_pull_id.to_i }
                 elsif @repo.branch
-                  pull_requests.find { |pr| pr.branch['name'] == @repo.branch }
+                  pull_requests.find do |pr|
+                    pr.source['branch']['name'] == @repo.branch
+                  end
                 end
     end
 
