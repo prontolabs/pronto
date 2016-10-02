@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+## Bugs fixed
+
+* [#179](https://github.com/mmozuras/pronto/pull/179): correctly select branch name for fix Bitbucket pull request formatter.
+
 ## 0.7.1
 
 ### Changes
@@ -8,7 +14,7 @@
 
 ## Bugs fixed
 
-* [#149](https://github.com/mmozuras/pronto/issues/149): Use patches to correctly find line position for GitHub pull request formatter.
+* [#149](https://github.com/mmozuras/pronto/issues/149): use patches to correctly find line position for GitHub pull request formatter.
 
 ## 0.7.0
 
