@@ -12,7 +12,8 @@ module Pronto
     end
 
     def consolidate_comments?
-      !@config_hash['consolidate_comments'].nil?
+      consolidated = ENV['CONSOLIDATE_COMMENTS'] || @config_hash['consolidate_comments']
+      !(consolidated).nil?
     end
 
     def excluded_files
@@ -30,19 +31,20 @@ module Pronto
     end
 
     def max_warnings
-      @config_hash['max_warnings']
+      ENV['MAX_WARNINGS'] || @config_hash['max_warnings']
     end
 
     def logger
       @logger ||= begin
-        @config_hash['verbose'] ? Logger.new($stdout) : Logger.silent
+        verbose = ENV['VERBOSE'] || @config_hash['verbose']
+        verbose ? Logger.new($stdout) : Logger.silent
       end
     end
 
     private
 
     def exclude
-      @config_hash['all']['exclude']
+      ENV['EXCLUDE'] || @config_hash['all']['exclude']
     end
   end
 end
