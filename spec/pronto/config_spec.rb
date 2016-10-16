@@ -7,7 +7,7 @@ module Pronto
       subject { config.github_slug }
 
       context 'from env variable' do
-        before { stub_const('ENV', 'GITHUB_SLUG' => 'mmozuras/pronto') }
+        before { stub_const('ENV', 'PRONTO_GITHUB_SLUG' => 'mmozuras/pronto') }
         it { should == 'mmozuras/pronto' }
       end
 
@@ -21,7 +21,7 @@ module Pronto
       subject { config.github_web_endpoint }
 
       context 'from env variable' do
-        before { stub_const('ENV', 'GITHUB_WEB_ENDPOINT' => '4.2.2.2') }
+        before { stub_const('ENV', 'PRONTO_GITHUB_WEB_ENDPOINT' => '4.2.2.2') }
         it { should == '4.2.2.2' }
       end
 
@@ -46,7 +46,7 @@ module Pronto
       subject { config.gitlab_slug }
 
       context 'from env variable' do
-        before { stub_const('ENV', 'GITLAB_SLUG' => 'rick/deckard') }
+        before { stub_const('ENV', 'PRONTO_GITLAB_SLUG' => 'rick/deckard') }
         it { should == 'rick/deckard' }
       end
 

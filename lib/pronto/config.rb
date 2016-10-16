@@ -7,12 +7,12 @@ module Pronto
     %w(github gitlab bitbucket).each do |service|
       ConfigFile::EMPTY[service].each do |key, _|
         name = "#{service}_#{key}"
-        define_method(name) { ENV[name.upcase] || @config_hash[service][key] }
+        define_method(name) { ENV["PRONTO_#{name.upcase}"] || @config_hash[service][key] }
       end
     end
 
     def consolidate_comments?
-      consolidated = ENV['CONSOLIDATE_COMMENTS'] || @config_hash['consolidate_comments']
+      consolidated = ENV['PRONTO_CONSOLIDATE_COMMENTS'] || @config_hash['consolidate_comments']
       !(consolidated).nil?
     end
 
@@ -31,12 +31,12 @@ module Pronto
     end
 
     def max_warnings
-      ENV['MAX_WARNINGS'] || @config_hash['max_warnings']
+      ENV['PRONTO_MAX_WARNINGS'] || @config_hash['max_warnings']
     end
 
     def logger
       @logger ||= begin
-        verbose = ENV['VERBOSE'] || @config_hash['verbose']
+        verbose = ENV['PRONTO_VERBOSE'] || @config_hash['verbose']
         verbose ? Logger.new($stdout) : Logger.silent
       end
     end
@@ -44,7 +44,7 @@ module Pronto
     private
 
     def exclude
-      ENV['EXCLUDE'] || @config_hash['all']['exclude']
+      ENV['PRONTO_EXCLUDE'] || @config_hash['all']['exclude']
     end
   end
 end

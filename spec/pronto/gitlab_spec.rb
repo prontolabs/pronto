@@ -5,8 +5,8 @@ module Pronto
     describe '#slug' do
       subject { gitlab.send(:slug) }
       before(:each) do
-        ENV['GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v3'
-        ENV['GITLAB_API_PRIVATE_TOKEN'] = 'token'
+        ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v3'
+        ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
       end
 
       context 'ssh with port remote url' do
@@ -42,8 +42,8 @@ module Pronto
         let(:comment) { double(note: 'body', path: 'path', line: 1) }
 
         specify do
-          ENV['GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v3'
-          ENV['GITLAB_API_PRIVATE_TOKEN'] = 'token'
+          ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v3'
+          ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
 
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
