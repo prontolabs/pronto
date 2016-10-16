@@ -2,7 +2,11 @@
 
 ## Unreleased
 
-## Bugs fixed
+### Changes
+
+* [#181](https://github.com/mmozuras/pronto/pull/181): add ENV variables for all configuration options.
+
+### Bugs fixed
 
 * [#179](https://github.com/mmozuras/pronto/pull/179): correctly select branch name for fix Bitbucket pull request formatter.
 
@@ -12,7 +16,7 @@
 
 * Remove support for Ruby 1.9.3.
 
-## Bugs fixed
+### Bugs fixed
 
 * [#149](https://github.com/mmozuras/pronto/issues/149): use patches to correctly find line position for GitHub pull request formatter.
 
