@@ -18,6 +18,10 @@ module Pronto
 
       context 'a single runner' do
         class Shakespeare
+          def self.title
+            'shakespeare'
+          end
+
           def initialize(patches, _)
             @patches = patches
           end

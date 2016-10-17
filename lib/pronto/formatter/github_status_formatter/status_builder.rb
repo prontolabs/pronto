@@ -1,5 +1,4 @@
 require_relative 'sentence'
-require_relative 'inflector'
 
 module Pronto
   module Formatter
@@ -20,7 +19,7 @@ module Pronto
         end
 
         def context
-          Inflector.underscore(@runner.name)
+          "pronto/#{@runner.title}"
         end
 
         private

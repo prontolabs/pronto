@@ -74,13 +74,13 @@ Just run `pronto` without any arguments to see what Pronto is capable of.
 
 Available Options
 
-Command flag     | Description
------------------|------------------------------------------------------------
-`--exit-code`    | Exits with non-zero code if there were any warnings/errors.
-`-c/--commit`    | Commit for the diff.
-`-i/--index`     | Analyze changes in git index (staging area).
-`-r/--runner`    | Run only the passed runners.
-`-f/--formatters`| Pick output formatters.
+| Command flag      | Description                                                 |
+|:------------------|:------------------------------------------------------------|
+| `--exit-code`     | Exits with non-zero code if there were any warnings/errors. |
+| `-c/--commit`     | Commit for the diff.                                        |
+| `-i/--index`      | Analyze changes in git index (staging area).                |
+| `-r/--runner`     | Run only the passed runners.                                |
+| `-f/--formatters` | Pick output formatters.                                     |
 
 ### GitHub Integration
 
@@ -180,6 +180,10 @@ The file has the following format:
 all:
   exclude:
     - 'spec/**/*'
+# exclude files for single runner
+eslint:
+  exclude:
+    - 'app/assets/**/*'
 github:
   slug: mmozuras/pronto
   access_token: B26354
