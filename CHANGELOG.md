@@ -5,6 +5,7 @@
 ### Changes
 
 * [#181](https://github.com/mmozuras/pronto/pull/181): add ENV variables for all configuration options.
+* [#184](https://github.com/mmozuras/pronto/pull/184): prefix all ENV variables with `PRONTO_`.
 
 ### Bugs fixed
 
