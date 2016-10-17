@@ -1,8 +1,8 @@
 module Pronto
   module Formatter
     describe GitlabFormatter do
-      ENV['GITLAB_API_ENDPOINT'] = 'http://example.com/api/v3'
-      ENV['GITLAB_API_PRIVATE_TOKEN'] = 'token'
+      ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://example.com/api/v3'
+      ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
 
       let(:formatter) { described_class.new }
 
