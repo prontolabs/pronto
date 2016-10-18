@@ -12,8 +12,10 @@ module Pronto
     end
 
     def consolidate_comments?
-      consolidated = ENV['PRONTO_CONSOLIDATE_COMMENTS'] || @config_hash['consolidate_comments']
-      !(consolidated).nil?
+      consolidated =
+        ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
+        @config_hash.fetch('consolidate_comments', false)
+      consolidated
     end
 
     def excluded_files
