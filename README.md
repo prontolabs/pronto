@@ -89,32 +89,32 @@ on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
 
 Add Pronto runners you want to use to your Gemfile:
 
-Set the GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
+Set the PRONTO_GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
 [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that has access to the repository.
 
 Then just run it:
 
 ```sh
-$ GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
 ```
 
 or, if you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
 ```
 
 Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
 
 ```sh
-$ GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
 ```
 
 It's possible to combine multiple formatters.
 To get both pull request comments and commit status summary use:
 
 ```sh
-$ GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
@@ -135,16 +135,16 @@ on GitLab commits using `GitlabFormatter`.
 
 **note: this requires at least GitLab v7.5.0**
 
-Set the `GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
+Set the `PRONTO_GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
 your API endpoint URL. If you are using Gitlab.com's hosted service your
 endpoint will be `https://gitlab.com/api/v3`.
-Set the `GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
+Set the `PRONTO_GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
 to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
 
 ```sh
-$ GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+$ PRONTO_GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
 ### Bitbucket Integration
@@ -154,19 +154,19 @@ on Bitbucket commits using `BitbucketFormatter` or `BitbucketPullRequestFormatte
 
 Add Pronto runners you want to use to your Gemfile:
 
-Set the BITBUCKET_USERNAME and BITBUCKET_PASSWORD environment variables or values in `.pronto.yml`.
+Set the PRONTO_BITBUCKET_USERNAME and PRONTO_BITBUCKET_PASSWORD environment variables or values in `.pronto.yml`.
 .
 
 Then just run it:
 
 ```sh
-$ BITBUCKET_USERNAME=user BITBUCKET_PASSWORD=pass pronto run -f bitbucket -c origin/master
+$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket -c origin/master
 ```
 
 or, if you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ BITBUCKET_USERNAME=user BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
+$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
 ```
 
 ## Configuration
@@ -200,7 +200,7 @@ verbose: false
 
 All properties that can be specified via `.pronto.yml`, can also be specified
 via environment variables. Their names will be the upcased path to the property.
-For example: `GITHUB_SLUG` or `GITLAB_API_PRIVATE_TOKEN`. Environment variables
+For example: `PRONTO_GITHUB_SLUG` or `PRONTO_GITLAB_API_PRIVATE_TOKEN`. Environment variables
 will always take precedence over values in configuration file.
 
 ## Runners
