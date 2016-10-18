@@ -83,7 +83,7 @@ module Pronto
           existing = old_comments[key]
           comments = dedupe_comments(existing, comments) if existing
 
-          if config.consolidate_comments?
+          if config.consolidate_comments? && !comments.empty?
             comment = consolidate_comments(comments)
             memo.push(comment)
           else
