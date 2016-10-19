@@ -11,6 +11,7 @@
 
 * [#179](https://github.com/mmozuras/pronto/pull/179): correctly select branch name for fix Bitbucket pull request formatter.
 * [#187](https://github.com/mmozuras/pronto/pull/187): correctly handle nil/false with consolidate_comments config option.
+* [#189](https://github.com/mmozuras/pronto/pull/189): do not post anything when all consolidated comments already exist.
 
 ## 0.7.1
 
