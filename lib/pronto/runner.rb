@@ -11,6 +11,14 @@ module Pronto
       repository
     end
 
+    def self.title
+      @runner_name ||= begin
+        source_path, _line = instance_method(:run).source_location
+        file_name, _extension = File.basename(source_path).split('.')
+        file_name
+      end
+    end
+
     def ruby_patches
       return [] unless @patches
 

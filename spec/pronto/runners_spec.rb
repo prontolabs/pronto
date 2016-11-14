@@ -2,7 +2,7 @@ module Pronto
   describe Runners do
     describe '#run' do
       subject { described_class.new(runners, config).run(patches) }
-      let(:patches) { double(commit: nil, any?: true) }
+      let(:patches) { double(commit: nil, none?: false) }
       let(:config) { Config.new }
 
       context 'no runners' do
@@ -12,6 +12,10 @@ module Pronto
 
       context 'fake runner' do
         class FakeRunner
+          def self.title
+            'fake_runner'
+          end
+
           def initialize(_, _)
           end
 

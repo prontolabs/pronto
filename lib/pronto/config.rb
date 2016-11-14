@@ -18,8 +18,15 @@ module Pronto
       consolidated
     end
 
-    def excluded_files
-      @excluded_files ||= Array(exclude)
+    def excluded_files(runner)
+      files =
+        if runner == 'all'
+          ENV['PRONTO_EXCLUDE'] || @config_hash['all']['exclude']
+        else
+          @config_hash.fetch(runner, {})['exclude']
+        end
+
+      Array(files)
         .flat_map { |path| Dir[path.to_s] }
         .map { |path| File.expand_path(path) }
     end
@@ -41,12 +48,6 @@ module Pronto
         verbose = ENV['PRONTO_VERBOSE'] || @config_hash['verbose']
         verbose ? Logger.new($stdout) : Logger.silent
       end
-    end
-
-    private
-
-    def exclude
-      ENV['PRONTO_EXCLUDE'] || @config_hash['all']['exclude']
     end
   end
 end

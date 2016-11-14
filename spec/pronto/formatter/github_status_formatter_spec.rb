@@ -9,8 +9,8 @@ module Pronto
         let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
         let(:runner_class) do
           Class.new do
-            def self.name
-              'Pronto::FakeRunner'
+            def self.title
+              'fake_runner'
             end
           end
         end
