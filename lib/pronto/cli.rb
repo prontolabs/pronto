@@ -37,7 +37,7 @@ module Pronto
 
     method_option :formatters,
                   type: :array,
-                  default: 'text',
+                  default: ['text'],
                   aliases: ['formatter', '-f'],
                   desc: "Pick output formatters. Available: #{::Pronto::Formatter.names.join(', ')}"
 
