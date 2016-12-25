@@ -233,6 +233,7 @@ Currently available:
 * [pronto-reek](https://github.com/mmozuras/pronto-reek)
 * [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
+* [pronto-shellcheck](https://github.com/pclalv/pronto-shellcheck)
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
