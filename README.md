@@ -190,7 +190,7 @@ github:
   api_endpoint: https://api.github.com/
   web_endpoint: https://github.com/
 gitlab:
-  slug: mmozuras/42
+  slug: 1234567 # gitlab's project ID
   api_private_token: 46751
   api_endpoint: https://api.vinted.com/gitlab
 bitbucket:
