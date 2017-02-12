@@ -1,4 +1,5 @@
 sudo: required
+before_install: gem update --system
 dist: trusty
 language: ruby
 rvm:
