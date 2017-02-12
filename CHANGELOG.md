@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New features
+
+* [#199](https://github.com/mmozuras/pronto/pull/199): add support for Ruby 2.4.0.
+
 ### Changes
 
 * [#181](https://github.com/mmozuras/pronto/pull/181): add ENV variables for all configuration options.
