@@ -214,6 +214,7 @@ Currently available:
 
 * [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
 * [pronto-eslint](https://github.com/mmozuras/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
