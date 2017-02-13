@@ -235,6 +235,7 @@ Currently available:
 * [pronto-scss](https://github.com/mmozuras/pronto-scss)
 * [pronto-shellcheck](https://github.com/pclalv/pronto-shellcheck)
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
+* [pronto-slim_lint](https://github.com/ibrahima/pronto-slim_lint)
 * [pronto-spell](https://github.com/mmozuras/pronto-spell)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
