@@ -239,6 +239,7 @@ Currently available:
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
+* [pronto-textlint](https://github.com/seikichi/pronto-textlint)
 
 ## Articles
 
