@@ -217,6 +217,7 @@ Currently available:
 * [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
+* [pronto-dogma](https://github.com/iurifq/pronto-dogma)
 * [pronto-eslint](https://github.com/mmozuras/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
 * [pronto-eslint_npm](https://github.com/doits/pronto-eslint_npm) (uses eslint installed from npm)
 * [pronto-fasterer](https://github.com/mmozuras/pronto-fasterer)
