@@ -67,7 +67,7 @@ module Pronto
         config.logger.log("Creating a comment from message: #{message.inspect}")
         body = message.msg
         path = message.path
-        lineno = line_number(message, patches)
+        lineno = line_number(message, patches) if message.line
 
         Comment.new(sha, body, path, lineno)
       end

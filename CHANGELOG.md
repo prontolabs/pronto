@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Bugs fixed
+
+* [#201](https://github.com/mmozuras/pronto/issues/201): allow messages without line positions or paths.
+
 ## 0.8.0
 
 ### New features
