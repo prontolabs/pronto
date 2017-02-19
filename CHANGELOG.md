@@ -4,6 +4,7 @@
 
 ### Bugs fixed
 
+* Post on commit comments on correct commit: use message.commit_sha to set comment.sha instead of head.
 * [#201](https://github.com/mmozuras/pronto/issues/201): allow messages without line positions or paths.
 
 ## 0.8.0

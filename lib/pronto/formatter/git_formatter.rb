@@ -3,9 +3,8 @@ module Pronto
     class GitFormatter
       def format(messages, repo, patches)
         client = client_module.new(repo)
-        head = repo.head_commit_sha
-        existing = existing_comments(client, head)
-        comments = new_comments(messages, patches, head)
+        existing = existing_comments(messages, client, repo)
+        comments = new_comments(messages, patches)
         additions = remove_duplicate_comments(existing, comments)
         submit_comments(client, additions)
 
@@ -63,19 +62,19 @@ module Pronto
         comments.map { |comment| "- #{comment.body}" }.join("\n")
       end
 
-      def new_comment(message, patches, sha)
+      def new_comment(message, patches)
         config.logger.log("Creating a comment from message: #{message.inspect}")
+        sha = message.commit_sha
         body = message.msg
         path = message.path
         lineno = line_number(message, patches) if message.line
-
         Comment.new(sha, body, path, lineno)
       end
 
-      def new_comments(messages, patches, sha)
+      def new_comments(messages, patches)
         comments = messages
           .uniq
-          .map { |message| new_comment(message, patches, sha) }
+          .map { |message| new_comment(message, patches) }
         grouped_comments(comments)
       end
 
