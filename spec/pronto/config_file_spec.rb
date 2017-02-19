@@ -22,7 +22,7 @@ module Pronto
             'gitlab' => {
               'slug' => nil,
               'api_private_token' => nil,
-              'api_endpoint' => nil
+              'api_endpoint' => 'https://gitlab.com/api/v3'
             }
           )
         end

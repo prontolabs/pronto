@@ -137,14 +137,14 @@ on GitLab commits using `GitlabFormatter`.
 
 Set the `PRONTO_GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
 your API endpoint URL. If you are using Gitlab.com's hosted service your
-endpoint will be `https://gitlab.com/api/v3`.
+endpoint will be set by default.
 Set the `PRONTO_GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
 to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
 
 ```sh
-$ PRONTO_GITLAB_API_ENDPOINT="https://gitlab.com/api/v3" PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
 ### Bitbucket Integration

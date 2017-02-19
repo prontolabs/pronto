@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changes
+
+* Add a default GitLab API endpoint: https://gitlab.com/api/v3
+
 ### Bugs fixed
 
 * Post on commit comments on correct commit: use message.commit_sha to set comment.sha instead of head.
