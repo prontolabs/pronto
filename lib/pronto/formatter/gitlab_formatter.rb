@@ -10,7 +10,7 @@ module Pronto
       end
 
       def line_number(message, _)
-        message.line.commit_line.new_lineno
+        message.line.commit_line.new_lineno if message.line
       end
     end
   end

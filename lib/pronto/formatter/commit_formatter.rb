@@ -7,10 +7,6 @@ module Pronto
         grouped_comments(comments)
       end
 
-      def line_number(message, _)
-        message.line.new_lineno
-      end
-
       def submit_comments(client, comments)
         comments.each { |comment| client.create_commit_comment(comment) }
       rescue Octokit::UnprocessableEntity, HTTParty::Error => e

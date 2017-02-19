@@ -8,6 +8,7 @@
 
 ### Bugs fixed
 
+* [#125](https://github.com/mmozuras/pronto/issues/125): check whether message has a line before posting to GitLab.
 * Post on commit comments on correct commit: use message.commit_sha to set comment.sha instead of head.
 * [#201](https://github.com/mmozuras/pronto/issues/201): allow messages without line positions or paths.
 
