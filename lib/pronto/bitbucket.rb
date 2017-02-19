@@ -30,9 +30,13 @@ module Pronto
     end
 
     def create_pull_comment(comment)
-      @config.logger.log("Creating pull request comment on #{pull_id}")
-      client.create_pull_comment(slug, pull_id, comment.body,
-                                 comment.path, comment.position)
+      if comment.path && comment.position
+        @config.logger.log("Creating pull request comment on #{pull_id}")
+        client.create_pull_comment(slug, pull_id, comment.body,
+                                   comment.path, comment.position)
+      else
+        create_commit_comment(comment)
+      end
     end
 
     private
