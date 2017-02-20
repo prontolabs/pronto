@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Bugs fixed
+
+* [#203](https://github.com/mmozuras/pronto/pull/203): fix unintentional class conversion that led to exclude config option not working.
+
 ## 0.8.1
 
 ### Changes
