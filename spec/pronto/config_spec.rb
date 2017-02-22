@@ -55,5 +55,22 @@ module Pronto
         it { should == 'ruby/ruby' }
       end
     end
+
+    describe '#message_format' do
+      subject { config.message_format('whatever') }
+
+      context 'when there is an entry in the config file' do
+        let(:config_hash) { { 'whatever' => { 'format' => whatever_format } } }
+        let(:whatever_format) { "that's just like your opinion man" }
+
+        it { should == whatever_format }
+      end
+
+      context 'when there is no entry in the config file' do
+        let(:config_hash) { ConfigFile::EMPTY }
+
+        it { should == ConfigFile::DEFAULT_MESSAGE_FORMAT }
+      end
+    end
   end
 end

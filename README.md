@@ -207,6 +207,36 @@ via environment variables. Their names will be the upcased path to the property.
 For example: `PRONTO_GITHUB_SLUG` or `PRONTO_GITLAB_API_PRIVATE_TOKEN`. Environment variables
 will always take precedence over values in configuration file.
 
+### Message format
+
+Pronto allows you to configure the format of the messages that are produced. You
+can set a default format that will be used by all formatters, or you can
+configure a separate format per formatter, if you are using several.
+
+To change the default format:
+
+```yaml
+format: "%{runner} %{level} %{msg}"
+```
+
+To add the title of the Runner to the GitHub Pull Request formatter only:
+
+```yaml
+github_pr:
+  format: "%{runner} - %{msg}"
+```
+
+The available values to be interpolated into the message are:
+
+| Key          | Description    |
+|--------------|----------------|
+| `path`       | File path.     |
+| `line`       | Line number.   |
+| `level`      | Message level. |
+| `msg`        | Message.       |
+| `commit_sha` | SHA.           |
+| `runner`     | Runner name.   |
+
 ## Runners
 
 Pronto can run various tools and libraries, as long as there's a runner for it.

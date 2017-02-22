@@ -1,5 +1,7 @@
 module Pronto
   class ConfigFile
+    DEFAULT_MESSAGE_FORMAT = "%{msg}".freeze
+
     EMPTY = {
       'all' => {
         'exclude' => [],
@@ -22,10 +24,14 @@ module Pronto
         'password' => nil,
         'web_endpoint' => 'https://bitbucket.org/'
       },
+      'text' => {
+        'format' => "%{color_location} %{color_level}: %{msg}"
+      },
       'runners' => [],
       'formatters' => [],
       'max_warnings' => nil,
-      'verbose' => false
+      'verbose' => false,
+      'format' => DEFAULT_MESSAGE_FORMAT
     }.freeze
 
     def initialize(path = '.pronto.yml')

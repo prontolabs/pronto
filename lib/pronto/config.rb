@@ -43,6 +43,15 @@ module Pronto
       ENV['PRONTO_MAX_WARNINGS'] || @config_hash['max_warnings']
     end
 
+    def message_format(formatter)
+      formatter_config = @config_hash[formatter]
+      if formatter_config && formatter_config.key?('format')
+        formatter_config['format']
+      else
+        ENV["PRONTO_FORMAT"] || @config_hash['format']
+      end
+    end
+
     def logger
       @logger ||= begin
         verbose = ENV['PRONTO_VERBOSE'] || @config_hash['verbose']

@@ -40,6 +40,17 @@ module Pronto
       end
     end
 
+    def to_h
+      {
+        path: path,
+        line: line,
+        level: level,
+        msg: msg,
+        commit_sha: commit_sha,
+        runner: @runner && @runner.title
+      }
+    end
+
     private
 
     def comparison_attributes
