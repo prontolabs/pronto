@@ -63,8 +63,11 @@ git checkout feature/branch
 # Analyze diff of committed changes on current branch and master:
 pronto run
 
+# Analyze changes in git staging area
+pronto run --staged
+
 # Analyze diff of uncommitted changes and master:
-pronto run --index
+pronto run --unstaged
 
 # Analyze *all* changes since the *initial* commit (may take some time):
 pronto run --commit=$(git log --pretty=format:%H | tail -1)
@@ -78,7 +81,8 @@ Available Options
 |:------------------|:------------------------------------------------------------|
 | `--exit-code`     | Exits with non-zero code if there were any warnings/errors. |
 | `-c/--commit`     | Commit for the diff.                                        |
-| `-i/--index`      | Analyze changes in git index (staging area).                |
+| `--staged`        | Analyze changes in git staging area                         |
+| `--unstaged`      | Analyze changes made, but not in git staging area           |
 | `-r/--runner`     | Run only the passed runners.                                |
 | `-f/--formatters` | Pick output formatters.                                     |
 
