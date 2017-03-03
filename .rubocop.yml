@@ -12,3 +12,7 @@ MultilineOperationIndentation:
 
 MultilineMethodCallIndentation:
   EnforcedStyle: indented
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
