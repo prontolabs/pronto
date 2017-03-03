@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### New features
+
+* [#111](https://github.com/mmozuras/pronto/issues/111): add `--staged` option for `pronto run` to analyze staged changes.
+
+### Changes
+
+* [#193](https://github.com/mmozuras/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
+
 ## 0.8.2
 
 ### Bugs fixed
@@ -10,7 +20,7 @@
 
 ### Changes
 
-* Add a default GitLab API endpoint: https://gitlab.com/api/v3
+* Add a default GitLab API endpoint: https://gitlab.com/api/v3.
 
 ### Bugs fixed
 

@@ -8,14 +8,18 @@ module Pronto
       end
 
       def diff(commit, options = nil)
-        if commit == :index
-          patches = @repo.index.diff(options)
-          Patches.new(self, head, patches)
-        else
-          merge_base = merge_base(commit)
-          patches = @repo.diff(merge_base, head, options)
-          Patches.new(self, merge_base, patches)
-        end
+        target, patches = case commit
+                          when :unstaged, :index
+                            [head, @repo.index.diff(options)]
+                          when :staged
+                            [head, @repo.index.diff(head, options)]
+                          else
+                            merge_base = merge_base(commit)
+                            patches = @repo.diff(merge_base, head, options)
+                            [merge_base, patches]
+                          end
+
+        Patches.new(self, target, patches)
       end
 
       def show_commit(sha)

@@ -24,10 +24,14 @@ module Pronto
                   aliases: '-c',
                   desc: 'Commit for the diff'
 
-    method_option :index,
+    method_option :unstaged,
                   type: :boolean,
-                  aliases: '-i',
-                  desc: 'Analyze changes in git index (staging area)'
+                  aliases: ['-i', '--index'],
+                  desc: 'Analyze changes made, but not in git staging area'
+
+    method_option :staged,
+                  type: :boolean,
+                  desc: 'Analyze changes in git staging area'
 
     method_option :runner,
                   type: :array,
@@ -48,7 +52,10 @@ module Pronto
       end
 
       formatters = ::Pronto::Formatter.get(options[:formatters])
-      commit = options[:index] ? :index : options[:commit]
+
+      commit_options = [:staged, :unstaged, :index]
+      commit = commit_options.find { |o| options[o] } || options[:commit]
+
       repo_workdir = ::Rugged::Repository.discover('.').workdir
       messages = Dir.chdir(repo_workdir) do
         ::Pronto.run(commit, '.', formatters, path)

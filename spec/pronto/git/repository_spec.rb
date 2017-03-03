@@ -57,7 +57,8 @@ module Pronto
       end
 
       describe '#diff' do
-        subject { repo.diff(sha) }
+        subject { repo.diff(sha, options) }
+        let(:options) { nil }
 
         context 'initial' do
           let(:sha) { '3e0e3ab' }
@@ -69,9 +70,27 @@ module Pronto
           it { should be_none }
         end
 
-        context 'index' do
-          let(:sha) { :index }
-          it { should be_one }
+        context 'unstaged' do
+          let(:sha) { :unstaged }
+
+          context 'all files' do
+            it { should be_one }
+          end
+
+          context 'hamlet.txt' do
+            let(:options) { { paths: ['hamlet.txt'] } }
+            it { should be_one }
+          end
+
+          context 'hamlet.txt' do
+            let(:options) { { paths: ['ophelia.txt'] } }
+            it { should be_none }
+          end
+        end
+
+        context 'staged' do
+          let(:sha) { :staged }
+          it { should be_none }
         end
       end
 
