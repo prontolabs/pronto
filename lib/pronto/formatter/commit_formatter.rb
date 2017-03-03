@@ -1,7 +1,7 @@
 module Pronto
   module Formatter
     class CommitFormatter < GitFormatter
-      def existing_comments(messages, client, repo)
+      def existing_comments(messages, client, _)
         shas = messages.map(&:commit_sha)
         comments = shas.flat_map { |sha| client.commit_comments(sha) }
         grouped_comments(comments)

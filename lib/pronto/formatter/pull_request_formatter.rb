@@ -1,7 +1,7 @@
 module Pronto
   module Formatter
     class PullRequestFormatter < GitFormatter
-      def existing_comments(messages, client, repo)
+      def existing_comments(_, client, repo)
         sha = repo.head_commit_sha
         comments = client.pull_comments(sha)
         grouped_comments(comments)
