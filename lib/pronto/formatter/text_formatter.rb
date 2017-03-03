@@ -14,7 +14,9 @@ module Pronto
 
       def format(messages, _, _)
         messages.map do |message|
-          "#{format_location(message)} #{format_level(message)}: #{message.msg}".strip
+          "#{format_location(message)} "\
+          "#{format_runner(message)}#{format_level(message)}: "\
+          "#{message.msg}".strip
         end
       end
 
@@ -39,6 +41,13 @@ module Pronto
         color = LEVEL_COLORS.fetch(level)
 
         colorize(level[0].upcase, color)
+      end
+
+      def format_runner(message)
+        runner = message.runner
+        return unless runner
+
+        runner.to_s.sub('Pronto::', '') + '/'
       end
     end
   end
