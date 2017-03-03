@@ -14,5 +14,6 @@ MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
 Metrics/BlockLength:
+  ExcludedMethods: Struct.new
   Exclude:
     - spec/**/*.rb
