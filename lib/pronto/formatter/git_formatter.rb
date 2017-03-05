@@ -1,6 +1,6 @@
 module Pronto
   module Formatter
-    class GitFormatter
+    class GitFormatter < Base
       def format(messages, repo, patches)
         client = client_module.new(repo)
         existing = existing_comments(messages, client, repo)
@@ -39,10 +39,6 @@ module Pronto
         comments.group_by { |comment| [comment.path, comment.position] }
       end
 
-      def config
-        @config ||= Config.new
-      end
-
       def consolidate_comments(comments)
         comment = comments.first
         if comments.length > 1
@@ -65,7 +61,9 @@ module Pronto
       def new_comment(message, patches)
         config.logger.log("Creating a comment from message: #{message.inspect}")
         sha = message.commit_sha
-        body = message.msg
+
+        body = config.message_format(self.class.name) % message.to_h
+
         path = message.path
         lineno = line_number(message, patches) if message.line
         Comment.new(sha, body, path, lineno)

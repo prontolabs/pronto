@@ -2,7 +2,7 @@ require 'rexml/document'
 
 module Pronto
   module Formatter
-    class CheckstyleFormatter
+    class CheckstyleFormatter < Base
       def initialize
         @output = ''
       end

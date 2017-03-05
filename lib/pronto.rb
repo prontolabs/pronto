@@ -29,6 +29,7 @@ require 'pronto/gitlab'
 require 'pronto/bitbucket'
 
 require 'pronto/formatter/colorizable'
+require 'pronto/formatter/base'
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
 require 'pronto/formatter/git_formatter'
