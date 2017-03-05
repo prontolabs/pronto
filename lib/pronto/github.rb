@@ -44,9 +44,9 @@ module Pronto
     def create_commit_status(status)
       sha = pull_sha || status.sha
       @config.logger.log("Creating comment status on #{sha}")
-      client.create_status(slug,
-                           sha,
-                           status.state, context: status.context, description: status.description)
+      client.create_status(slug, sha, status.state,
+                           context: status.context,
+                           description: status.description)
     end
 
     private

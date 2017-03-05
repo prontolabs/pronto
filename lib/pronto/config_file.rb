@@ -1,6 +1,6 @@
 module Pronto
   class ConfigFile
-    DEFAULT_MESSAGE_FORMAT = "%{msg}".freeze
+    DEFAULT_MESSAGE_FORMAT = '%{msg}'.freeze
 
     EMPTY = {
       'all' => {
@@ -25,7 +25,7 @@ module Pronto
         'web_endpoint' => 'https://bitbucket.org/'
       },
       'text' => {
-        'format' => "%{color_location} %{color_level}: %{msg}"
+        'format' => '%{color_location} %{color_level}: %{msg}'
       },
       'runners' => [],
       'formatters' => [],

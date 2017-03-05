@@ -48,7 +48,7 @@ module Pronto
       if formatter_config && formatter_config.key?('format')
         formatter_config['format']
       else
-        ENV["PRONTO_FORMAT"] || @config_hash['format']
+        ENV['PRONTO_FORMAT'] || @config_hash['format']
       end
     end
 
