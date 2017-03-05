@@ -13,6 +13,8 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
 
 ![Pronto demo](pronto.gif "")
 
+_This README might be ahead of the latest release. Find the README for v0.8.2 [here](https://github.com/mmozuras/pronto/blob/v0.8.2/README.md)._
+
 * [Installation](#installation)
 * [Usage](#usage)
     * [Local Changes](#local-changes)
