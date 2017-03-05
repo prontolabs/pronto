@@ -237,6 +237,13 @@ The available values to be interpolated into the message are:
 | `commit_sha` | SHA.           |
 | `runner`     | Runner name.   |
 
+The following values are available only to the text formatter:
+
+| Key              | Description              |
+|------------------|--------------------------|
+| `color_level`    | Colorized message level. |
+| `color_location` | Colorized location.      |
+
 ## Runners
 
 Pronto can run various tools and libraries, as long as there's a runner for it.
