@@ -8,7 +8,7 @@ module Pronto
 
     describe '==' do
       context 'itself' do
-        subject { status == status }
+        subject { status == status.dup }
         it { should be_truthy }
       end
     end

@@ -16,8 +16,7 @@ module Pronto
             'fake_runner'
           end
 
-          def initialize(_, _)
-          end
+          def initialize(_, _); end
 
           def run
             [1, nil, [3]]

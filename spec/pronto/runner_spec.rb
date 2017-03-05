@@ -1,6 +1,12 @@
 module Pronto
   describe Runner do
-    let(:runner) { described_class.new([]) }
+    let(:runner) { Runner.new([]) }
+
+    describe '.title' do
+      before { Runner.any_instance.stub(:run) }
+      subject { Runner.title }
+      it { should == 'recorder' }
+    end
 
     describe '#ruby_file?' do
       subject { runner.ruby_file?(path) }
