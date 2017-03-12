@@ -7,6 +7,10 @@ module Pronto
                       comment.position || comment.original_position)
         end
       end
+    rescue Octokit::NotFound => e
+      @config.logger.log("Error raised and rescued: #{e}")
+      msg = "Pull request for sha #{sha} with id #{pull_id} was not found."
+      raise Pronto::Error, msg
     end
 
     def commit_comments(sha)

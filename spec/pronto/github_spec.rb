@@ -66,6 +66,16 @@ module Pronto
           subject
         end
       end
+
+      context 'pull request does not exist' do
+        specify do
+          Octokit::Client.any_instance
+            .should_receive(:pull_comments)
+            .and_raise(Octokit::NotFound)
+
+          -> { subject }.should raise_error(Pronto::Error)
+        end
+      end
     end
 
     describe '#create_commit_status' do

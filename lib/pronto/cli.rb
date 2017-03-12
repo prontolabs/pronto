@@ -66,6 +66,8 @@ module Pronto
       end
     rescue Rugged::RepositoryError
       puts '"pronto" should be run from a git repository'
+    rescue Pronto::Error => e
+      $stderr.puts "Pronto errored: #{e.message}"
     end
 
     desc 'list', 'Lists pronto runners that are available to be used'

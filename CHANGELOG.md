@@ -10,6 +10,7 @@
 ### Changes
 
 * [#193](https://github.com/mmozuras/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
+* [#49](https://github.com/mmozuras/pronto/issues/49): Handle non-existance of GitHub pull requests gracefully
 
 ## 0.8.2
 

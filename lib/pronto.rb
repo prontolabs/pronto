@@ -5,6 +5,8 @@ require 'forwardable'
 require 'httparty'
 require 'rainbow'
 
+require 'pronto/error'
+
 require 'pronto/gem_names'
 
 require 'pronto/logger'
