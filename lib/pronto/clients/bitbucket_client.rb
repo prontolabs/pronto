@@ -13,15 +13,7 @@ class BitbucketClient
   end
 
   def create_commit_comment(slug, sha, body, path, position)
-    options = {
-      body: {
-        content: body,
-        line_to: position,
-        filename: path
-      }
-    }
-    options.merge!(@headers)
-    self.class.post("/#{slug}/changesets/#{sha}/comments", options)
+    post("/#{slug}/changesets/#{sha}/comments", body, path, position)
   end
 
   def pull_comments(slug, pr_id)
@@ -38,6 +30,16 @@ class BitbucketClient
   end
 
   def create_pull_comment(slug, pull_id, body, path, position)
+    post("/#{slug}/pullrequests/#{pull_id}/comments", body, path, position)
+  end
+
+  private
+
+  def openstruct(response)
+    response.map { |r| OpenStruct.new(r) }
+  end
+
+  def post(url, body, path, position)
     options = {
       body: {
         content: body,
@@ -46,10 +48,6 @@ class BitbucketClient
       }
     }
     options.merge!(@headers)
-    self.class.post("/#{slug}/pullrequests/#{pull_id}/comments", options)
-  end
-
-  def openstruct(response)
-    response.map { |r| OpenStruct.new(r) }
+    self.class.post(url, options)
   end
 end
