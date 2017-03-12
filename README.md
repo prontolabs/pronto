@@ -1,7 +1,8 @@
 # Pronto
 
-[![Code Climate](https://codeclimate.com/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
 [![Build Status](https://secure.travis-ci.org/mmozuras/pronto.svg)](http://travis-ci.org/mmozuras/pronto)
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
+[![Code Climate](https://codeclimate.com/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
 [![Dependency Status](https://gemnasium.com/mmozuras/pronto.svg)](https://gemnasium.com/mmozuras/pronto)
 [![Inline docs](http://inch-ci.org/github/mmozuras/pronto.svg)](http://inch-ci.org/github/mmozuras/pronto)
