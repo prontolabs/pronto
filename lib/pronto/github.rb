@@ -1,12 +1,5 @@
 module Pronto
-  class Github
-    def initialize(repo)
-      @repo = repo
-      @config = Config.new
-      @comment_cache = {}
-      @pull_id_cache = {}
-    end
-
+  class Github < Client
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
@@ -71,10 +64,6 @@ module Pronto
 
     def pull_id
       pull ? pull[:number].to_i : env_pull_id.to_i
-    end
-
-    def env_pull_id
-      ENV['PULL_REQUEST_ID']
     end
 
     def pull_sha

@@ -1,11 +1,5 @@
 module Pronto
-  class Gitlab
-    def initialize(repo)
-      @repo = repo
-      @config = Config.new
-      @comment_cache = {}
-    end
-
+  class Gitlab < Client
     def commit_comments(sha)
       @comment_cache[sha.to_s] ||= begin
         client.commit_comments(slug, sha, per_page: 500).map do |comment|
