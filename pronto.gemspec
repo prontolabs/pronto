@@ -54,4 +54,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('simplecov', '~> 0.11')
   s.add_development_dependency('rubocop', '~> 0.47')
   s.add_development_dependency('pronto-rubocop', '~> 0.8.0')
+  s.add_development_dependency('codeclimate-test-reporter', '~> 1.0')
 end
