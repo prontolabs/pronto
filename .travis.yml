@@ -15,3 +15,8 @@ after_success:
   [ "${TRAVIS_RUBY_VERSION}" = "2.0.0" ] &&
     PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
       bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
+- bundle exec codeclimate-test-reporter
+
+addons:
+  code_climate:
+    repo_token: 454641c9f4a22132526b4c126317ec5ef9aaa7efd3ae6858b55927d65160165d
