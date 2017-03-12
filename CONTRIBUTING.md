@@ -22,6 +22,7 @@ do so.
 * Use a topic/feature branch to easily amend a pull request later, if necessary.
 * Write [good commit messages][3].
 * Use the same coding conventions as the rest of the project.
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally. You can also test your version of pronto locally with the help of `gem build` and `gem install`.
 * Commit and push until you are happy with your contribution.
 * Open a [pull request][4] that relates to *only* one subject with a clear title
   and description in grammatically correct, complete sentences.
