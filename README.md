@@ -272,6 +272,7 @@ Currently available:
 * [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
 * [pronto-json](https://github.com/deees/pronto-json)
 * [pronto-luacheck](https://github.com/seikichi/pronto-luacheck)
+* [pronto-perl_lint](https://github.com/bells17/pronto-perl_lint)
 * [pronto-phpcs](https://github.com/EllisV/pronto-phpcs)
 * [pronto-phpmd](https://github.com/EllisV/pronto-phpmd)
 * [pronto-poper](https://github.com/mmozuras/pronto-poper)
