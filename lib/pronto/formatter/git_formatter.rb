@@ -51,7 +51,7 @@ module Pronto
 
       def dedupe_comments(existing, comments)
         body = existing.map(&:body).join(' ')
-        comments.select { |comment| !body.include?(comment.body) }
+        comments.reject { |comment| body.include?(comment.body) }
       end
 
       def join_comments(comments)

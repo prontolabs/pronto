@@ -2,7 +2,7 @@ module Pronto
   class Message
     attr_reader :path, :line, :level, :msg, :commit_sha, :runner
 
-    LEVELS = [:info, :warning, :error, :fatal].freeze
+    LEVELS = %i[info warning error fatal].freeze
 
     def initialize(path, line, level, msg, commit_sha = nil, runner = nil)
       unless LEVELS.include?(level)
@@ -54,7 +54,7 @@ module Pronto
     private
 
     def comparison_attributes
-      line ? [:path, :msg, :level, :line] : [:path, :msg, :level, :commit_sha]
+      line ? %i[path msg level line] : %i[path msg level commit_sha]
     end
   end
 end

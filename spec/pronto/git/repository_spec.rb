@@ -24,13 +24,13 @@ module Pronto
         context 'initial' do
           let(:sha) { '3e0e3ab' }
           it 'should list all the commits' do
-            should == %w(64dadfdb7c7437476782e8eb024085862e6287d6
+            should == %w[64dadfdb7c7437476782e8eb024085862e6287d6
                          7b21c8f4dfb0b8aa39739fc16678c5934877a414
                          577afa184c9bc82a66c40047d0809e5fcc43489f
                          ec05bab7d263d5e01be99f2c4e10a5974e24e6de
                          d6d56582ebfd0c6c3263ea4c4e2d727048370124
                          ac86326d7231ad77dab94e2c4f6f61245a2d9bec
-                         3e0e3ab0a436fc2a9c05253a439dc6084699b7d5)
+                         3e0e3ab0a436fc2a9c05253a439dc6084699b7d5]
           end
         end
 
