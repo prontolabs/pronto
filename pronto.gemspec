@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.author = 'Mindaugas Mozūras'
   s.email = 'mindaugas.mozuras@gmail.com'
-  s.homepage = 'http://github.com/mmozuras/pronto'
+  s.homepage = 'https://github.com/mmozuras/pronto'
   s.summary = 'Pronto runs analysis by checking only the introduced changes'
   s.description = <<-EOF
     Pronto runs analysis quickly by checking only the relevant changes. Created
