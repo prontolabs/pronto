@@ -8,7 +8,7 @@ module Pronto
     end
 
     def env_pull_id
-      ENV['PULL_REQUEST_ID']
+      ENV['PULL_REQUEST_ID'].to_i if ENV['PULL_REQUEST_ID']
     end
   end
 end
