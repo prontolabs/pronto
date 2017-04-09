@@ -4,7 +4,7 @@ module Pronto
       @config_hash = config_hash
     end
 
-    %w(github gitlab bitbucket).each do |service|
+    %w[github gitlab bitbucket].each do |service|
       ConfigFile::EMPTY[service].each do |key, _|
         name = "#{service}_#{key}"
         define_method(name) { ENV["PRONTO_#{name.upcase}"] || @config_hash[service][key] }

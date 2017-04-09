@@ -15,7 +15,7 @@ module Pronto
         end
 
         context 'when 1 word' do
-          let(:words) { %w(eeny) }
+          let(:words) { %w[eeny] }
 
           it 'returns the word' do
             subject.should == 'eeny'
@@ -23,7 +23,7 @@ module Pronto
         end
 
         context 'when 2 words' do
-          let(:words) { %w(eeny meeny) }
+          let(:words) { %w[eeny meeny] }
 
           it 'uses and to join words' do
             subject.should == 'eeny and meeny'
@@ -31,7 +31,7 @@ module Pronto
         end
 
         context 'when 3 words' do
-          let(:words) { %w(eeny meeny miny moe) }
+          let(:words) { %w[eeny meeny miny moe] }
 
           it 'enumerates words using oxford comma' do
             subject.should == 'eeny, meeny, miny, and moe'

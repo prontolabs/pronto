@@ -15,8 +15,8 @@ module Pronto
         @patches.each(&block)
       end
 
-      def reject!(&block)
-        @patches.reject!(&block)
+      def reject(&block)
+        Pronto::Git::Patches.new(repo, commit, @patches.reject(&block))
       end
 
       def find_line(path, line)

@@ -54,7 +54,7 @@ module Pronto
         subject { Formatter.get(names) }
 
         context 'github and text' do
-          let(:names) { %w(github text) }
+          let(:names) { %w[github text] }
 
           its(:count) { should == 2 }
           its(:first) { should be_an_instance_of GithubFormatter }
@@ -73,9 +73,9 @@ module Pronto
     describe '.names' do
       subject { Formatter.names }
       it do
-        should =~ %w(github github_pr github_status gitlab bitbucket
+        should =~ %w[github github_pr github_status gitlab bitbucket
                      bitbucket_pr json checkstyle text null
-                     bitbucket_server_pr)
+                     bitbucket_server_pr]
       end
     end
   end

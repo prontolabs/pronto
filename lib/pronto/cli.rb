@@ -53,7 +53,7 @@ module Pronto
 
       formatters = ::Pronto::Formatter.get(options[:formatters])
 
-      commit_options = [:staged, :unstaged, :index]
+      commit_options = %i[staged unstaged index]
       commit = commit_options.find { |o| options[o] } || options[:commit]
 
       repo_workdir = ::Rugged::Repository.discover('.').workdir
@@ -77,14 +77,14 @@ module Pronto
     end
 
     desc 'version', 'Display version'
-    map %w(-v --version) => :version
+    map %w[-v --version] => :version
 
     def version
       puts Version::STRING
     end
 
     desc 'verbose-version', 'Display verbose version'
-    map %w(-V --verbose-version) => :verbose_version
+    map %w[-V --verbose-version] => :verbose_version
 
     def verbose_version
       puts Version.verbose

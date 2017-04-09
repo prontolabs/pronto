@@ -28,10 +28,9 @@ module Pronto
     def reject_excluded(excluded_files, patches)
       return patches unless excluded_files.any?
 
-      patches.reject! do |patch|
+      patches.reject do |patch|
         excluded_files.include?(patch.new_file_full_path.to_s)
       end
-      patches
     end
 
     def exceeds_max?(warnings)

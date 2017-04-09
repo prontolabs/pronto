@@ -10,7 +10,11 @@
 ### Changes
 
 * [#193](https://github.com/mmozuras/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
-* [#49](https://github.com/mmozuras/pronto/issues/49): Handle non-existance of GitHub pull requests gracefully
+* [#49](https://github.com/mmozuras/pronto/issues/49): handle non-existance of GitHub pull requests gracefully.
+
+### Bugs fixed
+
+* [#215](https://github.com/mmozuras/pronto/pull/215): an exclusion of files for single runner led to those files being excluded for all runners.
 
 ## 0.8.2
 
