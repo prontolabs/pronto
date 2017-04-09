@@ -6,6 +6,9 @@ module Pronto
       def_delegators :line, :addition?, :deletion?, :content, :new_lineno,
                      :old_lineno, :line_origin
 
+      COMPARISON_ATTRIBUTES = %i[content line_origin
+                                 old_lineno new_lineno].freeze
+
       def position
         hunk_index = patch.hunks.find_index { |h| h.header == hunk.header }
         line_index = patch.lines.find_index(line)
@@ -31,10 +34,9 @@ module Pronto
         return false if other.nil?
         return true if line.nil? && other.line.nil?
 
-        content == other.content &&
-          line_origin == other.line_origin &&
-          old_lineno == other.old_lineno &&
-          new_lineno == other.new_lineno
+        COMPARISON_ATTRIBUTES.all? do |attribute|
+          send(attribute) == other.send(attribute)
+        end
       end
 
       private
