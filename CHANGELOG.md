@@ -4,6 +4,7 @@
 
 ### New features
 
+* [#206](https://github.com/mmozuras/pronto/pull/216): add Bitbucket Server pull request formatter.
 * [#204](https://github.com/mmozuras/pronto/pull/204): add ability configure message format for each formatter.
 * [#111](https://github.com/mmozuras/pronto/issues/111): add `--staged` option for `pronto run` to analyze staged changes.
 
