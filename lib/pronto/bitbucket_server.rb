@@ -2,14 +2,13 @@ module Pronto
   class BitbucketServer < Bitbucket
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
-        client.pull_comments(slug, pull_id).inject([]) do |comments, comment|
-          if comment['commentAnchor']
-            comments << Comment.new(sha,
-                                    comment['comment']['text'],
-                                    comment['commentAnchor']['path'],
-                                    comment['commentAnchor']['line'])
+        client.pull_comments(slug, pull_id).map do |comment|
+          anchor = comment['commentAnchor']
+          if anchor
+            Comment.new(sha, comment['comment']['text'],
+                        anchor['path'], anchor['line'])
           end
-        end
+        end.compact
       end
     end
 
@@ -22,14 +21,13 @@ module Pronto
     end
 
     def pull
-      @pull ||=
-        if env_pull_id
-          pull_requests.find { |pr| pr.id.to_i == env_pull_id }
-        elsif @repo.branch
-          pull_requests.find do |pr|
-            pr['fromRef']['displayId'] == @repo.branch
-          end
-        end
+      @pull ||= if env_pull_id
+                  pull_requests.find { |pr| pr.id.to_i == env_pull_id }
+                elsif @repo.branch
+                  pull_requests.find do |pr|
+                    pr['fromRef']['displayId'] == @repo.branch
+                  end
+                end
     end
   end
 end
