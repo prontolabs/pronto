@@ -56,7 +56,7 @@ module Pronto
             .once
             .and_return([comment])
 
-          ENV['PULL_REQUEST_ID'] = '10'
+          ENV['PRONTO_PULL_REQUEST_ID'] = '10'
 
           subject
           subject
@@ -93,13 +93,13 @@ module Pronto
                 context: context, description: desc)
           .once
       end
-      after { ENV.delete('PULL_REQUEST_ID') }
+      after { ENV.delete('PRONTO_PULL_REQUEST_ID') }
 
-      context 'uses PULL_REQUEST_ID to create commit status' do
+      context 'uses PRONTO_PULL_REQUEST_ID to create commit status' do
         let(:pull_request_sha) { '123456' }
         let(:expected_sha) { pull_request_sha }
 
-        before { ENV['PULL_REQUEST_ID'] = '10' }
+        before { ENV['PRONTO_PULL_REQUEST_ID'] = '10' }
 
         specify do
           octokit_client
@@ -114,7 +114,7 @@ module Pronto
       context 'adds status to commit with sha' do
         let(:expected_sha) { sha }
 
-        before { ENV.delete('PULL_REQUEST_ID') }
+        before { ENV.delete('PRONTO_PULL_REQUEST_ID') }
 
         specify do
           octokit_client

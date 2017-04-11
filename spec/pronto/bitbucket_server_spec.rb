@@ -36,7 +36,7 @@ module Pronto
             .once
             .and_return([response])
 
-          ENV['PULL_REQUEST_ID'] = '10'
+          ENV['PRONTO_PULL_REQUEST_ID'] = '10'
 
           subject
           subject
