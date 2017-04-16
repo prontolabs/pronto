@@ -26,6 +26,9 @@ module Pronto
       end
 
       def added_lines
+        'TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST'
+        lines.select(&:addition?)
+        lines.select(&:addition?)
         lines.select(&:addition?)
       end
 
