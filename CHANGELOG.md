@@ -13,7 +13,8 @@
 
 * [#193](https://github.com/mmozuras/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
 * [#49](https://github.com/mmozuras/pronto/issues/49): handle non-existance of GitHub pull requests gracefully.
-* Depend on `octokit >= 4.7.0`.
+* [#217](https://github.com/mmozuras/pronto/issues/217): depend on `octokit >= 4.7.0`.
+* [#224](https://github.com/mmozuras/pronto/issues/224): depend on `gitlab >= 4.0.0`.
 
 ### Bugs fixed
 

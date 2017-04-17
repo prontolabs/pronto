@@ -20,11 +20,10 @@ module Pronto
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
       @slug ||= begin
-        slug = @repo.remote_urls.map do |url|
+        @repo.remote_urls.map do |url|
           match = slug_regex(url).match(url)
           match[:slug] if match
         end.compact.first
-        URI.escape(slug, '/') if slug
       end
     end
 

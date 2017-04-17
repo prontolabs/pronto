@@ -16,7 +16,7 @@ module Pronto
         end
 
         it 'returns correct slug' do
-          subject.should eql('mmozuras%2Fpronto')
+          subject.should eql('mmozuras/pronto')
         end
       end
 
@@ -26,7 +26,7 @@ module Pronto
         end
 
         it 'returns correct slug' do
-          subject.should eql('mmozuras%2Fpronto')
+          subject.should eql('mmozuras/pronto')
         end
       end
     end
@@ -47,7 +47,7 @@ module Pronto
 
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras%2Fpronto', sha, per_page: 500)
+            .with('mmozuras/pronto', sha, per_page: 500)
             .once
             .and_return([comment])
 
