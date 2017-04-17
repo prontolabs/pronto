@@ -38,6 +38,16 @@ module Pronto
       end
     end
 
+    def create_pull_request_review(comments)
+      options = {
+        event: 'COMMENT',
+        comments: comments.map do |c|
+          { path: c.path, position: c.position, body: c.body }
+        end
+      }
+      client.create_pull_request_review(slug, pull_id, options)
+    end
+
     def create_commit_status(status)
       sha = pull_sha || status.sha
       @config.logger.log("Creating comment status on #{sha}")

@@ -14,6 +14,11 @@ module Pronto
           it { should be_an_instance_of GithubPullRequestFormatter }
         end
 
+        context 'github_pr_review' do
+          let(:name) { 'github_pr_review' }
+          it { should be_an_instance_of GithubPullRequestReviewFormatter }
+        end
+
         context 'github_status' do
           let(:name) { 'github_status' }
           it { should be_an_instance_of GithubStatusFormatter }
@@ -73,9 +78,9 @@ module Pronto
     describe '.names' do
       subject { Formatter.names }
       it do
-        should =~ %w[github github_pr github_status gitlab bitbucket
-                     bitbucket_pr json checkstyle text null
-                     bitbucket_server_pr]
+        should =~ %w[github github_pr github_pr_review github_status
+                     gitlab bitbucket bitbucket_pr bitbucket_server_pr
+                     json checkstyle text null]
       end
     end
   end

@@ -7,11 +7,13 @@
 * [#206](https://github.com/mmozuras/pronto/pull/216): add Bitbucket Server pull request formatter.
 * [#204](https://github.com/mmozuras/pronto/pull/204): add ability configure message format for each formatter.
 * [#111](https://github.com/mmozuras/pronto/issues/111): add `--staged` option for `pronto run` to analyze staged changes.
+* [#217](https://github.com/mmozuras/pronto/issues/217): add GitHub pull request review formatter.
 
 ### Changes
 
 * [#193](https://github.com/mmozuras/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
 * [#49](https://github.com/mmozuras/pronto/issues/49): handle non-existance of GitHub pull requests gracefully.
+* Depend on `octokit >= 4.7.0`.
 
 ### Bugs fixed
 
