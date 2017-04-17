@@ -12,7 +12,7 @@ module Pronto
                           when :unstaged, :index
                             [head, @repo.index.diff(options)]
                           when :staged
-                            [head, @repo.index.diff(head, options)]
+                            [head, @repo.head.target.diff(@repo.index, options)]
                           else
                             merge_base = merge_base(commit)
                             patches = @repo.diff(merge_base, head, options)
