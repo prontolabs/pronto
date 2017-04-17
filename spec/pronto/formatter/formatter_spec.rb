@@ -19,6 +19,21 @@ module Pronto
           it { should be_an_instance_of GithubPullRequestReviewFormatter }
         end
 
+        context 'bitbucket' do
+          let(:name) { 'bitbucket' }
+          it { should be_an_instance_of BitbucketFormatter }
+        end
+
+        context 'bitbucket_pr' do
+          let(:name) { 'bitbucket_pr' }
+          it { should be_an_instance_of BitbucketPullRequestFormatter }
+        end
+
+        context 'bitbucket_server_pr' do
+          let(:name) { 'bitbucket_server_pr' }
+          it { should be_an_instance_of BitbucketServerPullRequestFormatter }
+        end
+
         context 'github_status' do
           let(:name) { 'github_status' }
           it { should be_an_instance_of GithubStatusFormatter }
