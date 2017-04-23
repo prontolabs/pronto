@@ -10,9 +10,9 @@ module Pronto
       def diff(commit, options = nil)
         target, patches = case commit
                           when :unstaged, :index
-                            [head, @repo.index.diff(options)]
+                            [head_commit_sha, @repo.index.diff(options)]
                           when :staged
-                            [head, @repo.head.target.diff(@repo.index, options)]
+                            [head_commit_sha, head.diff(@repo.index, options)]
                           else
                             merge_base = merge_base(commit)
                             patches = @repo.diff(merge_base, head, options)

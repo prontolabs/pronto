@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1
+
+### Bugs fixed
+
+* Poper and some other runners were not working correctly. When using staged/unstaged flags, pass a string instead of Rugged::Commit as commit parameter for runners.
+
 ## 0.9.0
 
 ### New features
