@@ -15,6 +15,7 @@
 * [#49](https://github.com/mmozuras/pronto/issues/49): handle non-existance of GitHub pull requests gracefully.
 * [#217](https://github.com/mmozuras/pronto/issues/217): depend on `octokit >= 4.7.0`.
 * [#224](https://github.com/mmozuras/pronto/issues/224): depend on `gitlab >= 4.0.0`.
+* [#222](https://github.com/mmozuras/pronto/pull/184): prefix PULL_REQUEST_ID env variable with `PRONTO_`.
 
 ### Bugs fixed
 
