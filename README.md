@@ -121,7 +121,7 @@ It's possible to combine multiple formatters.
 To get both pull request comments and commit status summary use:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:

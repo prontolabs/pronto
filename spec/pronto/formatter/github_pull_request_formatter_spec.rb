@@ -14,7 +14,7 @@ module Pronto
         let(:patches) { repo.diff('64dadfd^') }
 
         before do
-          ENV['PULL_REQUEST_ID'] = '10'
+          ENV['PRONTO_PULL_REQUEST_ID'] = '10'
           Octokit::Client.any_instance
             .should_receive(:pull_requests)
             .once
