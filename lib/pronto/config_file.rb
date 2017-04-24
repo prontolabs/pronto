@@ -1,6 +1,7 @@
 module Pronto
   class ConfigFile
     DEFAULT_MESSAGE_FORMAT = '%{msg}'.freeze
+    DEFAULT_FILE_PATH = '.pronto.yml'.freeze
 
     EMPTY = {
       'all' => {
@@ -35,8 +36,12 @@ module Pronto
       'format' => DEFAULT_MESSAGE_FORMAT
     }.freeze
 
-    def initialize(path = '.pronto.yml')
-      @path = path
+    def initialize
+      @path = if File.exist?(ENV['PRONTO_CONFIG'].to_s)
+                ENV['PRONTO_CONFIG']
+              else
+                DEFAULT_FILE_PATH
+              end
     end
 
     def to_h
