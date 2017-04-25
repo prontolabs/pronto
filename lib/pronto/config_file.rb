@@ -37,11 +37,9 @@ module Pronto
     }.freeze
 
     def initialize
-      @path = if File.exist?(ENV['PRONTO_CONFIG'].to_s)
-                ENV['PRONTO_CONFIG']
-              else
-                DEFAULT_FILE_PATH
-              end
+      @path = ENV.fetch('PRONTO_CONFIG', DEFAULT_FILE_PATH)
+      return if @path == DEFAULT_FILE_PATH || File.exist?(@path)
+      raise Pronto::Error, "configuration file `#{@path}` missing"
     end
 
     def to_h

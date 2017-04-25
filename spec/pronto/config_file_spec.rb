@@ -33,9 +33,6 @@ module Pronto
       context 'only global excludes in file' do
         before do
           File.should_receive(:exist?)
-            .and_return(false)
-
-          File.should_receive(:exist?)
             .and_return(true)
 
           YAML.should_receive(:load_file)
@@ -54,9 +51,6 @@ module Pronto
       context 'a value is set to false' do
         before do
           File.should_receive(:exist?)
-            .and_return(false)
-
-          File.should_receive(:exist?)
             .and_return(true)
 
           YAML.should_receive(:load_file)
@@ -70,15 +64,13 @@ module Pronto
         let(:path) { '/tmp/pronto.yml' }
 
         before do
-          ENV.should_receive(:[])
-            .with('PRONTO_CONFIG').twice
+          ENV.should_receive(:fetch)
+            .with('PRONTO_CONFIG', described_class::DEFAULT_FILE_PATH)
             .and_return(path)
 
           File.should_receive(:exist?)
             .with(path)
-            .and_return(true)
-
-          File.should_receive(:exist?)
+            .twice
             .and_return(true)
 
           YAML.should_receive(:load_file)
@@ -92,6 +84,24 @@ module Pronto
               'exclude' => ['a/**/*.rb'], 'include' => []
             }
           )
+        end
+      end
+
+      context 'unexisting config file path' do
+        let(:path) { '/tmp/pronto.yml' }
+
+        before do
+          ENV.should_receive(:fetch)
+            .with('PRONTO_CONFIG', described_class::DEFAULT_FILE_PATH)
+            .and_return(path)
+
+          File.should_receive(:exist?)
+            .with(path)
+            .and_return(false)
+        end
+
+        specify do
+          -> { subject }.should raise_error(Pronto::Error, "configuration file `#{path}` missing")
         end
       end
     end
