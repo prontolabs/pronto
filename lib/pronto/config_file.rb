@@ -51,7 +51,7 @@ module Pronto
         if oldval.is_a?(Hash) && newval.is_a?(Hash)
           oldval.merge(newval, &merger)
         else
-          oldval || newval
+          oldval.nil? ? newval : oldval
         end
       end
 

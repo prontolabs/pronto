@@ -47,6 +47,18 @@ module Pronto
           )
         end
       end
+
+      context 'a value is set to false' do
+        before do
+          File.should_receive(:exist?)
+            .and_return(true)
+
+          YAML.should_receive(:load_file)
+            .and_return('verbose' => false)
+        end
+
+        it { should include('verbose' => false) }
+      end
     end
   end
 end
