@@ -16,7 +16,6 @@ module Pronto
 
     method_option :config,
                   type: :string,
-                  default: '.pronto.yml',
                   desc: 'Uses the specified config file.'
 
     method_option :'exit-code',

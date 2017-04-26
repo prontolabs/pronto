@@ -64,8 +64,8 @@ module Pronto
         let(:path) { '/tmp/pronto.yml' }
 
         before do
-          ENV.should_receive(:fetch)
-            .with('PRONTO_CONFIG', described_class::DEFAULT_FILE_PATH)
+          ENV.should_receive(:[])
+            .with('PRONTO_CONFIG')
             .and_return(path)
 
           File.should_receive(:exist?)
@@ -91,8 +91,8 @@ module Pronto
         let(:path) { '/tmp/pronto.yml' }
 
         before do
-          ENV.should_receive(:fetch)
-            .with('PRONTO_CONFIG', described_class::DEFAULT_FILE_PATH)
+          ENV.should_receive(:[])
+            .with('PRONTO_CONFIG')
             .and_return(path)
 
           File.should_receive(:exist?)
