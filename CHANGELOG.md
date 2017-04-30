@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.2
+
+### Bugs fixed
+
+* [#231](https://github.com/mmozuras/pronto/pull/231): GitHub pull request review formatter was not working in some cases without Accept header.
+
 ## 0.9.1
 
 ### Bugs fixed
