@@ -1,3 +1,5 @@
+require 'delegate'
+
 module Pronto
   module Formatter
     class TextMessageDecorator < SimpleDelegator
