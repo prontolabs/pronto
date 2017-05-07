@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.3
+
+### Bugs fixed
+
+* [#234](https://github.com/prontolabs/pronto/pull/234): Text formatter was not working, require delegate.rb in text_message_decorator.rb to fix.
+
 ## 0.9.2
 
 ### Bugs fixed
