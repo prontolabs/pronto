@@ -1,6 +1,6 @@
 # Pronto
 
-[![Build Status](https://secure.travis-ci.org/mmozuras/pronto.svg)](http://travis-ci.org/mmozuras/pronto)
+[![Build Status](https://secure.travis-ci.org/prontolabs/pronto.svg)](http://travis-ci.org/prontolabs/pronto)
 [![Coverage Status](https://img.shields.io/codeclimate/coverage/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
 [![Code Climate](https://codeclimate.com/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
@@ -10,11 +10,11 @@
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [GitHub pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
 Perfect if you want to find out quickly if a branch introduces changes that conform
-to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](https://github.com/mmozuras/pronto-flay), [don't introduce security holes](https://github.com/mmozuras/pronto-brakeman) and [more](#runners).
+to your [styleguide](https://github.com/prontolabs/pronto-rubocop), [are DRY](https://github.com/prontolabs/pronto-flay), [don't introduce security holes](https://github.com/prontolabs/pronto-brakeman) and [more](#runners).
 
 ![Pronto demo](pronto.gif "")
 
-_This README might be ahead of the latest release. Find the README for v0.9.2 [here](https://github.com/mmozuras/pronto/blob/v0.9.2/README.md)._
+_This README might be ahead of the latest release. Find the README for v0.9.2 [here](https://github.com/prontolabs/pronto/blob/v0.9.2/README.md)._
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -262,35 +262,35 @@ The following values are available only to the text formatter:
 Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
-* [pronto-brakeman](https://github.com/mmozuras/pronto-brakeman)
+* [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
 * [pronto-dogma](https://github.com/iurifq/pronto-dogma)
-* [pronto-eslint](https://github.com/mmozuras/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
+* [pronto-eslint](https://github.com/prontolabs/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
 * [pronto-eslint_npm](https://github.com/doits/pronto-eslint_npm) (uses eslint installed from npm)
-* [pronto-fasterer](https://github.com/mmozuras/pronto-fasterer)
-* [pronto-flay](https://github.com/mmozuras/pronto-flay)
-* [pronto-foodcritic](https://github.com/mmozuras/pronto-foodcritic)
-* [pronto-haml](https://github.com/mmozuras/pronto-haml)
+* [pronto-fasterer](https://github.com/prontolabs/pronto-fasterer)
+* [pronto-flay](https://github.com/prontolabs/pronto-flay)
+* [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
+* [pronto-haml](https://github.com/prontolabs/pronto-haml)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
-* [pronto-jshint](https://github.com/mmozuras/pronto-jshint)
+* [pronto-jshint](https://github.com/prontolabs/pronto-jshint)
 * [pronto-json](https://github.com/deees/pronto-json)
 * [pronto-luacheck](https://github.com/seikichi/pronto-luacheck)
 * [pronto-perl_lint](https://github.com/bells17/pronto-perl_lint)
 * [pronto-phpcs](https://github.com/EllisV/pronto-phpcs)
 * [pronto-phpmd](https://github.com/EllisV/pronto-phpmd)
-* [pronto-poper](https://github.com/mmozuras/pronto-poper)
-* [pronto-rails_best_practices](https://github.com/mmozuras/pronto-rails_best_practices)
+* [pronto-poper](https://github.com/prontolabs/pronto-poper)
+* [pronto-rails_best_practices](https://github.com/prontolabs/pronto-rails_best_practices)
 * [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
-* [pronto-reek](https://github.com/mmozuras/pronto-reek)
-* [pronto-rubocop](https://github.com/mmozuras/pronto-rubocop)
-* [pronto-scss](https://github.com/mmozuras/pronto-scss)
+* [pronto-reek](https://github.com/prontolabs/pronto-reek)
+* [pronto-rubocop](https://github.com/prontolabs/pronto-rubocop)
+* [pronto-scss](https://github.com/prontolabs/pronto-scss)
 * [pronto-shellcheck](https://github.com/pclalv/pronto-shellcheck)
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-slim_lint](https://github.com/ibrahima/pronto-slim_lint)
-* [pronto-spell](https://github.com/mmozuras/pronto-spell)
+* [pronto-spell](https://github.com/prontolabs/pronto-spell)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
