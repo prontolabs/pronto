@@ -1,10 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Bugs fixed
+
+* [#235](https://github.com/prontolabs/pronto/pull/235): do not submit empty pull request reviews to GitHub.
+
 ## 0.9.3
 
 ### Bugs fixed
 
-* [#234](https://github.com/prontolabs/pronto/pull/234): Text formatter was not working, require delegate.rb in text_message_decorator.rb to fix.
+* [#234](https://github.com/prontolabs/pronto/pull/234): text formatter was not working, require delegate.rb in text_message_decorator.rb to fix.
 
 ## 0.9.2
 
