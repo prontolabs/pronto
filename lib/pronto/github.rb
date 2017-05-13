@@ -39,6 +39,8 @@ module Pronto
     end
 
     def create_pull_request_review(comments)
+      return if comments.empty?
+
       options = {
         event: 'COMMENT',
         accept: 'application/vnd.github.black-cat-preview+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review

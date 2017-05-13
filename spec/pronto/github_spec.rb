@@ -124,5 +124,57 @@ module Pronto
         end
       end
     end
+
+    describe '#create_pull_request_review' do
+      subject { github.create_pull_request_review(comments) }
+
+      let(:octokit_client) { double(Octokit::Client) }
+
+      before do
+        github.instance_variable_set(:@client, octokit_client)
+      end
+
+      context 'with no comments' do
+        let(:comments) { [] }
+
+        specify do
+          octokit_client.should_not_receive(:create_pull_request_review)
+          subject
+        end
+      end
+
+      context 'with comments' do
+        before do
+          github.should_receive(:pull_id).once.and_return(pull_id)
+        end
+
+        let(:pull_id) { 10 }
+        let(:comments) do
+          [
+            double(path: 'bad_file.rb', position: 10, body: 'Offense #1'),
+            double(path: 'bad_file.rb', position: 20, body: 'Offense #2')
+          ]
+        end
+        let(:options) do
+          {
+            event: 'COMMENT',
+            accept: 'application/vnd.github.black-cat-preview+json',
+            comments: [
+              { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
+              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
+            ]
+          }
+        end
+
+        specify do
+          octokit_client
+            .should_not_receive(:create_pull_request_review)
+            .with('mmozuras/pronto', pull_id, options)
+            .once
+
+          subject
+        end
+      end
+    end
   end
 end
