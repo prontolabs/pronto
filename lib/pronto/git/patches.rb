@@ -21,7 +21,7 @@ module Pronto
 
       def find_line(path, line)
         patch = find { |p| p.new_file_full_path == path }
-        lines = patch ? patch.lines : []
+        lines = patch ? patch.added_lines : []
         lines.find { |l| l.new_lineno == line }
       end
     end
