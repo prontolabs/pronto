@@ -1,11 +1,11 @@
 # Pronto
 
 [![Build Status](https://secure.travis-ci.org/prontolabs/pronto.svg)](http://travis-ci.org/prontolabs/pronto)
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
-[![Code Climate](https://codeclimate.com/github/mmozuras/pronto.svg)](https://codeclimate.com/github/mmozuras/pronto)
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
+[![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
-[![Dependency Status](https://gemnasium.com/mmozuras/pronto.svg)](https://gemnasium.com/mmozuras/pronto)
-[![Inline docs](http://inch-ci.org/github/mmozuras/pronto.svg)](http://inch-ci.org/github/mmozuras/pronto)
+[![Dependency Status](https://gemnasium.com/prontolabs/pronto.svg)](https://gemnasium.com/prontolabs/pronto)
+[![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [GitHub pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
@@ -198,7 +198,7 @@ eslint:
   exclude:
     - 'app/assets/**/*'
 github:
-  slug: mmozuras/pronto
+  slug: prontolabs/pronto
   access_token: B26354
   api_endpoint: https://api.github.com/
   web_endpoint: https://github.com/
@@ -207,7 +207,7 @@ gitlab:
   api_private_token: 46751
   api_endpoint: https://api.vinted.com/gitlab
 bitbucket:
-  slug: mmozuras/pronto
+  slug: prontolabs/pronto
   username: user
   password: pass
   web_endpoint: https://bitbucket.org/
