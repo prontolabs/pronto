@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changes
+
+* [#227](https://github.com/prontolabs/pronto/issues/227): the repository was converted from an individual one (mmozuras/pronto) to an org (prontolabs/pronto).
+
 ### Bugs fixed
 
 * [#235](https://github.com/prontolabs/pronto/pull/235): do not submit empty pull request reviews to GitHub.
