@@ -3,7 +3,7 @@ module Pronto
     let(:github) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@github.com:mmozuras/pronto.git'], branch: nil)
+      double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil)
     end
     let(:sha) { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
@@ -15,7 +15,7 @@ module Pronto
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras/pronto', sha)
+            .with('prontolabs/pronto', sha)
             .once
             .and_return([comment])
 
@@ -26,12 +26,12 @@ module Pronto
       end
 
       context 'git remote without .git suffix' do
-        let(:repo) { double(remote_urls: ['git@github.com:mmozuras/pronto']) }
+        let(:repo) { double(remote_urls: ['git@github.com:prontolabs/pronto']) }
 
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras/pronto', sha)
+            .with('prontolabs/pronto', sha)
             .once
             .and_return([comment])
 
@@ -52,7 +52,7 @@ module Pronto
 
           Octokit::Client.any_instance
             .should_receive(:pull_comments)
-            .with('mmozuras/pronto', 10)
+            .with('prontolabs/pronto', 10)
             .once
             .and_return([comment])
 
@@ -89,7 +89,7 @@ module Pronto
 
         octokit_client
           .should_receive(:create_status)
-          .with('mmozuras/pronto', expected_sha, state,
+          .with('prontolabs/pronto', expected_sha, state,
                 context: context, description: desc)
           .once
       end
@@ -169,7 +169,7 @@ module Pronto
         specify do
           octokit_client
             .should_not_receive(:create_pull_request_review)
-            .with('mmozuras/pronto', pull_id, options)
+            .with('prontolabs/pronto', pull_id, options)
             .once
 
           subject

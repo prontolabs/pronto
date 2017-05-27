@@ -3,7 +3,7 @@ module Pronto
     let(:bitbucket) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@bitbucket.org:mmozuras/pronto.git'],
+      double(remote_urls: ['git@bitbucket.org:prontolabs/pronto.git'],
              branch: nil)
     end
     let(:sha) { '61e4bef' }
@@ -12,14 +12,14 @@ module Pronto
     end
 
     describe '#slug' do
-      let(:repo) { double(remote_urls: ['git@bitbucket.org:mmozuras/pronto']) }
+      let(:repo) { double(remote_urls: ['git@bitbucket.org:prontolabs/pronto']) }
       subject { bitbucket.commit_comments(sha) }
 
       context 'git remote without .git suffix' do
         specify do
           BitbucketClient.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras/pronto', sha)
+            .with('prontolabs/pronto', sha)
             .once
             .and_return([comment])
 
@@ -35,7 +35,7 @@ module Pronto
         specify do
           BitbucketClient.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras/pronto', sha)
+            .with('prontolabs/pronto', sha)
             .once
             .and_return([comment])
 
@@ -58,7 +58,7 @@ module Pronto
 
           BitbucketClient.any_instance
             .should_receive(:pull_comments)
-            .with('mmozuras/pronto', 10)
+            .with('prontolabs/pronto', 10)
             .once
             .and_return([comment])
 

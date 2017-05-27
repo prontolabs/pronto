@@ -3,7 +3,7 @@ module Pronto
     let(:bitbucket) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@bitbucket.org:mmozuras/pronto.git'],
+      double(remote_urls: ['git@bitbucket.org:prontolabs/pronto.git'],
              branch: nil)
     end
     let(:sha) { '61e4bef' }
@@ -32,7 +32,7 @@ module Pronto
 
           BitbucketServerClient.any_instance
             .should_receive(:pull_comments)
-            .with('mmozuras/pronto', 10)
+            .with('prontolabs/pronto', 10)
             .once
             .and_return([response])
 

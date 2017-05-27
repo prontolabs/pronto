@@ -11,22 +11,22 @@ module Pronto
 
       context 'ssh with port remote url' do
         let(:repo) do
-          remote_url = 'ssh://git@gitlab.example.com:111/mmozuras/pronto.git'
+          remote_url = 'ssh://git@gitlab.example.com:111/prontolabs/pronto.git'
           double(remote_urls: [remote_url])
         end
 
         it 'returns correct slug' do
-          subject.should eql('mmozuras/pronto')
+          subject.should eql('prontolabs/pronto')
         end
       end
 
       context 'git remote url' do
         let(:repo) do
-          double(remote_urls: ['git@gitlab.example.com:mmozuras/pronto.git'])
+          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
         end
 
         it 'returns correct slug' do
-          subject.should eql('mmozuras/pronto')
+          subject.should eql('prontolabs/pronto')
         end
       end
     end
@@ -36,7 +36,7 @@ module Pronto
 
       context 'three requests for same comments' do
         let(:repo) do
-          double(remote_urls: ['git@gitlab.example.com:mmozuras/pronto.git'])
+          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
         end
         let(:sha) { 'foobar' }
         let(:comment) { double(note: 'body', path: 'path', line: 1) }
@@ -47,7 +47,7 @@ module Pronto
 
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
-            .with('mmozuras/pronto', sha, per_page: 500)
+            .with('prontolabs/pronto', sha, per_page: 500)
             .once
             .and_return([comment])
 

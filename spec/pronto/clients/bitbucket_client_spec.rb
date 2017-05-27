@@ -4,7 +4,7 @@ module Pronto
 
     describe '#create_commit_comment' do
       subject { client.create_commit_comment(slug, sha, body, path, position) }
-      let(:slug) { 'mmozuras/pronto' }
+      let(:slug) { 'prontolabs/pronto' }
       let(:sha) { '123' }
       let(:body) { 'comment' }
       let(:path) { 'path/to/file' }

@@ -7,8 +7,8 @@ module Pronto
       subject { config.github_slug }
 
       context 'from env variable' do
-        before { stub_const('ENV', 'PRONTO_GITHUB_SLUG' => 'mmozuras/pronto') }
-        it { should == 'mmozuras/pronto' }
+        before { stub_const('ENV', 'PRONTO_GITHUB_SLUG' => 'prontolabs/pronto') }
+        it { should == 'prontolabs/pronto' }
       end
 
       context 'from config hash' do
