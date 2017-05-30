@@ -310,6 +310,7 @@ Articles to help you to get started:
 * [Running Rubocop before git commit](https://christoph.luppri.ch/articles/2016/11/21/running-rubocop-before-git-commit/)
 * [Pronto, Codeship and GitHub for automatic code review](http://abinoam.tl1n.com/pronto-codeship-and-github-for-automatic-code-review/)
 * [How to automatically review your PRs for style violations with Pronto and RuboCop](https://christoph.luppri.ch/articles/2017/03/05/how-to-automatically-review-your-prs-for-style-violations-with-pronto-and-rubocop/)
+* [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
 
 Make a Pull Request to add something you wrote or found useful.
 
