@@ -1,0 +1,24 @@
+From f49f29399d8cf23125874a0a8658b80fc5135d2c Mon Sep 17 00:00:00 2001
+From: Eddie Prislac <prislac@informz.com>
+Date: Thu, 8 Jun 2017 12:49:18 -0500
+Subject: [PATCH] Add pronto-tslint_npm to runner list in README.md
+
+---
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/README.md b/README.md
+index 1ee8364..cfca52d 100644
+--- a/README.md
++++ b/README.md
+@@ -297,6 +297,7 @@ Currently available:
+ * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
+ * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
+ * [pronto-textlint](https://github.com/seikichi/pronto-textlint)
++* [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
+ 
+ ## Articles
+ 
+-- 
+2.11.0 (Apple Git-81)
+
