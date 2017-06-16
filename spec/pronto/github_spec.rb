@@ -3,7 +3,7 @@ module Pronto
     let(:github) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil)
+      double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil, head_detached?: false)
     end
     let(:sha) { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
