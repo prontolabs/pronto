@@ -17,3 +17,6 @@ Metrics/BlockLength:
   ExcludedMethods: Struct.new
   Exclude:
     - spec/**/*.rb
+
+Rubocop/Metrics/AbcSize:
+  Max: 25
