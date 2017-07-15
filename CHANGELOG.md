@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Changes
+
+* [#250](https://github.com/prontolabs/pronto/issues/250): allow HTTParty `0.15.*`.
+
 ## 0.9.4
 
 ### Changes
