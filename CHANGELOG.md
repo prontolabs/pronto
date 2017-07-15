@@ -5,6 +5,7 @@
 ### Changes
 
 * [#227](https://github.com/prontolabs/pronto/issues/227): the repository was converted from an individual one (mmozuras/pronto) to an org (prontolabs/pronto).
+* [#247](https://github.com/prontolabs/pronto/pull/247): try to find GitHub pull request by sha when HEAD is detached.
 
 ### Bugs fixed
 
