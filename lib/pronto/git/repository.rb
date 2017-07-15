@@ -66,6 +66,10 @@ module Pronto
         head.oid
       end
 
+      def head_detached?
+        @repo.head_detached?
+      end
+
       private
 
       def empty_patches(sha)

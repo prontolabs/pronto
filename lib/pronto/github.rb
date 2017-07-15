@@ -92,6 +92,10 @@ module Pronto
                   pull_requests.find { |pr| pr[:number].to_i == env_pull_id }
                 elsif @repo.branch
                   pull_requests.find { |pr| pr[:head][:ref] == @repo.branch }
+                elsif @repo.head_detached?
+                  pull_requests.find do |pr|
+                    pr[:head][:sha] == @repo.head_commit_sha
+                  end
                 end
     end
 
