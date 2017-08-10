@@ -49,6 +49,8 @@ module Pronto
       end
 
       def blame(path, lineno)
+        return if new_file?(path)
+
         Rugged::Blame.new(@repo, path, min_line: lineno, max_line: lineno,
                                        track_copies_same_file: true,
                                        track_copies_any_commit_copies: true)[0]
@@ -71,6 +73,10 @@ module Pronto
       end
 
       private
+
+      def new_file?(path)
+        @repo.status(path).include?(:index_new)
+      end
 
       def empty_patches(sha)
         Patches.new(self, sha, [])
