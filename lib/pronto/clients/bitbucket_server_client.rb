@@ -62,6 +62,6 @@ class BitbucketServerClient
   end
 
   def get(url, query)
-    self.class.get(url, query).parsed_response
+    self.class.get(url, query: query).parsed_response
   end
 end
