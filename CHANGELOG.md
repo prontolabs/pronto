@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Bugs fixed
+
+* [#253](https://github.com/prontolabs/pronto/pull/253): fix an infinite loop when Bitbucket Server sends a paginated response.
+
 ### Changes
 
 * [#250](https://github.com/prontolabs/pronto/issues/250): allow HTTParty `0.15.*`.
