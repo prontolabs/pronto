@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changes
+
+* Depend on thor `0.20.*`.
+
+## 0.9.5
+
 ### Bugs fixed
 
 * [#253](https://github.com/prontolabs/pronto/pull/253): fix an infinite loop when Bitbucket Server sends a paginated response.
