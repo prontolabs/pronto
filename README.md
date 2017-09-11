@@ -276,6 +276,7 @@ Currently available:
 * [pronto-flow](https://github.com/kevinjalbert/pronto-flow)
 * [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
+* [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/prontolabs/pronto-jshint)
 * [pronto-json](https://github.com/deees/pronto-json)
