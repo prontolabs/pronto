@@ -46,11 +46,6 @@ module Pronto
       context 'three requests for same comments' do
         specify do
           Octokit::Client.any_instance
-            .should_receive(:pull_requests)
-            .once
-            .and_return([])
-
-          Octokit::Client.any_instance
             .should_receive(:pull_comments)
             .with('prontolabs/pronto', 10)
             .once
@@ -66,6 +61,8 @@ module Pronto
 
       context 'pull request does not exist' do
         specify do
+          ENV['PRONTO_PULL_REQUEST_ID'] = 'foo'
+
           Octokit::Client.any_instance
             .should_receive(:pull_comments)
             .and_raise(Octokit::NotFound)
@@ -173,6 +170,50 @@ module Pronto
             .once
 
           subject
+        end
+      end
+
+      context 'pull request for branch does not exist' do
+        let(:comments) do
+          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
+        end
+        let(:repo) do
+          double(remote_urls: ['git@github.com:prontolabs/pronto'],
+                 branch: 'master')
+        end
+        specify do
+          octokit_client
+            .should_not_receive(:create_pull_request_review)
+
+          octokit_client
+            .should_receive(:pull_requests)
+            .once
+            .and_return([])
+
+          -> { subject }.should raise_error(Pronto::Error, /branch master/)
+        end
+      end
+
+      context 'pull request for detached head does not exist' do
+        let(:comments) do
+          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
+        end
+        let(:repo) do
+          double(remote_urls: ['git@github.com:prontolabs/pronto'],
+                 branch: nil,
+                 head_detached?: true,
+                 head_commit_sha: 'sha_with_no_pr')
+        end
+        specify do
+          octokit_client
+            .should_not_receive(:create_pull_request_review)
+
+          octokit_client
+            .should_receive(:pull_requests)
+            .once
+            .and_return([])
+
+          -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
         end
       end
     end
