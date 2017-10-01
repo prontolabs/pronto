@@ -16,6 +16,7 @@ module Pronto
 
       def to_h
         original = __getobj__.to_h
+        original[:line] = __getobj__.line.new_lineno if __getobj__.line
         original[:color_level] = format_level(__getobj__)
         original[:color_location] = format_location(__getobj__)
         original
