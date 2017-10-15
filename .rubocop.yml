@@ -18,5 +18,5 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
 
-Rubocop/Metrics/AbcSize:
+Metrics/AbcSize:
   Max: 25
