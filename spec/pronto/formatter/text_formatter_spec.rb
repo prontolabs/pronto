@@ -42,6 +42,16 @@ module Pronto
           its(:first) { should == 'W: careful' }
         end
 
+        context 'with custom config' do
+          before do
+            formatter.stub(:config) do
+              Config.new('text' => { 'format' => '%{line} %{path}' })
+            end
+          end
+          its(:count) { should == 2 }
+          its(:first) { should == '1 path/to' }
+        end
+
         context 'in TTY' do
           before { $stdout.stub(:tty?) { true } }
 
