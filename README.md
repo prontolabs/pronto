@@ -272,6 +272,7 @@ Currently available:
 * [pronto-eslint](https://github.com/prontolabs/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
 * [pronto-eslint_npm](https://github.com/doits/pronto-eslint_npm) (uses eslint installed from npm)
 * [pronto-fasterer](https://github.com/prontolabs/pronto-fasterer)
+* [pronto-flake8](https://github.com/scoremedia/pronto-flake8)
 * [pronto-flay](https://github.com/prontolabs/pronto-flay)
 * [pronto-flow](https://github.com/kevinjalbert/pronto-flow)
 * [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
