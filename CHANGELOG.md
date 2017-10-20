@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Bugs fixed
+
+* [#270](https://github.com/prontolabs/pronto/pull/270): fix ${line} in text format to mean line number.
+
 ### Changes
 
 * Depend on thor `0.20.*`.
