@@ -1,5 +1,12 @@
+require 'pronto/github_pull'
+
 module Pronto
   class Github < Client
+    def initialize(repo)
+      super(repo)
+      @github_pull = Pronto::GithubPull.new(client, slug)
+    end
+
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
@@ -89,46 +96,12 @@ module Pronto
 
     def pull
       @pull ||= if env_pull_id
-                  pull_by_env_pull_id
+                  @github_pull.pull_by_id(env_pull_id)
                 elsif @repo.branch
-                  pull_by_repo_branch
+                  @github_pull.pull_by_branch(@repo.branch)
                 elsif @repo.head_detached?
-                  pull_by_repo_head
+                  @github_pull.pull_by_commit(@repo.head_commit_sha)
                 end
-    end
-
-    def pull_requests
-      @pull_requests ||= client.pull_requests(slug)
-    end
-
-    def pull_by_env_pull_id
-      result = pull_requests.find { |pr| pr[:number].to_i == env_pull_id }
-      unless result
-        message = "Pull request ##{env_pull_id} was not found in #{slug}."
-        raise Pronto::Error, message
-      end
-      result
-    end
-
-    def pull_by_repo_branch
-      result = pull_requests.find { |pr| pr[:head][:ref] == @repo.branch }
-      unless result
-        raise Pronto::Error, "Pull request for branch #{@repo.branch} " \
-                             "was not found in #{slug}."
-      end
-      result
-    end
-
-    def pull_by_repo_head
-      result = pull_requests.find do |pr|
-        pr[:head][:sha] == @repo.head_commit_sha
-      end
-      unless result
-        message = "Pull request with head #{@repo.head_commit_sha} " \
-                  "was not found in #{slug}."
-        raise Pronto::Error, message
-      end
-      result
     end
   end
 end

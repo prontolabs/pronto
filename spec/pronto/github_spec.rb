@@ -78,6 +78,7 @@ module Pronto
       subject { github.create_commit_status(status) }
 
       let(:octokit_client) { double(Octokit::Client) }
+      let(:github_pull) { double(GithubPull) }
       let(:status) { Status.new(sha, state, context, desc) }
       let(:state) { :success }
       let(:context) { :pronto }
@@ -85,6 +86,7 @@ module Pronto
 
       before do
         github.instance_variable_set(:@client, octokit_client)
+        github.instance_variable_set(:@github_pull, github_pull)
 
         octokit_client
           .should_receive(:create_status)
@@ -99,10 +101,11 @@ module Pronto
 
         specify do
           ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
-          octokit_client
-            .should_receive(:pull_requests)
+          github_pull
+            .should_receive(:pull_by_id)
+            .with(10)
             .once
-            .and_return([{ number: 10, head: { sha: pull_request_sha } }])
+            .and_return(head: { sha: pull_request_sha })
 
           subject
         end
@@ -183,11 +186,6 @@ module Pronto
           octokit_client
             .should_not_receive(:create_pull_request_review)
 
-          octokit_client
-            .should_receive(:pull_requests)
-            .once
-            .and_return([])
-
           -> { subject }.should raise_error(Pronto::Error, /branch master/)
         end
       end
@@ -205,11 +203,6 @@ module Pronto
         specify do
           octokit_client
             .should_not_receive(:create_pull_request_review)
-
-          octokit_client
-            .should_receive(:pull_requests)
-            .once
-            .and_return([])
 
           -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
         end
