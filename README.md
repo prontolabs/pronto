@@ -306,6 +306,7 @@ Currently available:
 
 Articles to help you to get started:
 
+* [Effortless Code Conventions Review for Pull Request Changes](https://jtway.co/effortless-code-review-for-pull-request-changes-241206b1cb04)
 * [Automating code review with Pronto (and friends)](http://everydayrails.com/2015/02/17/pronto-ruby-code-review.html)
 * [Setup Pronto with CircleCI](https://medium.com/@MaximAbramchuk/circleci-github-pr-commenting-ruby-scss-coffeescript-javascript-git-and-etc-fbcbe2a378a5#.gk5f14p3j)
 * [Continuous Static Analysis using Pronto](http://codingfearlessly.com/2014/11/06/continuous-static-analysis/)
