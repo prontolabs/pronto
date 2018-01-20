@@ -285,6 +285,7 @@ Currently available:
 * [pronto-perl_lint](https://github.com/bells17/pronto-perl_lint)
 * [pronto-phpcs](https://github.com/EllisV/pronto-phpcs)
 * [pronto-phpmd](https://github.com/EllisV/pronto-phpmd)
+* [pronto-phpstan](https://github.com/Powerhamster/pronto-phpstan)
 * [pronto-poper](https://github.com/prontolabs/pronto-poper)
 * [pronto-rails_best_practices](https://github.com/prontolabs/pronto-rails_best_practices)
 * [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
