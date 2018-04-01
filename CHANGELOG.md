@@ -62,7 +62,7 @@
 ### Changes
 
 * [#193](https://github.com/prontolabs/pronto/issues/193): rename `pronto run --index` option to `--unstaged`.
-* [#49](https://github.com/prontolabs/pronto/issues/49): handle non-existance of GitHub pull requests gracefully.
+* [#49](https://github.com/prontolabs/pronto/issues/49): handle nonexistence of GitHub pull requests gracefully.
 * [#217](https://github.com/prontolabs/pronto/issues/217): depend on `octokit >= 4.7.0`.
 * [#224](https://github.com/prontolabs/pronto/issues/224): depend on `gitlab >= 4.0.0`.
 * [#222](https://github.com/prontolabs/pronto/pull/184): prefix PULL_REQUEST_ID env variable with `PRONTO_`.
