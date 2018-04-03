@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('octokit', '~> 4.7', '>= 4.7.0')
   s.add_runtime_dependency('gitlab', '~> 4.0', '>= 4.0.0')
   s.add_runtime_dependency('httparty', '>= 0.13.7')
-  s.add_runtime_dependency('rainbow', '~> 3.0')
+  s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
   s.add_development_dependency('rake', '~> 12.0')
   s.add_development_dependency('rspec', '~> 3.4')
   s.add_development_dependency('rspec-its', '~> 1.2')
