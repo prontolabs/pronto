@@ -168,7 +168,6 @@ on Bitbucket commits using `BitbucketFormatter` or `BitbucketPullRequestFormatte
 Add Pronto runners you want to use to your Gemfile:
 
 Set the PRONTO_BITBUCKET_USERNAME and PRONTO_BITBUCKET_PASSWORD environment variables or values in `.pronto.yml`.
-.
 
 Then just run it:
 
