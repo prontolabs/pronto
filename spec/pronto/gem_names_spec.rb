@@ -18,7 +18,7 @@ module Pronto
         its(:count) { should == 1 }
       end
 
-      context 'inproperly named gem' do
+      context 'improperly named gem' do
         context 'with good path' do
           let(:gems) { [double(name: 'good', full_gem_path: '/good')] }
           before do
