@@ -56,6 +56,25 @@ module Pronto
       end
     end
 
+    describe '#max_warnings' do
+      subject { config.max_warnings }
+
+      context 'from env variable' do
+        before { stub_const('ENV', 'PRONTO_MAX_WARNINGS' => '20') }
+        it { should == 20 }
+      end
+
+      context 'from config hash' do
+        let(:config_hash) { { 'max_warnings' => 40 } }
+        it { should == 40 }
+      end
+
+      context 'default' do
+        let(:config_hash) { ConfigFile::EMPTY }
+        it { should == nil }
+      end
+    end
+
     describe '#message_format' do
       subject { config.message_format('whatever') }
 
