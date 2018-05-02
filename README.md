@@ -268,6 +268,7 @@ Currently available:
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
 * [pronto-dirty_words](https://github.com/kevinjalbert/pronto-dirty_words)
 * [pronto-dogma](https://github.com/iurifq/pronto-dogma)
+* [pronto-erb_lint](https://github.com/tleish/pronto-erb_lint)
 * [pronto-eslint](https://github.com/prontolabs/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
 * [pronto-eslint_npm](https://github.com/doits/pronto-eslint_npm) (uses eslint installed from npm)
 * [pronto-fasterer](https://github.com/prontolabs/pronto-fasterer)
