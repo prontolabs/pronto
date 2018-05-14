@@ -263,6 +263,8 @@ Currently available:
 
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
+* [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
+* [pronto-clang_tidy](https://github.com/micjabbour/pronto-clang_tidy)
 * [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
