@@ -6,6 +6,7 @@
 
 * [#258](https://github.com/prontolabs/pronto/pull/258): fix blame returning nil when file does not exist in the git tree.
 * [#270](https://github.com/prontolabs/pronto/pull/270): fix ${line} in text format to mean line number.
+* [#282](https://github.com/prontolabs/pronto/issues/282): relax rainbow dependency
 
 ### Changes
 
