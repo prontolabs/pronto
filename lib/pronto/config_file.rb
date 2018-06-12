@@ -16,7 +16,7 @@ module Pronto
       'gitlab' => {
         'slug' => nil,
         'api_private_token' => nil,
-        'api_endpoint' => 'https://gitlab.com/api/v3'
+        'api_endpoint' => 'https://gitlab.com/api/v4'
       },
       'bitbucket' => {
         'slug' => nil,
