@@ -40,7 +40,7 @@ module Pronto
     end
 
     def max_warnings
-      ENV['PRONTO_MAX_WARNINGS'] || @config_hash['max_warnings']
+      ENV['PRONTO_MAX_WARNINGS'] && Integer(ENV['PRONTO_MAX_WARNINGS']) || @config_hash['max_warnings']
     end
 
     def message_format(formatter)
