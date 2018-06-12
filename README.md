@@ -6,6 +6,7 @@
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
 [![Dependency Status](https://gemnasium.com/prontolabs/pronto.svg)](https://gemnasium.com/prontolabs/pronto)
 [![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
+[![Help Contribute to Open Source](https://www.codetriage.com/prontolabs/pronto/badges/users.svg)](https://www.codetriage.com/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [GitHub pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
