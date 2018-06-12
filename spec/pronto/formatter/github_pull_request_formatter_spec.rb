@@ -18,7 +18,7 @@ module Pronto
           Octokit::Client.any_instance
             .should_receive(:pull_requests)
             .once
-            .and_return([])
+            .and_return([{ number: 10, head: { sha: 'foo' } }])
 
           Octokit::Client.any_instance
             .should_receive(:pull_comments)

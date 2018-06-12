@@ -1,5 +1,12 @@
+require 'pronto/github_pull'
+
 module Pronto
   class Github < Client
+    def initialize(repo)
+      super(repo)
+      @github_pull = Pronto::GithubPull.new(client, slug)
+    end
+
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
@@ -80,7 +87,7 @@ module Pronto
     end
 
     def pull_id
-      pull ? pull[:number].to_i : env_pull_id
+      env_pull_id || pull[:number].to_i
     end
 
     def pull_sha
@@ -89,18 +96,12 @@ module Pronto
 
     def pull
       @pull ||= if env_pull_id
-                  pull_requests.find { |pr| pr[:number].to_i == env_pull_id }
+                  @github_pull.pull_by_id(env_pull_id)
                 elsif @repo.branch
-                  pull_requests.find { |pr| pr[:head][:ref] == @repo.branch }
+                  @github_pull.pull_by_branch(@repo.branch)
                 elsif @repo.head_detached?
-                  pull_requests.find do |pr|
-                    pr[:head][:sha] == @repo.head_commit_sha
-                  end
+                  @github_pull.pull_by_commit(@repo.head_commit_sha)
                 end
-    end
-
-    def pull_requests
-      @pull_requests ||= client.pull_requests(slug)
     end
   end
 end

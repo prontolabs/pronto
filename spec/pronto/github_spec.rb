@@ -7,6 +7,9 @@ module Pronto
     end
     let(:sha) { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
+    before do
+      ENV.stub(:[])
+    end
 
     describe '#commit_comments' do
       subject { github.commit_comments(sha) }
@@ -42,21 +45,17 @@ module Pronto
 
     describe '#pull_comments' do
       subject { github.pull_comments(sha) }
+      before do
+        ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
+      end
 
       context 'three requests for same comments' do
         specify do
-          Octokit::Client.any_instance
-            .should_receive(:pull_requests)
-            .once
-            .and_return([])
-
           Octokit::Client.any_instance
             .should_receive(:pull_comments)
             .with('prontolabs/pronto', 10)
             .once
             .and_return([comment])
-
-          ENV['PRONTO_PULL_REQUEST_ID'] = '10'
 
           subject
           subject
@@ -79,6 +78,7 @@ module Pronto
       subject { github.create_commit_status(status) }
 
       let(:octokit_client) { double(Octokit::Client) }
+      let(:github_pull) { double(GithubPull) }
       let(:status) { Status.new(sha, state, context, desc) }
       let(:state) { :success }
       let(:context) { :pronto }
@@ -86,6 +86,7 @@ module Pronto
 
       before do
         github.instance_variable_set(:@client, octokit_client)
+        github.instance_variable_set(:@github_pull, github_pull)
 
         octokit_client
           .should_receive(:create_status)
@@ -93,19 +94,18 @@ module Pronto
                 context: context, description: desc)
           .once
       end
-      after { ENV.delete('PRONTO_PULL_REQUEST_ID') }
 
       context 'uses PRONTO_PULL_REQUEST_ID to create commit status' do
         let(:pull_request_sha) { '123456' }
         let(:expected_sha) { pull_request_sha }
 
-        before { ENV['PRONTO_PULL_REQUEST_ID'] = '10' }
-
         specify do
-          octokit_client
-            .should_receive(:pull_requests)
+          ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
+          github_pull
+            .should_receive(:pull_by_id)
+            .with(10)
             .once
-            .and_return([{ number: 10, head: { sha: pull_request_sha } }])
+            .and_return(head: { sha: pull_request_sha })
 
           subject
         end
@@ -113,8 +113,6 @@ module Pronto
 
       context 'adds status to commit with sha' do
         let(:expected_sha) { sha }
-
-        before { ENV.delete('PRONTO_PULL_REQUEST_ID') }
 
         specify do
           octokit_client
@@ -173,6 +171,40 @@ module Pronto
             .once
 
           subject
+        end
+      end
+
+      context 'pull request for branch does not exist' do
+        let(:comments) do
+          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
+        end
+        let(:repo) do
+          double(remote_urls: ['git@github.com:prontolabs/pronto'],
+                 branch: 'master')
+        end
+        specify do
+          octokit_client
+            .should_not_receive(:create_pull_request_review)
+
+          -> { subject }.should raise_error(Pronto::Error, /branch master/)
+        end
+      end
+
+      context 'pull request for detached head does not exist' do
+        let(:comments) do
+          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
+        end
+        let(:repo) do
+          double(remote_urls: ['git@github.com:prontolabs/pronto'],
+                 branch: nil,
+                 head_detached?: true,
+                 head_commit_sha: 'sha_with_no_pr')
+        end
+        specify do
+          octokit_client
+            .should_not_receive(:create_pull_request_review)
+
+          -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
         end
       end
     end
