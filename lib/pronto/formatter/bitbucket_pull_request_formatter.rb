@@ -14,7 +14,7 @@ module Pronto
       end
 
       def approve_pull_request(comments_count, additions_count, client)
-        return if @config.bitbucket_auto_approve == false
+        return if config.bitbucket_auto_approve == false
 
         if comments_count > 0 && additions_count > 0
           client.unapprove_pull_request  
