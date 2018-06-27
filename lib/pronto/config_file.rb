@@ -23,6 +23,7 @@ module Pronto
         'username' => nil,
         'password' => nil,
         'api_endpoint' => nil,
+        'auto_approve' => false,
         'web_endpoint' => 'https://bitbucket.org/'
       },
       'text' => {
