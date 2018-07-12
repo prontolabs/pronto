@@ -31,7 +31,7 @@ module Pronto
       'runners' => [],
       'formatters' => [],
       'max_warnings' => nil,
-      'warning_per_review' => nil,
+      'warnings_per_review' => nil,
       'verbose' => false,
       'format' => DEFAULT_MESSAGE_FORMAT
     }.freeze

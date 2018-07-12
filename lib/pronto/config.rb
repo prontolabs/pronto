@@ -40,7 +40,7 @@ module Pronto
     end
 
     def warnings_per_review
-      ENV['PRONTO_WARNINGS_PER_REVIEW'] && Integer(ENV['PRONTO_WARNINGS_PER_REVIEW']) || @config_hash['warning_per_review']
+      ENV['PRONTO_WARNINGS_PER_REVIEW'] && Integer(ENV['PRONTO_WARNINGS_PER_REVIEW']) || @config_hash['warnings_per_review']
     end
 
     def max_warnings
