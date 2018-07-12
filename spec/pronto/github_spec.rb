@@ -180,13 +180,13 @@ module Pronto
         end
         let(:repo) do
           double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch: 'master')
+                 branch:      'develop')
         end
         specify do
           octokit_client
             .should_not_receive(:create_pull_request_review)
 
-          -> { subject }.should raise_error(Pronto::Error, /branch master/)
+          -> { subject }.should raise_error(Pronto::Error, /branch develop/)
         end
       end
 
