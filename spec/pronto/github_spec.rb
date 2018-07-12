@@ -123,8 +123,8 @@ module Pronto
       end
     end
 
-    describe '#create_pull_request_review' do
-      subject { github.create_pull_request_review(comments) }
+    describe '#publish_pull_request_comments' do
+      subject { github.publish_pull_request_comments(comments) }
 
       let(:octokit_client) { double(Octokit::Client) }
 
