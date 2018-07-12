@@ -24,7 +24,6 @@ module Pronto
           ENV['PRONTO_EXCLUDE'] || @config_hash['all']['exclude']
         else
           @config_hash.fetch(runner, {})['exclude']
-
         end
 
       Array(files)
