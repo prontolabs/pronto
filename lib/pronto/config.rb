@@ -24,6 +24,7 @@ module Pronto
           ENV['PRONTO_EXCLUDE'] || @config_hash['all']['exclude']
         else
           @config_hash.fetch(runner, {})['exclude']
+
         end
 
       Array(files)
@@ -37,6 +38,10 @@ module Pronto
 
     def bitbucket_hostname
       URI.parse(bitbucket_web_endpoint).host
+    end
+
+    def warnings_per_review
+      ENV['PRONTO_WARNINGS_PER_REVIEW'] && Integer(ENV['PRONTO_WARNINGS_PER_REVIEW']) || @config_hash['warning_per_review']
     end
 
     def max_warnings
