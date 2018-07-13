@@ -5,11 +5,17 @@ module Pronto
     let(:repo) do
       double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil, head_detached?: false)
     end
-    let(:sha) { '61e4bef' }
+
+    let(:sha)     { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
-    before do
-      ENV.stub(:[])
+    let(:empty_client_options) do
+      {
+        event: 'COMMENT',
+        accept: 'application/vnd.github.black-cat-preview+json'
+      }
     end
+
+    before { ENV.stub(:[]) }
 
     describe '#commit_comments' do
       subject { github.commit_comments(sha) }
@@ -141,12 +147,14 @@ module Pronto
         end
       end
 
-      context 'with comments' do
+      context 'with comments and' do
         before do
-          github.should_receive(:pull_id).once.and_return(pull_id)
+          github.stub(:pull_id).and_return(pull_id)
+          config.stub(:warnings_per_review).and_return(warnings_per_review)
         end
 
         let(:pull_id) { 10 }
+        let(:config)  { github.instance_variable_get(:@config) }
         let(:comments) do
           [
             double(path: 'bad_file.rb', position: 10, body: 'Offense #1'),
@@ -154,23 +162,57 @@ module Pronto
           ]
         end
         let(:options) do
-          {
-            event: 'COMMENT',
-            accept: 'application/vnd.github.black-cat-preview+json',
-            comments: [
-              { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
-              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
-            ]
-          }
+          empty_client_options.merge(comments: [
+            { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
+            { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
+          ])
         end
 
-        specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
-            .with('prontolabs/pronto', pull_id, options)
-            .once
+        {
+          'not defined':        nil,
+          'equal to comments':  2,
+          'more than comments': 5
+        }.each do |condition, warnings_per_review|
+          context "when warnings per review are #{condition}" do
+            let(:warnings_per_review) { warnings_per_review }
 
-          subject
+            specify do
+              octokit_client
+                .should_receive(:create_pull_request_review)
+                .with('prontolabs/pronto', pull_id, options)
+                .once
+
+              subject
+            end
+          end
+        end
+
+        context 'when warnings per review are lower than comments' do
+
+          let(:warnings_per_review) { 1 }
+          let(:first_options) do
+            empty_client_options.merge(comments: [
+              { path: 'bad_file.rb', position: 10, body: 'Offense #1' }
+            ])
+          end
+          let(:second_options) do
+            empty_client_options.merge(comments: [
+              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
+            ])
+          end
+
+          specify do
+            octokit_client
+              .should_receive(:create_pull_request_review)
+              .with('prontolabs/pronto', pull_id, first_options)
+              .once
+            octokit_client
+              .should_receive(:create_pull_request_review)
+              .with('prontolabs/pronto', pull_id, second_options)
+              .once
+
+            subject
+          end
         end
       end
 
