@@ -46,9 +46,10 @@ module Pronto
     end
 
     def publish_pull_request_comments(comments)
+      comments_left       = comments.clone
       warnings_per_review = @config.warnings_per_review || comments.size
-      while comments.any?
-        comments_to_publish = comments.slice!(0, warnings_per_review)
+      while comments_left.any?
+        comments_to_publish = comments_left.slice!(0, warnings_per_review)
         create_pull_request_review(comments_to_publish)
       end
     end
