@@ -3,14 +3,16 @@ module Pronto
     let(:github) { described_class.new(repo) }
 
     let(:repo) do
-      double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil, head_detached?: false)
+      double(remote_urls: ssh_remote_urls, branch: nil, head_detached?: false)
     end
 
-    let(:sha)     { '61e4bef' }
-    let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
+    let(:ssh_remote_urls) { ["git@github.com:#{github_slug}.git"] }
+    let(:github_slug)     { 'prontolabs/pronto' }
+    let(:sha)             { '61e4bef' }
+    let(:comment)         { double(body: 'note', path: 'path', line: 1, position: 1) }
     let(:empty_client_options) do
       {
-        event: 'COMMENT',
+        event:  'COMMENT',
         accept: 'application/vnd.github.black-cat-preview+json'
       }
     end
@@ -24,7 +26,7 @@ module Pronto
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha)
+            .with(github_slug, sha)
             .once
             .and_return([comment])
 
@@ -35,12 +37,12 @@ module Pronto
       end
 
       context 'git remote without .git suffix' do
-        let(:repo) { double(remote_urls: ['git@github.com:prontolabs/pronto']) }
+        let(:repo) { double(remote_urls: ssh_remote_urls) }
 
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha)
+            .with(github_slug, sha)
             .once
             .and_return([comment])
 
@@ -59,7 +61,7 @@ module Pronto
         specify do
           Octokit::Client.any_instance
             .should_receive(:pull_comments)
-            .with('prontolabs/pronto', 10)
+            .with(github_slug, 10)
             .once
             .and_return([comment])
 
@@ -96,8 +98,8 @@ module Pronto
 
         octokit_client
           .should_receive(:create_status)
-          .with('prontolabs/pronto', expected_sha, state,
-                context: context, description: desc)
+          .with(github_slug, expected_sha, state, context:     context,
+                                                  description: desc)
           .once
       end
 
@@ -179,7 +181,7 @@ module Pronto
             specify do
               octokit_client
                 .should_receive(:create_pull_request_review)
-                .with('prontolabs/pronto', pull_id, options)
+                .with(github_slug, pull_id, options)
                 .once
 
               subject
@@ -204,11 +206,11 @@ module Pronto
           specify do
             octokit_client
               .should_receive(:create_pull_request_review)
-              .with('prontolabs/pronto', pull_id, first_options)
+              .with(github_slug, pull_id, first_options)
               .once
             octokit_client
               .should_receive(:create_pull_request_review)
-              .with('prontolabs/pronto', pull_id, second_options)
+              .with(github_slug, pull_id, second_options)
               .once
 
             subject
@@ -217,13 +219,10 @@ module Pronto
       end
 
       context 'pull request for branch does not exist' do
-        let(:comments) do
-          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
-        end
-        let(:repo) do
-          double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch:      'develop')
-        end
+
+        let(:comments) { [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')] }
+        let(:repo) { double(remote_urls: ssh_remote_urls, branch: 'develop') }
+
         specify do
           octokit_client
             .should_not_receive(:create_pull_request_review)
@@ -237,9 +236,9 @@ module Pronto
           [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
         end
         let(:repo) do
-          double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch: nil,
-                 head_detached?: true,
+          double(remote_urls:     ssh_remote_urls,
+                 branch:          nil,
+                 head_detached?:  true,
                  head_commit_sha: 'sha_with_no_pr')
         end
         specify do
