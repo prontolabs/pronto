@@ -4,7 +4,6 @@
 [![Coverage Status](https://img.shields.io/codeclimate/coverage/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
-[![Dependency Status](https://gemnasium.com/prontolabs/pronto.svg)](https://gemnasium.com/prontolabs/pronto)
 [![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
