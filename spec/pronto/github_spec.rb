@@ -1,18 +1,14 @@
 module Pronto
   describe Github do
     let(:github) { described_class.new(repo) }
-
-    let(:repo) do
-      double(remote_urls: ssh_remote_urls, branch: nil, head_detached?: false)
-    end
-
+    let(:repo) { double(remote_urls: ssh_remote_urls, branch: nil, head_detached?: false) }
     let(:ssh_remote_urls) { ["git@github.com:#{github_slug}.git"] }
-    let(:github_slug)     { 'prontolabs/pronto' }
-    let(:sha)             { '61e4bef' }
-    let(:comment)         { double(body: 'note', path: 'path', line: 1, position: 1) }
+    let(:github_slug) { 'prontolabs/pronto' }
+    let(:sha) { '61e4bef' }
+    let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
     let(:empty_client_options) do
       {
-        event:  'COMMENT',
+        event: 'COMMENT',
         accept: 'application/vnd.github.black-cat-preview+json'
       }
     end
@@ -53,9 +49,8 @@ module Pronto
 
     describe '#pull_comments' do
       subject { github.pull_comments(sha) }
-      before do
-        ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
-      end
+
+      before { ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10) }
 
       context 'three requests for same comments' do
         specify do
@@ -65,9 +60,7 @@ module Pronto
             .once
             .and_return([comment])
 
-          subject
-          subject
-          subject
+          3.times { subject }
         end
       end
 
@@ -163,10 +156,9 @@ module Pronto
           ]
         end
         let(:options) do
-          empty_client_options.merge(comments: [
-            { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
-            { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
-          ])
+          empty_client_options
+            .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' },
+                              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
         end
 
         {
@@ -191,14 +183,12 @@ module Pronto
 
           let(:warnings_per_review) { 1 }
           let(:first_options) do
-            empty_client_options.merge(comments: [
-              { path: 'bad_file.rb', position: 10, body: 'Offense #1' }
-            ])
+            empty_client_options
+              .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' }])
           end
           let(:second_options) do
-            empty_client_options.merge(comments: [
-              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
-            ])
+            empty_client_options
+              .merge(comments: [{ path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
           end
 
           specify do
@@ -217,9 +207,7 @@ module Pronto
       end
 
       context 'pull request for detached head does not exist' do
-        let(:comments) do
-          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
-        end
+        let(:comments) { [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')] }
         let(:repo) do
           double(remote_urls:     ssh_remote_urls,
                  branch:          nil,
