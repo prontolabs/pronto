@@ -115,8 +115,7 @@ module Pronto
         let(:expected_sha) { sha }
 
         specify do
-          octokit_client
-            .should_not_receive(:pull_requests)
+          octokit_client.should_not_receive(:pull_requests)
 
           subject
         end
@@ -174,22 +173,6 @@ module Pronto
         end
       end
 
-      context 'pull request for branch does not exist' do
-        let(:comments) do
-          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
-        end
-        let(:repo) do
-          double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch: 'master')
-        end
-        specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
-
-          -> { subject }.should raise_error(Pronto::Error, /branch master/)
-        end
-      end
-
       context 'pull request for detached head does not exist' do
         let(:comments) do
           [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
@@ -201,8 +184,7 @@ module Pronto
                  head_commit_sha: 'sha_with_no_pr')
         end
         specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
+          octokit_client.should_not_receive(:create_pull_request_review)
 
           -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
         end
