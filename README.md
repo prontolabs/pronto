@@ -116,10 +116,11 @@ If you want review to appear on pull request diff, instead of comments:
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
 ```
 
-If you wish to limit the number of comments per PR review add an additional environment variable:
+All the comments will now not be published into a single PR review, but separated into a number of PRs.
+This can be managed via additional environment variable or in the config file (see below):
 
-Note: This will split all the comments in separate PR reviews in order to prevent from timeouts
-      when publishing all the comments at once. As an alternative you can also set this value in `.pronto.yml`
+Note: In case no environment variable or config setting is specified in `.pronto.yml`, 
+      a default value of `30` will be used.
 
 ```sh
 $ PRONTO_WARNINGS_PER_REVIEW=30 PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
