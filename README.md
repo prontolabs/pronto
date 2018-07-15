@@ -320,6 +320,7 @@ Articles to help you to get started:
 * [Pronto, Codeship and GitHub for automatic code review](http://abinoam.tl1n.com/pronto-codeship-and-github-for-automatic-code-review/)
 * [How to automatically review your PRs for style violations with Pronto and RuboCop](https://christoph.luppri.ch/articles/2017/03/05/how-to-automatically-review-your-prs-for-style-violations-with-pronto-and-rubocop/)
 * [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
+* [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
 
 Make a Pull Request to add something you wrote or found useful.
 
