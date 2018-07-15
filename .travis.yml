@@ -8,14 +8,22 @@ rvm:
 - 2.4
 - 2.5
 
-after_success:
-- >
-  [ "${TRAVIS_PULL_REQUEST}" != "false" ] &&
-  [ "${TRAVIS_RUBY_VERSION}" = "2.2" ] &&
-    PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
-      bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
-- bundle exec codeclimate-test-reporter
+env:
+  global:
+    - CC_TEST_REPORTER_ID=3d676246ffa66d3fdef6253a9870431b1a2da04e9ecb25486c08a38823c37b6a
 
-addons:
-  code_climate:
-    repo_token: 3d676246ffa66d3fdef6253a9870431b1a2da04e9ecb25486c08a38823c37b6a
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+script:
+  - bundle exec rspec
+
+after_script:
+  - >
+    [ "${TRAVIS_PULL_REQUEST}" != "false" ] &&
+    [ "${TRAVIS_RUBY_VERSION}" = "2.2" ] &&
+      PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
+        bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
