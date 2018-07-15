@@ -4,7 +4,6 @@
 [![Coverage Status](https://img.shields.io/codeclimate/coverage/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
-[![Dependency Status](https://gemnasium.com/prontolabs/pronto.svg)](https://gemnasium.com/prontolabs/pronto)
 [![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
@@ -331,6 +330,7 @@ Articles to help you to get started:
 * [Pronto, Codeship and GitHub for automatic code review](http://abinoam.tl1n.com/pronto-codeship-and-github-for-automatic-code-review/)
 * [How to automatically review your PRs for style violations with Pronto and RuboCop](https://christoph.luppri.ch/articles/2017/03/05/how-to-automatically-review-your-prs-for-style-violations-with-pronto-and-rubocop/)
 * [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
+* [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
 
 Make a Pull Request to add something you wrote or found useful.
 
@@ -340,4 +340,4 @@ Make a Pull Request to add something you wrote or found useful.
 
 ## Copyright
 
-Copyright (c) 2013-2017 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
+Copyright (c) 2013-2018 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
