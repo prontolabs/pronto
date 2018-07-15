@@ -12,6 +12,7 @@
 
 * Depend on thor `0.20.*`.
 * [#298](https://github.com/prontolabs/pronto/pull/298): change default GitLab API endpoint to v4.
+* Remove support for Ruby older than 2.2.0.
 
 ## 0.9.5
 

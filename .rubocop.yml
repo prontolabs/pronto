@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.2
 
 Documentation:
   Enabled: false
@@ -12,11 +12,6 @@ MultilineOperationIndentation:
 
 MultilineMethodCallIndentation:
   EnforcedStyle: indented
-
-Metrics/BlockLength:
-  ExcludedMethods: Struct.new
-  Exclude:
-    - spec/**/*.rb
 
 Metrics/AbcSize:
   Max: 25
