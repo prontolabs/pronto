@@ -3,16 +3,16 @@ before_install: gem update --system
 dist: trusty
 language: ruby
 rvm:
-- 2.0.0
-- 2.1
+- 2.1.10
 - 2.2
-- 2.3.0
-- 2.4.0
+- 2.3
+- 2.4
+- 2.5
 
 after_success:
 - >
   [ "${TRAVIS_PULL_REQUEST}" != "false" ] &&
-  [ "${TRAVIS_RUBY_VERSION}" = "2.0.0" ] &&
+  [ "${TRAVIS_RUBY_VERSION}" = "2.1.10" ] &&
     PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
       bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
 - bundle exec codeclimate-test-reporter
