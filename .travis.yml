@@ -18,7 +18,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - bundle exec rspec
+  - COVERAGE=true bundle exec rspec
 
 after_script:
   - >
