@@ -330,4 +330,4 @@ Make a Pull Request to add something you wrote or found useful.
 
 ## Copyright
 
-Copyright (c) 2013-2017 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
+Copyright (c) 2013-2018 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
