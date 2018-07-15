@@ -170,11 +170,10 @@ module Pronto
         end
 
         {
-          'not defined'         => nil,
-          'equal to comments'   => 2,
-          'more than comments'  => 5
+          equal: 2,
+          more_than: 5
         }.each do |condition, warnings_per_review|
-          context "when warnings per review are #{condition}" do
+          context "when warnings per review #{condition} total comments" do
             let(:warnings_per_review) { warnings_per_review }
 
             specify do

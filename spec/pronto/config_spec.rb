@@ -56,7 +56,14 @@ module Pronto
       end
     end
 
-    %w(max_warnings warnings_per_review).each do |setting_name|
+    {
+      max_warnings: {
+        default_value: nil
+      },
+      warnings_per_review: {
+        default_value: ConfigFile::DEFAULT_WARNINGS_PER_REVIEW
+      }
+    }.each do |setting_name, specifics|
       describe "##{setting_name}" do
         subject { config.public_send(setting_name) }
 
@@ -76,13 +83,13 @@ module Pronto
         end
 
         context 'from config hash' do
-          let(:config_hash) { { setting_name => 40 } }
+          let(:config_hash) { { setting_name.to_s => 40 } }
           it { should == 40 }
         end
 
         context 'default' do
           let(:config_hash) { ConfigFile::EMPTY }
-          it { should == nil }
+          it { should == specifics[:default_value] }
         end
       end
     end
