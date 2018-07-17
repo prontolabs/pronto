@@ -92,6 +92,13 @@ module Pronto
           let(:sha) { :staged }
           it { should be_one }
         end
+
+        context 'detecting renames with lines changed' do
+          let(:repo) { described_class.new('spec/fixtures/rename-test.git') }
+          let(:sha) { 'master' }
+
+          it { should be_one }
+        end
       end
 
       describe '#blame' do

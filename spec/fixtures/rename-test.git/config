@@ -1,0 +1,16 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = /home/siebert/code/prontolabs-pronto/tmp/../spec/fixtures/test.git/
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+	rebase = true
+[branch "renaming-test"]
+	remote = origin
+	merge = refs/heads/renaming-test
+	rebase = true

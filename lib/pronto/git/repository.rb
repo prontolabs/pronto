@@ -19,6 +19,7 @@ module Pronto
                             [merge_base, patches]
                           end
 
+        patches.find_similar!
         Patches.new(self, target, patches)
       end
 

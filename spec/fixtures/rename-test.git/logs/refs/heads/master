@@ -1,0 +1,3 @@
+0000000000000000000000000000000000000000 64dadfdb7c7437476782e8eb024085862e6287d6 Michael Siebert <michael.siebert@samedi.de> 1531810144 +0200	clone: from /home/siebert/code/prontolabs-pronto/tmp/../spec/fixtures/test.git/
+64dadfdb7c7437476782e8eb024085862e6287d6 0dc631b3c7e749ca89327479c26ffe541c44fe25 Michael Siebert <michael.siebert@samedi.de> 1531810268 +0200	commit: rename a file, adding a line to check that we can detect renames
+0dc631b3c7e749ca89327479c26ffe541c44fe25 64dadfdb7c7437476782e8eb024085862e6287d6 Michael Siebert <michael.siebert@samedi.de> 1531812027 +0200	reset: moving to HEAD^
