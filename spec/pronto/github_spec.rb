@@ -205,21 +205,6 @@ module Pronto
           end
         end
       end
-
-      context 'pull request for detached head does not exist' do
-        let(:comments) { [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')] }
-        let(:repo) do
-          double(remote_urls:     ssh_remote_urls,
-                 branch:          nil,
-                 head_detached?:  true,
-                 head_commit_sha: 'sha_with_no_pr')
-        end
-        specify do
-          octokit_client.should_not_receive(:create_pull_request_review)
-
-          -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
-        end
-      end
     end
   end
 end

@@ -1,7 +1,7 @@
 # Pronto
 
 [![Build Status](https://secure.travis-ci.org/prontolabs/pronto.svg)](http://travis-ci.org/prontolabs/pronto)
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
 [![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
