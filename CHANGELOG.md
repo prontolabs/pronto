@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New features
+
+* [#301](https://github.com/prontolabs/pronto/pull/301): add ability to auto approve Bitbucket pull requests.
+
 ### Bugs fixed
 
 * [#258](https://github.com/prontolabs/pronto/pull/258): fix blame returning nil when file does not exist in the git tree.
