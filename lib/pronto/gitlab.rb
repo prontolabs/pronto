@@ -1,10 +1,49 @@
+require'byebug'
+
 module Pronto
   class Gitlab < Client
     def commit_comments(sha)
       @comment_cache[sha.to_s] ||= begin
-        client.commit_comments(slug, sha, per_page: 500).map do |comment|
+        client.commit_comments(slug, sha).auto_paginate.map do |comment|
           Comment.new(sha, comment.note, comment.path, comment.line)
         end
+      end
+    end
+
+    def pull_comments(sha)
+      @comment_cache["#{slug}/#{pull_id}"] ||= begin
+        arr = []
+        client.merge_request_discussions(slug, pull_id).auto_paginate.each do |comment|
+          comment.notes.each do |note|
+            next unless note['position']
+
+            arr << Comment.new(
+              sha,
+              note['body'],
+              note['position']['new_path'],
+              note['position']['new_line']
+            )
+          end
+        end
+        arr
+      end
+    end
+
+    def create_pull_request_review(comments)
+      return if comments.empty?
+
+      comments.each do |comment|
+        options = {
+          body: comment.body,
+          position: position_sha.dup.merge(
+            new_path: comment.path,
+            position_type: 'text',
+            new_line: comment.position,
+            old_line: nil,
+          )
+        }
+
+        client.create_merge_request_discussion(slug, pull_id, options)
       end
     end
 
@@ -17,6 +56,15 @@ module Pronto
 
     private
 
+    def position_sha
+      # Better to get those informations from Gitlab API directly than trying to look for them here.
+      # (FYI you can't use `pull` method because index api does not contains those informations)
+      @position_sha ||= begin
+                          data = client.merge_request(slug, pull_id)
+                          data.diff_refs.to_h
+                        end
+    end
+
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
       @slug ||= begin
@@ -25,6 +73,46 @@ module Pronto
           match[:slug] if match
         end.compact.first
       end
+    end
+
+    def pull_id
+      pull ? pull.iid.to_i : env_pull_id
+    end
+
+    def pull
+      @pull ||= if env_pull_id
+                  pull_by_id(env_pull_id)
+                elsif @repo.branch
+                  pull_by_branch(@repo.branch)
+                elsif @repo.head_detached?
+                  pull_by_commit(@repo.head_commit_sha)
+                end
+    end
+
+    def pull_requests
+      @pull_requests ||= client.merge_requests(slug, { state: :opened, source_branch: @repo.branch }).auto_paginate
+    end
+
+    def pull_by_id(pull_id)
+      result = pull_requests.find { |pr| pr.iid.to_i == pull_id }
+      return result if result
+      message = "Merge request ##{pull_id} was not found in #{slug}."
+      raise Pronto::Error, message
+    end
+
+    def pull_by_branch(branch)
+      result = pull_requests.find { |pr| pr.source_branch == @repo.branch }
+      return result if result
+      raise Pronto::Error, "Merge request for branch #{branch} " \
+                           "was not found in #{slug}."
+    end
+
+    def pull_by_commit(sha)
+      result = pull_requests.find { |pr| pr.sha == sha }
+      return result if result
+      message = "Merge request with head #{sha} " \
+                "was not found in #{slug}."
+      raise Pronto::Error, message
     end
 
     def slug_regex(url)
