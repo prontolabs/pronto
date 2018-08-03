@@ -40,6 +40,7 @@ module Pronto
         end
         let(:sha) { 'foobar' }
         let(:comment) { double(note: 'body', path: 'path', line: 1) }
+        let(:paginated_response) { double(auto_paginate: [ comment ]) }
 
         specify do
           ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
@@ -47,9 +48,9 @@ module Pronto
 
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha, per_page: 500)
+            .with('prontolabs/pronto', sha)
             .once
-            .and_return([comment])
+            .and_return(paginated_response)
 
           subject
           subject
