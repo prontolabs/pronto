@@ -303,6 +303,7 @@ Currently available:
 * [pronto-textlint](https://github.com/seikichi/pronto-textlint)
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
+* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 
 ## Articles
 
