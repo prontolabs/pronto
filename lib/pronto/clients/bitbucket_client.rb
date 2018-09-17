@@ -22,7 +22,7 @@ class BitbucketClient
 
   def pull_requests(slug)
     base = 'https://api.bitbucket.org/2.0/repositories'
-    response = get("#{base}/#{slug}/pullrequests?state=OPEN")
+    response = get("#{base}/#{slug}/pullrequests?state=OPEN&pagelen=50")
     openstruct(response['values'])
   end
 
