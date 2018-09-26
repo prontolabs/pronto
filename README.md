@@ -304,6 +304,7 @@ Currently available:
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
 * [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
+* [pronto-undercover](https://github.com/grodowski/pronto-undercover)
 
 ## Articles
 
@@ -322,6 +323,7 @@ Articles to help you to get started:
 * [How to automatically review your PRs for style violations with Pronto and RuboCop](https://christoph.luppri.ch/articles/2017/03/05/how-to-automatically-review-your-prs-for-style-violations-with-pronto-and-rubocop/)
 * [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
 * [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
+* [Stop shipping untested Ruby code with undercover](https://medium.com/futuredev/stop-shipping-untested-ruby-code-with-undercover-1edc963be4a6)
 
 Make a Pull Request to add something you wrote or found useful.
 
