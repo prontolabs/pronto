@@ -260,6 +260,7 @@ The following values are available only to the text formatter:
 Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
+* [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
