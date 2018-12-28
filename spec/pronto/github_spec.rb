@@ -155,7 +155,7 @@ module Pronto
         let(:options) do
           {
             event: 'COMMENT',
-            accept: 'application/vnd.github.black-cat-preview+json',
+            accept: 'application/vnd.github.v3.diff+json',
             comments: [
               { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
               { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
