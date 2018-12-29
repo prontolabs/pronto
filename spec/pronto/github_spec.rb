@@ -165,7 +165,7 @@ module Pronto
 
         specify do
           octokit_client
-            .should_not_receive(:create_pull_request_review)
+            .should_receive(:create_pull_request_review)
             .with('prontolabs/pronto', pull_id, options)
             .once
 
