@@ -16,10 +16,10 @@ module Pronto
                           else
                             merge_base = merge_base(commit)
                             patches = @repo.diff(merge_base, head, options)
-                            patches.find_similar!(renames: true)
                             [merge_base, patches]
                           end
 
+        patches.find_similar!(renames: true)
         Patches.new(self, target, patches)
       end
 
