@@ -50,7 +50,7 @@ module Pronto
 
       options = {
         event: 'COMMENT',
-        accept: 'application/vnd.github.black-cat-preview+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
+        accept: 'application/vnd.github.v3.diff+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
         comments: comments.map do |c|
           { path: c.path, position: c.position, body: c.body }
         end
