@@ -70,7 +70,7 @@ module Pronto
         exit(error_messages_count)
       end
     rescue Rugged::RepositoryError
-      puts '"pronto" should be run on/from a git repository'
+      puts '"pronto" must be run from within a git repository or must be supplied the path to a git repository'
     rescue Pronto::Error => e
       $stderr.puts "Pronto errored: #{e.message}"
     end
