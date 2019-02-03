@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
   s.add_runtime_dependency('rugged', '~> 0.24', '>= 0.23.0')
   s.add_runtime_dependency('thor', '~> 0.20.0')
-  s.add_development_dependency('bundler', '~> 1.3')
+  s.add_development_dependency('bundler', '>= 1.15')
   s.add_development_dependency('pronto-rubocop', '~> 0.9.0')
   s.add_development_dependency('rake', '~> 12.0')
   s.add_development_dependency('rspec', '~> 3.4')
