@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   EOF
 
   s.licenses = ['MIT']
-  s.required_ruby_version = '>= 2.2.0'
+  s.required_ruby_version = '>= 2.3.0'
   s.rubygems_version = '1.8.23'
 
   s.files = `git ls-files`.split($RS).reject do |file|
