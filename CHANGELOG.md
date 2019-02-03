@@ -11,12 +11,13 @@
 * [#258](https://github.com/prontolabs/pronto/pull/258): fix blame returning nil when file does not exist in the git tree.
 * [#270](https://github.com/prontolabs/pronto/pull/270): fix ${line} in text format to mean line number.
 * [#282](https://github.com/prontolabs/pronto/issues/282): relax rainbow dependency.
+* [#329](https://github.com/prontolabs/pronto/pull/329): correctly handle renamed-only files.
 
 ### Changes
 
 * Depend on thor `0.20.*`.
 * [#298](https://github.com/prontolabs/pronto/pull/298): change default GitLab API endpoint to v4.
-* Remove support for Ruby older than 2.3.0.
+* [#332](https://github.com/prontolabs/pronto/pull/332): remove support for Ruby older than 2.3.0.
 
 ## 0.9.5
 
