@@ -94,8 +94,8 @@ module Pronto
       subject { Formatter.names }
       it do
         should =~ %w[github github_pr github_pr_review github_status
-                     gitlab bitbucket bitbucket_pr bitbucket_server_pr
-                     json checkstyle text null]
+                     github_combined_status gitlab bitbucket bitbucket_pr
+                     bitbucket_server_pr json checkstyle text null]
       end
     end
   end
