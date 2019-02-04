@@ -278,6 +278,7 @@ Currently available:
 * [pronto-flay](https://github.com/prontolabs/pronto-flay)
 * [pronto-flow](https://github.com/kevinjalbert/pronto-flow)
 * [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
+* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
 * [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
@@ -304,7 +305,6 @@ Currently available:
 * [pronto-textlint](https://github.com/seikichi/pronto-textlint)
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
-* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-undercover](https://github.com/grodowski/pronto-undercover)
 
 ## Articles
