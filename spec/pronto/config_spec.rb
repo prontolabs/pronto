@@ -42,6 +42,25 @@ module Pronto
       it { should == 'github.com' }
     end
 
+    describe '#github_review_type' do
+      subject { config.github_review_type }
+
+      context 'from env variable' do
+        before { stub_const('ENV', 'PRONTO_GITHUB_REVIEW_TYPE' => 'comment') }
+        it { should == 'COMMENT' }
+      end
+
+      context 'from config hash' do
+        let(:config_hash) { { 'github' => { 'review_type' => 'something_else' } } }
+        it { should == 'REQUEST_CHANGES' }
+      end
+
+      context 'default' do
+        let(:config_hash) { ConfigFile::EMPTY }
+        it { should == 'REQUEST_CHANGES' }
+      end
+    end
+
     describe '#gitlab_slug' do
       subject { config.gitlab_slug }
 
