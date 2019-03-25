@@ -10,8 +10,7 @@ module Pronto
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.body, comment.path,
-                      comment.position || comment.original_position)
+          Comment.new(sha, comment.body, comment.path, comment.position, comment.id)
         end
       end
     rescue Octokit::NotFound => e
@@ -23,7 +22,7 @@ module Pronto
     def commit_comments(sha)
       @comment_cache[sha.to_s] ||= begin
         client.commit_comments(slug, sha).map do |comment|
-          Comment.new(sha, comment.body, comment.path, comment.position)
+          Comment.new(sha, comment.body, comment.path, comment.position, comment.id)
         end
       end
     end
@@ -32,6 +31,10 @@ module Pronto
       @config.logger.log("Creating commit comment on #{comment.sha}")
       client.create_commit_comment(slug, comment.sha, comment.body,
                                    comment.path, nil, comment.position)
+    end
+
+    def delete_pull_comment(comment)
+      client.delete_pull_request_comment(slug, comment.id)
     end
 
     def create_pull_comment(comment)

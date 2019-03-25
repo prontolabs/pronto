@@ -7,6 +7,12 @@ module Pronto
         grouped_comments(comments)
       end
 
+      def remove_comments(client, comments)
+        comments.each { |comment| client.delete_pull_comment(comment) }
+      rescue Octokit::UnprocessableEntity, HTTParty::Error => e
+        $stderr.puts "Failed to post: #{e.message}"
+      end
+
       def submit_comments(client, comments)
         comments.each { |comment| client.create_pull_comment(comment) }
       rescue Octokit::UnprocessableEntity, HTTParty::Error => e

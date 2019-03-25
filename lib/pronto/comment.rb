@@ -1,5 +1,5 @@
 module Pronto
-  Comment = Struct.new(:sha, :body, :path, :position) do
+  Comment = Struct.new(:sha, :body, :path, :position, :id) do
     def ==(other)
       position == other.position &&
         path == other.path &&
