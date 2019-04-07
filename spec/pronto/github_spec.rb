@@ -155,7 +155,7 @@ module Pronto
         let(:options) do
           {
             event: 'COMMENT',
-            accept: 'application/vnd.github.black-cat-preview+json',
+            accept: 'application/vnd.github.v3.diff+json',
             comments: [
               { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
               { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
@@ -165,7 +165,7 @@ module Pronto
 
         specify do
           octokit_client
-            .should_not_receive(:create_pull_request_review)
+            .should_receive(:create_pull_request_review)
             .with('prontolabs/pronto', pull_id, options)
             .once
 

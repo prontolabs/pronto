@@ -12,7 +12,7 @@ module Pronto
       end
     end
 
-    desc 'run', 'Run Pronto'
+    desc 'run [PATH]', 'Run Pronto'
 
     method_option :'exit-code',
                   type: :boolean,
@@ -45,7 +45,9 @@ module Pronto
                   aliases: ['formatter', '-f'],
                   desc: "Pick output formatters. Available: #{::Pronto::Formatter.names.join(', ')}"
 
-    def run(path = nil)
+    def run(path = '.')
+      path = File.expand_path(path)
+
       gem_names = options[:runner].any? ? options[:runner] : ::Pronto::GemNames.new.to_a
       gem_names.each do |gem_name|
         require "pronto/#{gem_name}"
@@ -56,16 +58,19 @@ module Pronto
       commit_options = %i[staged unstaged index]
       commit = commit_options.find { |o| options[o] } || options[:commit]
 
-      repo_workdir = ::Rugged::Repository.discover('.').workdir
+      repo_workdir = ::Rugged::Repository.discover(path).workdir
+      relative     = path.sub(repo_workdir, '')
+
       messages = Dir.chdir(repo_workdir) do
-        ::Pronto.run(commit, '.', formatters, path)
+        file = relative.length != path.length ? relative : nil
+        ::Pronto.run(commit, '.', formatters, file)
       end
       if options[:'exit-code']
         error_messages_count = messages.count { |m| m.level != :info }
         exit(error_messages_count)
       end
     rescue Rugged::RepositoryError
-      puts '"pronto" should be run from a git repository'
+      puts '"pronto" must be run from within a git repository or must be supplied the path to a git repository'
     rescue Pronto::Error => e
       $stderr.puts "Pronto errored: #{e.message}"
     end

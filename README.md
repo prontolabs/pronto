@@ -150,7 +150,7 @@ on GitLab commits using `GitlabFormatter`.
 Set the `PRONTO_GITLAB_API_ENDPOINT` environment variable or value in `.pronto.yml` to
 your API endpoint URL. If you are using Gitlab.com's hosted service your
 endpoint will be set by default.
-Set the `PRONTO_GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml
+Set the `PRONTO_GITLAB_API_PRIVATE_TOKEN` environment variable or value in `.pronto.yml`
 to your Gitlab private token which you can find in your account settings.
 
 Then just run it:
@@ -282,6 +282,7 @@ The following values are available only to the text formatter:
 Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
+* [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
@@ -299,6 +300,7 @@ Currently available:
 * [pronto-flay](https://github.com/prontolabs/pronto-flay)
 * [pronto-flow](https://github.com/kevinjalbert/pronto-flow)
 * [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
+* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
 * [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
@@ -325,6 +327,7 @@ Currently available:
 * [pronto-textlint](https://github.com/seikichi/pronto-textlint)
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
+* [pronto-undercover](https://github.com/grodowski/pronto-undercover)
 
 ## Articles
 
@@ -343,6 +346,7 @@ Articles to help you to get started:
 * [How to automatically review your PRs for style violations with Pronto and RuboCop](https://christoph.luppri.ch/articles/2017/03/05/how-to-automatically-review-your-prs-for-style-violations-with-pronto-and-rubocop/)
 * [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
 * [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
+* [Stop shipping untested Ruby code with undercover](https://medium.com/futuredev/stop-shipping-untested-ruby-code-with-undercover-1edc963be4a6)
 
 Make a Pull Request to add something you wrote or found useful.
 
