@@ -22,6 +22,7 @@ module Pronto
       'json' => JsonFormatter,
       'checkstyle' => CheckstyleFormatter,
       'text' => TextFormatter,
+      'html' => HtmlFormatter,
       'null' => NullFormatter
     }.freeze
   end
