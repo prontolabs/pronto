@@ -246,7 +246,7 @@
               <span class="severity <%= offense.level %>"><%= offense.level %>:</span>
               <span class="message"><%= decorated_message(offense.msg) %></span>
             </div>
-            <pre><code><%= offense.line.line.content %></code></pre>
+            <pre><code><%= offense.line.line.content.force_encoding('UTF-8') %></code></pre>
           </div>
           <% end %>
         </div>
