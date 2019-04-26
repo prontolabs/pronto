@@ -267,6 +267,7 @@ Currently available:
 * [pronto-clang_tidy](https://github.com/micjabbour/pronto-clang_tidy)
 * [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
+* [pronto-dialyxir](https://github.com/Apelsinka223/pronto-dialyxir)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
 * [pronto-dirty_words](https://github.com/kevinjalbert/pronto-dirty_words)
 * [pronto-dogma](https://github.com/iurifq/pronto-dogma)
