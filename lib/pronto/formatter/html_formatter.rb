@@ -75,7 +75,7 @@ module Pronto
         def decorated_message(msg)
           msg.gsub(/`(.+?)`/) do
             "<code>#{Regexp.last_match(1)}</code>"
-          end
+          end.force_encoding('UTF-8')
         end
 
         def pluralize(number, thing, options = {})
