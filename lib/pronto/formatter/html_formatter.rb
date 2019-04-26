@@ -61,11 +61,10 @@ module Pronto
         LOGO_IMAGE_PATH =
           File.expand_path('../assets/logo.png', __dir__)
 
-        attr_reader :messages, :summary
+        attr_reader :files
 
         def initialize(messages)
-          @messages = messages.sort_by(&:path)
-          @summary = 'IMPLEMENT LATER'
+          @files = messages.group_by(&:path)
         end
 
         # Make Kernel#binding public.
@@ -73,9 +72,19 @@ module Pronto
           super
         end
 
-        def decorated_message(message)
-          message.msg.gsub(/`(.+?)`/) do
+        def decorated_message(msg)
+          msg.gsub(/`(.+?)`/) do
             "<code>#{Regexp.last_match(1)}</code>"
+          end
+        end
+
+        def pluralize(number, thing, options = {})
+          if number.zero? && options[:no_for_zero]
+            "no #{thing}s"
+          elsif number == 1
+            "1 #{thing}"
+          else
+            "#{number} #{thing}s"
           end
         end
 
