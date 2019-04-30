@@ -262,6 +262,7 @@ Currently available:
 
 * [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
+* [pronto-bundler_audit](https://github.com/pdobb/pronto-bundler_audit)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
 * [pronto-clang_tidy](https://github.com/micjabbour/pronto-clang_tidy)
