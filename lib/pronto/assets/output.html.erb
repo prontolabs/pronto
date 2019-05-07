@@ -18,7 +18,7 @@
       margin: 0 !important;
     }
 
-    .copy-btn {
+    .copy-btn, .card-header {
       cursor: pointer;
     }
 
@@ -64,14 +64,14 @@
     </div>
 
     <% files.each do |path, offenses| %>
-      <div class="card mt-2">
-        <div class="card-header bg-gray text-bold">
+      <details class="card mt-2 accordion" id="offense_<%= path %>" open>
+        <summary class="accordition-header card-header bg-gray text-bold">
           <%= path %>
           <span class="chip">
             <%= pluralize(offenses.count, 'offense') %>
           </span>
-        </div>
-        <div class="card-body">
+        </summary>
+        <div class="card-body accordion-body">
           <% offenses.each do |offense| %>
             <div class="report">
               <div class="meta text-italic">
@@ -92,7 +92,7 @@
             </div>
           <% end %>
         </div>
-      </div>
+      </details>
     <% end %>
   </div>
   <script>
