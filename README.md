@@ -95,38 +95,38 @@ on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
 
 Add Pronto runners you want to use to your Gemfile:
 
-Set the PRONTO_GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
+Set the GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml` to
 [OAuth token](https://help.github.com/articles/creating-an-access-token-for-command-line-use) that has access to the repository.
 
 Then just run it:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
 ```
 
 If you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
 ```
 
 If you want review to appear on pull request diff, instead of comments:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
 ```
 
 Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
+$ GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
 ```
 
 It's possible to combine multiple formatters.
 To get both pull request comments and commit status summary use:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
+$ GITHUB_ACCESS_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
 ```
 
 As an alternative, you can also set up a rake task:
