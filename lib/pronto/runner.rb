@@ -28,7 +28,10 @@ module Pronto
     end
 
     def ruby_file?(path)
-      rb_file?(path) || rake_file?(path) || ruby_executable?(path)
+      rb_file?(path) ||
+        rake_file?(path) ||
+        gem_file?(path) ||
+        ruby_executable?(path)
     end
 
     def repo_path
@@ -43,6 +46,10 @@ module Pronto
 
     def rake_file?(path)
       File.extname(path) == '.rake'
+    end
+
+    def gem_file?(path)
+      File.basename(path) == 'Gemfile' || File.extname(path) == '.gemspec'
     end
 
     def ruby_executable?(path)
