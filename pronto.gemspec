@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   EOF
 
   s.licenses = ['MIT']
-  s.required_ruby_version = '>= 2.2.0'
+  s.required_ruby_version = '>= 2.3.0'
   s.rubygems_version = '1.8.23'
 
   s.files = `git ls-files`.split($RS).reject do |file|
@@ -46,8 +46,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
   s.add_runtime_dependency('rugged', '~> 0.24', '>= 0.23.0')
   s.add_runtime_dependency('thor', '~> 0.20.0')
-  s.add_development_dependency('bundler', '~> 1.3')
-  s.add_development_dependency('pronto-rubocop', '~> 0.9.0')
+  s.add_development_dependency('bundler', '>= 1.15')
+  s.add_development_dependency('pronto-rubocop', '~> 0.10.0')
   s.add_development_dependency('rake', '~> 12.0')
   s.add_development_dependency('rspec', '~> 3.4')
   s.add_development_dependency('rspec-its', '~> 1.2')

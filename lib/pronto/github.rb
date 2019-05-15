@@ -66,9 +66,13 @@ module Pronto
     def create_pull_request_review(comments)
       options = {
         event: 'COMMENT',
-        accept: 'application/vnd.github.black-cat-preview+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
-        comments: comments.map do |c|
-          { path: c.path, position: c.position, body: c.body }
+        accept: 'application/vnd.github.v3.diff+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
+        comments: comments.map do |comment|
+          { 
+            path:     comment.path,
+            position: comment.position,
+            body:     comment.body
+          }
         end
       }
       client.create_pull_request_review(slug, pull_id, options)

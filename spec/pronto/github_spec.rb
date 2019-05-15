@@ -9,7 +9,7 @@ module Pronto
     let(:empty_client_options) do
       {
         event: 'COMMENT',
-        accept: 'application/vnd.github.black-cat-preview+json'
+        accept: 'application/vnd.github.v3.diff+json'
       }
     end
 

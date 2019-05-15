@@ -3,10 +3,10 @@ before_install: gem update --system
 dist: trusty
 language: ruby
 rvm:
-- 2.2
-- 2.3
-- 2.4
-- 2.5
+  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
 
 env:
   global:
@@ -23,7 +23,7 @@ script:
 after_script:
   - >
     [ "${TRAVIS_PULL_REQUEST}" != "false" ] &&
-    [ "${TRAVIS_RUBY_VERSION}" = "2.2" ] &&
+    [ "${TRAVIS_RUBY_VERSION}" = "2.3" ] &&
       PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} \
         bundle exec pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
