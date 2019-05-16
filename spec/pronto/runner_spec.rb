@@ -32,7 +32,7 @@ module Pronto
       end
 
       context 'named Gemfile' do
-        let(:path) { 'test/Gemfile' }
+        let(:path) { 'Gemfile' }
         it { should be_truthy }
       end
 
