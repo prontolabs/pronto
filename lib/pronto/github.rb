@@ -45,17 +45,12 @@ module Pronto
       end
     end
 
-    def create_pull_request_review(comments)
-      return if comments.empty?
-
-      options = {
-        event: 'COMMENT',
-        accept: 'application/vnd.github.v3.diff+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
-        comments: comments.map do |c|
-          { path: c.path, position: c.position, body: c.body }
-        end
-      }
-      client.create_pull_request_review(slug, pull_id, options)
+    def publish_pull_request_comments(comments)
+      comments_left = comments.clone
+      while comments_left.any?
+        comments_to_publish = comments_left.slice!(0, warnings_per_review)
+        create_pull_request_review(comments_to_publish)
+      end
     end
 
     def create_commit_status(status)
@@ -67,6 +62,21 @@ module Pronto
     end
 
     private
+
+    def create_pull_request_review(comments)
+      options = {
+        event: 'COMMENT',
+        accept: 'application/vnd.github.v3.diff+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
+        comments: comments.map do |comment|
+          { 
+            path:     comment.path,
+            position: comment.position,
+            body:     comment.body
+          }
+        end
+      }
+      client.create_pull_request_review(slug, pull_id, options)
+    end
 
     def slug
       return @config.github_slug if @config.github_slug
@@ -102,6 +112,10 @@ module Pronto
                 elsif @repo.head_detached?
                   @github_pull.pull_by_commit(@repo.head_commit_sha)
                 end
+    end
+
+    def warnings_per_review
+      @warnings_per_review ||= @config.warnings_per_review
     end
   end
 end

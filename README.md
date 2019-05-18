@@ -116,6 +116,22 @@ If you want review to appear on pull request diff, instead of comments:
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
 ```
 
+All the **N** pending comments will be now separated into **X** number of PR reviews.
+The number of the PR reviews will be controlled by an additional environment variable or with the help of a config setting.
+This way, by a single pronto run, all the comments will be published to the PR, but divided into small reviews
+in order to avoid the rate limit of the providers.
+
+```
+X = N / {PRONTO_WARNINGS_PER_REVIEW || warnings_per_review || 30})
+```
+
+Note: In case no environment variable or config setting is specified in `.pronto.yml`, 
+      a default value of `30` will be used.
+
+```sh
+$ PRONTO_WARNINGS_PER_REVIEW=30 PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
+```
+
 Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
 
 ```sh
@@ -210,6 +226,7 @@ bitbucket:
   password: pass
   web_endpoint: https://bitbucket.org/
 max_warnings: 150
+warnings_per_review: 30
 verbose: false
 ```
 

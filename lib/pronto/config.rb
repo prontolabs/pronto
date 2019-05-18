@@ -39,6 +39,10 @@ module Pronto
       URI.parse(bitbucket_web_endpoint).host
     end
 
+    def warnings_per_review
+      ENV['PRONTO_WARNINGS_PER_REVIEW'] && Integer(ENV['PRONTO_WARNINGS_PER_REVIEW']) || @config_hash['warnings_per_review']
+    end
+
     def max_warnings
       ENV['PRONTO_MAX_WARNINGS'] && Integer(ENV['PRONTO_MAX_WARNINGS']) || @config_hash['max_warnings']
     end

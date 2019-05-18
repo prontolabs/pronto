@@ -10,7 +10,7 @@ module Pronto
       end
 
       def submit_comments(client, comments)
-        client.create_pull_request_review(comments)
+        client.publish_pull_request_comments(comments)
       rescue Octokit::UnprocessableEntity, HTTParty::Error => e
         $stderr.puts "Failed to post: #{e.message}"
       end
