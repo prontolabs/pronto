@@ -21,7 +21,7 @@ class BitbucketClient
   end
 
   def pull_requests(slug)
-    response = get("#{pull_request_api(slug)}/pullrequests?state=OPEN")
+    response = get("/#{slug}/pullrequests?state=OPEN")
     openstruct(response['values'])
   end
 
@@ -30,11 +30,11 @@ class BitbucketClient
   end
 
   def approve_pull_request(slug, pull_id)
-    self.class.post("#{slug}/pullrequests/#{pull_id}/approve")
+    self.class.post("/#{slug}/pullrequests/#{pull_id}/approve")
   end
 
   def unapprove_pull_request(slug, pull_id)
-    self.class.delete("#{slug}/pullrequests/#{pull_id}/approve")
+    self.class.delete("/#{slug}/pullrequests/#{pull_id}/approve")
   end
 
   private
