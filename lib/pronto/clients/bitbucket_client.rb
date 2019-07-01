@@ -21,7 +21,7 @@ class BitbucketClient
   end
 
   def pull_requests(slug)
-    response = get("#{pull_request_api(slug)}/pullrequests?state=OPEN")
+    response = get("/#{slug}/pullrequests?state=OPEN")
     openstruct(response['values'])
   end
 
