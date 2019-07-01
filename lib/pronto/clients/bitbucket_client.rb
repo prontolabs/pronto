@@ -30,11 +30,11 @@ class BitbucketClient
   end
 
   def approve_pull_request(slug, pull_id)
-    self.class.post("#{slug}/pullrequests/#{pull_id}/approve")
+    self.class.post("/#{slug}/pullrequests/#{pull_id}/approve")
   end
 
   def unapprove_pull_request(slug, pull_id)
-    self.class.delete("#{slug}/pullrequests/#{pull_id}/approve")
+    self.class.delete("/#{slug}/pullrequests/#{pull_id}/approve")
   end
 
   private
