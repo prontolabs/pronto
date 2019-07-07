@@ -23,10 +23,10 @@ module Pronto
         ENV['PRONTO_GITHUB_REVIEW_TYPE'] ||
         @config_hash.fetch('github_review_type', false)
 
-      if review_type == 'comment'
-        'COMMENT'
-      else
+      if review_type == 'request_changes'
         'REQUEST_CHANGES'
+      else
+        'COMMENT'
       end
     end
 

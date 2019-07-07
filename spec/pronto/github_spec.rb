@@ -8,7 +8,7 @@ module Pronto
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
     let(:empty_client_options) do
       {
-        event: 'REQUEST_CHANGES',
+        event: 'COMMENT',
         accept: 'application/vnd.github.v3.diff+json'
       }
     end
