@@ -5,6 +5,7 @@ module Pronto
       ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
 
       let(:formatter) { described_class.new }
+      let(:paginated_response) { double(auto_paginate: []) }
 
       describe '#format' do
         subject { formatter.format(messages, repo, nil) }
@@ -18,7 +19,7 @@ module Pronto
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return(double(:commits, auto_paginate: []))
+            .and_return(paginated_response)
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)
@@ -45,7 +46,7 @@ module Pronto
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return(double(:commits, auto_paginate: []))
+            .and_return(paginated_response)
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)
