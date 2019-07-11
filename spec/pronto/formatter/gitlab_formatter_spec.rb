@@ -18,7 +18,7 @@ module Pronto
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return([])
+            .and_return(double(:commits, auto_paginate: []))
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)
@@ -45,7 +45,7 @@ module Pronto
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return([])
+            .and_return(double(:commits, auto_paginate: []))
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)
