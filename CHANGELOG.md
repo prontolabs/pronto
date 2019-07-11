@@ -7,10 +7,6 @@
 * [#301](https://github.com/prontolabs/pronto/pull/301): add ability to auto approve Bitbucket pull requests.
 * [#331](https://github.com/prontolabs/pronto/pull/331): allow to specify PATH in "run" command.
 
-### New features
-
-* [#301](https://github.com/prontolabs/pronto/pull/301): add ability to auto approve Bitbucket pull requests.
-
 ### Bugs fixed
 
 * [#258](https://github.com/prontolabs/pronto/pull/258): fix blame returning nil when file does not exist in the git tree.
