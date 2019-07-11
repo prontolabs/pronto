@@ -56,32 +56,41 @@ module Pronto
       end
     end
 
-    describe '#max_warnings' do
-      subject { config.max_warnings }
+    {
+      max_warnings: {
+        default_value: nil
+      },
+      warnings_per_review: {
+        default_value: ConfigFile::DEFAULT_WARNINGS_PER_REVIEW
+      }
+    }.each do |setting_name, specifics|
+      describe "##{setting_name}" do
+        subject { config.public_send(setting_name) }
 
-      context 'from env variable' do
-        context 'with a valid value' do
-          before { stub_const('ENV', 'PRONTO_MAX_WARNINGS' => '20') }
-          it { should == 20 }
-        end
+        context 'from env variable' do
+          context 'with a valid value' do
+            before { stub_const('ENV', "PRONTO_#{setting_name.upcase}" => '20') }
+            it { should == 20 }
+          end
 
-        context 'with an invalid value' do
-          before { stub_const('ENV', 'PRONTO_MAX_WARNINGS' => 'twenty') }
+          context 'with an invalid value' do
+            before { stub_const('ENV', "PRONTO_#{setting_name.upcase}" => 'twenty') }
 
-          specify do
-            -> { subject }.should raise_error(ArgumentError)
+            specify do
+              -> { subject }.should raise_error(ArgumentError)
+            end
           end
         end
-      end
 
-      context 'from config hash' do
-        let(:config_hash) { { 'max_warnings' => 40 } }
-        it { should == 40 }
-      end
+        context 'from config hash' do
+          let(:config_hash) { { setting_name.to_s => 40 } }
+          it { should == 40 }
+        end
 
-      context 'default' do
-        let(:config_hash) { ConfigFile::EMPTY }
-        it { should == nil }
+        context 'default' do
+          let(:config_hash) { ConfigFile::EMPTY }
+          it { should == specifics[:default_value] }
+        end
       end
     end
 
