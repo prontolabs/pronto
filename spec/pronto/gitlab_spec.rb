@@ -61,16 +61,16 @@ module Pronto
       end
     end
 
-    describe '#pull_id' do
+    describe '#mr_id' do
       it 'should return iid of merge request if there is one' do
-        gitlab.should_receive(:pull).twice.and_return(double(iid: 10))
-        gitlab.send(:pull_id).should eql(10)
+        gitlab.should_receive(:merge_request).twice.and_return(double(iid: 10))
+        gitlab.send(:mr_id).should eql(10)
       end
 
       it 'should return the env_pull_id if no pull' do
-        gitlab.should_receive(:pull).and_return(nil)
+        gitlab.should_receive(:merge_request).and_return(nil)
         gitlab.should_receive(:env_pull_id).and_return(11)
-        gitlab.send(:pull_id).should eql(11)
+        gitlab.send(:mr_id).should eql(11)
       end
     end
 

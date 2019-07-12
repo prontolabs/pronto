@@ -9,8 +9,8 @@ module Pronto
     end
 
     def pull_comments(sha)
-      @comment_cache["#{slug}/#{pull_id}"] ||= begin
-        client.merge_request_discussions(slug, pull_id).auto_paginate.reduce([]) do |arr, comment|
+      @comment_cache["#{slug}/#{mr_id}"] ||= begin
+        client.merge_request_discussions(slug, mr_id).auto_paginate.reduce([]) do |arr, comment|
           comment.notes.each do |note|
             if note['position']
               arr.push(Comment.new(
@@ -41,7 +41,7 @@ module Pronto
           )
         }
 
-        client.create_merge_request_discussion(slug, pull_id, options)
+        client.create_merge_request_discussion(slug, mr_id, options)
       end
     end
 
@@ -58,7 +58,7 @@ module Pronto
       # Better to get those informations from Gitlab API directly than trying to look for them here.
       # (FYI you can't use `pull` method because index api does not contains those informations)
       @position_sha ||= begin
-                          data = client.merge_request(slug, pull_id)
+                          data = client.merge_request(slug, mr_id)
                           data.diff_refs.to_h
                         end
     end
@@ -73,17 +73,17 @@ module Pronto
       end
     end
 
-    def pull_id
-      pull ? pull.iid.to_i : env_pull_id
+    def mr_id
+      merge_request ? merge_request.iid.to_i : env_pull_id
     end
 
-    def pull
-      @pull ||= if env_pull_id
-                  pull_by_id(env_pull_id)
+    def merge_request
+      @merge_request ||= if env_pull_id
+                  merge_request_by_id(env_pull_id)
                 elsif @repo.branch
-                  pull_by_branch(@repo.branch)
+                  merge_request_by_branch(@repo.branch)
                 elsif @repo.head_detached?
-                  pull_by_commit(@repo.head_commit_sha)
+                  merge_request_by_commit(@repo.head_commit_sha)
                 end
     end
 
@@ -91,21 +91,21 @@ module Pronto
       @merge_requests ||= client.merge_requests(slug, { state: :opened, source_branch: @repo.branch }).auto_paginate
     end
 
-    def pull_by_id(pull_id)
-      result = merge_requests.find { |pr| pr.iid.to_i == pull_id }
+    def merge_request_by_id(mr_id)
+      result = merge_requests.find { |pr| pr.iid.to_i == mr_id }
       return result if result
-      message = "Merge request ##{pull_id} was not found in #{slug}."
+      message = "Merge request ##{mr_id} was not found in #{slug}."
       raise Pronto::Error, message
     end
 
-    def pull_by_branch(branch)
+    def merge_request_by_branch(branch)
       result = merge_requests.find { |pr| pr.source_branch == @repo.branch }
       return result if result
       raise Pronto::Error, "Merge request for branch #{branch} " \
                            "was not found in #{slug}."
     end
 
-    def pull_by_commit(sha)
+    def merge_request_by_commit(sha)
       result = merge_requests.find { |pr| pr.sha == sha }
       return result if result
       message = "Merge request with head #{sha} " \
