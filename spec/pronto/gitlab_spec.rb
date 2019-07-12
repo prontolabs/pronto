@@ -2,6 +2,37 @@ module Pronto
   describe Gitlab do
     let(:gitlab) { described_class.new(repo) }
 
+    describe '#position_sha' do
+      subject { gitlab.send(:position_sha) }
+      let(:repo) do
+        double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
+      end
+      let(:merge_request) do
+        double(
+          iid: 10,
+          source_branch: 'prontolabs/pronto',
+          diff_refs: {
+            "base_sha" => "c380d3ace",
+            "head_sha" => "2be7ddb70",
+            "start_sha" => "c380d3ace"
+        })
+      end
+      let(:paginated_merge_requests) { double(auto_paginate: [merge_request]) }
+
+      specify do
+        ::Gitlab::Client.any_instance
+          .should_receive(:merge_requests)
+          .and_return(paginated_merge_requests)
+        ::Gitlab::Client.any_instance
+            .should_receive(:merge_request)
+            .with('prontolabs/pronto', 10)
+            .once
+            .and_return(merge_request)
+
+        subject
+      end
+    end
+
     describe '#slug' do
       subject { gitlab.send(:slug) }
       before(:each) do
@@ -27,6 +58,35 @@ module Pronto
 
         it 'returns correct slug' do
           subject.should eql('prontolabs/pronto')
+        end
+      end
+    end
+
+    describe '#commit_comments' do
+      subject { gitlab.commit_comments(sha) }
+
+      context 'three requests for same comments' do
+        let(:repo) do
+          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
+        end
+        let(:sha) { 'foobar' }
+        let(:comment) { double(note: 'body', path: 'path', line: 1) }
+        let(:paginated_response) { double(auto_paginate: [ comment ]) }
+
+        specify do
+          ::Gitlab::Client.any_instance
+            .should_receive(:commit_comments)
+            .with('prontolabs/pronto', sha)
+            .once
+            .and_return(paginated_response)
+
+          Comment.should_receive(:new)
+            .with(sha, comment.note, comment.path, comment.line)
+            .once
+
+          subject
+          subject
+          subject
         end
       end
     end
@@ -63,35 +123,6 @@ module Pronto
               note['position']['new_path'],
               note['position']['new_line']
             ).once
-
-          subject
-          subject
-          subject
-        end
-      end
-    end
-
-    describe '#commit_comments' do
-      subject { gitlab.commit_comments(sha) }
-
-      context 'three requests for same comments' do
-        let(:repo) do
-          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
-        end
-        let(:sha) { 'foobar' }
-        let(:comment) { double(note: 'body', path: 'path', line: 1) }
-        let(:paginated_response) { double(auto_paginate: [ comment ]) }
-
-        specify do
-          ::Gitlab::Client.any_instance
-            .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha)
-            .once
-            .and_return(paginated_response)
-
-          Comment.should_receive(:new)
-            .with(sha, comment.note, comment.path, comment.line)
-            .once
 
           subject
           subject
