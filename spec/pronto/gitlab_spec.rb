@@ -81,28 +81,58 @@ module Pronto
       let(:mr2) { double(iid: 2, source_branch: 'branch2', sha: "abcdefg2") }
       let(:mr3) { double(iid: 3, source_branch: 'branch3', sha: "abcdefg3") }
       subject { gitlab.send(:merge_request) }
-      before do
-        gitlab.should_receive(:merge_requests).and_return(merge_requests)
+
+      context 'with merge_requests' do
+        before do
+          gitlab.should_receive(:merge_requests).and_return(merge_requests)
+        end
+        it 'should return merge request for env_pull_id if specified' do
+          gitlab.should_receive(:env_pull_id).twice.and_return(2)
+
+          subject.should eql(mr2)
+        end
+
+        it 'should return merge_request_for_branch if repo has branch' do
+          gitlab.should_receive(:env_pull_id).and_return(nil)
+
+          subject.should eql(mr1)
+        end
+
+        it 'should find by commit if no branch' do
+          gitlab.should_receive(:env_pull_id).and_return(nil)
+          repo.should_receive(:branch).and_return(nil)
+          repo.should_receive(:head_detached?).and_return(true)
+          repo.should_receive(:head_commit_sha).and_return('abcdefg3')
+
+          subject.should eql(mr3)
+        end
       end
-      it 'should return merge request for env_pull_id if specified' do
-        gitlab.should_receive(:env_pull_id).twice.and_return(2)
 
-        subject.should eql(mr2)
-      end
+      context 'without merge_requests' do
+        before do
+          gitlab.should_receive(:merge_requests).and_return([])
+        end
 
-      it 'should return merge_request_for_branch if repo has branch' do
-        gitlab.should_receive(:env_pull_id).and_return(nil)
+        it 'should raise error env_pull_id if specified' do
+          gitlab.should_receive(:env_pull_id).twice.and_return(2)
 
-        subject.should eql(mr1)
-      end
+          -> { subject }.should raise_error
+        end
 
-      it 'should find by commit if no branch' do
-        gitlab.should_receive(:env_pull_id).and_return(nil)
-        repo.should_receive(:branch).and_return(nil)
-        repo.should_receive(:head_detached?).and_return(true)
-        repo.should_receive(:head_commit_sha).and_return('abcdefg3')
+        it 'should raise error if has branch' do
+          gitlab.should_receive(:env_pull_id).and_return(nil)
 
-        subject.should eql(mr3)
+          -> { subject }.should raise_error
+        end
+
+        it 'should raies error if no branch' do
+          gitlab.should_receive(:env_pull_id).and_return(nil)
+          repo.should_receive(:branch).and_return(nil)
+          repo.should_receive(:head_detached?).and_return(true)
+          repo.should_receive(:head_commit_sha).and_return('abcdefg3')
+
+          -> { subject }.should raise_error
+        end
       end
     end
 
