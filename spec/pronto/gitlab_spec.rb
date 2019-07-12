@@ -4,6 +4,7 @@ module Pronto
     before do
       ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
       ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
+      ENV['PRONTO_PULL_REQUEST_ID'] = nil
     end
     let(:repo) do
       double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
@@ -84,12 +85,14 @@ module Pronto
       end
 
       it 'should return merge_request_for_branch if repo has branch' do
+        gitlab.should_receive(:env_pull_id).and_return(nil)
         gitlab.should_receive(:merge_request_by_branch).with('prontolabs/pronto')
 
         subject
       end
 
       it 'should find by commit if no branch' do
+        gitlab.should_receive(:env_pull_id).and_return(nil)
         repo.should_receive(:branch).and_return(nil)
         repo.should_receive(:head_detached?).and_return(true)
         repo.should_receive(:head_commit_sha).and_return('abcdefg')
