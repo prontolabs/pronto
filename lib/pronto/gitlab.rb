@@ -10,20 +10,20 @@ module Pronto
 
     def pull_comments(sha)
       @comment_cache["#{slug}/#{pull_id}"] ||= begin
-        arr = []
-        client.merge_request_discussions(slug, pull_id).auto_paginate.each do |comment|
+        client.merge_request_discussions(slug, pull_id).auto_paginate.reduce([]) do |arr, comment|
           comment.notes.each do |note|
-            next unless note['position']
+            if note['position']
+              arr.push(Comment.new(
+                sha,
+                note['body'],
+                note['position']['new_path'],
+                note['position']['new_line']
+              ))
+            end
 
-            arr << Comment.new(
-              sha,
-              note['body'],
-              note['position']['new_path'],
-              note['position']['new_line']
-            )
+            arr
           end
         end
-        arr
       end
     end
 

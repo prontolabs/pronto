@@ -31,6 +31,46 @@ module Pronto
       end
     end
 
+    describe '#pull_comments' do
+      subject { gitlab.pull_comments(sha) }
+
+      context 'three requests for same comments' do
+        let(:repo) do
+          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
+        end
+        let(:sha) { 'foobar' }
+        let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
+        let(:comment) { double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'path', 'new_line'=> 1 } }]) }
+        let(:paginated_response) { double(auto_paginate: [ comment ]) }
+        let(:paginated_merge_requests) { double(auto_paginate: [merge_request]) }
+
+        specify do
+          ::Gitlab::Client.any_instance
+            .should_receive(:merge_requests)
+            .and_return(paginated_merge_requests)
+
+          ::Gitlab::Client.any_instance
+            .should_receive(:merge_request_discussions)
+            .with('prontolabs/pronto', merge_request.iid)
+            .once
+            .and_return(paginated_response)
+
+          note = comment.notes.first
+          Comment.should_receive(:new)
+            .with(
+              sha,
+              note['body'],
+              note['position']['new_path'],
+              note['position']['new_line']
+            ).once
+
+          subject
+          subject
+          subject
+        end
+      end
+    end
+
     describe '#commit_comments' do
       subject { gitlab.commit_comments(sha) }
 
@@ -43,14 +83,15 @@ module Pronto
         let(:paginated_response) { double(auto_paginate: [ comment ]) }
 
         specify do
-          ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
-          ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
-
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .with('prontolabs/pronto', sha)
             .once
             .and_return(paginated_response)
+
+          Comment.should_receive(:new)
+            .with(sha, comment.note, comment.path, comment.line)
+            .once
 
           subject
           subject
