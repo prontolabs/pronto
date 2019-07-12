@@ -138,8 +138,8 @@ module Pronto
       end
     end
 
-    describe '#create_pull_request_review' do
-      subject { gitlab.create_pull_request_review(comments) }
+    describe '#create_merge_request_review' do
+      subject { gitlab.create_merge_request_review(comments) }
 
       context 'no comments' do
         let(:comments) { [] }

@@ -10,7 +10,7 @@ module Pronto
       end
 
       def submit_comments(client, comments)
-        client.create_pull_request_review(comments)
+        client.create_merge_request_review(comments)
       rescue => e
         $stderr.puts "Failed to post: #{e.message}"
       end

@@ -27,7 +27,7 @@ module Pronto
       end
     end
 
-    def create_pull_request_review(comments)
+    def create_merge_request_review(comments)
       return if comments.empty?
 
       comments.each do |comment|
@@ -87,26 +87,26 @@ module Pronto
                 end
     end
 
-    def pull_requests
-      @pull_requests ||= client.merge_requests(slug, { state: :opened, source_branch: @repo.branch }).auto_paginate
+    def merge_requests
+      @merge_requests ||= client.merge_requests(slug, { state: :opened, source_branch: @repo.branch }).auto_paginate
     end
 
     def pull_by_id(pull_id)
-      result = pull_requests.find { |pr| pr.iid.to_i == pull_id }
+      result = merge_requests.find { |pr| pr.iid.to_i == pull_id }
       return result if result
       message = "Merge request ##{pull_id} was not found in #{slug}."
       raise Pronto::Error, message
     end
 
     def pull_by_branch(branch)
-      result = pull_requests.find { |pr| pr.source_branch == @repo.branch }
+      result = merge_requests.find { |pr| pr.source_branch == @repo.branch }
       return result if result
       raise Pronto::Error, "Merge request for branch #{branch} " \
                            "was not found in #{slug}."
     end
 
     def pull_by_commit(sha)
-      result = pull_requests.find { |pr| pr.sha == sha }
+      result = merge_requests.find { |pr| pr.sha == sha }
       return result if result
       message = "Merge request with head #{sha} " \
                 "was not found in #{slug}."
