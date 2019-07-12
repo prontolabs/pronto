@@ -102,6 +102,7 @@ module Pronto
         let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
         let(:comment) { double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'path', 'new_line'=> 1 } }]) }
         let(:paginated_response) { double(auto_paginate: [ comment ]) }
+        let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
         let(:paginated_merge_requests) { double(auto_paginate: [merge_request]) }
 
         specify do

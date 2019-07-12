@@ -7,7 +7,7 @@ module Pronto
         comments = new_comments(messages, patches)
         additions = remove_duplicate_comments(existing, comments)
         submit_comments(client, additions)
-        
+
         approve_pull_request(comments.count, additions.count, client) if defined?(self.approve_pull_request)
 
         "#{additions.count} Pronto messages posted to #{pretty_name}"
