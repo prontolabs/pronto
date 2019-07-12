@@ -5,12 +5,12 @@ module Pronto
       ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
       ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
     end
+    let(:repo) do
+      double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
+    end
 
     describe '#position_sha' do
       subject { gitlab.send(:position_sha) }
-      let(:repo) do
-        double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
-      end
       let(:merge_request) do
         double(
           iid: 10,
@@ -65,9 +65,6 @@ module Pronto
       subject { gitlab.commit_comments(sha) }
 
       context 'three requests for same comments' do
-        let(:repo) do
-          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
-        end
         let(:sha) { 'foobar' }
         let(:comment) { double(note: 'body', path: 'path', line: 1) }
         let(:paginated_response) { double(auto_paginate: [ comment ]) }
@@ -94,9 +91,6 @@ module Pronto
       subject { gitlab.pull_comments(sha) }
 
       context 'three requests for same comments' do
-        let(:repo) do
-          double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
-        end
         let(:sha) { 'foobar' }
         let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
         let(:comment) { double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'path', 'new_line'=> 1 } }]) }
@@ -131,28 +125,55 @@ module Pronto
       end
     end
 
-    # describe '#create_pull_request_review' do
-    #   subject { gitlab.create_pull_request_review(comments) }
+    describe '#create_pull_request_review' do
+      subject { gitlab.create_pull_request_review(comments) }
 
-    #   context 'no comments' do
-    #     let(:comments) { [] }
-    #     specify do
-    #       ::Gitlab::Client.any_instance
-    #         .should_not_receive(:create_merge_request_discussion)
-    #       subject
-    #     end
-    #   end
+      context 'no comments' do
+        let(:comments) { [] }
+        specify do
+          ::Gitlab::Client.any_instance
+            .should_not_receive(:create_merge_request_discussion)
+          subject
+        end
+      end
 
-    #   context 'with comments' do
-    #     let(:comments) { [comment] }
-    #     let(:comment) { double() }
-    #     specify do
-    #       ::Gitlab::Client.any_instance
-    #         .should_receive(:create_merge_request_discussion)
-    #         .with('prontolabs/pronto', 10, options)
+      context 'with comments' do
+        let(:comments) { [comment] }
+        let(:comment) { double(body: 'body', path: 'path', position: 1) }
+        let(:merge_request) do
+          double(
+            iid: 10,
+            source_branch: 'prontolabs/pronto',
+            diff_refs: {
+              "base_sha" => "c380d3ace",
+              "head_sha" => "2be7ddb70",
+              "start_sha" => "c380d3ace"
+          })
+        end
+        let(:paginated_merge_requests) { double(auto_paginate: [merge_request]) }
 
-    #       # subject
-    #     end
-    #   end
+        specify do
+          ::Gitlab::Client.any_instance
+            .should_receive(:merge_requests)
+            .and_return(paginated_merge_requests)
+
+          ::Gitlab::Client.any_instance
+            .should_receive(:merge_request)
+            .with('prontolabs/pronto', 10)
+            .once
+            .and_return(merge_request)
+
+          ::Gitlab::Client.any_instance
+            .should_receive(:create_merge_request_discussion)
+            .with('prontolabs/pronto', 10, {:body=>"body",
+              :position=>{"base_sha"=>"c380d3ace", "head_sha"=>"2be7ddb70",
+                :new_line=>1, :new_path=>"path", :old_line=>nil,
+                :position_type=>"text",
+                "start_sha"=>"c380d3ace"}})
+
+          subject
+        end
+      end
+    end
   end
 end
