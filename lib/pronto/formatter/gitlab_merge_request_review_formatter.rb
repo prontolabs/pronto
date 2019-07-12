@@ -11,8 +11,8 @@ module Pronto
 
       def submit_comments(client, comments)
         client.create_pull_request_review(comments)
-      # rescue => e
-      #   $stderr.puts "Failed to post: #{e.message}"
+      rescue => e
+        $stderr.puts "Failed to post: #{e.message}"
       end
 
       def line_number(message, _)

@@ -1,6 +1,10 @@
 module Pronto
   describe Gitlab do
     let(:gitlab) { described_class.new(repo) }
+    before do
+      ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
+      ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
+    end
 
     describe '#position_sha' do
       subject { gitlab.send(:position_sha) }
@@ -35,11 +39,6 @@ module Pronto
 
     describe '#slug' do
       subject { gitlab.send(:slug) }
-      before(:each) do
-        ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
-        ENV['PRONTO_GITLAB_API_PRIVATE_TOKEN'] = 'token'
-      end
-
       context 'ssh with port remote url' do
         let(:repo) do
           remote_url = 'ssh://git@gitlab.example.com:111/prontolabs/pronto.git'
@@ -131,5 +130,29 @@ module Pronto
         end
       end
     end
+
+    # describe '#create_pull_request_review' do
+    #   subject { gitlab.create_pull_request_review(comments) }
+
+    #   context 'no comments' do
+    #     let(:comments) { [] }
+    #     specify do
+    #       ::Gitlab::Client.any_instance
+    #         .should_not_receive(:create_merge_request_discussion)
+    #       subject
+    #     end
+    #   end
+
+    #   context 'with comments' do
+    #     let(:comments) { [comment] }
+    #     let(:comment) { double() }
+    #     specify do
+    #       ::Gitlab::Client.any_instance
+    #         .should_receive(:create_merge_request_discussion)
+    #         .with('prontolabs/pronto', 10, options)
+
+    #       # subject
+    #     end
+    #   end
   end
 end
