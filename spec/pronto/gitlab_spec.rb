@@ -74,6 +74,31 @@ module Pronto
       end
     end
 
+    describe '#merge_request' do
+      subject { gitlab.send(:merge_request) }
+      it 'should return merge request for env_pull_id if specified' do
+        gitlab.should_receive(:env_pull_id).twice.and_return(11)
+        gitlab.should_receive(:merge_request_by_id).with(11)
+
+        subject
+      end
+
+      it 'should return merge_request_for_branch if repo has branch' do
+        gitlab.should_receive(:merge_request_by_branch).with('prontolabs/pronto')
+
+        subject
+      end
+
+      it 'should find by commit if no branch' do
+        repo.should_receive(:branch).and_return(nil)
+        repo.should_receive(:head_detached?).and_return(true)
+        repo.should_receive(:head_commit_sha).and_return('abcdefg')
+        gitlab.should_receive(:merge_request_by_commit).with('abcdefg')
+
+        subject
+      end
+    end
+
     describe '#commit_comments' do
       subject { gitlab.commit_comments(sha) }
 
