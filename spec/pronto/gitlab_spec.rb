@@ -7,7 +7,7 @@ module Pronto
       ENV['PRONTO_PULL_REQUEST_ID'] = nil
     end
     let(:repo) do
-      double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'prontolabs/pronto')
+      double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'], branch: 'current_branch')
     end
 
     describe '#position_sha' do
@@ -15,7 +15,7 @@ module Pronto
       let(:merge_request) do
         double(
           iid: 10,
-          source_branch: 'prontolabs/pronto',
+          source_branch: 'current_branch',
           diff_refs: {
             "base_sha" => "c380d3ace",
             "head_sha" => "2be7ddb70",
@@ -76,29 +76,33 @@ module Pronto
     end
 
     describe '#merge_request' do
+      let(:merge_requests) { [mr1, mr2, mr3]}
+      let(:mr1) { double(iid: 1, source_branch: 'current_branch', sha: "abcdefg1") }
+      let(:mr2) { double(iid: 2, source_branch: 'branch2', sha: "abcdefg2") }
+      let(:mr3) { double(iid: 3, source_branch: 'branch3', sha: "abcdefg3") }
       subject { gitlab.send(:merge_request) }
+      before do
+        gitlab.should_receive(:merge_requests).and_return(merge_requests)
+      end
       it 'should return merge request for env_pull_id if specified' do
-        gitlab.should_receive(:env_pull_id).twice.and_return(11)
-        gitlab.should_receive(:merge_request_by_id).with(11)
+        gitlab.should_receive(:env_pull_id).twice.and_return(2)
 
-        subject
+        subject.should eql(mr2)
       end
 
       it 'should return merge_request_for_branch if repo has branch' do
         gitlab.should_receive(:env_pull_id).and_return(nil)
-        gitlab.should_receive(:merge_request_by_branch).with('prontolabs/pronto')
 
-        subject
+        subject.should eql(mr1)
       end
 
       it 'should find by commit if no branch' do
         gitlab.should_receive(:env_pull_id).and_return(nil)
         repo.should_receive(:branch).and_return(nil)
         repo.should_receive(:head_detached?).and_return(true)
-        repo.should_receive(:head_commit_sha).and_return('abcdefg')
-        gitlab.should_receive(:merge_request_by_commit).with('abcdefg')
+        repo.should_receive(:head_commit_sha).and_return('abcdefg3')
 
-        subject
+        subject.should eql(mr3)
       end
     end
 
@@ -136,7 +140,7 @@ module Pronto
         let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
         let(:comment) { double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'path', 'new_line'=> 1 } }]) }
         let(:paginated_response) { double(auto_paginate: [ comment ]) }
-        let(:merge_request) { double(source_branch: 'prontolabs/pronto', iid: 10) }
+        let(:merge_request) { double(source_branch: 'current_branch', iid: 10) }
         let(:paginated_merge_requests) { double(auto_paginate: [merge_request]) }
 
         specify do
@@ -184,7 +188,7 @@ module Pronto
         let(:merge_request) do
           double(
             iid: 10,
-            source_branch: 'prontolabs/pronto',
+            source_branch: 'current_branch',
             diff_refs: {
               "base_sha" => "c380d3ace",
               "head_sha" => "2be7ddb70",
