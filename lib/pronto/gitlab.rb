@@ -1,5 +1,3 @@
-require'byebug'
-
 module Pronto
   class Gitlab < Client
     def commit_comments(sha)
