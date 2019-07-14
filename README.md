@@ -175,7 +175,7 @@ Then just run it:
 $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
-***note: this requires at least Gitlab 11.x+**
+**note: this requires at least Gitlab 11.6+**
 
 Merge request integration:
 
@@ -183,17 +183,19 @@ Merge request integration:
 $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/master
 ```
 
-You can run it also on Gitlab CI:
+On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
 
 ```sh
-pronto:
-  stage: code_review
+lint:
+  image: ruby
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: token
+  only:
+    - merge_requests
   script:
-    - apt-get install jq
-    - export PR_BRANCH=$(curl -s "https://${YOUR_GITLAB_URL}/api/v4/projects/${CI_PROJECT_ID}/merge_requests?private_token=${PRONTO_GITLAB_API_PRIVATE_TOKEN}&state=opened" | jq -r ".[]|select(.sha == \"$CI_COMMIT_SHA\")|.source_branch")
-    - export TR_BRANCH=$(curl -s "https://${YOUR_GITLAB_URL}/api/v4/projects/${CI_PROJECT_ID}/merge_requests?private_token=${PRONTO_GITLAB_API_PRIVATE_TOKEN}&state=opened" | jq -r ".[]|select(.sha == \"$CI_COMMIT_SHA\")|.target_branch")
-    - export PRONTO_PULL_REQUEST_ID=$(curl -s "https://${YOUR_GITLAB_URL}/api/v4/projects/${CI_PROJECT_ID}/merge_requests?private_token=${PRONTO_GITLAB_API_PRIVATE_TOKEN}&state=opened" | jq -r ".[]|select(.sha == \"$CI_COMMIT_SHA\")|.iid")
-    - bundle exec pronto run -f gitlab_mr -c origin/$TR_BRANCH
+    - bundle install
+    - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
 ```
 
 ### Bitbucket Integration
@@ -216,7 +218,6 @@ or, if you want comments to appear on pull request diff, instead of commit:
 ```sh
 $ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
 ```
-
 
 ## Configuration
 
