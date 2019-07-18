@@ -7,12 +7,12 @@ class BitbucketClient
   end
 
   def commit_comments(slug, sha)
-    response = get("/#{slug}/changesets/#{sha}/comments")
+    response = get("/#{slug}/commit/#{sha}/comments")
     openstruct(response['values'])
   end
 
   def create_commit_comment(slug, sha, body, path, position)
-    post("/#{slug}/changesets/#{sha}/comments", body, path, position)
+    post("/#{slug}/commit/#{sha}/comments", body, path, position)
   end
 
   def pull_comments(slug, pull_id)
