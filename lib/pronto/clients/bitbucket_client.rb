@@ -45,10 +45,19 @@ class BitbucketClient
 
   def post(url, body, path, position)
     options = {
-      body: {
-        content: body,
-        line_to: position,
-        filename: path
+      options = {
+        body: {
+          content: {
+            raw: body
+          },
+          inline: {
+            to: position,
+            path: path
+          }
+        }.to_json,
+        headers: {
+          { 'Content-Type': 'application/json' }
+        }
       }
     }
     self.class.post(url, options)
