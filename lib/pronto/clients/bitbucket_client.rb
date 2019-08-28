@@ -47,7 +47,7 @@ class BitbucketClient
     values.each do |value|
       value.content = value.content['raw']
       value.line_to = value.inline['to']
-      value.filename = value.content['path']
+      value.filename = value.inline['path']
     end
     values
   end
