@@ -8,7 +8,7 @@ class BitbucketClient
 
   def commit_comments(slug, sha)
     response = get("/#{slug}/changesets/#{sha}/comments")
-    openstruct(response['values'])
+    parse_comments(openstruct(response['values']))
   end
 
   def create_commit_comment(slug, sha, body, path, position)
@@ -17,7 +17,7 @@ class BitbucketClient
 
   def pull_comments(slug, pull_id)
     response = get("/#{slug}/pullrequests/#{pull_id}/comments")
-    openstruct(response['values'])
+    parse_comments(openstruct(response['values']))
   end
 
   def pull_requests(slug)
@@ -43,12 +43,28 @@ class BitbucketClient
     response.map { |r| OpenStruct.new(r) }
   end
 
+  def parse_comments(values)
+    values.each do |value|
+      value.content = value.content['raw']
+      value.line_to = value.inline['to']
+      value.filename = value.inline['path']
+    end
+    values
+  end
+  
   def post(url, body, path, position)
     options = {
       body: {
-        content: body,
-        line_to: position,
-        filename: path
+        content: {
+          raw: body
+        },
+        inline: {
+          to: position,
+          path: path
+        }
+      }.to_json,
+      headers: {
+        'Content-Type': 'application/json'
       }
     }
     self.class.post(url, options)
