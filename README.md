@@ -175,6 +175,29 @@ Then just run it:
 $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 ```
 
+**note: this requires at least Gitlab 11.6+**
+
+Merge request integration:
+
+```sh
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/master
+```
+
+On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
+
+```sh
+lint:
+  image: ruby
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: token
+  only:
+    - merge_requests
+  script:
+    - bundle install
+    - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+```
+
 ### Bitbucket Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
