@@ -8,10 +8,10 @@ class BitbucketClient
 
   def commit_comments(slug, sha)
     response = get("/#{slug}/commit/#{sha}/comments?pagelen=100")
-    result = parse_comments(openstruct(response['values']))
+    result = parse_comments(openstruct(response))
     while (response['next'])
       response = get response['next']
-      result.concat(parse_comments(openstruct(response['values'])))
+      result.concat(parse_comments(openstruct(response)))
     end
     result
   end
@@ -22,18 +22,18 @@ class BitbucketClient
 
   def pull_comments(slug, pull_id)
     response = get("/#{slug}/pullrequests/#{pull_id}/comments?pagelen=100")
-    parse_comments(openstruct(response['values']))
-    result = parse_comments(openstruct(response['values']))
+    parse_comments(openstruct(response))
+    result = parse_comments(openstruct(response))
     while (response['next'])
       response = get response['next']
-      result.concat(parse_comments(openstruct(response['values'])))
+      result.concat(parse_comments(openstruct(response)))
     end
     result
   end
 
   def pull_requests(slug)
     response = get("/#{slug}/pullrequests?state=OPEN")
-    openstruct(response['values'])
+    openstruct(response)
   end
 
   def create_pull_comment(slug, pull_id, body, path, position)
@@ -51,7 +51,12 @@ class BitbucketClient
   private
 
   def openstruct(response)
-    response.map { |r| OpenStruct.new(r) }
+    if response['values']
+      response['values'].map { |r| OpenStruct.new(r) }
+    else
+      p response
+      raise 'BitBucket response invalid'
+    end
   end
 
   def parse_comments(values)
