@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
-  s.add_runtime_dependency('gitlab', '~> 4.0', '>= 4.0.0')
+  s.add_runtime_dependency('gitlab', '~> 4.4', '>= 4.4.0')
   s.add_runtime_dependency('httparty', '>= 0.13.7')
   s.add_runtime_dependency('octokit', '~> 4.7', '>= 4.7.0')
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')

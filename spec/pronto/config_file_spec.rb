@@ -13,7 +13,8 @@ module Pronto
               'slug' => nil,
               'access_token' => nil,
               'api_endpoint' => 'https://api.github.com/',
-              'web_endpoint' => 'https://github.com/'
+              'web_endpoint' => 'https://github.com/',
+              'review_type' => 'request_changes'
             }
           )
         end

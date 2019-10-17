@@ -18,6 +18,18 @@ module Pronto
       consolidated
     end
 
+    def github_review_type
+      review_type =
+        ENV['PRONTO_GITHUB_REVIEW_TYPE'] ||
+        @config_hash.fetch('github_review_type', false)
+
+      if review_type == 'request_changes'
+        'REQUEST_CHANGES'
+      else
+        'COMMENT'
+      end
+    end
+
     def excluded_files(runner)
       files =
         if runner == 'all'

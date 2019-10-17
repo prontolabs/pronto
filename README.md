@@ -156,6 +156,30 @@ formatters = [formatter, status_formatter]
 Pronto.run('origin/master', '.', formatters)
 ```
 
+#### GitHub Actions Integration
+
+You can also run Pronto as a GitHub action. 
+
+Here's an example `.github/workflows/pronto.yml` workflow file using the `github_status` and `github_pr` formatters and running on each GitHub PR, with `pronto-rubocop` as the runner:
+
+```yml
+name: Pronto
+on: [pull_request]
+
+jobs:
+  pronto:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - run: gem install pronto pronto-rubocop
+      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}" pronto run -f github_status github_pr -c origin/master
+```
+
 ### GitLab Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
@@ -173,6 +197,29 @@ Then just run it:
 
 ```sh
 $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+```
+
+**note: this requires at least Gitlab 11.6+**
+
+Merge request integration:
+
+```sh
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/master
+```
+
+On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
+
+```sh
+lint:
+  image: ruby
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: token
+  only:
+    - merge_requests
+  script:
+    - bundle install
+    - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
 ```
 
 ### Bitbucket Integration
