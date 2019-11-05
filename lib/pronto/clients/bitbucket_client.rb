@@ -62,8 +62,9 @@ class BitbucketClient
   def parse_comments(values)
     values.each do |value|
       value.content = value.content['raw']
-      value.line_to = value.inline['to']
-      value.filename = value.inline['path']
+      value.line_to = value.inline ? value.inline['to'] : 0
+      value.filename = value.inline ? value.inline['path'] : ''
+      end
     end
     values
   end
