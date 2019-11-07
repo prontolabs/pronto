@@ -8,7 +8,7 @@ class BitbucketClient
 
   def commit_comments(slug, sha)
     response = get_all_comments("/#{slug}/changesets/#{sha}/comments?pagelen=100")
-    parse_comments(openstruct(response['values']))
+    parse_comments(openstruct(response))
   end
 
   def create_commit_comment(slug, sha, body, path, position)
@@ -17,7 +17,7 @@ class BitbucketClient
 
   def pull_comments(slug, pull_id)
     response = get_all_comments("/#{slug}/pullrequests/#{pull_id}/comments?pagelen=100")
-    parse_comments(openstruct(response['values']))
+    parse_comments(openstruct(response))
   end
 
   def pull_requests(slug)
