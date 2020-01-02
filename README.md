@@ -369,6 +369,7 @@ Currently available:
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-slim_lint](https://github.com/ibrahima/pronto-slim_lint)
 * [pronto-spell](https://github.com/prontolabs/pronto-spell)
+* [pronto-standardrb](https://github.com/julianrubisch/pronto-standardrb)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
