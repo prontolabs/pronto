@@ -359,6 +359,7 @@ Currently available:
 * [pronto-phpmd](https://github.com/EllisV/pronto-phpmd)
 * [pronto-phpstan](https://github.com/Powerhamster/pronto-phpstan)
 * [pronto-poper](https://github.com/prontolabs/pronto-poper)
+* [pronto-punchlist](https://github.com/apiology/pronto-punchlist)
 * [pronto-rails_best_practices](https://github.com/prontolabs/pronto-rails_best_practices)
 * [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
 * [pronto-reek](https://github.com/prontolabs/pronto-reek)
