@@ -7,22 +7,33 @@ class BitbucketClient
   end
 
   def commit_comments(slug, sha)
-    response = get("/#{slug}/changesets/#{sha}/comments")
-    parse_comments(openstruct(response['values']))
+    response = get("/#{slug}/commit/#{sha}/comments?pagelen=100")
+    result = parse_comments(openstruct(response))
+    while (response['next'])
+      response = get response['next']
+      result.concat(parse_comments(openstruct(response)))
+    end
+    result
   end
 
   def create_commit_comment(slug, sha, body, path, position)
-    post("/#{slug}/changesets/#{sha}/comments", body, path, position)
+    post("/#{slug}/commit/#{sha}/comments", body, path, position)
   end
 
   def pull_comments(slug, pull_id)
-    response = get("/#{slug}/pullrequests/#{pull_id}/comments")
-    parse_comments(openstruct(response['values']))
+    response = get("/#{slug}/pullrequests/#{pull_id}/comments?pagelen=100")
+    parse_comments(openstruct(response))
+    result = parse_comments(openstruct(response))
+    while (response['next'])
+      response = get response['next']
+      result.concat(parse_comments(openstruct(response)))
+    end
+    result
   end
 
   def pull_requests(slug)
     response = get("/#{slug}/pullrequests?state=OPEN")
-    openstruct(response['values'])
+    openstruct(response)
   end
 
   def create_pull_comment(slug, pull_id, body, path, position)
@@ -40,14 +51,19 @@ class BitbucketClient
   private
 
   def openstruct(response)
-    response.map { |r| OpenStruct.new(r) }
+    if response['values']
+      response['values'].map { |r| OpenStruct.new(r) }
+    else
+      p response
+      raise 'BitBucket response invalid'
+    end
   end
 
   def parse_comments(values)
     values.each do |value|
       value.content = value.content['raw']
-      value.line_to = value.inline['to']
-      value.filename = value.inline['path']
+      value.line_to = value.inline ? value.inline['to'] : 0
+      value.filename = value.inline ? value.inline['path'] : ''
     end
     values
   end
