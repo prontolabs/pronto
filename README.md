@@ -138,6 +138,12 @@ Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/12
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
 ```
 
+If you want to show a one single status for all runners, instead of status per runner:
+
+```sh
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_combined_status -c origin/master
+```
+
 It's possible to combine multiple formatters.
 To get both pull request comments and commit status summary use:
 
