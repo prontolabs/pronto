@@ -18,6 +18,18 @@ module Pronto
       consolidated
     end
 
+    def github_review_type
+      review_type =
+        ENV['PRONTO_GITHUB_REVIEW_TYPE'] ||
+        @config_hash.fetch('github_review_type', false)
+
+      if review_type == 'request_changes'
+        'REQUEST_CHANGES'
+      else
+        'COMMENT'
+      end
+    end
+
     def excluded_files(runner)
       files =
         if runner == 'all'
@@ -37,6 +49,10 @@ module Pronto
 
     def bitbucket_hostname
       URI.parse(bitbucket_web_endpoint).host
+    end
+
+    def warnings_per_review
+      ENV['PRONTO_WARNINGS_PER_REVIEW'] && Integer(ENV['PRONTO_WARNINGS_PER_REVIEW']) || @config_hash['warnings_per_review']
     end
 
     def max_warnings

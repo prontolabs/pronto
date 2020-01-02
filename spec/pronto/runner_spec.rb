@@ -26,6 +26,21 @@ module Pronto
         it { should be_truthy }
       end
 
+      context 'ending with .gemspec' do
+        let(:path) { 'test.gemspec' }
+        it { should be_truthy }
+      end
+
+      context 'named Gemfile' do
+        let(:path) { 'Gemfile' }
+        it { should be_truthy }
+      end
+
+      context 'named Gemfile in directory' do
+        let(:path) { 'test/Gemfile' }
+        it { should be_truthy }
+      end
+
       context 'executable' do
         let(:path) { 'test' }
         before { File.stub(:open).with(path).and_return(shebang) }

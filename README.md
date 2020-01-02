@@ -116,6 +116,22 @@ If you want review to appear on pull request diff, instead of comments:
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
 ```
 
+All the **N** pending comments will be now separated into **X** number of PR reviews.
+The number of the PR reviews will be controlled by an additional environment variable or with the help of a config setting.
+This way, by a single pronto run, all the comments will be published to the PR, but divided into small reviews
+in order to avoid the rate limit of the providers.
+
+```
+X = N / {PRONTO_WARNINGS_PER_REVIEW || warnings_per_review || 30})
+```
+
+Note: In case no environment variable or config setting is specified in `.pronto.yml`, 
+      a default value of `30` will be used.
+
+```sh
+$ PRONTO_WARNINGS_PER_REVIEW=30 PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
+```
+
 Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
 
 ```sh
@@ -146,6 +162,30 @@ formatters = [formatter, status_formatter]
 Pronto.run('origin/master', '.', formatters)
 ```
 
+#### GitHub Actions Integration
+
+You can also run Pronto as a GitHub action. 
+
+Here's an example `.github/workflows/pronto.yml` workflow file using the `github_status` and `github_pr` formatters and running on each GitHub PR, with `pronto-rubocop` as the runner:
+
+```yml
+name: Pronto
+on: [pull_request]
+
+jobs:
+  pronto:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - run: gem install pronto pronto-rubocop
+      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}" pronto run -f github_status github_pr -c origin/master
+```
+
 ### GitLab Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
@@ -163,6 +203,29 @@ Then just run it:
 
 ```sh
 $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+```
+
+**note: this requires at least Gitlab 11.6+**
+
+Merge request integration:
+
+```sh
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/master
+```
+
+On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
+
+```sh
+lint:
+  image: ruby
+  variables:
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: token
+  only:
+    - merge_requests
+  script:
+    - bundle install
+    - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
 ```
 
 ### Bitbucket Integration
@@ -216,6 +279,7 @@ bitbucket:
   password: pass
   web_endpoint: https://bitbucket.org/
 max_warnings: 150
+warnings_per_review: 30
 verbose: false
 ```
 
@@ -268,11 +332,14 @@ Currently available:
 
 * [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
+* [pronto-bundler_audit](https://github.com/pdobb/pronto-bundler_audit)
+* [pronto-checkstyle](https://github.com/seikichi/pronto-checkstyle)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
 * [pronto-clang_tidy](https://github.com/micjabbour/pronto-clang_tidy)
 * [pronto-clippy](https://github.com/hauleth/pronto-clippy)
 * [pronto-credo](https://github.com/carakan/pronto-credo)
+* [pronto-dialyxir](https://github.com/Apelsinka223/pronto-dialyxir)
 * [pronto-dialyzer](https://github.com/iurifq/pronto-dialyzer)
 * [pronto-dirty_words](https://github.com/kevinjalbert/pronto-dirty_words)
 * [pronto-dogma](https://github.com/iurifq/pronto-dogma)
@@ -280,11 +347,14 @@ Currently available:
 * [pronto-eslint](https://github.com/prontolabs/pronto-eslint) (uses [eslintrb](https://github.com/zendesk/eslintrb))
 * [pronto-eslint_npm](https://github.com/doits/pronto-eslint_npm) (uses eslint installed from npm)
 * [pronto-fasterer](https://github.com/prontolabs/pronto-fasterer)
+* [pronto-findbugs](https://github.com/seikichi/pronto-findbugs)
 * [pronto-flake8](https://github.com/scoremedia/pronto-flake8)
 * [pronto-flay](https://github.com/prontolabs/pronto-flay)
 * [pronto-flow](https://github.com/kevinjalbert/pronto-flow)
 * [pronto-foodcritic](https://github.com/prontolabs/pronto-foodcritic)
+* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
+* [pronto-hlint](https://github.com/fretlink/pronto-hlint/) (uses Haskell code suggestions [hlint](https://github.com/ndmitchell/hlint))
 * [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/prontolabs/pronto-jshint)
@@ -295,6 +365,7 @@ Currently available:
 * [pronto-phpmd](https://github.com/EllisV/pronto-phpmd)
 * [pronto-phpstan](https://github.com/Powerhamster/pronto-phpstan)
 * [pronto-poper](https://github.com/prontolabs/pronto-poper)
+* [pronto-punchlist](https://github.com/apiology/pronto-punchlist)
 * [pronto-rails_best_practices](https://github.com/prontolabs/pronto-rails_best_practices)
 * [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
 * [pronto-reek](https://github.com/prontolabs/pronto-reek)
@@ -304,13 +375,13 @@ Currently available:
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-slim_lint](https://github.com/ibrahima/pronto-slim_lint)
 * [pronto-spell](https://github.com/prontolabs/pronto-spell)
+* [pronto-standardrb](https://github.com/julianrubisch/pronto-standardrb)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
 * [pronto-swiftlint](https://github.com/ajanauskas/pronto-swiftlint)
 * [pronto-tailor](https://github.com/ajanauskas/pronto-tailor)
 * [pronto-textlint](https://github.com/seikichi/pronto-textlint)
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
-* [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-undercover](https://github.com/grodowski/pronto-undercover)
 
 ## Articles
