@@ -330,6 +330,7 @@ The following values are available only to the text formatter:
 Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
+* [pronto-bigfiles](https://github.com/apiology/pronto-bigfiles)
 * [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-bundler_audit](https://github.com/pdobb/pronto-bundler_audit)
