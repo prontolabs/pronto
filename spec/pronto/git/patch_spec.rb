@@ -36,6 +36,16 @@ module Pronto
         let(:repo) { double(path: Pathname.new('/house/of/cards')) }
         its(:to_s) { should == '/house/of/cards/test.md' }
       end
+
+      describe '#new_file_path' do
+        subject { patch.new_file_path }
+
+        let(:rugged_patch) do
+          double(delta: double(new_file: { path: 'test.md' }))
+        end
+        let(:repo) { double(path: Pathname.new('/house/of/cards')) }
+        its(:to_s) { should == 'test.md' }
+      end
     end
   end
 end
