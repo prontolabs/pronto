@@ -178,13 +178,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: |
+          git fetch --prune --unshallow
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Setup pronto
       - run: gem install pronto pronto-rubocop
-      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}" pronto run -f github_status github_pr -c origin/master
+      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" bundle exec pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
 ```
+> - `${{ github.token }}` is scoped to the current repository, so if you want to checkout a different repository that is private you will need to provide your own [PAT](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line). e.g ${{ secrets.GitHub_PAT }} # `GitHub_PAT` is a secret that contains your PAT
 
 ### GitLab Integration
 
