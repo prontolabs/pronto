@@ -179,7 +179,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - run: |
