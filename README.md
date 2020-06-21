@@ -391,6 +391,7 @@ Currently available:
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
 * [pronto-undercover](https://github.com/grodowski/pronto-undercover)
+* [pronto-xmllint](https://github.com/pauliusm/pronto-xmllint)
 
 ## Articles
 
