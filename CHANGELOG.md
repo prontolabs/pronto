@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.11.0
+
+### New features
+
+* [#304](https://github.com/prontolabs/pronto/pull/304) Add option to limit warnings per pr review
+* [#351](https://github.com/prontolabs/pronto/pull/351) Add GitLab MR formatter
+* [#369](https://github.com/prontolabs/pronto/pull/369) Make Pronto::Git::Patch#new_file_path public
+* [#386](https://github.com/prontolabs/pronto/pull/386) Add ruby 2.7 to CI
+
+### Bugs fixed
+
+* [#334](https://github.com/prontolabs/pronto/pull/334) Change Github comment type to 'REQUEST_CHANGES' by default
+* [#344](https://github.com/prontolabs/pronto/pull/344) Treat Gemfile and .gemspecs as Ruby
+* [#379](https://github.com/prontolabs/pronto/pull/379) Relax rugged gem dependency
+* [#387](https://github.com/prontolabs/pronto/pull/387) Fix running pronto inside git submodules
+
 ## 0.10.0
 
 ### New features
