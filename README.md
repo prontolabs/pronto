@@ -168,6 +168,7 @@ You can also run Pronto as a GitHub action.
 
 Here's an example `.github/workflows/pronto.yml` workflow file using the `github_status` and `github_pr` formatters and running on each GitHub PR, with `pronto-rubocop` as the runner:
 
+
 ```yml
 name: Pronto
 on: [pull_request]
@@ -178,13 +179,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
-      - run: gem install pronto pronto-rubocop
-      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}" pronto run -f github_status github_pr -c origin/master
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: |
+          git fetch --no-tags --prune --depth=10 origin +refs/heads/*:refs/remotes/origin/*
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Setup pronto
+        run: gem install pronto pronto-rubocop
+      - name: Run Pronto
+        run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
 ```
+check Wiki on [GitHub Actions Integration](https://github.com/prontolabs/pronto/wiki/GitHub-Actions-Integration) for more info.
 
 ### GitLab Integration
 
@@ -356,6 +362,7 @@ Currently available:
 * [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
 * [pronto-hlint](https://github.com/fretlink/pronto-hlint/) (uses Haskell code suggestions [hlint](https://github.com/ndmitchell/hlint))
+* [pronto-infer](https://github.com/seikichi/pronto-infer)
 * [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/prontolabs/pronto-jshint)
@@ -386,6 +393,7 @@ Currently available:
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
 * [pronto-undercover](https://github.com/grodowski/pronto-undercover)
+* [pronto-xmllint](https://github.com/pauliusm/pronto-xmllint)
 
 ## Articles
 
