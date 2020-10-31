@@ -46,7 +46,7 @@ module Pronto
       end
 
       def path
-        Pathname.new(@repo.path).parent
+        Pathname.new(@repo.workdir).cleanpath
       end
 
       def blame(path, lineno)
