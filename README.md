@@ -110,7 +110,7 @@ If you want comments to appear on pull request diff, instead of commit:
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
 ```
 
-If you want review to appear on pull request diff, instead of comments:
+If you want review to appear on pull request diff, instead of separate comments:
 
 ```sh
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
@@ -188,7 +188,10 @@ jobs:
       - name: Setup pronto
         run: gem install pronto pronto-rubocop
       - name: Run Pronto
-        run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
+        run: pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
+        env:
+          PRONTO_PULL_REQUEST_ID: ${{ github.event.pull_request.number }}
+          PRONTO_GITHUB_ACCESS_TOKEN: "${{ github.token }}"
 ```
 check Wiki on [GitHub Actions Integration](https://github.com/prontolabs/pronto/wiki/GitHub-Actions-Integration) for more info.
 
@@ -221,7 +224,7 @@ $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f 
 
 On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
 
-```sh
+```yml
 lint:
   image: ruby
   variables:
