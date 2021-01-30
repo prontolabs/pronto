@@ -1,6 +1,5 @@
-sudo: required
 before_install: gem update --system
-dist: trusty
+dist: bionic
 language: ruby
 rvm:
   - 2.3
@@ -8,6 +7,7 @@ rvm:
   - 2.5
   - 2.6
   - 2.7
+  - 3.0
 
 env:
   global:
