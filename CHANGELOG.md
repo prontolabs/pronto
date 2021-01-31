@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.11.0
+
 ### New features
 
 * [#304](https://github.com/prontolabs/pronto/pull/304) add option to limit comments per PR review
