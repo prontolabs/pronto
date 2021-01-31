@@ -1,5 +1,32 @@
 # Changelog
 
+## Unreleased
+
+### New features
+
+* [#304](https://github.com/prontolabs/pronto/pull/304) add option to limit comments per PR review
+* [#333](https://github.com/prontolabs/pronto/pull/333) add github_combined_status formatter
+* [#334](https://github.com/prontolabs/pronto/pull/334) add configurable review_type for GitHub (with REQUEST_CHANGES as default)
+* [#351](https://github.com/prontolabs/pronto/pull/351) add gitLab_mr formatter
+* [#369](https://github.com/prontolabs/pronto/pull/369) make Pronto::Git::Patch#new_file_path public
+* update to the BitBucket 2.0 API (_as the 1.0 API was deprecated_) via [#347](https://github.com/prontolabs/pronto/pull/347), [#348](https://github.com/prontolabs/pronto/pull/348), [#352](https://github.com/prontolabs/pronto/pull/352) and [#354](https://github.com/prontolabs/pronto/pull/354)
+
+### Bugs fixed
+
+* [#344](https://github.com/prontolabs/pronto/pull/344) treat Gemfile and .gemspecs as Ruby
+* [#380](https://github.com/prontolabs/pronto/pull/380) fix compatibility with rugged >= 0.99
+* [#387](https://github.com/prontolabs/pronto/pull/387) fix running pronto inside git submodules
+
+### Changes
+
+* [#370](https://github.com/prontolabs/pronto/pull/370) allow thor 1.x gem versions
+* [#379](https://github.com/prontolabs/pronto/pull/379) allow rugged 1.0.x gem versions
+* [#386](https://github.com/prontolabs/pronto/pull/386) add ruby 2.7 to CI
+* [#390](https://github.com/prontolabs/pronto/pull/390) fix issue with generating Sorbet RBI
+* [#396](https://github.com/prontolabs/pronto/pull/396) add support for Ruby 3.0
+* document/improve GitHub Actions integration in README.md via [#360](https://github.com/prontolabs/pronto/pull/360), [#378](https://github.com/prontolabs/pronto/pull/378) and [#389](https://github.com/prontolabs/pronto/pull/389)
+* add links to additional pronto runners in README.md
+
 ## 0.10.0
 
 ### New features
