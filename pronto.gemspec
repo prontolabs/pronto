@@ -54,5 +54,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec-its', '~> 1.2')
   s.add_development_dependency('rspec-expectations', '~> 3.4')
   s.add_development_dependency('rubocop', '~> 0.58')
-  s.add_development_dependency('simplecov', '~> 0.14')
+  s.add_development_dependency('simplecov', '~> 0.17', '!= 0.18.0', '!= 0.18.1', '!= 0.18.2', '!= 0.18.3', '!= 0.18.4',
+                               '!= 0.18.5', '!= 0.19.0', '!= 0.19.1') # see https://docs.codeclimate.com/docs/configuring-test-coverage
 end
