@@ -1,0 +1,20 @@
+name: Pronto
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  pronto:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5
+          bundler-cache: true
+      - name: Run Pronto
+        run: bundle exec pronto run --exit-code -c origin/${{ github.base_ref }}
