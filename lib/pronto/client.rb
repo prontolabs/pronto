@@ -10,6 +10,8 @@ module Pronto
     def env_pull_id
       if (pull_request = ENV['PULL_REQUEST_ID'])
         warn "[DEPRECATION] `PULL_REQUEST_ID` is deprecated.  Please use `PRONTO_PULL_REQUEST_ID` instead."
+
+
       end
 
       pull_request ||= ENV['PRONTO_PULL_REQUEST_ID']
