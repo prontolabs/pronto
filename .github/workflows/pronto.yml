@@ -1,0 +1,43 @@
+name: Pronto
+
+on:
+  pull_request_target:
+
+jobs:
+  pronto:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5
+          bundler-cache: true
+      - name: Cache gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: gem_cache
+          key: ${{ runner.os }}-2.5-gems-${{ hashFiles('pronto.gemspec') }}
+      - name: Install pronto
+        env:
+          GEM_HOME: gem_cache
+          GEM_PATH: gem_cache
+        run: |
+          gem install bundler
+          bundle install --system
+          gem build pronto.gemspec
+          gem install pronto-*.gem
+      - name: Run pronto
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEM_HOME: gem_cache
+          GEM_PATH: gem_cache
+        run: |
+          export PATH=$(pwd)/gem_cache/bin:$PATH
+          hub pr checkout ${{ github.event.pull_request.number }}
+          PRONTO_PULL_REQUEST_ID=${{ github.event.pull_request.number }} \
+          PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" \
+            pronto run -r rubocop -f github_status github_pr -c origin/${{ github.event.pull_request.base.ref }}

@@ -34,10 +34,3 @@ jobs:
           COVERAGE: true
         with:
           coverageCommand: bundle exec rspec
-      - if: matrix.ruby-version == '2.4' && github.event_name == 'pull_request'
-        name: Run pronto
-        run: |
-          git fetch -q origin ${{ github.context.pull_request.base.sha }}
-          PRONTO_PULL_REQUEST_ID=${{github.event.number}} \
-          PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" \
-            bundle exec pronto run -f github_status github_pr -c origin/${{ github.event.pull_request.base.ref }}
