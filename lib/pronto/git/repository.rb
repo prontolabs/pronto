@@ -38,7 +38,7 @@ module Pronto
 
       def commits_until(sha)
         result = []
-        @repo.walk(head, Rugged::SORT_TOPO).take_while do |commit|
+        @repo.walk(head_commit_sha, Rugged::SORT_TOPO).take_while do |commit|
           result << commit.oid
           !commit.oid.start_with?(sha)
         end
@@ -46,7 +46,7 @@ module Pronto
       end
 
       def path
-        Pathname.new(@repo.path).parent
+        Pathname.new(@repo.workdir).cleanpath
       end
 
       def blame(path, lineno)

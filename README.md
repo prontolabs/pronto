@@ -110,7 +110,7 @@ If you want comments to appear on pull request diff, instead of commit:
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
 ```
 
-If you want review to appear on pull request diff, instead of comments:
+If you want review to appear on pull request diff, instead of separate comments:
 
 ```sh
 $ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
@@ -168,6 +168,7 @@ You can also run Pronto as a GitHub action.
 
 Here's an example `.github/workflows/pronto.yml` workflow file using the `github_status` and `github_pr` formatters and running on each GitHub PR, with `pronto-rubocop` as the runner:
 
+
 ```yml
 name: Pronto
 on: [pull_request]
@@ -178,13 +179,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: '2.6'
-      - run: gem install pronto pronto-rubocop
-      - run: PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ secrets.GITHUB_TOKEN }}" pronto run -f github_status github_pr -c origin/master
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: |
+          git fetch --no-tags --prune --depth=10 origin +refs/heads/*:refs/remotes/origin/*
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Setup pronto
+        run: gem install pronto pronto-rubocop
+      - name: Run Pronto
+        run: pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
+        env:
+          PRONTO_PULL_REQUEST_ID: ${{ github.event.pull_request.number }}
+          PRONTO_GITHUB_ACCESS_TOKEN: "${{ github.token }}"
 ```
+check Wiki on [GitHub Actions Integration](https://github.com/prontolabs/pronto/wiki/GitHub-Actions-Integration) for more info.
 
 ### GitLab Integration
 
@@ -215,7 +224,7 @@ $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f 
 
 On GitLabCI make make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
 
-```sh
+```yml
 lint:
   image: ruby
   variables:
@@ -356,6 +365,7 @@ Currently available:
 * [pronto-goodcheck](https://github.com/aergonaut/pronto-goodcheck)
 * [pronto-haml](https://github.com/prontolabs/pronto-haml)
 * [pronto-hlint](https://github.com/fretlink/pronto-hlint/) (uses Haskell code suggestions [hlint](https://github.com/ndmitchell/hlint))
+* [pronto-infer](https://github.com/seikichi/pronto-infer)
 * [pronto-inspec](https://github.com/stiller-leser/pronto-inspec)
 * [pronto-jscs](https://github.com/spajus/pronto-jscs)
 * [pronto-jshint](https://github.com/prontolabs/pronto-jshint)
@@ -368,6 +378,7 @@ Currently available:
 * [pronto-poper](https://github.com/prontolabs/pronto-poper)
 * [pronto-punchlist](https://github.com/apiology/pronto-punchlist)
 * [pronto-rails_best_practices](https://github.com/prontolabs/pronto-rails_best_practices)
+* [pronto-rails_data_schema](https://github.com/mbajur/pronto-rails_data_schema)
 * [pronto-rails_schema](https://github.com/raimondasv/pronto-rails_schema)
 * [pronto-reek](https://github.com/prontolabs/pronto-reek)
 * [pronto-rubocop](https://github.com/prontolabs/pronto-rubocop)
@@ -375,6 +386,7 @@ Currently available:
 * [pronto-shellcheck](https://github.com/pclalv/pronto-shellcheck)
 * [pronto-slim](https://github.com/nysthee/pronto-slim)
 * [pronto-slim_lint](https://github.com/ibrahima/pronto-slim_lint)
+* [pronto-sorbet](https://github.com/teamsimplepay/pronto-sorbet)
 * [pronto-spell](https://github.com/prontolabs/pronto-spell)
 * [pronto-standardrb](https://github.com/julianrubisch/pronto-standardrb)
 * [pronto-stylelint](https://github.com/kevinjalbert/pronto-stylelint)
@@ -384,6 +396,7 @@ Currently available:
 * [pronto-tslint_npm](https://github.com/eprislac/pronto-tslint_npm)
 * [pronto-yamllint](https://github.com/pauliusm/pronto-yamllint)
 * [pronto-undercover](https://github.com/grodowski/pronto-undercover)
+* [pronto-xmllint](https://github.com/pauliusm/pronto-xmllint)
 
 ## Articles
 
