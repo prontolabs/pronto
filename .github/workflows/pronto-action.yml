@@ -9,4 +9,4 @@ jobs:
       - uses: actions/checkout@v1
       - uses: HeRoMo/pronto-action@v1.13.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
