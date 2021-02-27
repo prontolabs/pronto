@@ -1,4 +1,4 @@
-name: Pronto
+name: Pronto wiki
 on: [pull_request]
 
 jobs:
@@ -11,6 +11,8 @@ jobs:
           git fetch --no-tags --prune --depth=10 origin +refs/heads/*:refs/remotes/origin/*
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5
       - name: Setup pronto
         run: gem install pronto pronto-rubocop
       - name: Run Pronto
