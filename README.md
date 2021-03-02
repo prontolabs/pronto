@@ -290,6 +290,8 @@ bitbucket:
 max_warnings: 150
 warnings_per_review: 30
 verbose: false
+runners: [rubocop, eslint] # only listed runners will be executed
+skip_runners: [reek] # all, except listed runners will be executed
 ```
 
 All properties that can be specified via `.pronto.yml`, can also be specified
