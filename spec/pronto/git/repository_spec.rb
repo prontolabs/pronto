@@ -92,6 +92,15 @@ module Pronto
           let(:sha) { :staged }
           it { should be_one }
         end
+
+        context 'workdir' do
+          let(:sha) { :workdir }
+
+          it do
+            # this count includes all the files from the repositories (*.git)
+            subject.count.should eq 48
+          end
+        end
       end
 
       describe '#blame' do

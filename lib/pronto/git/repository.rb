@@ -13,6 +13,18 @@ module Pronto
                             [head_commit_sha, @repo.index.diff(options)]
                           when :staged
                             [head_commit_sha, head.diff(@repo.index, options)]
+                          when :workdir
+                            [
+                              head_commit_sha,
+                              @repo.diff_workdir(
+                                head,
+                                {
+                                  include_untracked: true,
+                                  include_untracked_content: true,
+                                  recurse_untracked_dirs: true
+                                }.merge(options || {})
+                              )
+                            ]
                           else
                             merge_base = merge_base(commit)
                             patches = @repo.diff(merge_base, head, options)
