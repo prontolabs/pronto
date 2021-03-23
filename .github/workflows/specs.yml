@@ -22,6 +22,9 @@ jobs:
           - ruby-version: "2.3" # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
     steps:
       - uses: actions/checkout@v2
+      - name: Use specific gitlab gem version (if required)
+        if: matrix.ruby-version == '2.4'
+        run: echo "gem 'gitlab', '< 4.14.1'" >> Gemfile.local
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -34,10 +37,3 @@ jobs:
           COVERAGE: true
         with:
           coverageCommand: bundle exec rspec
-      - if: matrix.ruby-version == '2.4' && github.event_name == 'pull_request'
-        name: Run pronto
-        run: |
-          git fetch -q origin ${{ github.context.pull_request.base.sha }}
-          PRONTO_PULL_REQUEST_ID=${{github.event.number}} \
-          PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" \
-            bundle exec pronto run -f github_status github_pr -c origin/${{ github.event.pull_request.base.ref }}
