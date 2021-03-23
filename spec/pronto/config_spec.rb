@@ -146,20 +146,20 @@ module Pronto
       context 'when runners are skipped via ENV variable' do
         let(:env_variables) { { 'PRONTO_SKIP_RUNNERS' => 'Runner,OtherRunner' } }
 
-        it { should == ['Runner', 'OtherRunner'] }
+        it { should == %w[Runner OtherRunner] }
       end
 
       context 'when runners are skipped via config file' do
         let(:config_hash) { { 'skip_runners' => ['Runner'] } }
 
-        it { should == ['Runner'] }
+        it { should == %w[Runner] }
       end
 
       context 'when runners are skipped via config file and ENV variable' do
         let(:env_variables) { { 'PRONTO_SKIP_RUNNERS' => 'EnvRunner' } }
-        let(:config_hash) { { 'skip_runners' => ['ConfigRunner'] } }
+        let(:config_hash) { { 'skip_runners' => %w[ConfigRunner] } }
 
-        it { should == ['EnvRunner'] }
+        it { should == %w[EnvRunner] }
       end
     end
 
@@ -169,7 +169,7 @@ module Pronto
       context 'when there is an entry in the config file' do
         let(:config_hash) { { 'runners' => ['Runner'] } }
 
-        it { should == ['Runner'] }
+        it { should == %w[Runner] }
       end
 
       context 'when there is no entry in the config file' do

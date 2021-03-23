@@ -41,7 +41,7 @@ module Pronto
         end
       end
 
-      context 'when multiple runners exist' do
+      context 'when multiple runners exist' do # rubocop:disable Metrics/BlockLength
         let(:fake_runner_2) do
           Class.new(fake_runner) do
             def self.title
@@ -86,8 +86,8 @@ module Pronto
 
         context 'when same runners are skipped and some are listed' do
           before do
-            config.stub(:runners) { ['fake_runner', 'fake_runner_3'] }
-            config.stub(:skip_runners) { ['fake_runner_3'] }
+            config.stub(:runners) { %w[fake_runner fake_runner_3] }
+            config.stub(:skip_runners) { %w[fake_runner_3] }
           end
 
           it { should == [1, 3] }
