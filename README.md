@@ -416,6 +416,7 @@ Articles to help you to get started:
 * [Create your own Pronto Runner](https://kevinjalbert.com/create-your-own-pronto-runner/)
 * [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
 * [Stop shipping untested Ruby code with undercover](https://medium.com/futuredev/stop-shipping-untested-ruby-code-with-undercover-1edc963be4a6)
+* [Automatic code review with Pronto and GitHub Actions](https://everydayrails.com/2021/05/29/pronto-github-actions-code-quality.html)
 
 Make a Pull Request to add something you wrote or found useful.
 
