@@ -352,7 +352,6 @@ Currently available:
 * [pronto-bigfiles](https://github.com/apiology/pronto-bigfiles)
 * [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
-* [pronto-bundler_audit](https://github.com/pdobb/pronto-bundler_audit)
 * [pronto-checkstyle](https://github.com/seikichi/pronto-checkstyle)
 * [pronto-coffeelint](https://github.com/siebertm/pronto-coffeelint)
 * [pronto-clang_format](https://github.com/micjabbour/pronto-clang_format)
