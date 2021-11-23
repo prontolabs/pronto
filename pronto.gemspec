@@ -45,7 +45,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('octokit', '~> 4.7', '>= 4.7.0')
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
   s.add_runtime_dependency('rexml', '~> 3.2', '>= 3.2.5')
-  s.add_runtime_dependency('rugged', '>= 0.23.0', '< 1.1.0')
+  s.add_runtime_dependency('rugged', '>= 0.23.0', '<= 1.2.0')
   s.add_runtime_dependency('thor', '>= 0.20.3', '< 2.0')
   s.add_development_dependency('bundler', '>= 1.15')
   s.add_development_dependency('pronto-rubocop', '~> 0.10.0')
