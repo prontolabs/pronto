@@ -4,7 +4,7 @@ module Pronto
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
           Comment.new(sha, comment.content, comment.filename,
-                      comment.line_to, comment.id)
+                      comment.line_to, comment&.id)
         end
       end
     end

@@ -10,6 +10,7 @@ module Pronto
       let(:path) { 'path/to/file' }
       let(:position) { 1 }
 
+
       context 'success' do
         before { BitbucketClient.stub(:post).and_return(response) }
         let(:response) { double('Response', success?: true) }
@@ -24,6 +25,19 @@ module Pronto
 
       context 'success' do
         before { BitbucketClient.stub(:post).and_return(response) }
+        let(:response) { double('Response', success?: true) }
+        its(:success?) { should be_truthy }
+      end
+    end
+
+    describe '#delete_comment' do
+      subject { client.delete_comment(slug, pull_id, comment_id) }
+      let(:slug) { 'prontolabs/pronto' }
+      let(:pull_id) { 1 }
+      let(:comment_id) { 11 }
+
+      context 'success' do
+        before { BitbucketClient.stub(:delete).and_return(response) }
         let(:response) { double('Response', success?: true) }
         its(:success?) { should be_truthy }
       end
