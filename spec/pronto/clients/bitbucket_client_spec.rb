@@ -10,7 +10,6 @@ module Pronto
       let(:path) { 'path/to/file' }
       let(:position) { 1 }
 
-
       context 'success' do
         before { BitbucketClient.stub(:post).and_return(response) }
         let(:response) { double('Response', success?: true) }

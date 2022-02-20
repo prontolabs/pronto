@@ -11,18 +11,16 @@ module Pronto
 
         submit_comments(client, additions)
 
-        approve_pull_request(comments.count, additions.count, client) if defined?(self.approve_pull_request)
+        approve_pull_request(comments.count, additions.count, client) if defined?(approve_pull_request)
 
         "#{additions.count} Pronto messages posted to #{pretty_name}"
       end
-
 
       def remove_comments(client, existing, comments)
         removed_comments = dedupe_comments(ungrouped_comments(comments),
                                            ungrouped_comments(existing))
         removed_comments.map { |c| client.delete_comment(c.client_id) }
       end
-
 
       def client_module
         Bitbucket
