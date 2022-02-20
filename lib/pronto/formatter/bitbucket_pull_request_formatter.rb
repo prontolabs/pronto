@@ -1,6 +1,29 @@
 module Pronto
   module Formatter
     class BitbucketPullRequestFormatter < PullRequestFormatter
+      def format(messages, repo, patches)
+        client = client_module.new(repo)
+        existing = existing_comments(messages, client, repo)
+        comments = new_comments(messages, patches)
+        additions = remove_duplicate_comments(existing, comments)
+
+        remove_comments(client, existing, comments) if existing.any?
+
+        submit_comments(client, additions)
+
+        approve_pull_request(comments.count, additions.count, client) if defined?(self.approve_pull_request)
+
+        "#{additions.count} Pronto messages posted to #{pretty_name}"
+      end
+
+
+      def remove_comments(client, existing, comments)
+        removed_comments = dedupe_comments(ungrouped_comments(comments),
+                                           ungrouped_comments(existing))
+        removed_comments.map { |c| client.delete_comment(c.client_id) }
+      end
+
+
       def client_module
         Bitbucket
       end
