@@ -3,7 +3,8 @@ module Pronto
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.content, comment.filename, comment.line_to)
+          Comment.new(sha, comment.content, comment.filename,
+                      comment.line_to, comment&.id)
         end
       end
     end
@@ -39,6 +40,12 @@ module Pronto
     def unapprove_pull_request
       client.unapprove_pull_request(slug, pull_id)
     end
+
+    def delete_comment(comment_id)
+      @config.logger.log("Delete comment id:#{comment_id}")
+      client.delete_comment(slug, pull_id, comment_id)
+    end
+
     private
 
     def slug
