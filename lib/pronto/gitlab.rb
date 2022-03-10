@@ -87,8 +87,10 @@ module Pronto
     def slug_regex(url)
       if url =~ %r{^ssh:\/\/}
         %r{.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git}
-      else
+      elsif url =~ /#{host}/
         %r{.*#{host}(:|\/)(?<slug>.*).git}
+      else
+        %r{\/\/.*?(\/)(?<slug>.*).git}
       end
     end
 
