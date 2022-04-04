@@ -18,6 +18,7 @@ jobs:
           - "2.6"
           - "2.7"
           - "3.0"
+          - "3.1"
         exclude:
           - ruby-version: "2.3" # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
     steps:
