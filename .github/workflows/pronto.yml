@@ -2,7 +2,7 @@ name: Pronto
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   pronto:

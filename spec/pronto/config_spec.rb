@@ -17,7 +17,7 @@ module Pronto
       end
 
       context 'from default value' do
-        it { should == 'master' }
+        it { should == 'main' }
       end
     end
 

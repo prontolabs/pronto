@@ -14,7 +14,7 @@ module Pronto
     def default_commit
       default_commit =
         ENV['PRONTO_DEFAULT_COMMIT'] ||
-        @config_hash.fetch('default_commit', 'master')
+        @config_hash.fetch('default_commit', 'main')
       default_commit
     end
 

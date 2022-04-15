@@ -10,7 +10,7 @@ module Pronto
 
       describe '#branch' do
         subject { repo.branch }
-        it { should == 'master' }
+        it { should == 'main' }
       end
 
       describe '#remote_urls' do
