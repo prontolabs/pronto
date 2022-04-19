@@ -68,13 +68,14 @@ module Pronto
 
         path = message.path
         lineno = line_number(message, patches) if message.line
-        Comment.new(sha, body, path, lineno)
+        Comment.new(sha, body, path, lineno) if lineno
       end
 
       def new_comments(messages, patches)
         comments = messages
           .uniq
           .map { |message| new_comment(message, patches) }
+          .compact
         grouped_comments(comments)
       end
 

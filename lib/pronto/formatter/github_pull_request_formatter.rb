@@ -11,7 +11,7 @@ module Pronto
 
       def line_number(message, patches)
         line = patches.find_line(message.full_path, message.line.new_lineno)
-        line.position
+        line&.position
       end
     end
   end
