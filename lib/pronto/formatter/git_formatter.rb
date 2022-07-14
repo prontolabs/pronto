@@ -10,7 +10,7 @@ module Pronto
         
         approve_pull_request(comments.count, additions.count, client) if defined?(self.approve_pull_request)
 
-        "#{additions.count} Pronto messages posted to #{pretty_name}"
+        "#{additions.count} Pronto messages posted to #{pretty_name} (#{existing.count} existing)"
       end
 
       def client_module

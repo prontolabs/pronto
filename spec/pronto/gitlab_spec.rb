@@ -29,6 +29,26 @@ module Pronto
           subject.should eql('prontolabs/pronto')
         end
       end
+
+      context 'http remote url' do
+        let(:repo) do
+          double(remote_urls: ['https://gitlab.example.com/prontolabs/pronto.git'])
+        end
+
+        it 'returns correct slug' do
+          subject.should eql('prontolabs/pronto')
+        end
+      end
+
+      context 'http remote url with different host' do
+        let(:repo) do
+          double(remote_urls: ['https://gitlab.example.net/prontolabs/pronto.git'])
+        end
+
+        it 'returns correct slug' do
+          subject.should eql('prontolabs/pronto')
+        end
+      end
     end
 
     describe '#commit_comments' do
