@@ -261,7 +261,14 @@ $ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bi
 ## Configuration
 
 The behavior of Pronto can be controlled via the `.pronto.yml` configuration
-file. It must be placed in your project directory.
+file. It can either be placed in the working directory (*) or specified using
+the environment variable `PRONTO_CONFIG_FILE`.
+
+(*) The working directory is where you run the command from, which is typically
+your project directory.
+
+If this file cannot be found, then the default configuration in
+[Pronto::ConfigFile::EMPTY](lib/pronto/config_file.rb) applies.
 
 The file has the following format:
 

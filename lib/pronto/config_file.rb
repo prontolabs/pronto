@@ -40,7 +40,9 @@ module Pronto
       'format' => DEFAULT_MESSAGE_FORMAT
     }.freeze
 
-    def initialize(path = '.pronto.yml')
+    attr_reader :path
+
+    def initialize(path = ENV.fetch('PRONTO_CONFIG_FILE', '.pronto.yml'))
       @path = path
     end
 
