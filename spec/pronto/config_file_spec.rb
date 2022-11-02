@@ -2,6 +2,22 @@ module Pronto
   describe ConfigFile do
     let(:config_file) { described_class.new }
 
+    describe '#path' do
+      subject { config_file.path }
+
+      it { should eq '.pronto.yml' }
+
+      context 'when specified by the environment variable' do
+        let(:file_path) { '/etc/pronto-config.yml' }
+
+        before do
+          stub_const('ENV', 'PRONTO_CONFIG_FILE' => file_path)
+        end
+
+        it { should eq file_path }
+      end
+    end
+
     describe '#to_h' do
       subject { config_file.to_h }
 
