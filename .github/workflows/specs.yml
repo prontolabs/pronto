@@ -19,10 +19,11 @@ jobs:
           - "2.7"
           - "3.0"
           - "3.1"
+          - "3.2"
         exclude:
           - ruby-version: "2.3" # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Use specific gitlab gem version (if required)
         if: matrix.ruby-version == '2.4'
         run: echo "gem 'gitlab', '< 4.14.1'" >> Gemfile.local
