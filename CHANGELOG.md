@@ -1,6 +1,34 @@
 # Changelog
 
-## Unreleased
+## 0.11.1
+
+### New features
+
+* [#371](https://github.com/prontolabs/pronto/pull/371) allow to filter runners via config
+* [#402](https://github.com/prontolabs/pronto/pull/402) add --workdir option
+* [#410](https://github.com/prontolabs/pronto/pull/410) allow the default commit run against to be configured
+* [#435](https://github.com/prontolabs/pronto/pull/435) allow override of config file path via PRONTO_CONFIG_FILE
+
+### Bugs fixed
+
+* [#422](https://github.com/prontolabs/pronto/pull/422) fix Gitlab#slug_regex when URL has different host
+* [#423](https://github.com/prontolabs/pronto/pull/423) show existing message count when reporting posted messages
+
+### Changes
+
+* [#397](https://github.com/prontolabs/pronto/pull/397) migrate CI to GitHub Actions
+* [#398](https://github.com/prontolabs/pronto/pull/398) fix duplicated runs on GitHub Actions
+* [#403](https://github.com/prontolabs/pronto/pull/403) run pronto on GitHub Actions without any reporting
+* [#408](https://github.com/prontolabs/pronto/pull/408) require rexml ~> 3.2.5 due to CVE-2021-28965
+* [#409](https://github.com/prontolabs/pronto/pull/409) add article about GitHub Actions to README.md
+* [#414](https://github.com/prontolabs/pronto/pull/414) fix typo in README.md
+* [#415](https://github.com/prontolabs/pronto/pull/415) remove deprecated pronto-bundler_audit from README.md
+* [#417](https://github.com/prontolabs/pronto/pull/417) relax rugged dependency to allow releases up to 1.2.0
+* [#424](https://github.com/prontolabs/pronto/pull/424) add Ruby 3.1 to the test matrix
+* [#431](https://github.com/prontolabs/pronto/pull/431) relax rugged dependency to allow releases up to 2.0
+* [#436](https://github.com/prontolabs/pronto/pull/436) update dead links in README.md
+* [#438](https://github.com/prontolabs/pronto/pull/438) add Ruby 3.2 to the test matrix
+* [#439](https://github.com/prontolabs/pronto/pull/439) relax dependencies to allow currently released major versions
 
 ## 0.11.0
 
