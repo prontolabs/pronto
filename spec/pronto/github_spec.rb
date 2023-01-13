@@ -1,15 +1,19 @@
 module Pronto
   describe Github do
     let(:github) { described_class.new(repo) }
-
-    let(:repo) do
-      double(remote_urls: ['git@github.com:prontolabs/pronto.git'], branch: nil, head_detached?: false)
-    end
+    let(:repo) { double(remote_urls: ssh_remote_urls, branch: nil, head_detached?: false) }
+    let(:ssh_remote_urls) { ["git@github.com:#{github_slug}.git"] }
+    let(:github_slug) { 'prontolabs/pronto' }
     let(:sha) { '61e4bef' }
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
-    before do
-      ENV.stub(:[])
+    let(:empty_client_options) do
+      {
+        event: 'COMMENT',
+        accept: 'application/vnd.github.v3.diff+json'
+      }
     end
+
+    before { ENV.stub(:[]) }
 
     describe '#commit_comments' do
       subject { github.commit_comments(sha) }
@@ -18,7 +22,7 @@ module Pronto
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha)
+            .with(github_slug, sha)
             .once
             .and_return([comment])
 
@@ -29,12 +33,12 @@ module Pronto
       end
 
       context 'git remote without .git suffix' do
-        let(:repo) { double(remote_urls: ['git@github.com:prontolabs/pronto']) }
+        let(:repo) { double(remote_urls: ssh_remote_urls) }
 
         specify do
           Octokit::Client.any_instance
             .should_receive(:commit_comments)
-            .with('prontolabs/pronto', sha)
+            .with(github_slug, sha)
             .once
             .and_return([comment])
 
@@ -45,21 +49,18 @@ module Pronto
 
     describe '#pull_comments' do
       subject { github.pull_comments(sha) }
-      before do
-        ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
-      end
+
+      before { ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10) }
 
       context 'three requests for same comments' do
         specify do
           Octokit::Client.any_instance
             .should_receive(:pull_comments)
-            .with('prontolabs/pronto', 10)
+            .with(github_slug, 10)
             .once
             .and_return([comment])
 
-          subject
-          subject
-          subject
+          3.times { subject }
         end
       end
 
@@ -90,8 +91,8 @@ module Pronto
 
         octokit_client
           .should_receive(:create_status)
-          .with('prontolabs/pronto', expected_sha, state,
-                context: context, description: desc)
+          .with(github_slug, expected_sha, state, context:     context,
+                                                  description: desc)
           .once
       end
 
@@ -115,16 +116,15 @@ module Pronto
         let(:expected_sha) { sha }
 
         specify do
-          octokit_client
-            .should_not_receive(:pull_requests)
+          octokit_client.should_not_receive(:pull_requests)
 
           subject
         end
       end
     end
 
-    describe '#create_pull_request_review' do
-      subject { github.create_pull_request_review(comments) }
+    describe '#publish_pull_request_comments' do
+      subject { github.publish_pull_request_comments(comments) }
 
       let(:octokit_client) { double(Octokit::Client) }
 
@@ -141,12 +141,14 @@ module Pronto
         end
       end
 
-      context 'with comments' do
+      context 'with comments and' do
         before do
-          github.should_receive(:pull_id).once.and_return(pull_id)
+          github.stub(:pull_id).and_return(pull_id)
+          config.stub(:warnings_per_review).and_return(warnings_per_review)
         end
 
         let(:pull_id) { 10 }
+        let(:config)  { github.instance_variable_get(:@config) }
         let(:comments) do
           [
             double(path: 'bad_file.rb', position: 10, body: 'Offense #1'),
@@ -154,57 +156,53 @@ module Pronto
           ]
         end
         let(:options) do
-          {
-            event: 'COMMENT',
-            accept: 'application/vnd.github.black-cat-preview+json',
-            comments: [
-              { path: 'bad_file.rb', position: 10, body: 'Offense #1' },
-              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }
-            ]
-          }
+          empty_client_options
+            .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' },
+                              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
         end
 
-        specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
-            .with('prontolabs/pronto', pull_id, options)
-            .once
+        {
+          equal: 2,
+          more_than: 5
+        }.each do |condition, warnings_per_review|
+          context "when warnings per review #{condition} total comments" do
+            let(:warnings_per_review) { warnings_per_review }
 
-          subject
-        end
-      end
+            specify do
+              octokit_client
+                .should_receive(:create_pull_request_review)
+                .with(github_slug, pull_id, options)
+                .once
 
-      context 'pull request for branch does not exist' do
-        let(:comments) do
-          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
+              subject
+            end
+          end
         end
-        let(:repo) do
-          double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch: 'master')
-        end
-        specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
 
-          -> { subject }.should raise_error(Pronto::Error, /branch master/)
-        end
-      end
+        context 'when warnings per review are lower than comments' do
 
-      context 'pull request for detached head does not exist' do
-        let(:comments) do
-          [double(path: 'bad_file.rb', position: 10, body: 'Offense #1')]
-        end
-        let(:repo) do
-          double(remote_urls: ['git@github.com:prontolabs/pronto'],
-                 branch: nil,
-                 head_detached?: true,
-                 head_commit_sha: 'sha_with_no_pr')
-        end
-        specify do
-          octokit_client
-            .should_not_receive(:create_pull_request_review)
+          let(:warnings_per_review) { 1 }
+          let(:first_options) do
+            empty_client_options
+              .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' }])
+          end
+          let(:second_options) do
+            empty_client_options
+              .merge(comments: [{ path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
+          end
 
-          -> { subject }.should raise_error(Pronto::Error, /sha_with_no_pr/)
+          specify do
+            octokit_client
+              .should_receive(:create_pull_request_review)
+              .with(github_slug, pull_id, first_options)
+              .once
+            octokit_client
+              .should_receive(:create_pull_request_review)
+              .with(github_slug, pull_id, second_options)
+              .once
+
+            subject
+          end
         end
       end
     end

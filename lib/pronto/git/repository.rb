@@ -13,12 +13,25 @@ module Pronto
                             [head_commit_sha, @repo.index.diff(options)]
                           when :staged
                             [head_commit_sha, head.diff(@repo.index, options)]
+                          when :workdir
+                            [
+                              head_commit_sha,
+                              @repo.diff_workdir(
+                                head,
+                                {
+                                  include_untracked: true,
+                                  include_untracked_content: true,
+                                  recurse_untracked_dirs: true
+                                }.merge(options || {})
+                              )
+                            ]
                           else
                             merge_base = merge_base(commit)
                             patches = @repo.diff(merge_base, head, options)
                             [merge_base, patches]
                           end
 
+        patches.find_similar!(renames: true)
         Patches.new(self, target, patches)
       end
 
@@ -37,7 +50,7 @@ module Pronto
 
       def commits_until(sha)
         result = []
-        @repo.walk(head, Rugged::SORT_TOPO).take_while do |commit|
+        @repo.walk(head_commit_sha, Rugged::SORT_TOPO).take_while do |commit|
           result << commit.oid
           !commit.oid.start_with?(sha)
         end
@@ -45,7 +58,7 @@ module Pronto
       end
 
       def path
-        Pathname.new(@repo.path).parent
+        Pathname.new(@repo.workdir).cleanpath
       end
 
       def blame(path, lineno)

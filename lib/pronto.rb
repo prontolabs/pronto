@@ -42,9 +42,11 @@ require 'pronto/formatter/commit_formatter'
 require 'pronto/formatter/pull_request_formatter'
 require 'pronto/formatter/github_formatter'
 require 'pronto/formatter/github_status_formatter'
+require 'pronto/formatter/github_combined_status_formatter'
 require 'pronto/formatter/github_pull_request_formatter'
 require 'pronto/formatter/github_pull_request_review_formatter'
 require 'pronto/formatter/gitlab_formatter'
+require 'pronto/formatter/gitlab_merge_request_review_formatter'
 require 'pronto/formatter/bitbucket_formatter'
 require 'pronto/formatter/bitbucket_pull_request_formatter'
 require 'pronto/formatter/bitbucket_server_pull_request_formatter'
@@ -53,9 +55,9 @@ require 'pronto/formatter/null_formatter'
 require 'pronto/formatter/formatter'
 
 module Pronto
-  def self.run(commit = 'master', repo_path = '.',
+  def self.run(commit = nil, repo_path = '.',
                formatters = [Formatter::TextFormatter.new], file = nil)
-    commit ||= 'master'
+    commit ||= default_commit
 
     repo = Git::Repository.new(repo_path)
     options = { paths: [file] } if file
@@ -69,5 +71,9 @@ module Pronto
     end
 
     result
+  end
+
+  def self.default_commit
+    Config.new.default_commit
   end
 end

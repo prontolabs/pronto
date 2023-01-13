@@ -37,8 +37,6 @@ module Pronto
         repo.path.join(new_file_path)
       end
 
-      private
-
       def new_file_path
         delta.new_file[:path]
       end

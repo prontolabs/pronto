@@ -1,0 +1,41 @@
+name: Specs
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        ruby-version:
+          - "2.3"
+          - "2.4"
+          - "2.5"
+          - "2.6"
+          - "2.7"
+          - "3.0"
+          - "3.1"
+          - "3.2"
+        exclude:
+          - ruby-version: "2.3" # Rugged uses the wrong openssl version on CI and segfaults (similar to https://github.com/libgit2/rugged/issues/718)
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use specific gitlab gem version (if required)
+        if: matrix.ruby-version == '2.4'
+        run: echo "gem 'gitlab', '< 4.14.1'" >> Gemfile.local
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: 3d676246ffa66d3fdef6253a9870431b1a2da04e9ecb25486c08a38823c37b6a
+          COVERAGE: true
+        with:
+          coverageCommand: bundle exec rspec

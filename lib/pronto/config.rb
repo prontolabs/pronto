@@ -11,11 +11,30 @@ module Pronto
       end
     end
 
+    def default_commit
+      default_commit =
+        ENV['PRONTO_DEFAULT_COMMIT'] ||
+        @config_hash.fetch('default_commit', 'master')
+      default_commit
+    end
+
     def consolidate_comments?
       consolidated =
         ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
         @config_hash.fetch('consolidate_comments', false)
       consolidated
+    end
+
+    def github_review_type
+      review_type =
+        ENV['PRONTO_GITHUB_REVIEW_TYPE'] ||
+        @config_hash.fetch('github_review_type', false)
+
+      if review_type == 'request_changes'
+        'REQUEST_CHANGES'
+      else
+        'COMMENT'
+      end
     end
 
     def excluded_files(runner)
@@ -39,8 +58,12 @@ module Pronto
       URI.parse(bitbucket_web_endpoint).host
     end
 
+    def warnings_per_review
+      fetch_integer('warnings_per_review')
+    end
+
     def max_warnings
-      ENV['PRONTO_MAX_WARNINGS'] && Integer(ENV['PRONTO_MAX_WARNINGS']) || @config_hash['max_warnings']
+      fetch_integer('max_warnings')
     end
 
     def message_format(formatter)
@@ -48,14 +71,44 @@ module Pronto
       if formatter_config && formatter_config.key?('format')
         formatter_config['format']
       else
-        ENV['PRONTO_FORMAT'] || @config_hash['format']
+        fetch_value('format')
       end
+    end
+
+    def skip_runners
+      fetch_list('skip_runners')
+    end
+
+    def runners
+      fetch_list('runners')
     end
 
     def logger
       @logger ||= begin
-        verbose = ENV['PRONTO_VERBOSE'] || @config_hash['verbose']
+        verbose = fetch_value('verbose')
         verbose ? Logger.new($stdout) : Logger.silent
+      end
+    end
+
+    private
+
+    def fetch_integer(key)
+      full_key = env_key(key)
+
+      (ENV[full_key] && Integer(ENV[full_key])) || @config_hash[key]
+    end
+
+    def fetch_value(key)
+      ENV[env_key(key)] || @config_hash[key]
+    end
+
+    def env_key(key)
+      "PRONTO_#{key.upcase}"
+    end
+
+    def fetch_list(key)
+      Array(fetch_value(key)).flat_map do |runners|
+        runners.split(',')
       end
     end
   end

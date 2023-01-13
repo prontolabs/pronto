@@ -32,6 +32,13 @@ module Pronto
       end
     end
 
+    def approve_pull_request
+      client.approve_pull_request(slug, pull_id)
+    end
+
+    def unapprove_pull_request
+      client.unapprove_pull_request(slug, pull_id)
+    end
     private
 
     def slug

@@ -16,5 +16,29 @@ module Pronto
         its(:success?) { should be_truthy }
       end
     end
+
+    describe '#approve_pull_request' do
+      subject { client.approve_pull_request(slug, pull_id) }
+      let(:slug) { 'prontolabs/pronto' }
+      let(:pull_id) { 1 }
+
+      context 'success' do
+        before { BitbucketClient.stub(:post).and_return(response) }
+        let(:response) { double('Response', success?: true) }
+        its(:success?) { should be_truthy }
+      end
+    end
+
+    describe '#unapprove_pull_request' do
+      subject { client.unapprove_pull_request(slug, pull_id) }
+      let(:slug) { 'prontolabs/pronto' }
+      let(:pull_id) { 1 }
+
+      context 'success' do
+        before { BitbucketClient.stub(:delete).and_return(response) }
+        let(:response) { double('Response', success?: true) }
+        its(:success?) { should be_truthy }
+      end
+    end
   end
 end

@@ -12,13 +12,14 @@ module Pronto
         let(:repo) { Git::Repository.new('spec/fixtures/test.git') }
         let(:message) { Message.new('path/to', line, :warning, 'crucial') }
         let(:line) { double(new_lineno: 1, commit_sha: '123', position: nil) }
+        let(:paginated_response) { double(auto_paginate: []) }
         before { line.stub(:commit_line).and_return(line) }
 
         specify do
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return([])
+            .and_return(paginated_response)
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)
@@ -36,6 +37,7 @@ module Pronto
         let(:message2) { Message.new('path/to2', line2, :warning, 'crucial') }
         let(:line1) { double(new_lineno: 1, commit_sha: '123', position: nil) }
         let(:line2) { double(new_lineno: 2, commit_sha: '123', position: nil) }
+        let(:paginated_response) { double(auto_paginate: []) }
         before do
           line1.stub(:commit_line).and_return(line1)
           line2.stub(:commit_line).and_return(line2)
@@ -45,7 +47,7 @@ module Pronto
           ::Gitlab::Client.any_instance
             .should_receive(:commit_comments)
             .once
-            .and_return([])
+            .and_return(paginated_response)
 
           ::Gitlab::Client.any_instance
             .should_receive(:create_commit_comment)

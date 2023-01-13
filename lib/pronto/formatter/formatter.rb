@@ -13,9 +13,11 @@ module Pronto
     FORMATTERS = {
       'github' => GithubFormatter,
       'github_status' => GithubStatusFormatter,
+      'github_combined_status' => GithubCombinedStatusFormatter,
       'github_pr' => GithubPullRequestFormatter,
       'github_pr_review' => GithubPullRequestReviewFormatter,
       'gitlab' => GitlabFormatter,
+      'gitlab_mr' => GitlabMergeRequestReviewFormatter,
       'bitbucket' => BitbucketFormatter,
       'bitbucket_pr' => BitbucketPullRequestFormatter,
       'bitbucket_server_pr' => BitbucketServerPullRequestFormatter,

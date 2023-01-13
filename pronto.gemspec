@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   EOF
 
   s.licenses = ['MIT']
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.3.0'
   s.rubygems_version = '1.8.23'
 
   s.files = `git ls-files`.split($RS).reject do |file|
@@ -40,19 +40,20 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
-  s.add_runtime_dependency('rugged', '~> 0.24', '>= 0.23.0')
-  s.add_runtime_dependency('thor', '~> 0.20.0')
-  s.add_runtime_dependency('octokit', '~> 4.7', '>= 4.7.0')
-  s.add_runtime_dependency('gitlab', '~> 4.0', '>= 4.0.0')
-  s.add_runtime_dependency('httparty', '>= 0.13.7')
+  s.add_runtime_dependency('gitlab', '>= 4.4.0', '< 5.0')
+  s.add_runtime_dependency('httparty', '>= 0.13.7', '< 1.0')
+  s.add_runtime_dependency('octokit', '>= 4.7.0', '< 7.0')
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
+  s.add_runtime_dependency('rexml', '>= 3.2.5', '< 4.0')
+  s.add_runtime_dependency('rugged', '>= 0.23.0', '< 2.0')
+  s.add_runtime_dependency('thor', '>= 0.20.3', '< 2.0')
+  s.add_development_dependency('bundler', '>= 1.15')
+  s.add_development_dependency('pronto-rubocop', '~> 0.10.0')
   s.add_development_dependency('rake', '~> 12.0')
   s.add_development_dependency('rspec', '~> 3.4')
   s.add_development_dependency('rspec-its', '~> 1.2')
   s.add_development_dependency('rspec-expectations', '~> 3.4')
-  s.add_development_dependency('bundler', '~> 1.3')
-  s.add_development_dependency('simplecov', '~> 0.14')
-  s.add_development_dependency('rubocop', '~> 0.47')
-  s.add_development_dependency('pronto-rubocop', '~> 0.9.0')
-  s.add_development_dependency('codeclimate-test-reporter', '~> 1.0')
+  s.add_development_dependency('rubocop', '~> 0.58')
+  s.add_development_dependency('simplecov', '~> 0.17', '!= 0.18.0', '!= 0.18.1', '!= 0.18.2', '!= 0.18.3', '!= 0.18.4',
+                               '!= 0.18.5', '!= 0.19.0', '!= 0.19.1') # see https://docs.codeclimate.com/docs/configuring-test-coverage
 end

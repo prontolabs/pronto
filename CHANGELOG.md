@@ -1,16 +1,81 @@
 # Changelog
 
-## Unreleased
+## 0.11.1
+
+### New features
+
+* [#371](https://github.com/prontolabs/pronto/pull/371) allow to filter runners via config
+* [#402](https://github.com/prontolabs/pronto/pull/402) add --workdir option
+* [#410](https://github.com/prontolabs/pronto/pull/410) allow the default commit run against to be configured
+* [#435](https://github.com/prontolabs/pronto/pull/435) allow override of config file path via PRONTO_CONFIG_FILE
+
+### Bugs fixed
+
+* [#422](https://github.com/prontolabs/pronto/pull/422) fix Gitlab#slug_regex when URL has different host
+* [#423](https://github.com/prontolabs/pronto/pull/423) show existing message count when reporting posted messages
+
+### Changes
+
+* [#397](https://github.com/prontolabs/pronto/pull/397) migrate CI to GitHub Actions
+* [#398](https://github.com/prontolabs/pronto/pull/398) fix duplicated runs on GitHub Actions
+* [#403](https://github.com/prontolabs/pronto/pull/403) run pronto on GitHub Actions without any reporting
+* [#408](https://github.com/prontolabs/pronto/pull/408) require rexml ~> 3.2.5 due to CVE-2021-28965
+* [#409](https://github.com/prontolabs/pronto/pull/409) add article about GitHub Actions to README.md
+* [#414](https://github.com/prontolabs/pronto/pull/414) fix typo in README.md
+* [#415](https://github.com/prontolabs/pronto/pull/415) remove deprecated pronto-bundler_audit from README.md
+* [#417](https://github.com/prontolabs/pronto/pull/417) relax rugged dependency to allow releases up to 1.2.0
+* [#424](https://github.com/prontolabs/pronto/pull/424) add Ruby 3.1 to the test matrix
+* [#431](https://github.com/prontolabs/pronto/pull/431) relax rugged dependency to allow releases up to 2.0
+* [#436](https://github.com/prontolabs/pronto/pull/436) update dead links in README.md
+* [#438](https://github.com/prontolabs/pronto/pull/438) add Ruby 3.2 to the test matrix
+* [#439](https://github.com/prontolabs/pronto/pull/439) relax dependencies to allow currently released major versions
+
+## 0.11.0
+
+### New features
+
+* [#304](https://github.com/prontolabs/pronto/pull/304) add option to limit comments per PR review
+* [#333](https://github.com/prontolabs/pronto/pull/333) add github_combined_status formatter
+* [#334](https://github.com/prontolabs/pronto/pull/334) add configurable review_type for GitHub (with REQUEST_CHANGES as default)
+* [#351](https://github.com/prontolabs/pronto/pull/351) add gitLab_mr formatter
+* [#369](https://github.com/prontolabs/pronto/pull/369) make Pronto::Git::Patch#new_file_path public
+* update to the BitBucket 2.0 API (_as the 1.0 API was deprecated_) via [#347](https://github.com/prontolabs/pronto/pull/347), [#348](https://github.com/prontolabs/pronto/pull/348), [#352](https://github.com/prontolabs/pronto/pull/352) and [#354](https://github.com/prontolabs/pronto/pull/354)
+
+### Bugs fixed
+
+* [#344](https://github.com/prontolabs/pronto/pull/344) treat Gemfile and .gemspecs as Ruby
+* [#380](https://github.com/prontolabs/pronto/pull/380) fix compatibility with rugged >= 0.99
+* [#387](https://github.com/prontolabs/pronto/pull/387) fix running pronto inside git submodules
+
+### Changes
+
+* [#370](https://github.com/prontolabs/pronto/pull/370) allow thor 1.x gem versions
+* [#379](https://github.com/prontolabs/pronto/pull/379) allow rugged 1.0.x gem versions
+* [#386](https://github.com/prontolabs/pronto/pull/386) add ruby 2.7 to CI
+* [#390](https://github.com/prontolabs/pronto/pull/390) fix issue with generating Sorbet RBI
+* [#396](https://github.com/prontolabs/pronto/pull/396) add support for Ruby 3.0
+* document/improve GitHub Actions integration in README.md via [#360](https://github.com/prontolabs/pronto/pull/360), [#378](https://github.com/prontolabs/pronto/pull/378) and [#389](https://github.com/prontolabs/pronto/pull/389)
+* add links to additional pronto runners in README.md
+
+## 0.10.0
+
+### New features
+
+* [#301](https://github.com/prontolabs/pronto/pull/301): add ability to auto approve Bitbucket pull requests.
+* [#331](https://github.com/prontolabs/pronto/pull/331): allow to specify PATH in "run" command.
 
 ### Bugs fixed
 
 * [#258](https://github.com/prontolabs/pronto/pull/258): fix blame returning nil when file does not exist in the git tree.
 * [#270](https://github.com/prontolabs/pronto/pull/270): fix ${line} in text format to mean line number.
-* [#282](https://github.com/prontolabs/pronto/issues/282): relax rainbow dependency
+* [#282](https://github.com/prontolabs/pronto/issues/282): relax rainbow dependency.
+* [#329](https://github.com/prontolabs/pronto/pull/329): correctly handle renamed-only files.
 
 ### Changes
 
 * Depend on thor `0.20.*`.
+* [#298](https://github.com/prontolabs/pronto/pull/298): change default GitLab API endpoint to v4.
+* [#332](https://github.com/prontolabs/pronto/pull/332): remove support for Ruby older than 2.3.0.
 
 ## 0.9.5
 

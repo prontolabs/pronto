@@ -7,7 +7,7 @@ module Pronto
         @output = ''
       end
 
-      def format(messages, _, _)
+      def format(messages, _repo, _patches)
         open_xml
         process_messages(messages)
         close_xml

@@ -92,6 +92,15 @@ module Pronto
           let(:sha) { :staged }
           it { should be_one }
         end
+
+        context 'workdir' do
+          let(:sha) { :workdir }
+
+          it do
+            # this count includes all the files from the repositories (*.git)
+            subject.count.should eq 48
+          end
+        end
       end
 
       describe '#blame' do
@@ -117,5 +126,20 @@ module Pronto
         end
       end
     end
+
+    describe Repository do
+      let(:repo) { described_class.new('spec/fixtures/renamed-file.git') }
+
+      describe '#diff' do
+        subject { repo.diff(sha, options) }
+        let(:options) { nil }
+
+        context 'initial' do
+          let(:sha) { '3e2cbd4' }
+          it { should be_one }
+        end
+      end
+    end
+
   end
 end
