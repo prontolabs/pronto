@@ -41,6 +41,12 @@ module Pronto
         comments.group_by { |comment| [comment.path, comment.position] }
       end
 
+      def ungrouped_comments(comments)
+        return [] unless comments.any?
+
+        comments.values.flatten
+      end
+
       def consolidate_comments(comments)
         comment = comments.first
         if comments.length > 1

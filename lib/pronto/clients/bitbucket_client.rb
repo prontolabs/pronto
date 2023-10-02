@@ -21,7 +21,7 @@ class BitbucketClient
   end
 
   def pull_comments(slug, pull_id)
-    response = get("/#{slug}/pullrequests/#{pull_id}/comments?pagelen=100")
+    response = get("/#{slug}/pullrequests/#{pull_id}/comments?q=deleted=false&pagelen=100")
     parse_comments(openstruct(response))
     result = parse_comments(openstruct(response))
     while (response['next'])
@@ -46,6 +46,10 @@ class BitbucketClient
 
   def unapprove_pull_request(slug, pull_id)
     self.class.delete("/#{slug}/pullrequests/#{pull_id}/approve")
+  end
+
+  def delete_comment(slug, pull_id, comment_id)
+    self.class.delete("/#{slug}/pullrequests/#{pull_id}/comments/#{comment_id}")
   end
 
   private

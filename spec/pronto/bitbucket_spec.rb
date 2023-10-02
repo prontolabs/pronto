@@ -8,7 +8,7 @@ module Pronto
     end
     let(:sha) { '61e4bef' }
     let(:comment) do
-      double(content: 'note', filename: 'path', line_to: 1, position: 1)
+      double(content: 'note', filename: 'path', line_to: 1, position: 1, id: 1)
     end
 
     describe '#slug' do
