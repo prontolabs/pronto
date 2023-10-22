@@ -57,3 +57,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.add('checkstyle', Pronto::Formatter::CheckstyleFormatter)

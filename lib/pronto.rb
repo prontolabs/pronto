@@ -35,6 +35,7 @@ require 'pronto/bitbucket_server'
 
 require 'pronto/formatter/colorizable'
 require 'pronto/formatter/base'
+require 'pronto/formatter/formatter'
 require 'pronto/formatter/text_formatter'
 require 'pronto/formatter/json_formatter'
 require 'pronto/formatter/git_formatter'
@@ -52,7 +53,6 @@ require 'pronto/formatter/bitbucket_pull_request_formatter'
 require 'pronto/formatter/bitbucket_server_pull_request_formatter'
 require 'pronto/formatter/checkstyle_formatter'
 require 'pronto/formatter/null_formatter'
-require 'pronto/formatter/formatter'
 
 module Pronto
   def self.run(commit = nil, repo_path = '.',

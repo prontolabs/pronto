@@ -2,7 +2,7 @@ require_relative 'sentence'
 
 module Pronto
   module Formatter
-    class GithubStatusFormatter
+    class GithubStatusFormatter < Base
       class StatusBuilder
         def initialize(runner, messages)
           @runner = runner

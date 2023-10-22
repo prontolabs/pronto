@@ -5,3 +5,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.add('null', Pronto::Formatter::NullFormatter)

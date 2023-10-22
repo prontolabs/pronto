@@ -1,5 +1,50 @@
 module Pronto
   module Formatter
+    describe '.add' do
+      context 'format method not implementend' do
+        subject { Formatter.add(formatter_label, formatter) }
+
+        let(:formatter_label) { 'formatter_without_method' }
+        let(:formatter) { Class.new(Pronto::Formatter::Base) }
+
+        specify do
+          -> { subject }.should raise_error(
+            NoMethodError, "format method is not declared in the #{formatter_label} class."
+          )
+        end
+      end
+
+      context 'formatter class is not Formatter::Base' do
+        subject { Formatter.add(formatter_label, formatter) }
+
+        let(:formatter_label) { 'formatter_without_base_class' }
+        let(:formatter) do
+          Class.new do
+            def format(_messages, _repo, _patches); end
+          end
+        end
+
+        specify do
+          -> { subject }.should raise_error("#{formatter_label.inspect} is not a #{Pronto::Formatter::Base}")
+        end
+      end
+
+      context 'there is a formater with same name' do
+        subject { Formatter.add(formatter_label, formatter) }
+
+        let(:formatter_label) { 'json' }
+        let(:formatter) do
+          Class.new(Pronto::Formatter::Base) do
+            def format(_messages, _repo, _patches); end
+          end
+        end
+
+        specify do
+          -> { subject }.should raise_error("formatter #{formatter_label.inspect} has already been added.")
+        end
+      end
+    end
+
     describe '.get' do
       context 'single' do
         subject { Formatter.get(name).first }

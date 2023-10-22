@@ -17,7 +17,7 @@ module Pronto
         return if config.bitbucket_auto_approve == false
 
         if comments_count > 0 && additions_count > 0
-          client.unapprove_pull_request  
+          client.unapprove_pull_request
         elsif comments_count == 0
           client.approve_pull_request
         end
@@ -25,3 +25,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.add('bitbucket_pr', Pronto::Formatter::BitbucketPullRequestFormatter)

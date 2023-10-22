@@ -18,3 +18,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.add('json', Pronto::Formatter::JsonFormatter)

@@ -27,3 +27,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.add('gitlab_mr', Pronto::Formatter::GitlabMergeRequestReviewFormatter)

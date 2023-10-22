@@ -1,30 +1,32 @@
 module Pronto
   module Formatter
-    def self.get(names)
-      names ||= 'text'
-      Array(names).map { |name| FORMATTERS[name.to_s] || TextFormatter }
-        .uniq.map(&:new)
-    end
+    class << self
+      def add(label, formatter_klass = nil)
+        unless formatter_klass.method_defined?(:format)
+          raise NoMethodError, "format method is not declared in the #{label} class."
+        end
 
-    def self.names
-      FORMATTERS.keys
-    end
+        base = Pronto::Formatter::Base
+        raise "#{label.inspect} is not a #{base}" unless formatter_klass.ancestors.include?(base)
 
-    FORMATTERS = {
-      'github' => GithubFormatter,
-      'github_status' => GithubStatusFormatter,
-      'github_combined_status' => GithubCombinedStatusFormatter,
-      'github_pr' => GithubPullRequestFormatter,
-      'github_pr_review' => GithubPullRequestReviewFormatter,
-      'gitlab' => GitlabFormatter,
-      'gitlab_mr' => GitlabMergeRequestReviewFormatter,
-      'bitbucket' => BitbucketFormatter,
-      'bitbucket_pr' => BitbucketPullRequestFormatter,
-      'bitbucket_server_pr' => BitbucketServerPullRequestFormatter,
-      'json' => JsonFormatter,
-      'checkstyle' => CheckstyleFormatter,
-      'text' => TextFormatter,
-      'null' => NullFormatter
-    }.freeze
+        raise ArgumentError, "formatter #{label.inspect} has already been added." if formatters.key?(label)
+
+        formatters[label] = formatter_klass
+      end
+
+      def get(names)
+        names ||= 'text'
+        Array(names).map { |name| formatters[name.to_s] || TextFormatter }
+          .uniq.map(&:new)
+      end
+
+      def names
+        formatters.keys
+      end
+
+      def formatters
+        @formatters ||= {}
+      end
+    end
   end
 end
