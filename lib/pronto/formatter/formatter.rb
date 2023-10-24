@@ -9,21 +9,18 @@ module Pronto
         base = Pronto::Formatter::Base
         raise "#{formatter_klass.name} is not a #{base}" unless formatter_klass.ancestors.include?(base)
 
-        formatters[formatter_klass.name] = formatter_klass
+        @formatters ||= {}
+        @formatters[formatter_klass.name] = formatter_klass
       end
 
       def get(names)
         names ||= 'text'
-        Array(names).map { |name| formatters[name.to_s] || TextFormatter }
+        Array(names).map { |name| @formatters[name.to_s] || TextFormatter }
           .uniq.map(&:new)
       end
 
       def names
-        formatters.keys
-      end
-
-      def formatters
-        @formatters ||= {}
+        @formatters.keys
       end
     end
   end

@@ -6,7 +6,9 @@ module Pronto
 
         let(:formatter) do
           Class.new(Pronto::Formatter::Base) do
-            def self.name; 'custom_formatter'; end
+            def self.name
+              'custom_formatter'
+            end
           end
         end
 
@@ -22,7 +24,10 @@ module Pronto
 
         let(:formatter) do
           Class.new do
-            def self.name; 'custom_formatter'; end
+            def self.name
+              'custom_formatter'
+            end
+
             def format(_messages, _repo, _patches); end
           end
         end
