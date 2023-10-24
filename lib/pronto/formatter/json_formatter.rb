@@ -19,4 +19,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('json', Pronto::Formatter::JsonFormatter)
+Pronto::Formatter.register('json', Pronto::Formatter::JsonFormatter)

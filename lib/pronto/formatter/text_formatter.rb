@@ -14,4 +14,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('text', Pronto::Formatter::TextFormatter)
+Pronto::Formatter.register('text', Pronto::Formatter::TextFormatter)

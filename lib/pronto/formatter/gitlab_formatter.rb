@@ -16,4 +16,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('gitlab', Pronto::Formatter::GitlabFormatter)
+Pronto::Formatter.register('gitlab', Pronto::Formatter::GitlabFormatter)

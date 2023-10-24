@@ -26,4 +26,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('bitbucket_pr', Pronto::Formatter::BitbucketPullRequestFormatter)
+Pronto::Formatter.register('bitbucket_pr', Pronto::Formatter::BitbucketPullRequestFormatter)

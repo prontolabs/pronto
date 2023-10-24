@@ -23,4 +23,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('github_combined_status', Pronto::Formatter::GithubCombinedStatusFormatter)
+Pronto::Formatter.register('github_combined_status', Pronto::Formatter::GithubCombinedStatusFormatter)

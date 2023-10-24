@@ -17,4 +17,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('github_pr', Pronto::Formatter::GithubPullRequestFormatter)
+Pronto::Formatter.register('github_pr', Pronto::Formatter::GithubPullRequestFormatter)

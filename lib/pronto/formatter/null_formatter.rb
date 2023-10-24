@@ -6,4 +6,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('null', Pronto::Formatter::NullFormatter)
+Pronto::Formatter.register('null', Pronto::Formatter::NullFormatter)

@@ -16,4 +16,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('bitbucket', Pronto::Formatter::BitbucketFormatter)
+Pronto::Formatter.register('bitbucket', Pronto::Formatter::BitbucketFormatter)

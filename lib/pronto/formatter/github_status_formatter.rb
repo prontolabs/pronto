@@ -27,4 +27,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('github_status', Pronto::Formatter::GithubStatusFormatter)
+Pronto::Formatter.register('github_status', Pronto::Formatter::GithubStatusFormatter)

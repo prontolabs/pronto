@@ -16,4 +16,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.add('github', Pronto::Formatter::GithubFormatter)
+Pronto::Formatter.register('github', Pronto::Formatter::GithubFormatter)

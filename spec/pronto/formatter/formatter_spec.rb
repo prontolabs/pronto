@@ -1,8 +1,8 @@
 module Pronto
   module Formatter
-    describe '.add' do
+    describe '.register' do
       context 'format method not implementend' do
-        subject { Formatter.add(formatter_label, formatter) }
+        subject { Formatter.register(formatter_label, formatter) }
 
         let(:formatter_label) { 'formatter_without_method' }
         let(:formatter) { Class.new(Pronto::Formatter::Base) }
@@ -15,7 +15,7 @@ module Pronto
       end
 
       context 'formatter class is not Formatter::Base' do
-        subject { Formatter.add(formatter_label, formatter) }
+        subject { Formatter.register(formatter_label, formatter) }
 
         let(:formatter_label) { 'formatter_without_base_class' }
         let(:formatter) do
@@ -26,21 +26,6 @@ module Pronto
 
         specify do
           -> { subject }.should raise_error("#{formatter_label.inspect} is not a #{Pronto::Formatter::Base}")
-        end
-      end
-
-      context 'there is a formater with same name' do
-        subject { Formatter.add(formatter_label, formatter) }
-
-        let(:formatter_label) { 'json' }
-        let(:formatter) do
-          Class.new(Pronto::Formatter::Base) do
-            def format(_messages, _repo, _patches); end
-          end
-        end
-
-        specify do
-          -> { subject }.should raise_error("formatter #{formatter_label.inspect} has already been added.")
         end
       end
     end
