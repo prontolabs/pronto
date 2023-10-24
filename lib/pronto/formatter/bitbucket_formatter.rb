@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class BitbucketFormatter < CommitFormatter
+      def self.name
+        'bitbucket'
+      end
+
       def client_module
         Bitbucket
       end
@@ -16,4 +20,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('bitbucket', Pronto::Formatter::BitbucketFormatter)
+Pronto::Formatter.register(Pronto::Formatter::BitbucketFormatter)

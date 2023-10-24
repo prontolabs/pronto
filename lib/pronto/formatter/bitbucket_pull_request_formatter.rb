@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class BitbucketPullRequestFormatter < PullRequestFormatter
+      def self.name
+        'bitbucket_pr'
+      end
+
       def client_module
         Bitbucket
       end
@@ -26,4 +30,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('bitbucket_pr', Pronto::Formatter::BitbucketPullRequestFormatter)
+Pronto::Formatter.register(Pronto::Formatter::BitbucketPullRequestFormatter)

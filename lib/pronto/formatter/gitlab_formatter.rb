@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class GitlabFormatter < CommitFormatter
+      def self.name
+        'gitlab'
+      end
+
       def client_module
         Gitlab
       end
@@ -16,4 +20,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('gitlab', Pronto::Formatter::GitlabFormatter)
+Pronto::Formatter.register(Pronto::Formatter::GitlabFormatter)

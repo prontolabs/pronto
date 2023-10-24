@@ -3,6 +3,10 @@ require 'json'
 module Pronto
   module Formatter
     class JsonFormatter < Base
+      def self.name
+        'json'
+      end
+
       def format(messages, _repo, _patches)
         messages.map do |message|
           lineno = message.line.new_lineno if message.line
@@ -19,4 +23,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('json', Pronto::Formatter::JsonFormatter)
+Pronto::Formatter.register(Pronto::Formatter::JsonFormatter)

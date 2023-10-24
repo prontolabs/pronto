@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class GithubPullRequestReviewFormatter < PullRequestFormatter
+      def self.name
+        'github_pr_review'
+      end
+
       def client_module
         Github
       end
@@ -23,4 +27,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('github_pr_review', Pronto::Formatter::GithubPullRequestReviewFormatter)
+Pronto::Formatter.register(Pronto::Formatter::GithubPullRequestReviewFormatter)

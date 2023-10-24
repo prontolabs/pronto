@@ -1,15 +1,15 @@
 module Pronto
   module Formatter
     class << self
-      def register(label, formatter_klass)
+      def register(formatter_klass)
         unless formatter_klass.method_defined?(:format)
-          raise NoMethodError, "format method is not declared in the #{label} class."
+          raise NoMethodError, "format method is not declared in the #{formatter_klass.name} class."
         end
 
         base = Pronto::Formatter::Base
-        raise "#{label.inspect} is not a #{base}" unless formatter_klass.ancestors.include?(base)
+        raise "#{formatter_klass.name} is not a #{base}" unless formatter_klass.ancestors.include?(base)
 
-        formatters[label] = formatter_klass
+        formatters[formatter_klass.name] = formatter_klass
       end
 
       def get(names)

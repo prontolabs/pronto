@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class GitlabMergeRequestReviewFormatter < PullRequestFormatter
+      def self.name
+        'gitlab_mr'
+      end
+
       def client_module
         Gitlab
       end
@@ -28,4 +32,4 @@ module Pronto
   end
 end
 
-Pronto::Formatter.register('gitlab_mr', Pronto::Formatter::GitlabMergeRequestReviewFormatter)
+Pronto::Formatter.register(Pronto::Formatter::GitlabMergeRequestReviewFormatter)
