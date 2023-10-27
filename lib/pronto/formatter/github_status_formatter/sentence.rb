@@ -1,6 +1,6 @@
 module Pronto
   module Formatter
-    class GithubStatusFormatter
+    class GithubStatusFormatter < Base
       class Sentence
         def initialize(words)
           @words = words

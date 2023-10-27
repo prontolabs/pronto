@@ -3,6 +3,10 @@ require 'rexml/document'
 module Pronto
   module Formatter
     class CheckstyleFormatter < Base
+      def self.name
+        'checkstyle'
+      end
+
       def initialize
         @output = ''
       end
@@ -57,3 +61,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.register(Pronto::Formatter::CheckstyleFormatter)

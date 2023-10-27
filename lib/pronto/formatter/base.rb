@@ -2,7 +2,7 @@ module Pronto
   module Formatter
     class Base
       def self.name
-        Formatter::FORMATTERS.invert[self]
+        raise NoMethodError, 'Must be implemented in subclasses.'
       end
 
       def config

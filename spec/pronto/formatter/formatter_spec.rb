@@ -1,5 +1,43 @@
 module Pronto
   module Formatter
+    describe '.register' do
+      context 'format method not implementend' do
+        subject { Formatter.register(formatter) }
+
+        let(:formatter) do
+          Class.new(Pronto::Formatter::Base) do
+            def self.name
+              'custom_formatter'
+            end
+          end
+        end
+
+        specify do
+          -> { subject }.should raise_error(
+            NoMethodError, "format method is not declared in the #{formatter.name} class."
+          )
+        end
+      end
+
+      context 'formatter class is not Formatter::Base' do
+        subject { Formatter.register(formatter) }
+
+        let(:formatter) do
+          Class.new do
+            def self.name
+              'custom_formatter'
+            end
+
+            def format(_messages, _repo, _patches); end
+          end
+        end
+
+        specify do
+          -> { subject }.should raise_error(RuntimeError, "#{formatter.name} is not a #{Pronto::Formatter::Base}")
+        end
+      end
+    end
+
     describe '.get' do
       context 'single' do
         subject { Formatter.get(name).first }

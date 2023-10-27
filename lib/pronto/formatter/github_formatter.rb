@@ -1,6 +1,10 @@
 module Pronto
   module Formatter
     class GithubFormatter < CommitFormatter
+      def self.name
+        'github'
+      end
+
       def client_module
         Github
       end
@@ -15,3 +19,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.register(Pronto::Formatter::GithubFormatter)

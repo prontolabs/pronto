@@ -2,7 +2,11 @@ require_relative 'github_status_formatter/status_builder'
 
 module Pronto
   module Formatter
-    class GithubStatusFormatter
+    class GithubStatusFormatter < Base
+      def self.name
+        'github_status'
+      end
+
       def format(messages, repo, _)
         client = Github.new(repo)
         head = repo.head_commit_sha
@@ -26,3 +30,5 @@ module Pronto
     end
   end
 end
+
+Pronto::Formatter.register(Pronto::Formatter::GithubStatusFormatter)
