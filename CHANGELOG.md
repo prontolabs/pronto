@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.2
+
+### Changes
+
+* [#449](https://github.com/prontolabs/pronto/pull/449) relax octokit version dependency to allow releases up to 8.0
+* [#450](https://github.com/prontolabs/pronto/pull/450) introduce Pronto::Formatter.register for adding custom formatters
+
 ## 0.11.1
 
 ### New features
