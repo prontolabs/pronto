@@ -42,7 +42,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency('gitlab', '>= 4.4.0', '< 5.0')
   s.add_runtime_dependency('httparty', '>= 0.13.7', '< 1.0')
-  s.add_runtime_dependency('octokit', '>= 4.7.0', '< 8.0')
+  s.add_runtime_dependency('octokit', '>= 4.7.0', '< 9.0')
   s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
   s.add_runtime_dependency('rexml', '>= 3.2.5', '< 4.0')
   s.add_runtime_dependency('rugged', '>= 0.23.0', '< 2.0')

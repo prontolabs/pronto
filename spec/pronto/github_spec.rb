@@ -8,8 +8,7 @@ module Pronto
     let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
     let(:empty_client_options) do
       {
-        event: 'COMMENT',
-        accept: 'application/vnd.github.v3.diff+json'
+        event: 'COMMENT'
       }
     end
 
@@ -157,8 +156,8 @@ module Pronto
         end
         let(:options) do
           empty_client_options
-            .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' },
-                              { path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
+            .merge(comments: [{ path: 'bad_file.rb', line: 10, body: 'Offense #1' },
+                              { path: 'bad_file.rb', line: 20, body: 'Offense #2' }])
         end
 
         {
@@ -184,11 +183,11 @@ module Pronto
           let(:warnings_per_review) { 1 }
           let(:first_options) do
             empty_client_options
-              .merge(comments: [{ path: 'bad_file.rb', position: 10, body: 'Offense #1' }])
+              .merge(comments: [{ path: 'bad_file.rb', line: 10, body: 'Offense #1' }])
           end
           let(:second_options) do
             empty_client_options
-              .merge(comments: [{ path: 'bad_file.rb', position: 20, body: 'Offense #2' }])
+              .merge(comments: [{ path: 'bad_file.rb', line: 20, body: 'Offense #2' }])
           end
 
           specify do

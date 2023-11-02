@@ -42,7 +42,7 @@ module Pronto
             Octokit::Client.any_instance
               .should_receive(:commit_comments)
               .once
-              .and_return([double(body: 'crucial', path: 'path/to', position: nil)])
+              .and_return([double(body: 'crucial', path: 'path/to', line: nil)])
 
             Octokit::Client.any_instance.should_not_receive(:create_commit_comment)
 
@@ -62,7 +62,7 @@ module Pronto
             Octokit::Client.any_instance
               .should_receive(:commit_comments)
               .once
-              .and_return([double(body: 'existed', path: 'path/to', position: nil)])
+              .and_return([double(body: 'existed', path: 'path/to', line: nil)])
 
             Octokit::Client.any_instance.should_receive(:create_commit_comment).once
 
