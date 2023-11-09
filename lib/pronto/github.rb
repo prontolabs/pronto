@@ -10,8 +10,9 @@ module Pronto
     def pull_comments(sha)
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.body, comment.path,
-                      comment.position || comment.original_position)
+          Comment.new(
+            sha, comment.body, comment.path, comment.line || comment.original_line
+          )
         end
       end
     rescue Octokit::NotFound => e
@@ -23,7 +24,7 @@ module Pronto
     def commit_comments(sha)
       @comment_cache[sha.to_s] ||= begin
         client.commit_comments(slug, sha).map do |comment|
-          Comment.new(sha, comment.body, comment.path, comment.position)
+          Comment.new(sha, comment.body, comment.path, comment.line)
         end
       end
     end
@@ -37,9 +38,13 @@ module Pronto
     def create_pull_comment(comment)
       if comment.path && comment.position
         @config.logger.log("Creating pull request comment on #{pull_id}")
-        client.create_pull_comment(slug, pull_id, comment.body,
-                                   pull_sha || comment.sha,
-                                   comment.path, comment.position)
+        client.create_pull_comment(
+          # Depending on the Octokit version the 6th argument can be either postion or line. We'll
+          # provide the `line` as this argument and also provide the line in the options argument.
+          # The API uses `line` and ignores position when `line` is provided.
+          slug, pull_id, comment.body, pull_sha || comment.sha,
+          comment.path, comment.position, { line: comment.position }
+        )
       else
         create_commit_comment(comment)
       end
@@ -66,12 +71,11 @@ module Pronto
     def create_pull_request_review(comments)
       options = {
         event: @config.github_review_type,
-        accept: 'application/vnd.github.v3.diff+json', # https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
         comments: comments.map do |comment|
           {
-            path:     comment.path,
-            position: comment.position,
-            body:     comment.body
+            path: comment.path,
+            line: comment.position,
+            body: comment.body
           }
         end
       }
