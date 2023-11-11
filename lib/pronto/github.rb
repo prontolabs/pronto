@@ -106,6 +106,8 @@ module Pronto
 
     def pull_sha
       pull[:head][:sha] if pull
+    rescue Pronto::Error
+      nil
     end
 
     def pull
