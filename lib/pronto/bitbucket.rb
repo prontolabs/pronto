@@ -69,6 +69,8 @@ module Pronto
                     pr.source['branch']['name'] == @repo.branch
                   end
                 end
+raise Pronto::Error, "No pull request found" if @pull.nil?
+      @pull
     end
 
     def pull_requests
