@@ -53,7 +53,7 @@ gem 'pronto-flay', require: false
 
 ## Usage
 
-Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
+Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is main).
 
 ### Local Changes
 
@@ -62,13 +62,13 @@ Navigate to the repository you want to run Pronto on, and:
 ```sh
 git checkout feature/branch
 
-# Analyze diff of committed changes on current branch and master:
+# Analyze diff of committed changes on current branch and main:
 pronto run
 
 # Analyze changes in git staging area
 pronto run --staged
 
-# Analyze diff of uncommitted changes and master:
+# Analyze diff of uncommitted changes and main:
 pronto run --unstaged
 
 # Analyze *all* changes since the *initial* commit (may take some time):
@@ -101,19 +101,19 @@ Set the PRONTO_GITHUB_ACCESS_TOKEN environment variable or value in `.pronto.yml
 Then just run it:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github -c origin/main
 ```
 
 If you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr -c origin/main
 ```
 
 If you want review to appear on pull request diff, instead of separate comments:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/main
 ```
 
 All the **N** pending comments will be now separated into **X** number of PR reviews.
@@ -129,26 +129,26 @@ Note: In case no environment variable or config setting is specified in `.pronto
       a default value of `30` will be used.
 
 ```sh
-$ PRONTO_WARNINGS_PER_REVIEW=30 PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/master
+$ PRONTO_WARNINGS_PER_REVIEW=30 PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_pr_review -c origin/main
 ```
 
 Use `GithubStatusFormatter` to submit [commit status](https://github.com/blog/1227-commit-status-api):
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_status -c origin/main
 ```
 
 If you want to show a one single status for all runners, instead of status per runner:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_combined_status -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token pronto run -f github_combined_status -c origin/main
 ```
 
 It's possible to combine multiple formatters.
 To get both pull request comments and commit status summary use:
 
 ```sh
-$ PRONTO_GITHUB_ACCESS_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/master
+$ PRONTO_GITHUB_ACCESS_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f github_status github_pr -c origin/main
 ```
 
 As an alternative, you can also set up a rake task:
@@ -159,7 +159,7 @@ Pronto::GemNames.new.to_a.each { |gem_name| require "pronto/#{gem_name}" }
 formatter = Pronto::Formatter::GithubFormatter.new # also possible: GithubPullRequestFormatter, GithubPullRequestReviewFormatter
 status_formatter = Pronto::Formatter::GithubStatusFormatter.new
 formatters = [formatter, status_formatter]
-Pronto.run('origin/master', '.', formatters)
+Pronto.run('origin/main', '.', formatters)
 ```
 
 #### GitHub Actions Integration
@@ -211,7 +211,7 @@ to your Gitlab private token which you can find in your account settings.
 Then just run it:
 
 ```sh
-$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/main
 ```
 
 **note: this requires at least Gitlab 11.6+**
@@ -219,7 +219,7 @@ $ PRONTO_GITLAB_API_PRIVATE_TOKEN=token pronto run -f gitlab -c origin/master
 Merge request integration:
 
 ```sh
-$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/master
+$ PRONTO_GITLAB_API_PRIVATE_TOKEN=token PRONTO_PULL_REQUEST_ID=id pronto run -f gitlab_mr -c origin/main
 ```
 
 On GitLabCI, make sure to run Pronto in a [merge request pipeline](https://docs.gitlab.com/ce/ci/merge_request_pipelines/):
@@ -249,13 +249,13 @@ Set the PRONTO_BITBUCKET_USERNAME and PRONTO_BITBUCKET_PASSWORD environment vari
 Then just run it:
 
 ```sh
-$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket -c origin/master
+$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket -c origin/main
 ```
 
 or, if you want comments to appear on pull request diff, instead of commit:
 
 ```sh
-$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
+$ PRONTO_BITBUCKET_USERNAME=user PRONTO_BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/main
 ```
 
 ## Configuration
