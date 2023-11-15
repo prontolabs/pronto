@@ -18,6 +18,8 @@ module Pronto
         file_name, _extension = File.basename(source_path).split('.')
         file_name
       end
+      puts "@runner_name --> #{@runner_name}"
+      @runner_name
     end
 
     def ruby_patches

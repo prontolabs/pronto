@@ -19,6 +19,7 @@ module Pronto
         end
 
         def context
+          puts "context name --> pronto/#{@runner.title}"
           "pronto/#{@runner.title}"
         end
 
