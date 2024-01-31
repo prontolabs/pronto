@@ -27,7 +27,7 @@ module Pronto
                             ]
                           else
                             merge_base = merge_base(commit)
-                            patches = @repo.diff(merge_base, head, options)
+                            patches = @repo.diff(merge_base, head, options || {})
                             [merge_base, patches]
                           end
 
