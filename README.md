@@ -226,14 +226,18 @@ On GitLabCI, make sure to run Pronto in a [merge request pipeline](https://docs.
 
 ```yml
 lint:
-  image: ruby
+  image: ruby:3.3.0 # change to your app's ruby version
   variables:
-    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4"
-    PRONTO_GITLAB_API_PRIVATE_TOKEN: token
+    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4" # required if you are using self hosted Gitlab
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: $ACCESS_TOKEN # configure as a variable in Gitlab CI settings
   only:
     - merge_requests
   script:
+    - apt-get update && apt-get install -y cmake # Install cmake required for rugged gem (Pronto depends on it)
     - bundle install
+    # Pronto fails with the error "revspec 'origin/{target_branch}' because Gitlab fetches changes with git depth set to 20 by default. You can remove this line if you update Gitlab CI setting to clone the full project.
+    - git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    # Run pronto on branch of current merge request
     - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
 ```
 
@@ -433,6 +437,7 @@ Articles to help you to get started:
 * [Make Code Reviews A Little Bit Better With Automation](https://medium.com/jimmy-farrell/make-codes-reviews-a-little-bit-better-with-automation-35640df08a62)
 * [Stop shipping untested Ruby code with undercover](https://medium.com/futuredev/stop-shipping-untested-ruby-code-with-undercover-1edc963be4a6)
 * [Automatic code review with Pronto and GitHub Actions](https://everydayrails.com/2021/05/29/pronto-github-actions-code-quality.html)
+* [Integrate Pronto with Gitlab CI for Rails App](https://prabinpoudel.com.np/articles/integrate-pronto-with-gitlab-ci-for-rails-app/)
 
 Make a Pull Request to add something you wrote or found useful.
 
