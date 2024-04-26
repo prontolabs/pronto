@@ -228,18 +228,23 @@ On GitLabCI, make sure to run Pronto in a [merge request pipeline](https://docs.
 lint:
   image: ruby:3.3.0 # change to your app's ruby version
   variables:
-    PRONTO_GITLAB_API_ENDPOINT: "https://gitlab.com/api/v4" # required if you are using self hosted Gitlab
-    PRONTO_GITLAB_API_PRIVATE_TOKEN: $ACCESS_TOKEN # configure as a variable in Gitlab CI settings
+    PRONTO_GITLAB_API_ENDPOINT: "$CI_API_V4_URL" # this already contains the correct url for your GitLab instance
+    PRONTO_GITLAB_API_PRIVATE_TOKEN: $ACCESS_TOKEN # configure as a variable in Gitlab CI settings; you might use a "Project Access Token" with api scope instead of your private one
+
+    # Without this variable, GitLab only fetches with git depth set to a fixed amount (by default 20 on newer projects, 50 on older ones).
+    # This would make pronto fail with the errror "revspec 'origin/{target_branch}", because it would not know of the target Branch.
+    # It would also make pronto unable to compare changes with more than that amount of commits. E.g. running on 25 new commits would just return all problems, instead of only the ones in your changes.
+    GIT_DEPTH: 0
   only:
     - merge_requests
   script:
     - apt-get update && apt-get install -y cmake # Install cmake required for rugged gem (Pronto depends on it)
     - bundle install
-    # Pronto fails with the error "revspec 'origin/{target_branch}' because Gitlab fetches changes with git depth set to 20 by default. You can remove this line if you update Gitlab CI setting to clone the full project.
-    - git fetch origin $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-    # Run pronto on branch of current merge request
+    # Run pronto on branch of current merge request, comparing to the merge requests target branch
     - bundle exec pronto run -f gitlab_mr -c origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME
 ```
+
+
 
 ### Bitbucket Integration
 
