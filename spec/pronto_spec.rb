@@ -11,8 +11,8 @@ module Pronto
         it { should be_empty }
       end
 
-      context 'master' do
-        let(:commit) { 'master' }
+      context 'main' do
+        let(:commit) { 'main' }
         it { should be_empty }
       end
 
