@@ -18,9 +18,10 @@ _This README might be ahead of the latest release. Find the README for v0.9.2 [h
 * [Installation](#installation)
 * [Usage](#usage)
     * [Local Changes](#local-changes)
-    * [GitHub Integration](#github-integration)
-    * [GitLab Integration](#gitlab-integration)
-    * [Bitbucket Integration](#bitbucket-integration)
+    * [Integrations](#integrations)
+       * [GitHub Integration](#github-integration)
+       * [GitLab Integration](#gitlab-integration)
+       * [Bitbucket Integration](#bitbucket-integration)
 * [Configuration](#configuration)
 * [Runners](#runners)
 * [Articles](#articles)
@@ -88,9 +89,9 @@ Available Options
 | `-r/--runner`     | Run only the passed runners.                                |
 | `-f/--formatters` | Pick output formatters.                                     |
 
-## Integrations
+### Integrations
 
-### GitHub Integration
+#### GitHub Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
 on GitHub commits using `GithubFormatter` or `GithubPullRequestFormatter`.
@@ -164,7 +165,7 @@ formatters = [formatter, status_formatter]
 Pronto.run('origin/master', '.', formatters)
 ```
 
-#### GitHub Actions Integration
+##### GitHub Actions Integration
 
 You can also run Pronto as a GitHub action.
 
@@ -197,7 +198,7 @@ jobs:
 ```
 check Wiki on [GitHub Actions Integration](https://github.com/prontolabs/pronto/wiki/GitHub-Actions-Integration) for more info.
 
-### GitLab Integration
+#### GitLab Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
 on GitLab commits using `GitlabFormatter`.
@@ -248,7 +249,7 @@ lint:
 
 
 
-### Bitbucket Integration
+#### Bitbucket Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
 on Bitbucket commits using `BitbucketFormatter` or `BitbucketPullRequestFormatter`.
