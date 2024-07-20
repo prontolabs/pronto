@@ -88,6 +88,8 @@ Available Options
 | `-r/--runner`     | Run only the passed runners.                                |
 | `-f/--formatters` | Pick output formatters.                                     |
 
+## Integrations
+
 ### GitHub Integration
 
 You can run Pronto as a step of your CI builds and get the results as comments
