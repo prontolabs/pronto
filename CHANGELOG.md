@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Changes
+
+* [#455](https://github.com/prontolabs/pronto/pull/455) compatibility fixes for supporting octokit 8.x
+* [#460](https://github.com/prontolabs/pronto/pull/460) improve documentation for Gitlab CI integration
+* [#462](https://github.com/prontolabs/pronto/pull/462) more doc improvements for Gitlab CI integration
+* [#466](https://github.com/prontolabs/pronto/pull/466) relax octokit dependency to allow 9.x releases
+
 ## 0.11.2
 
 ### Changes
