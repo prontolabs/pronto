@@ -25,7 +25,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@7bcf9e73c0ee77d178e72c0ec69f1a99c1afc1f3 # v2.7.5
+        uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
         env:
           CC_TEST_REPORTER_ID: 3d676246ffa66d3fdef6253a9870431b1a2da04e9ecb25486c08a38823c37b6a
           COVERAGE: true
