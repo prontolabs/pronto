@@ -1,10 +1,8 @@
 # Pronto
 
-[![Build Status](https://secure.travis-ci.org/prontolabs/pronto.svg)](http://travis-ci.org/prontolabs/pronto)
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
-[![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
-[![Inline docs](http://inch-ci.org/github/prontolabs/pronto.svg)](http://inch-ci.org/github/prontolabs/pronto)
+[![Build Status](https://github.com/prontolabs/pronto/actions/workflows/specs.yml/badge.svg)](https://github.com/prontolabs/pronto/actions/workflows/specs.yml)
+[![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [GitHub pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
@@ -13,7 +11,7 @@ to your [styleguide](https://github.com/prontolabs/pronto-rubocop), [are DRY](ht
 
 ![Pronto demo](pronto.gif "")
 
-_This README might be ahead of the latest release. Find the README for v0.9.2 [here](https://github.com/prontolabs/pronto/blob/v0.9.2/README.md)._
+_This README might be ahead of the latest release. Find the README for v0.11.2 [here](https://github.com/prontolabs/pronto/blob/v0.11.2/README.md)._
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -452,4 +450,4 @@ Make a Pull Request to add something you wrote or found useful.
 
 ## Copyright
 
-Copyright (c) 2013-2018 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
+Copyright (c) 2013-2025 Mindaugas Mozūras. See [LICENSE](LICENSE) for further details.
