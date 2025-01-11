@@ -25,13 +25,15 @@ module Pronto
           octokit_client
             .stub(:pull_comments)
             .once
-            .and_return([double(body: 'a comment', path: 'a/path', line: 5)])
+            .and_return([double(body: 'a comment', path: 'a/path', line: 5, id: 1_881_471_822)])
         end
 
         specify do
           octokit_client
             .should_receive(:create_pull_comment)
             .once
+
+          octokit_client.should_receive(:delete_pull_comment).with(nil, 1_881_471_822).and_return(true)
 
           subject
         end
@@ -43,7 +45,7 @@ module Pronto
 
           specify do
             octokit_client.should_receive(:pull_comments).and_return(
-              [double(body: 'existed', path: 'path/to', line: line.new_lineno)]
+              [double(body: 'existed', path: 'path/to', line: line.new_lineno, id: 1_881_471_822)]
             )
 
             octokit_client.should_not_receive(:create_pull_comment)
@@ -59,7 +61,7 @@ module Pronto
 
           specify do
             octokit_client.should_receive(:pull_comments).and_return(
-              [double(body: 'existed', path: 'path/to', line: line.new_lineno)]
+              [double(body: 'existed', path: 'path/to', line: line.new_lineno, id: 1_881_471_822)]
             )
 
             octokit_client.should_receive(:create_pull_comment).once
@@ -91,6 +93,8 @@ module Pronto
             octokit_client
               .should_receive(:create_pull_comment)
               .and_raise(error)
+
+            octokit_client.should_receive(:delete_pull_comment).with(nil, 1_881_471_822).and_return(true)
 
             $stderr.should_receive(:puts) do |line|
               line.should =~ /Failed to post/
