@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.11.3
+
 ### Changes
 
 * [#455](https://github.com/prontolabs/pronto/pull/455) compatibility fixes for supporting octokit 8.x
