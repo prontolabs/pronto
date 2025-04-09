@@ -11,7 +11,7 @@ module Pronto
       @comment_cache["#{pull_id}/#{sha}"] ||= begin
         client.pull_comments(slug, pull_id).map do |comment|
           Comment.new(
-            sha, comment.body, comment.path, comment.line || comment.original_line
+            sha, comment.body, comment.path, comment.line || comment.original_line, comment.id
           )
         end
       end
@@ -64,6 +64,10 @@ module Pronto
       client.create_status(slug, sha, status.state,
                            context: status.context,
                            description: status.description)
+    end
+
+    def delete_comment(comment)
+      client.delete_pull_comment(slug, comment.id)
     end
 
     private
