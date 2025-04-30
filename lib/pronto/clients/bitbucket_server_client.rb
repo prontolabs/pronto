@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class BitbucketServerClient
   include HTTParty
 
