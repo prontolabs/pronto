@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.11.4
+
+### Changes
+
+* [#477](https://github.com/prontolabs/pronto/pull/477) fix uninitialized constant error with BitBucket integration
+* [#479](https://github.com/prontolabs/pronto/pull/479) relax octokit dependency to allow 10.x releases
+
 ## 0.11.3
 
 ### Changes
