@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'ostruct'
+
 class BitbucketServerClient
   include HTTParty
 
