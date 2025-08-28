@@ -8,6 +8,7 @@ module Pronto
       end
 
       def diff(commit, options = nil)
+        options ||= {}
         target, patches = case commit
                           when :unstaged, :index
                             [head_commit_sha, @repo.index.diff(options)]
@@ -22,7 +23,7 @@ module Pronto
                                   include_untracked: true,
                                   include_untracked_content: true,
                                   recurse_untracked_dirs: true
-                                }.merge(options || {})
+                                }.merge(options)
                               )
                             ]
                           else
