@@ -1,6 +1,6 @@
 module Pronto
   module Version
-    STRING = '0.11.4'.freeze
+    STRING = '0.11.5'.freeze
 
     MSG = '%s (running on %s %s %s)'.freeze
 

@@ -2,7 +2,6 @@
 
 [![Gem Version](https://badge.fury.io/rb/pronto.svg)](http://badge.fury.io/rb/pronto)
 [![Build Status](https://github.com/prontolabs/pronto/actions/workflows/specs.yml/badge.svg)](https://github.com/prontolabs/pronto/actions/workflows/specs.yml)
-[![Code Climate](https://codeclimate.com/github/prontolabs/pronto.svg)](https://codeclimate.com/github/prontolabs/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
 be used on [GitHub pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
@@ -11,7 +10,7 @@ to your [styleguide](https://github.com/prontolabs/pronto-rubocop), [are DRY](ht
 
 ![Pronto demo](pronto.gif "")
 
-_This README might be ahead of the latest release. Find the README for v0.11.4 [here](https://github.com/prontolabs/pronto/blob/v0.11.4/README.md)._
+_This README might be ahead of the latest release. Find the README for v0.11.5 [here](https://github.com/prontolabs/pronto/blob/v0.11.5/README.md)._
 
 * [Installation](#installation)
 * [Usage](#usage)

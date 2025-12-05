@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.11.5
+
+### Changes
+
+* [#481](https://github.com/prontolabs/pronto/pull/481) add "ostruct" as dependency for Ruby 4.0 compatibility
+* [#493](https://github.com/prontolabs/pronto/pull/493) docs: document setting an alternate default branch
+
 ## 0.11.4
 
 ### Changes
