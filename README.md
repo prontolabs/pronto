@@ -53,6 +53,9 @@ gem 'pronto-flay', require: false
 
 Pronto runs the checks on a diff between the current HEAD and the provided commit-ish (default is master).
 
+> [!NOTE]
+> If the default branch is NOT `master`, invoke `pronto run -c=<branch>` OR set the `default_commit` config value.
+
 ### Local Changes
 
 Navigate to the repository you want to run Pronto on, and:
@@ -287,6 +290,7 @@ all:
 eslint:
   exclude:
     - 'app/assets/**/*'
+default_commit: 'main' # set this if your repo differs from master
 github:
   slug: prontolabs/pronto
   access_token: B26354
@@ -320,6 +324,7 @@ will always take precedence over values in configuration file.
 | `skip_runners`        | All, except listed runners will be executed. Runs everything if option is skipped.   |
 | `verbose`             | Outputs more information when set to `true`.                                         |
 | `warnings_per_review` | Limits the amount of warnings per review. Returns all warnings if option is skipped. |
+| `default_commit`      | Commit-ish `pronto run` will execute runners against.                                |
 
 ### Message format
 
