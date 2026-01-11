@@ -368,6 +368,7 @@ Pronto can run various tools and libraries, as long as there's a runner for it.
 Currently available:
 
 * [pronto-bigfiles](https://github.com/apiology/pronto-bigfiles)
+* [pronto-biome](https://github.com/Sbastien/pronto-biome)
 * [pronto-blacklist](https://github.com/pbstriker38/pronto-blacklist)
 * [pronto-brakeman](https://github.com/prontolabs/pronto-brakeman)
 * [pronto-checkstyle](https://github.com/seikichi/pronto-checkstyle)
