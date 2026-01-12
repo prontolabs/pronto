@@ -33,7 +33,7 @@ module Pronto
 
           specify do
             octokit_client.should_receive(:pull_comments).and_return(
-              [double(body: 'existed', path: 'path/to', line: line.new_lineno)]
+              [double(body: 'existed', path: 'path/to', line: line.new_lineno, id: 1_881_471_822)]
             )
 
             octokit_client.should_not_receive(:create_pull_request_review)
@@ -49,7 +49,7 @@ module Pronto
 
           specify do
             octokit_client.should_receive(:pull_comments).and_return(
-              [double(body: 'existed', path: 'path/to', line: line.new_lineno)]
+              [double(body: 'existed', path: 'path/to', line: line.new_lineno, id: 1_881_471_822)]
             )
 
             octokit_client.should_receive(:create_pull_request_review).once
