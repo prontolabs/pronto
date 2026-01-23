@@ -44,11 +44,11 @@ module Pronto
       end
 
       def pull_id
-        ENV['TRAVIS_PULL_REQUEST']
+        ENV.fetch('TRAVIS_PULL_REQUEST', nil)
       end
 
       def repo_slug
-        ENV['TRAVIS_REPO_SLUG']
+        ENV.fetch('TRAVIS_REPO_SLUG', nil)
       end
 
       def setup_ivars(args)

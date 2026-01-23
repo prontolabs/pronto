@@ -2,7 +2,7 @@
 
 module Pronto
   class ConfigFile
-    DEFAULT_MESSAGE_FORMAT = '%{msg}'
+    DEFAULT_MESSAGE_FORMAT = '%<msg>s'
     DEFAULT_WARNINGS_PER_REVIEW = 30
 
     EMPTY = {
@@ -31,7 +31,7 @@ module Pronto
         'web_endpoint' => 'https://bitbucket.org/'
       },
       'text' => {
-        'format' => '%{color_location} %{color_level}: %{msg}'
+        'format' => '%<color_location>s %<color_level>s: %<msg>s'
       },
       'default_commit' => 'master',
       'runners' => [],

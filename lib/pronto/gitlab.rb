@@ -3,10 +3,8 @@
 module Pronto
   class Gitlab < Client
     def commit_comments(sha)
-      @comment_cache[sha.to_s] ||= begin
-        client.commit_comments(slug, sha).auto_paginate.map do |comment|
-          Comment.new(sha, comment.note, comment.path, comment.line)
-        end
+      @comment_cache[sha.to_s] ||= client.commit_comments(slug, sha).auto_paginate.map do |comment|
+        Comment.new(sha, comment.note, comment.path, comment.line)
       end
     end
 
@@ -68,22 +66,21 @@ module Pronto
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
 
-      @slug ||= begin
-        @repo.remote_urls.map do |url|
-          match = slug_regex(url).match(url)
-          match[:slug] if match
-        end.compact.first
-      end
+      @slug ||= @repo.remote_urls.map do |url|
+        match = slug_regex(url).match(url)
+        match[:slug] if match
+      end.compact.first
     end
 
     def pull_id
-      env_pull_id || raise(Pronto::Error, 'Unable to determine merge request id. Specify either `PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.')
+      env_pull_id || raise(Pronto::Error,
+                           'Unable to determine merge request id. Specify either `PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.')
     end
 
     def env_pull_id
       pull_request = super
 
-      pull_request ||= ENV['CI_MERGE_REQUEST_IID']
+      pull_request ||= ENV.fetch('CI_MERGE_REQUEST_IID', nil)
       pull_request&.to_i
     end
 

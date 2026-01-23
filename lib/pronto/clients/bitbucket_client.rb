@@ -4,6 +4,7 @@ require 'ostruct'
 
 class BitbucketClient
   include HTTParty
+
   base_uri 'https://api.bitbucket.org/2.0/repositories'
 
   def initialize(username, password)

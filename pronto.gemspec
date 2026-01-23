@@ -22,8 +22,7 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT']
   s.required_ruby_version = '>= 2.3.0'
 
-  s.files = `git ls-files`.split($RS).reject do |file|
-    file =~ %r{^(?:
+  s.files = `git ls-files`.split($RS).grep_v(%r{^(?:
     spec/.*
     |Gemfile
     |Rakefile
@@ -32,21 +31,19 @@ Gem::Specification.new do |s|
     |\.gitignore
     |\.rubocop.yml
     |\.travis.yml
-    )$}x
-  end
-  s.test_files = []
+    )$}x)
   s.extra_rdoc_files = ['LICENSE', 'README.md']
   s.require_paths = ['lib']
   s.executables = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
-  s.add_runtime_dependency('gitlab', '>= 4.4.0', '< 7.0')
-  s.add_runtime_dependency('httparty', '>= 0.13.7', '< 1.0')
-  s.add_runtime_dependency('octokit', '>= 4.7.0', '< 11.0')
-  s.add_runtime_dependency('ostruct')
-  s.add_runtime_dependency('rainbow', '>= 2.2', '< 4.0')
-  s.add_runtime_dependency('rexml', '>= 3.2.5', '< 4.0')
-  s.add_runtime_dependency('rugged', '>= 0.23.0', '< 2.0')
-  s.add_runtime_dependency('thor', '>= 0.20.3', '< 2.0')
+  s.add_dependency('gitlab', '>= 4.4.0', '< 7.0')
+  s.add_dependency('httparty', '>= 0.13.7', '< 1.0')
+  s.add_dependency('octokit', '>= 4.7.0', '< 11.0')
+  s.add_dependency('ostruct')
+  s.add_dependency('rainbow', '>= 2.2', '< 4.0')
+  s.add_dependency('rexml', '>= 3.2.5', '< 4.0')
+  s.add_dependency('rugged', '>= 0.23.0', '< 2.0')
+  s.add_dependency('thor', '>= 0.20.3', '< 2.0')
   s.add_development_dependency('base64', '~> 0.3.0')
   s.add_development_dependency('bundler', '>= 1.15')
   s.add_development_dependency('pronto-rubocop', '~> 0.11.0')
@@ -57,4 +54,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rubocop', '~> 1.0')
   s.add_development_dependency('simplecov', '~> 0.17', '!= 0.18.0', '!= 0.18.1', '!= 0.18.2', '!= 0.18.3', '!= 0.18.4',
                                '!= 0.18.5', '!= 0.19.0', '!= 0.19.1') # see https://docs.codeclimate.com/docs/configuring-test-coverage
+  s.metadata['rubygems_mfa_required'] = 'true'
 end

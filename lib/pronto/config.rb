@@ -7,7 +7,7 @@ module Pronto
     end
 
     %w[github gitlab bitbucket].each do |service|
-      ConfigFile::EMPTY[service].each do |key, _|
+      ConfigFile::EMPTY[service].each_key do |key|
         name = "#{service}_#{key}"
         define_method(name) { ENV["PRONTO_#{name.upcase}"] || @config_hash[service][key] }
       end
@@ -93,7 +93,7 @@ module Pronto
     def fetch_integer(key)
       full_key = env_key(key)
 
-      (ENV[full_key] && Integer(ENV[full_key])) || @config_hash[key]
+      (ENV.fetch(full_key, nil) && Integer(ENV.fetch(full_key, nil))) || @config_hash[key]
     end
 
     def fetch_value(key)

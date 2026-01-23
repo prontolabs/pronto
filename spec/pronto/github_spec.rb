@@ -87,6 +87,8 @@ module Pronto
       let(:desc) { 'No issues found!' }
 
       before do
+        github_pull.stub(:pull_by_id)
+
         github.instance_variable_set(:@client, octokit_client)
         github.instance_variable_set(:@github_pull, github_pull)
 

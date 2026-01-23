@@ -69,7 +69,7 @@ module Pronto
       relative     = path.sub(repo_workdir, '')
 
       messages = Dir.chdir(repo_workdir) do
-        file = relative.length != path.length ? relative : nil
+        file = relative.length == path.length ? nil : relative
         ::Pronto.run(commit, '.', formatters, file)
       end
       if options[:'exit-code']

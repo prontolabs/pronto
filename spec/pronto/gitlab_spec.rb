@@ -89,7 +89,9 @@ module Pronto
           double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
         end
         let(:sha) { 'foobar' }
-        let(:comment) { double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'test', 'old_path' => nil } }]) }
+        let(:comment) do
+          double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'test', 'old_path' => nil } }])
+        end
         let(:paginated_response) { double(auto_paginate: [comment]) }
 
         specify do

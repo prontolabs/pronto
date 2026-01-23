@@ -47,7 +47,7 @@ module Pronto
         context 'with custom config' do
           before do
             formatter.stub(:config) do
-              Config.new('text' => { 'format' => '%{line} %{path}' })
+              Config.new('text' => { 'format' => '%<line>s %<path>s' })
             end
           end
           its(:count) { should == 2 }

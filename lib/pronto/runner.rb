@@ -15,7 +15,7 @@ module Pronto
     end
 
     def self.title
-      @runner_name ||= begin
+      @title ||= begin
         source_path, _line = instance_method(:run).source_location
         file_name, _extension = File.basename(source_path).split('.')
         file_name
