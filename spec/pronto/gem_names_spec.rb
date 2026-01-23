@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe GemNames do
     let(:gem_names) { described_class.new }

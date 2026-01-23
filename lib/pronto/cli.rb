@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thor'
 
 module Pronto
@@ -8,6 +10,7 @@ module Pronto
     class << self
       def is_thor_reserved_word?(word, type)
         return false if word == 'run'
+
         super
       end
     end
@@ -76,7 +79,7 @@ module Pronto
     rescue Rugged::RepositoryError
       puts '"pronto" must be run from within a git repository or must be supplied the path to a git repository'
     rescue Pronto::Error => e
-      $stderr.puts "Pronto errored: #{e.message}"
+      warn "Pronto errored: #{e.message}"
     end
 
     desc 'list', 'Lists pronto runners that are available to be used'

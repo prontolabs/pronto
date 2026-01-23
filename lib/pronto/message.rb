@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Message
     attr_reader :path, :line, :level, :msg, :commit_sha, :runner
@@ -5,9 +7,7 @@ module Pronto
     LEVELS = %i[info warning error fatal].freeze
 
     def initialize(path, line, level, msg, commit_sha = nil, runner = nil)
-      unless LEVELS.include?(level)
-        raise ::ArgumentError, "level should be set to one of #{LEVELS}"
-      end
+      raise ::ArgumentError, "level should be set to one of #{LEVELS}" unless LEVELS.include?(level)
 
       @path = path
       @line = line
@@ -19,11 +19,11 @@ module Pronto
     end
 
     def full_path
-      repo.path.join(path) if repo
+      repo&.path&.join(path)
     end
 
     def repo
-      line.patch.repo if line
+      line&.patch&.repo
     end
 
     def ==(other)
@@ -47,7 +47,7 @@ module Pronto
         level: level,
         msg: msg,
         commit_sha: commit_sha,
-        runner: @runner && @runner.title
+        runner: @runner&.title
       }
     end
 

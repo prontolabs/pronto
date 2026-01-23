@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Git
     describe Repository do
@@ -140,6 +142,5 @@ module Pronto
         end
       end
     end
-
   end
 end

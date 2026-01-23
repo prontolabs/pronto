@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Config
     def initialize(config_hash = ConfigFile.new.to_h)
@@ -12,17 +14,13 @@ module Pronto
     end
 
     def default_commit
-      default_commit =
-        ENV['PRONTO_DEFAULT_COMMIT'] ||
+      ENV['PRONTO_DEFAULT_COMMIT'] ||
         @config_hash.fetch('default_commit', 'master')
-      default_commit
     end
 
     def consolidate_comments?
-      consolidated =
-        ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
+      ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
         @config_hash.fetch('consolidate_comments', false)
-      consolidated
     end
 
     def github_review_type
@@ -68,7 +66,7 @@ module Pronto
 
     def message_format(formatter)
       formatter_config = @config_hash[formatter]
-      if formatter_config && formatter_config.key?('format')
+      if formatter_config&.key?('format')
         formatter_config['format']
       else
         fetch_value('format')

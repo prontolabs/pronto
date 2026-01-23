@@ -4,14 +4,18 @@ AllCops:
 Documentation:
   Enabled: false
 
-SignalException:
-  EnforcedStyle: only_raise
+Metrics/AbcSize:
+  Max: 25
 
-MultilineOperationIndentation:
-  EnforcedStyle: indented
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 
 MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Metrics/AbcSize:
-  Max: 25
+MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+SignalException:
+  EnforcedStyle: only_raise

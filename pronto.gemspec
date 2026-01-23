@@ -1,6 +1,6 @@
-# -*- encoding: utf-8 -*-
+# frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path('../lib', __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 require 'pronto/version'
 require 'English'
 
@@ -52,8 +52,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency('pronto-rubocop', '~> 0.10.0')
   s.add_development_dependency('rake', '~> 12.0')
   s.add_development_dependency('rspec', '~> 3.4')
-  s.add_development_dependency('rspec-its', '~> 1.2')
   s.add_development_dependency('rspec-expectations', '~> 3.4')
+  s.add_development_dependency('rspec-its', '~> 1.2')
   s.add_development_dependency('rubocop', '~> 0.58')
   s.add_development_dependency('simplecov', '~> 0.17', '!= 0.18.0', '!= 0.18.1', '!= 0.18.2', '!= 0.18.3', '!= 0.18.4',
                                '!= 0.18.5', '!= 0.19.0', '!= 0.19.1') # see https://docs.codeclimate.com/docs/configuring-test-coverage

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Runner do
     let(:runner) { Runner.new([]) }

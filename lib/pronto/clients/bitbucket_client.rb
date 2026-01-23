@@ -13,7 +13,7 @@ class BitbucketClient
   def commit_comments(slug, sha)
     response = get("/#{slug}/commit/#{sha}/comments?pagelen=100")
     result = parse_comments(openstruct(response))
-    while (response['next'])
+    while response['next']
       response = get response['next']
       result.concat(parse_comments(openstruct(response)))
     end
@@ -28,7 +28,7 @@ class BitbucketClient
     response = get("/#{slug}/pullrequests/#{pull_id}/comments?pagelen=100")
     parse_comments(openstruct(response))
     result = parse_comments(openstruct(response))
-    while (response['next'])
+    while response['next']
       response = get response['next']
       result.concat(parse_comments(openstruct(response)))
     end
@@ -71,7 +71,7 @@ class BitbucketClient
     end
     values
   end
-  
+
   def post(url, body, path, position)
     options = {
       body: {

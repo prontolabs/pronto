@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class BitbucketPullRequestFormatter < PullRequestFormatter
@@ -14,15 +16,15 @@ module Pronto
       end
 
       def line_number(message, _)
-        message.line.line.new_lineno if message.line
+        message.line&.line&.new_lineno
       end
 
       def approve_pull_request(comments_count, additions_count, client)
         return if config.bitbucket_auto_approve == false
 
-        if comments_count > 0 && additions_count > 0
+        if comments_count.positive? && additions_count.positive?
           client.unapprove_pull_request
-        elsif comments_count == 0
+        elsif comments_count.zero?
           client.approve_pull_request
         end
       end

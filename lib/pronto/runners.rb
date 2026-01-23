@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Runners
     def initialize(runners = Runner.runners, config = Config.new)
@@ -12,11 +14,13 @@ module Pronto
       result = []
       active_runners.each do |runner|
         next if exceeds_max?(result)
+
         config.logger.log("Running #{runner}")
         runner_patches = reject_excluded(
           config.excluded_files(runner.title), patches
         )
         next if runner_patches.none?
+
         result += runner.new(runner_patches, patches.commit).run.flatten.compact
       end
       result = result.take(config.max_warnings) if config.max_warnings

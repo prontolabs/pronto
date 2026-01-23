@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pronto'
 require 'rake'
 require 'rake/tasklib'
@@ -9,15 +11,12 @@ module Pronto
     # require 'rubocop/rake/travis_pull_request'
     # Pronto::Rake::TravisPullRequest.new
     class TravisPullRequest < Rake::TaskLib
-      attr_accessor :name
-      attr_accessor :verbose
+      attr_accessor :name, :verbose
 
       def initialize(*args, &task_block)
         setup_ivars(args)
 
-        unless ::Rake.application.last_comment
-          desc 'Run Pronto on Travis Pull Request'
-        end
+        desc 'Run Pronto on Travis Pull Request' unless ::Rake.application.last_comment
 
         task(name, *args) do |_, task_args|
           RakeFileUtils.send(:verbose, verbose) do

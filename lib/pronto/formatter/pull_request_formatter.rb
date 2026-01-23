@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class PullRequestFormatter < GitFormatter
@@ -10,7 +12,7 @@ module Pronto
       def submit_comments(client, comments)
         comments.each { |comment| client.create_pull_comment(comment) }
       rescue Octokit::UnprocessableEntity, HTTParty::Error => e
-        $stderr.puts "Failed to post: #{e.message}"
+        warn "Failed to post: #{e.message}"
       end
     end
   end

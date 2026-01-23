@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Pronto
   class ConfigFile
-    DEFAULT_MESSAGE_FORMAT = '%{msg}'.freeze
+    DEFAULT_MESSAGE_FORMAT = '%{msg}'
     DEFAULT_WARNINGS_PER_REVIEW = 30
 
     EMPTY = {

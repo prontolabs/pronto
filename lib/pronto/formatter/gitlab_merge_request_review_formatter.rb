@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class GitlabMergeRequestReviewFormatter < PullRequestFormatter
@@ -21,12 +23,12 @@ module Pronto
 
       def submit_comments(client, comments)
         client.create_pull_request_review(comments)
-      rescue => e
-        $stderr.puts "Failed to post: #{e.message}"
+      rescue StandardError => e
+        warn "Failed to post: #{e.message}"
       end
 
       def line_number(message, _)
-        message.line.line.new_lineno if message.line
+        message.line&.line&.new_lineno
       end
     end
   end

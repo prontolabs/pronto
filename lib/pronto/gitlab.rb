@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Gitlab < Client
     def commit_comments(sha)
@@ -37,7 +39,7 @@ module Pronto
             new_path: comment.path,
             position_type: 'text',
             new_line: comment.position,
-            old_line: nil,
+            old_line: nil
           )
         }
 
@@ -58,13 +60,14 @@ module Pronto
       # Better to get those informations from Gitlab API directly than trying to look for them here.
       # (FYI you can't use `pull` method because index api does not contains those informations)
       @position_sha ||= begin
-                          data = client.merge_request(slug, pull_id)
-                          data.diff_refs.to_h
-                        end
+        data = client.merge_request(slug, pull_id)
+        data.diff_refs.to_h
+      end
     end
 
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
+
       @slug ||= begin
         @repo.remote_urls.map do |url|
           match = slug_regex(url).match(url)
@@ -74,23 +77,24 @@ module Pronto
     end
 
     def pull_id
-      env_pull_id || raise(Pronto::Error, "Unable to determine merge request id. Specify either `PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.")
+      env_pull_id || raise(Pronto::Error, 'Unable to determine merge request id. Specify either `PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.')
     end
 
     def env_pull_id
       pull_request = super
 
       pull_request ||= ENV['CI_MERGE_REQUEST_IID']
-      pull_request.to_i if pull_request
+      pull_request&.to_i
     end
 
     def slug_regex(url)
-      if url =~ %r{^ssh:\/\/}
-        %r{.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git}
-      elsif url =~ /#{host}/
-        %r{.*#{host}(:|\/)(?<slug>.*).git}
+      case url
+      when %r{^ssh://}
+        %r{.*#{host}(:[0-9]+)?(:|/)(?<slug>.*).git}
+      when /#{host}/
+        %r{.*#{host}(:|/)(?<slug>.*).git}
       else
-        %r{\/\/.*?(\/)(?<slug>.*).git}
+        %r{//.*?(/)(?<slug>.*).git}
       end
     end
 

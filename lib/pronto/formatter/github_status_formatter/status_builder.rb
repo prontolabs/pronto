@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sentence'
 
 module Pronto
@@ -66,7 +68,7 @@ module Pronto
           fatal: :failure
         }.freeze
 
-        NO_ISSUES_DESCRIPTION = 'Coast is clear!'.freeze
+        NO_ISSUES_DESCRIPTION = 'Coast is clear!'
 
         private_constant :DEFAULT_LEVEL_TO_STATE_MAPPING, :NO_ISSUES_DESCRIPTION
       end

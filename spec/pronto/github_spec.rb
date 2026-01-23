@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Github do
     let(:github) { described_class.new(repo) }
@@ -90,7 +92,7 @@ module Pronto
 
         octokit_client
           .should_receive(:create_status)
-          .with(github_slug, expected_sha, state, context:     context,
+          .with(github_slug, expected_sha, state, context: context,
                                                   description: desc)
           .once
       end
@@ -179,7 +181,6 @@ module Pronto
         end
 
         context 'when warnings per review are lower than comments' do
-
           let(:warnings_per_review) { 1 }
           let(:first_options) do
             empty_client_options

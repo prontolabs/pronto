@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Git
     Patch = Struct.new(:patch, :repo) do

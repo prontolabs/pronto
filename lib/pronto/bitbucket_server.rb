@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class BitbucketServer < Bitbucket
     def pull_comments(sha)

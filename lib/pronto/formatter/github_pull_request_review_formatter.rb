@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class GithubPullRequestReviewFormatter < PullRequestFormatter
@@ -16,7 +18,7 @@ module Pronto
       def submit_comments(client, comments)
         client.publish_pull_request_comments(comments)
       rescue Octokit::UnprocessableEntity, HTTParty::Error => e
-        $stderr.puts "Failed to post: #{e.message}"
+        warn "Failed to post: #{e.message}"
       end
 
       def line_number(message, _)
