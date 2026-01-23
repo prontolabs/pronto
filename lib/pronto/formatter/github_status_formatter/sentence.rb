@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class GithubStatusFormatter < Base
@@ -32,8 +34,8 @@ module Pronto
         private_constant :WORD_CONNECTORS
 
         def to_oxford_comma_sentence
-          "#{words[0...-1].join(WORD_CONNECTORS[:words_connector])}"\
-            "#{WORD_CONNECTORS[:last_word_connector]}"\
+          "#{words[0...-1].join(WORD_CONNECTORS[:words_connector])}" \
+            "#{WORD_CONNECTORS[:last_word_connector]}" \
             "#{words[-1]}"
         end
       end

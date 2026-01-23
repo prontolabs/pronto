@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rexml/document'
 
 module Pronto
@@ -8,7 +10,9 @@ module Pronto
       end
 
       def initialize
-        @output = ''
+        super
+
+        @output = String.new
       end
 
       def format(messages, _repo, _patches)

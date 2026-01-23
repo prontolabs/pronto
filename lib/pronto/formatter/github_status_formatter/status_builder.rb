@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sentence'
 
 module Pronto
@@ -52,11 +54,11 @@ module Pronto
         end
 
         def order_by_severity(counts)
-          Hash[counts.sort_by { |k, _v| Pronto::Message::LEVELS.index(k) }]
+          counts.sort_by { |k, _v| Pronto::Message::LEVELS.index(k) }.to_h
         end
 
         def pluralize(count, word)
-          "#{count} #{word}#{count > 1 ? 's' : ''}"
+          "#{count} #{word}#{'s' if count > 1}"
         end
 
         DEFAULT_LEVEL_TO_STATE_MAPPING = {
@@ -66,7 +68,7 @@ module Pronto
           fatal: :failure
         }.freeze
 
-        NO_ISSUES_DESCRIPTION = 'Coast is clear!'.freeze
+        NO_ISSUES_DESCRIPTION = 'Coast is clear!'
 
         private_constant :DEFAULT_LEVEL_TO_STATE_MAPPING, :NO_ISSUES_DESCRIPTION
       end

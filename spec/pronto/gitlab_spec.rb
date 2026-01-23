@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Gitlab do
     let(:gitlab) { described_class.new(repo) }
@@ -60,7 +62,7 @@ module Pronto
         end
         let(:sha) { 'foobar' }
         let(:comment) { double(note: 'body', path: 'path', line: 1) }
-        let(:paginated_response) { double(auto_paginate: [ comment ]) }
+        let(:paginated_response) { double(auto_paginate: [comment]) }
 
         specify do
           ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'
@@ -87,8 +89,10 @@ module Pronto
           double(remote_urls: ['git@gitlab.example.com:prontolabs/pronto.git'])
         end
         let(:sha) { 'foobar' }
-        let(:comment) { double(notes: [{'body' => 'body', 'position' => {'new_path' => 'test', 'old_path' => nil}}]) }
-        let(:paginated_response) { double(auto_paginate: [ comment ]) }
+        let(:comment) do
+          double(notes: [{ 'body' => 'body', 'position' => { 'new_path' => 'test', 'old_path' => nil } }])
+        end
+        let(:paginated_response) { double(auto_paginate: [comment]) }
 
         specify do
           ENV['PRONTO_GITLAB_API_ENDPOINT'] = 'http://gitlab.example.com/api/v4'

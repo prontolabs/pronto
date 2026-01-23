@@ -1,19 +1,19 @@
+# frozen_string_literal: true
+
 require 'pronto/github_pull'
 
 module Pronto
   class Github < Client
     def initialize(repo)
-      super(repo)
+      super
       @github_pull = Pronto::GithubPull.new(client, slug)
     end
 
     def pull_comments(sha)
-      @comment_cache["#{pull_id}/#{sha}"] ||= begin
-        client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(
-            sha, comment.body, comment.path, comment.line || comment.original_line
-          )
-        end
+      @comment_cache["#{pull_id}/#{sha}"] ||= client.pull_comments(slug, pull_id).map do |comment|
+        Comment.new(
+          sha, comment.body, comment.path, comment.line || comment.original_line
+        )
       end
     rescue Octokit::NotFound => e
       @config.logger.log("Error raised and rescued: #{e}")
@@ -22,10 +22,8 @@ module Pronto
     end
 
     def commit_comments(sha)
-      @comment_cache[sha.to_s] ||= begin
-        client.commit_comments(slug, sha).map do |comment|
-          Comment.new(sha, comment.body, comment.path, comment.line)
-        end
+      @comment_cache[sha.to_s] ||= client.commit_comments(slug, sha).map do |comment|
+        Comment.new(sha, comment.body, comment.path, comment.line)
       end
     end
 
@@ -84,13 +82,12 @@ module Pronto
 
     def slug
       return @config.github_slug if @config.github_slug
-      @slug ||= begin
-        @repo.remote_urls.map do |url|
-          hostname = Regexp.escape(@config.github_hostname)
-          match = %r{.*#{hostname}(:|\/)(?<slug>.*?)(?:\.git)?\z}.match(url)
-          match[:slug] if match
-        end.compact.first
-      end
+
+      @slug ||= @repo.remote_urls.map do |url|
+        hostname = Regexp.escape(@config.github_hostname)
+        match = %r{.*#{hostname}(:|/)(?<slug>.*?)(?:\.git)?\z}.match(url)
+        match[:slug] if match
+      end.compact.first
     end
 
     def client

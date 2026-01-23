@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Runners do
     describe '#run' do
@@ -41,7 +43,7 @@ module Pronto
         end
       end
 
-      context 'when multiple runners exist' do # rubocop:disable Metrics/BlockLength
+      context 'when multiple runners exist' do
         let(:fake_runner_2) do
           Class.new(fake_runner) do
             def self.title

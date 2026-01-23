@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     describe GithubPullRequestFormatter do
@@ -92,7 +94,7 @@ module Pronto
               .should_receive(:create_pull_comment)
               .and_raise(error)
 
-            $stderr.should_receive(:puts) do |line|
+            formatter.should_receive(:warn) do |line|
               line.should =~ /Failed to post/
               line.should =~ /Validation Failed/
               line.should =~ /missing_field/

@@ -1,18 +1,16 @@
+# frozen_string_literal: true
+
 module Pronto
   class Bitbucket < Client
     def pull_comments(sha)
-      @comment_cache["#{pull_id}/#{sha}"] ||= begin
-        client.pull_comments(slug, pull_id).map do |comment|
-          Comment.new(sha, comment.content, comment.filename, comment.line_to)
-        end
+      @comment_cache["#{pull_id}/#{sha}"] ||= client.pull_comments(slug, pull_id).map do |comment|
+        Comment.new(sha, comment.content, comment.filename, comment.line_to)
       end
     end
 
     def commit_comments(sha)
-      @comment_cache[sha.to_s] ||= begin
-        client.commit_comments(slug, sha).map do |comment|
-          Comment.new(sha, comment.content, comment.filename, comment.line_to)
-        end
+      @comment_cache[sha.to_s] ||= client.commit_comments(slug, sha).map do |comment|
+        Comment.new(sha, comment.content, comment.filename, comment.line_to)
       end
     end
 
@@ -39,17 +37,17 @@ module Pronto
     def unapprove_pull_request
       client.unapprove_pull_request(slug, pull_id)
     end
+
     private
 
     def slug
       return @config.bitbucket_slug if @config.bitbucket_slug
-      @slug ||= begin
-        @repo.remote_urls.map do |url|
-          hostname = Regexp.escape(@config.bitbucket_hostname)
-          match = %r{.*#{hostname}(:|\/)(?<slug>.*?)(?:\.git)?\z}.match(url)
-          match[:slug] if match
-        end.compact.first
-      end
+
+      @slug ||= @repo.remote_urls.map do |url|
+        hostname = Regexp.escape(@config.bitbucket_hostname)
+        match = %r{.*#{hostname}(:|/)(?<slug>.*?)(?:\.git)?\z}.match(url)
+        match[:slug] if match
+      end.compact.first
     end
 
     def client

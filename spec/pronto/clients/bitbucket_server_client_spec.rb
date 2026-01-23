@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe BitbucketServerClient do
     let(:client) { described_class.new('username', 'password', 'endpoint') }

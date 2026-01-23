@@ -1,17 +1,26 @@
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.5
 
 Documentation:
   Enabled: false
 
-SignalException:
-  EnforcedStyle: only_raise
+Metrics/AbcSize:
+  Max: 25
 
-MultilineOperationIndentation:
-  EnforcedStyle: indented
+Metrics/BlockLength:
+  Exclude:
+    - 'pronto.gemspec'
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
 
 MultilineMethodCallIndentation:
   EnforcedStyle: indented
 
-Metrics/AbcSize:
-  Max: 25
+MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+SignalException:
+  EnforcedStyle: only_raise

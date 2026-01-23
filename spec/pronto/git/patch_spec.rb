@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Git
     describe Patch do

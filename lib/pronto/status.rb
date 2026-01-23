@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   Status = Struct.new(:sha, :state, :context, :description) do
     def ==(other)

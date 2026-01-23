@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Runner
     include Plugin
@@ -13,7 +15,7 @@ module Pronto
     end
 
     def self.title
-      @runner_name ||= begin
+      @title ||= begin
         source_path, _line = instance_method(:run).source_location
         file_name, _extension = File.basename(source_path).split('.')
         file_name
@@ -23,7 +25,7 @@ module Pronto
     def ruby_patches
       return [] unless @patches
 
-      @ruby_patches ||= @patches.select { |patch| patch.additions > 0 }
+      @ruby_patches ||= @patches.select { |patch| patch.additions.positive? }
         .select { |patch| ruby_file?(patch.new_file_full_path) }
     end
 
@@ -54,6 +56,7 @@ module Pronto
 
     def ruby_executable?(path)
       return false if File.directory?(path)
+
       line = File.open(path, &:readline)
       line =~ /#!.*ruby/
     rescue ArgumentError, EOFError
