@@ -14,6 +14,8 @@ module Pronto
       attr_accessor :name, :verbose
 
       def initialize(*args, &task_block)
+        super
+
         setup_ivars(args)
 
         desc 'Run Pronto on Travis Pull Request' unless ::Rake.application.last_comment

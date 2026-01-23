@@ -10,6 +10,8 @@ module Pronto
       end
 
       def initialize
+        super
+
         @output = String.new
       end
 

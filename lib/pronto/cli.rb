@@ -53,29 +53,8 @@ module Pronto
                   desc: "Pick output formatters. Available: #{::Pronto::Formatter.names.join(', ')}"
 
     def run(path = '.')
-      path = File.expand_path(path)
-
-      gem_names = options[:runner].any? ? options[:runner] : ::Pronto::GemNames.new.to_a
-      gem_names.each do |gem_name|
-        require "pronto/#{gem_name}"
-      end
-
-      formatters = ::Pronto::Formatter.get(options[:formatters])
-
-      commit_options = %i[workdir staged unstaged index]
-      commit = commit_options.find { |o| options[o] } || options[:commit]
-
-      repo_workdir = ::Rugged::Repository.discover(path).workdir
-      relative     = path.sub(repo_workdir, '')
-
-      messages = Dir.chdir(repo_workdir) do
-        file = relative.length == path.length ? nil : relative
-        ::Pronto.run(commit, '.', formatters, file)
-      end
-      if options[:'exit-code']
-        error_messages_count = messages.count { |m| m.level != :info }
-        exit(error_messages_count)
-      end
+      messages = execute_run(path)
+      handle_exit_code(messages) if options[:'exit-code']
     rescue Rugged::RepositoryError
       puts '"pronto" must be run from within a git repository or must be supplied the path to a git repository'
     rescue Pronto::Error => e
@@ -100,6 +79,52 @@ module Pronto
 
     def verbose_version
       puts Version.verbose
+    end
+
+    private
+
+    def execute_run(path)
+      path = File.expand_path(path)
+      load_runners(runner_gem_names)
+      formatters = build_formatters
+      commit = resolve_commit
+      repo_workdir, relative = repo_and_relative(path)
+      collect_messages(repo_workdir, relative, commit, formatters, path)
+    end
+
+    def runner_gem_names
+      options[:runner].any? ? options[:runner] : ::Pronto::GemNames.new.to_a
+    end
+
+    def load_runners(gem_names)
+      gem_names.each { |gem_name| require "pronto/#{gem_name}" }
+    end
+
+    def build_formatters
+      ::Pronto::Formatter.get(options[:formatters])
+    end
+
+    def resolve_commit
+      commit_options = %i[workdir staged unstaged index]
+      commit_options.find { |o| options[o] } || options[:commit]
+    end
+
+    def repo_and_relative(path)
+      repo_workdir = ::Rugged::Repository.discover(path).workdir
+      relative = path.sub(repo_workdir, '')
+      [repo_workdir, relative]
+    end
+
+    def collect_messages(repo_workdir, relative, commit, formatters, full_path)
+      Dir.chdir(repo_workdir) do
+        file = relative.length == full_path.length ? nil : relative
+        ::Pronto.run(commit, '.', formatters, file)
+      end
+    end
+
+    def handle_exit_code(messages)
+      error_messages_count = messages.count { |m| m.level != :info }
+      exit(error_messages_count)
     end
   end
 end

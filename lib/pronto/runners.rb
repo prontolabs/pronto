@@ -8,23 +8,10 @@ module Pronto
     end
 
     def run(patches)
-      patches = reject_excluded(config.excluded_files('all'), patches)
-      return [] if patches.none?
+      filtered = reject_excluded(config.excluded_files('all'), patches)
+      return [] if filtered.none?
 
-      result = []
-      active_runners.each do |runner|
-        next if exceeds_max?(result)
-
-        config.logger.log("Running #{runner}")
-        runner_patches = reject_excluded(
-          config.excluded_files(runner.title), patches
-        )
-        next if runner_patches.none?
-
-        result += runner.new(runner_patches, patches.commit).run.flatten.compact
-      end
-      result = result.take(config.max_warnings) if config.max_warnings
-      result
+      apply_max_warnings(run_all_runners(filtered, patches.commit))
     end
 
     private
@@ -56,6 +43,28 @@ module Pronto
 
     def exceeds_max?(warnings)
       config.max_warnings && warnings.count >= config.max_warnings
+    end
+
+    def run_runner(runner, runner_patches, commit)
+      Array(runner.new(runner_patches, commit).run).flatten.compact
+    end
+
+    def apply_max_warnings(result)
+      config.max_warnings ? result.take(config.max_warnings) : result
+    end
+
+    def run_all_runners(filtered, commit)
+      result = []
+      active_runners.each do |runner|
+        break if exceeds_max?(result)
+
+        config.logger.log("Running #{runner}")
+        runner_patches = reject_excluded(config.excluded_files(runner.title), filtered)
+        next if runner_patches.none?
+
+        result.concat(run_runner(runner, runner_patches, commit))
+      end
+      result
     end
   end
 end

@@ -9,6 +9,11 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
+    - 'pronto.gemspec'
+    - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
     - 'spec/**/*'
 
 MultilineMethodCallIndentation:

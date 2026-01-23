@@ -14,8 +14,6 @@ module Pronto
       }
     end
 
-    before { ENV.stub(:[]) }
-
     describe '#commit_comments' do
       subject { github.commit_comments(sha) }
 
@@ -51,7 +49,11 @@ module Pronto
     describe '#pull_comments' do
       subject { github.pull_comments(sha) }
 
-      before { ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10) }
+      before do
+        ENV.stub(:fetch).with('PRONTO_CONFIG_FILE', '.pronto.yml').and_return('.pronto.yml')
+        ENV.stub(:fetch).with('PULL_REQUEST_ID', nil).and_return(nil)
+        ENV.stub(:fetch).with('PRONTO_PULL_REQUEST_ID', nil).and_return(10)
+      end
 
       context 'three requests for same comments' do
         specify do
@@ -104,7 +106,9 @@ module Pronto
         let(:expected_sha) { pull_request_sha }
 
         specify do
-          ENV.stub(:[]).with('PRONTO_PULL_REQUEST_ID').and_return(10)
+          ENV.stub(:fetch).with('PULL_REQUEST_ID', nil).and_return(nil)
+          ENV.stub(:fetch).with('PRONTO_PULL_REQUEST_ID', nil).and_return(10)
+
           github_pull
             .should_receive(:pull_by_id)
             .with(10)
