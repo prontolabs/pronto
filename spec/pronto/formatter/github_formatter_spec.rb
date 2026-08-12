@@ -34,7 +34,7 @@ module Pronto
         context 'with duplicates in the existed messages' do
           let(:messages) { [message] }
           let(:message) { Message.new('path/to', line, :warning, 'crucial') }
-          let(:line) { double(new_lineno: 1, commit_sha: '123', position: nil) }
+          let(:line) { double(new_lineno: 1, commit_sha: '123', position: 4) }
 
           before { line.stub(:commit_line).and_return(line) }
 
@@ -42,7 +42,7 @@ module Pronto
             Octokit::Client.any_instance
               .should_receive(:commit_comments)
               .once
-              .and_return([double(body: 'crucial', path: 'path/to', line: nil)])
+              .and_return([double(body: 'crucial', path: 'path/to', position: 4)])
 
             Octokit::Client.any_instance.should_not_receive(:create_commit_comment)
 
@@ -54,7 +54,7 @@ module Pronto
           let(:messages) { [message, existed_message] }
           let(:message) { Message.new('path/to', line, :warning, 'crucial') }
           let(:existed_message) { Message.new('path/to', line, :warning, 'existed') }
-          let(:line) { double(new_lineno: 1, commit_sha: '123', position: nil) }
+          let(:line) { double(new_lineno: 1, commit_sha: '123', position: 4) }
 
           before { line.stub(:commit_line).and_return(line) }
 
@@ -62,7 +62,7 @@ module Pronto
             Octokit::Client.any_instance
               .should_receive(:commit_comments)
               .once
-              .and_return([double(body: 'existed', path: 'path/to', line: nil)])
+              .and_return([double(body: 'existed', path: 'path/to', position: 4)])
 
             Octokit::Client.any_instance.should_receive(:create_commit_comment).once
 
