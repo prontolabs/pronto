@@ -16,6 +16,14 @@ module Pronto
       def line_number(message, _)
         message.line&.new_lineno
       end
+
+      def remove_outdated_comments(client, outdated_comments)
+        outdated_comments.each do |comment|
+          client.delete_comment(comment)
+        end
+      rescue Octokit::UnprocessableEntity, HTTParty::Error => e
+        warn "Failed to delete: #{e.message}"
+      end
     end
   end
 end

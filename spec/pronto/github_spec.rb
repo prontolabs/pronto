@@ -5,7 +5,7 @@ module Pronto
     let(:ssh_remote_urls) { ["git@github.com:#{github_slug}.git"] }
     let(:github_slug) { 'prontolabs/pronto' }
     let(:sha) { '61e4bef' }
-    let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1) }
+    let(:comment) { double(body: 'note', path: 'path', line: 1, position: 1, id: 1_881_471_822) }
     let(:empty_client_options) do
       {
         event: 'COMMENT'

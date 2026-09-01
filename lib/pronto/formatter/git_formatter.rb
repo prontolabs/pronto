@@ -6,8 +6,10 @@ module Pronto
         existing = existing_comments(messages, client, repo)
         comments = new_comments(messages, patches)
         additions = remove_duplicate_comments(existing, comments)
+        outdated_comments = existing.reject { |key, _| comments.key?(key) }.values.flatten
+        remove_outdated_comments(client, outdated_comments) if respond_to?(:remove_outdated_comments)
         submit_comments(client, additions)
-        
+
         approve_pull_request(comments.count, additions.count, client) if defined?(self.approve_pull_request)
 
         "#{additions.count} Pronto messages posted to #{pretty_name} (#{existing.count} existing)"
