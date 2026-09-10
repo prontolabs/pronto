@@ -44,6 +44,20 @@ module Pronto
           subject
         end
       end
+
+      context 'comment created with a diff position' do
+        let(:comment) { double(body: 'note', path: 'path/to', position: 5) }
+
+        specify do
+          Octokit::Client.any_instance
+            .should_receive(:commit_comments)
+            .with(github_slug, sha)
+            .once
+            .and_return([comment])
+
+          subject.map(&:position).should eq [5]
+        end
+      end
     end
 
     describe '#pull_comments' do
