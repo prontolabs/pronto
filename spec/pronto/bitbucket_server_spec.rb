@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe BitbucketServer do
     let(:bitbucket) { described_class.new(repo) }

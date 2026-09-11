@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     RSpec.describe GithubStatusFormatter::Sentence do

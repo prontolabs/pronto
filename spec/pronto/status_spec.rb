@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Status do
     let(:status) { described_class.new(sha, state, context, description) }

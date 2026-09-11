@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Config do
     let(:config) { described_class.new(config_hash) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class Config
     def initialize(config_hash = ConfigFile.new.to_h)
@@ -5,24 +7,20 @@ module Pronto
     end
 
     %w[github gitlab bitbucket].each do |service|
-      ConfigFile::EMPTY[service].each do |key, _|
+      ConfigFile::EMPTY[service].each_key do |key|
         name = "#{service}_#{key}"
         define_method(name) { ENV["PRONTO_#{name.upcase}"] || @config_hash[service][key] }
       end
     end
 
     def default_commit
-      default_commit =
-        ENV['PRONTO_DEFAULT_COMMIT'] ||
+      ENV['PRONTO_DEFAULT_COMMIT'] ||
         @config_hash.fetch('default_commit', 'master')
-      default_commit
     end
 
     def consolidate_comments?
-      consolidated =
-        ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
+      ENV['PRONTO_CONSOLIDATE_COMMENTS'] ||
         @config_hash.fetch('consolidate_comments', false)
-      consolidated
     end
 
     def github_review_type
@@ -68,7 +66,7 @@ module Pronto
 
     def message_format(formatter)
       formatter_config = @config_hash[formatter]
-      if formatter_config && formatter_config.key?('format')
+      if formatter_config&.key?('format')
         formatter_config['format']
       else
         fetch_value('format')
@@ -95,7 +93,7 @@ module Pronto
     def fetch_integer(key)
       full_key = env_key(key)
 
-      (ENV[full_key] && Integer(ENV[full_key])) || @config_hash[key]
+      (ENV.fetch(full_key, nil) && Integer(ENV.fetch(full_key, nil))) || @config_hash[key]
     end
 
     def fetch_value(key)

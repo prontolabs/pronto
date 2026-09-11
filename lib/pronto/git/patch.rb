@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Git
     Patch = Struct.new(:patch, :repo) do
@@ -18,10 +20,8 @@ module Pronto
       end
 
       def lines
-        @lines ||= begin
-          hunks.flat_map do |hunk|
-            hunk.lines.map { |line| Line.new(line, self, hunk) }
-          end
+        @lines ||= hunks.flat_map do |hunk|
+          hunk.lines.map { |line| Line.new(line, self, hunk) }
         end
       end
 

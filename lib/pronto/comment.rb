@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   Comment = Struct.new(:sha, :body, :path, :position) do
     def ==(other)

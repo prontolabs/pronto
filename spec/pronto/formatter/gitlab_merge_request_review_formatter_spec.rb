@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     describe GitlabMergeRequestReviewFormatter do
@@ -6,11 +8,11 @@ module Pronto
       ENV['CI_MERGE_REQUEST_IID'] = '1'
 
       let(:formatter) { described_class.new }
-      let(:diff_refs) {
-        double(diff_refs: {"base_sha"=>"8f38ee927a5ea1e7fcf91e2603f9a09a2f6ad8a7",
-                           "head_sha"=>"4075991c8c9170e614f754aed3a52b25f4a586b4",
-                           "start_sha"=>"8f38ee927a5ea1e7fcf91e2603f9a09a2f6ad8a7"})
-      }
+      let(:diff_refs) do
+        double(diff_refs: { 'base_sha' => '8f38ee927a5ea1e7fcf91e2603f9a09a2f6ad8a7',
+                            'head_sha' => '4075991c8c9170e614f754aed3a52b25f4a586b4',
+                            'start_sha' => '8f38ee927a5ea1e7fcf91e2603f9a09a2f6ad8a7' })
+      end
 
       describe '#format' do
         subject { formatter.format(messages, repo, nil) }

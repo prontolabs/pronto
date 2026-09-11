@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class BitbucketFormatter < CommitFormatter
@@ -14,7 +16,7 @@ module Pronto
       end
 
       def line_number(message, _)
-        message.line.new_lineno if message.line
+        message.line&.new_lineno
       end
     end
   end

@@ -1,47 +1,22 @@
+# frozen_string_literal: true
+
 module Pronto
   class Gitlab < Client
     def commit_comments(sha)
-      @comment_cache[sha.to_s] ||= begin
-        client.commit_comments(slug, sha).auto_paginate.map do |comment|
-          Comment.new(sha, comment.note, comment.path, comment.line)
-        end
+      @comment_cache[sha.to_s] ||= client.commit_comments(slug, sha).auto_paginate.map do |comment|
+        Comment.new(sha, comment.note, comment.path, comment.line)
       end
     end
 
     def pull_comments(sha)
-      @comment_cache["#{slug}/#{pull_id}"] ||= begin
-        arr = []
-        client.merge_request_discussions(slug, pull_id).auto_paginate.each do |comment|
-          comment.notes.each do |note|
-            next unless note['position']
-
-            arr << Comment.new(
-              sha,
-              note['body'],
-              note['position']['new_path'],
-              note['position']['new_line']
-            )
-          end
-        end
-        arr
-      end
+      @comment_cache["#{slug}/#{pull_id}"] ||= merge_request_comments(sha)
     end
 
     def create_pull_request_review(comments)
       return if comments.empty?
 
       comments.each do |comment|
-        options = {
-          body: comment.body,
-          position: position_sha.dup.merge(
-            new_path: comment.path,
-            position_type: 'text',
-            new_line: comment.position,
-            old_line: nil,
-          )
-        }
-
-        client.create_merge_request_discussion(slug, pull_id, options)
+        client.create_merge_request_discussion(slug, pull_id, discussion_options(comment))
       end
     end
 
@@ -58,39 +33,41 @@ module Pronto
       # Better to get those informations from Gitlab API directly than trying to look for them here.
       # (FYI you can't use `pull` method because index api does not contains those informations)
       @position_sha ||= begin
-                          data = client.merge_request(slug, pull_id)
-                          data.diff_refs.to_h
-                        end
+        data = client.merge_request(slug, pull_id)
+        data.diff_refs.to_h
+      end
     end
 
     def slug
       return @config.gitlab_slug if @config.gitlab_slug
-      @slug ||= begin
-        @repo.remote_urls.map do |url|
-          match = slug_regex(url).match(url)
-          match[:slug] if match
-        end.compact.first
-      end
+
+      @slug ||= @repo.remote_urls.map do |url|
+        match = slug_regex(url).match(url)
+        match[:slug] if match
+      end.compact.first
     end
 
     def pull_id
-      env_pull_id || raise(Pronto::Error, "Unable to determine merge request id. Specify either `PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.")
+      env_pull_id || raise(Pronto::Error,
+                           'Unable to determine merge request id. Specify either ' \
+                           '`PRONTO_PULL_REQUEST_ID` or `CI_MERGE_REQUEST_IID`.')
     end
 
     def env_pull_id
       pull_request = super
 
-      pull_request ||= ENV['CI_MERGE_REQUEST_IID']
-      pull_request.to_i if pull_request
+      pull_request ||= ENV.fetch('CI_MERGE_REQUEST_IID', nil)
+      pull_request&.to_i
     end
 
     def slug_regex(url)
-      if url =~ %r{^ssh:\/\/}
-        %r{.*#{host}(:[0-9]+)?(:|\/)(?<slug>.*).git}
-      elsif url =~ /#{host}/
-        %r{.*#{host}(:|\/)(?<slug>.*).git}
+      case url
+      when %r{^ssh://}
+        %r{.*#{host}(?::[0-9]+)?(?::|/)(?<slug>.*)\.git}
+      when /#{host}/
+        %r{.*#{host}(?::|/)(?<slug>.*)\.git}
       else
-        %r{\/\/.*?(\/)(?<slug>.*).git}
+        %r{//.*?/(?<slug>.*)\.git}
       end
     end
 
@@ -109,6 +86,27 @@ module Pronto
 
     def gitlab_api_endpoint
       @config.gitlab_api_endpoint
+    end
+
+    def merge_request_comments(sha)
+      client
+        .merge_request_discussions(slug, pull_id)
+        .auto_paginate
+        .flat_map(&:notes)
+        .select { |note| note['position'] }
+        .map { |note| Comment.new(sha, note['body'], note['position']['new_path'], note['position']['new_line']) }
+    end
+
+    def discussion_options(comment)
+      {
+        body: comment.body,
+        position: position_sha.dup.merge(
+          new_path: comment.path,
+          position_type: 'text',
+          new_line: comment.position,
+          old_line: nil
+        )
+      }
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe GithubPull do
     let(:github_pull) { described_class.new(octokit_client, slug) }
@@ -30,7 +32,7 @@ module Pronto
             .once
             .and_return([])
 
-          -> { subject }.should raise_error(Pronto::Error, /Pull request ##{10}/)
+          -> { subject }.should raise_error(Pronto::Error, /Pull request #10/)
         end
       end
     end

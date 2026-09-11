@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 module Pronto
   class BitbucketServer < Bitbucket
     def pull_comments(sha)
-      @comment_cache["#{pull_id}/#{sha}"] ||= begin
-        client.pull_comments(slug, pull_id).map do |comment|
-          anchor = comment['commentAnchor']
-          if anchor
-            Comment.new(sha, comment['comment']['text'],
-                        anchor['path'], anchor['line'])
-          end
-        end.compact
-      end
+      @comment_cache["#{pull_id}/#{sha}"] ||= client.pull_comments(slug, pull_id).map do |comment|
+        anchor = comment['commentAnchor']
+        if anchor
+          Comment.new(sha, comment['comment']['text'],
+                      anchor['path'], anchor['line'])
+        end
+      end.compact
     end
 
     private

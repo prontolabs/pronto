@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Comment do
     let(:comment) { described_class.new(sha, body, path, position) }

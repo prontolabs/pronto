@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rugged'
 require 'octokit'
 require 'gitlab'

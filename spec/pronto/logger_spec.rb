@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   describe Logger do
     let(:logger) { described_class.new(io) }

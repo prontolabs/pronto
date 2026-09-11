@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     describe JsonFormatter do
@@ -12,7 +14,7 @@ module Pronto
 
         it do
           should ==
-            '[{"level":"W","message":"crucial","path":"path/to","line":1},'\
+            '[{"level":"W","message":"crucial","path":"path/to","line":1},' \
             '{"level":"W","message":"crucial","path":"path/to","line":1}]'
         end
 
@@ -20,8 +22,8 @@ module Pronto
           let(:message) { Message.new(nil, line, :warning, 'careful') }
 
           it do
-            should == '[{"level":"W","message":"careful","line":1},'\
-              '{"level":"W","message":"careful","line":1}]'
+            should == '[{"level":"W","message":"careful","line":1},' \
+                      '{"level":"W","message":"careful","line":1}]'
           end
         end
 
@@ -29,8 +31,8 @@ module Pronto
           let(:message) { Message.new('path/to', nil, :warning, 'careful') }
 
           it do
-            should == '[{"level":"W","message":"careful","path":"path/to"},'\
-              '{"level":"W","message":"careful","path":"path/to"}]'
+            should == '[{"level":"W","message":"careful","path":"path/to"},' \
+                      '{"level":"W","message":"careful","path":"path/to"}]'
           end
         end
 
@@ -41,7 +43,7 @@ module Pronto
 
           it do
             should ==
-              '[{"level":"W","message":"careful","line":1,"runner":"Class"},'\
+              '[{"level":"W","message":"careful","line":1,"runner":"Class"},' \
               '{"level":"W","message":"careful","line":1,"runner":"Class"}]'
           end
         end

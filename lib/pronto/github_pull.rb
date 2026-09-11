@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   # Provides strategies for finding corresponding PR on GitHub
   class GithubPull

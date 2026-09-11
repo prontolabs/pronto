@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Pronto
   module Version
-    STRING = '0.11.5'.freeze
+    STRING = '0.11.5'
 
-    MSG = '%s (running on %s %s %s)'.freeze
+    MSG = '%s (running on %s %s %s)'
 
     module_function
 

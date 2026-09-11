@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   module Formatter
     class GithubFormatter < CommitFormatter
@@ -14,7 +16,7 @@ module Pronto
       end
 
       def line_number(message, _)
-        message.line.commit_line.position if message.line
+        message.line&.commit_line&.position
       end
     end
   end

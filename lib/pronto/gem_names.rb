@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pronto
   class GemNames
     def to_a

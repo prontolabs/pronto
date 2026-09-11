@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'pronto/formatter/text_message_decorator'
 
 module Pronto
