@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<testsuites>
+  <testsuite name='pronto' tests='1' failures='1'>
+    <testcase classname='docs.a  b' name='rubocop'>
+      <failure type='rubocop' message='Line Error'>
+        /repo/docs/a  b.rb:1
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

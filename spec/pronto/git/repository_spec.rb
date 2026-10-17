@@ -98,7 +98,7 @@ module Pronto
 
           it do
             # this count includes all the files from the repositories (*.git)
-            subject.count.should eq 48
+            subject.count.should eq 56
           end
         end
       end

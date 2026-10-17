@@ -52,6 +52,7 @@ require 'pronto/formatter/bitbucket_formatter'
 require 'pronto/formatter/bitbucket_pull_request_formatter'
 require 'pronto/formatter/bitbucket_server_pull_request_formatter'
 require 'pronto/formatter/checkstyle_formatter'
+require 'pronto/formatter/junit_formatter'
 require 'pronto/formatter/null_formatter'
 
 module Pronto

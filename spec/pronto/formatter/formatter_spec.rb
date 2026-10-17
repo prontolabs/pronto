@@ -92,6 +92,11 @@ module Pronto
           it { should be_an_instance_of CheckstyleFormatter }
         end
 
+        context 'junit' do
+          let(:name) { 'junit' }
+          it { should be_an_instance_of JunitFormatter }
+        end
+
         context 'null' do
           let(:name) { 'null' }
           it { should be_an_instance_of NullFormatter }
@@ -133,7 +138,7 @@ module Pronto
       it do
         should =~ %w[github github_pr github_pr_review github_status
                      github_combined_status gitlab gitlab_mr bitbucket bitbucket_pr
-                     bitbucket_server_pr json checkstyle text null]
+                     bitbucket_server_pr json checkstyle junit text null]
       end
     end
   end

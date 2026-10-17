@@ -23,13 +23,13 @@ module Pronto
       result
     end
 
-    private
-
-    attr_reader :config, :runners
-
     def active_runners
       runners.select { |runner| active_runner?(runner) }
     end
+
+    private
+
+    attr_reader :config, :runners
 
     def active_runner?(runner)
       return true if config.runners.empty? && config.skip_runners.empty?
